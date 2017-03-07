@@ -20,6 +20,7 @@
 #include "il/symbol/LabelSymbol.hpp"  // for LabelSymbol
 #include "codegen/Snippet.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 
 OMR::Snippet::Snippet(
       TR::CodeGenerator *cg,

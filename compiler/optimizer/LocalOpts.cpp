@@ -26,7 +26,8 @@
 #include <stdio.h>                             // for printf, fflush, etc
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for NULL, strncmp, strcmp, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, feGetEnv, etc
 #include "env/KnownObjectTable.hpp"        // for KnownObjectTable, etc
 #include "codegen/Linkage.hpp"                 // for Linkage

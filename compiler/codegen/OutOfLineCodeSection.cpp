@@ -20,7 +20,8 @@
 
 #include <stddef.h>                         // for NULL
 #include <stdint.h>                         // for int32_t
-#include "codegen/CodeGenerator.hpp"        // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"        // for CodeGenerator
 #include "codegen/TreeEvaluator.hpp"        // for TreeEvaluator
 #include "compile/Compilation.hpp"          // for Compilation
 #include "il/ILOps.hpp"                     // for ILOpCode

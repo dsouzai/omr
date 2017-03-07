@@ -23,7 +23,8 @@
 #include <stdint.h>                                 // for int32_t
 #include <stdlib.h>                                 // for atoi
 #include <string.h>                                 // for NULL, memset
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd, etc
 #include "codegen/Linkage.hpp"                      // for Linkage
 #include "compile/Compilation.hpp"                  // for Compilation

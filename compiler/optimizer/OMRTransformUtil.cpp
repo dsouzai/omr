@@ -19,6 +19,7 @@
 #include "optimizer/TransformUtil.hpp"
 #include "compile/Compilation.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "il/Node.hpp"
 #include "il/Node_inlines.hpp"
 #include "il/SymbolReference.hpp"

@@ -21,7 +21,8 @@
 
 #include <stdint.h>                           // for uint8_t, int32_t, etc
 #include <string.h>                           // for NULL, strcpy, strlen
-#include "codegen/CodeGenerator.hpp"          // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"          // for CodeGenerator
 #include "codegen/InstOpCode.hpp"             // for InstOpCode, etc
 #include "codegen/Instruction.hpp"            // for Instruction, etc
 #include "codegen/MemoryReference.hpp"        // for MemoryReference

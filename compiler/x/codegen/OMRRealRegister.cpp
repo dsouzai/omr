@@ -16,7 +16,8 @@
  *    Multiple authors (IBM Corp.) - initial implementation and documentation
  *******************************************************************************/
 
-#include "codegen/CodeGenerator.hpp"  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
 #include "codegen/Machine.hpp"        // for Machine
 #include "codegen/RealRegister.hpp"   // for RealRegister, etc
 

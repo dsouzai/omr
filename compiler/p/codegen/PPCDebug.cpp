@@ -23,7 +23,8 @@ int jitDebugPPC;
 #include <stdint.h>                                // for int32_t, uint32_t, etc
 #include <string.h>                                // for NULL, strcmp, etc
 #include "codegen/CodeGenPhase.hpp"                // for CodeGenPhase, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/GCRegisterMap.hpp"               // for GCRegisterMap
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc

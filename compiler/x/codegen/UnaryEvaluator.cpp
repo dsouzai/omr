@@ -16,7 +16,8 @@
  *    Multiple authors (IBM Corp.) - initial implementation and documentation
  *******************************************************************************/
 
-#include "codegen/CodeGenerator.hpp"      // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"      // for CodeGenerator
 #include "codegen/FrontEnd.hpp"           // for feGetEnv, TR_FrontEnd
 #include "codegen/LiveRegister.hpp"       // for TR_LiveRegisters
 #include "codegen/Register.hpp"           // for Register

@@ -23,7 +23,8 @@
 #include <stdint.h>                            // for intptr_t, uint8_t, etc
 #include <stdio.h>                             // for sprintf
 #include <string.h>                            // for strlen, strncmp, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, feGetEnv
 #include "env/KnownObjectTable.hpp"            // for KnownObjectTable, etc
 #include "codegen/LinkageConventionsEnum.hpp"

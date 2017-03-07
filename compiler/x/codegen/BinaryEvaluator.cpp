@@ -18,7 +18,8 @@
 
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for int32_t, uint8_t, etc
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv
 #include "codegen/Instruction.hpp"                  // for Instruction
 #include "codegen/LiveRegister.hpp"                 // for TR_LiveRegisters

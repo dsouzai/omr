@@ -31,6 +31,7 @@
 #include <string.h>                                // for NULL, strlen, etc
 #include "codegen/CodeGenPhase.hpp"                // for CodeGenPhase, etc
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc

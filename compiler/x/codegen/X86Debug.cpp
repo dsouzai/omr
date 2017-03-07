@@ -19,7 +19,8 @@
 #include <stdint.h>                              // for int32_t, uint8_t, etc
 #include <stdio.h>                               // for NULL, sprintf
 #include <string.h>                              // for memset
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator, etc
 #include "codegen/GCRegisterMap.hpp"             // for GCRegisterMap
 #include "codegen/Instruction.hpp"               // for Instruction, etc
 #include "codegen/Linkage.hpp"

@@ -20,7 +20,8 @@
 
 #include <stdint.h>                           // for uint16_t
 #include <string.h>                           // for NULL, memset
-#include "codegen/CodeGenerator.hpp"          // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"          // for CodeGenerator
 #include "compile/Compilation.hpp"            // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"        // for TR::Options, etc

@@ -24,6 +24,7 @@ int jitDebugARM;
 #include "arm/codegen/ARMDisassem.hpp"
 #include "arm/codegen/ARMRecompilationSnippet.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/GCRegisterMap.hpp"
 #include "codegen/Machine.hpp"
 #include "codegen/Snippet.hpp"

@@ -22,6 +22,7 @@
 #include <stddef.h>                              // for NULL
 #include <stdint.h>                              // for uint32_t, int32_t, etc
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/InstOpCode.hpp"                // for InstOpCode, etc
 #include "codegen/Instruction.hpp"               // for Instruction, etc
 #include "codegen/MemoryReference.hpp"           // for MemoryReference

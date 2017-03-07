@@ -21,7 +21,8 @@
 #include <algorithm>                        // for std::max, etc
 #include <stdint.h>                         // for int32_t
 #include <string.h>                         // for strlen
-#include "codegen/CodeGenerator.hpp"        // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"        // for CodeGenerator
 #include "codegen/Linkage.hpp"              // for Linkage
 #include "compile/Compilation.hpp"          // for Compilation
 #include "il/DataTypes.hpp"                 // for TR::DataType

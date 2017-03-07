@@ -20,6 +20,7 @@
 #include "codegen/GCStackAtlas.hpp"
 #include "codegen/SnippetGCMap.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Instruction.hpp"
 
 

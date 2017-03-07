@@ -31,7 +31,8 @@
 #include <stdio.h>                                  // for NULL, sprintf, etc
 #include <stdlib.h>                                 // for abs, atoi
 #include <string.h>                                 // for memset, strlen, etc
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd, etc
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc

@@ -21,7 +21,8 @@
 #include <stdint.h>                             // for int32_t, etc
 #include <stdlib.h>                             // for strtol, atoi
 #include <string.h>                             // for NULL, strncmp, etc
-#include "codegen/CodeGenerator.hpp"            // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"            // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                 // for TR_FrontEnd, etc
 #include "codegen/Linkage.hpp"                  // for Linkage
 #include "codegen/LinkageConventionsEnum.hpp"

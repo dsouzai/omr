@@ -22,7 +22,8 @@
 #include <stdint.h>                          // for uint16_t, uint32_t, etc
 #include <stdlib.h>                          // for NULL, strtoul
 #include <string.h>                          // for memset
-#include "codegen/CodeGenerator.hpp"         // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"         // for CodeGenerator
 #include "codegen/FrontEnd.hpp"              // for TR_FrontEnd, feGetEnv, etc
 #include "compile/Compilation.hpp"           // for Compilation
 #include "compile/CompilationTypes.hpp"      // for TR_Hotness

@@ -19,6 +19,7 @@
 #include "il/TreeTop.hpp"
 #include "compiler/il/OMRTreeTop_inlines.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/CallSnippet.hpp"

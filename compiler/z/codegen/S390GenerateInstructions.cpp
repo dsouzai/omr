@@ -22,7 +22,8 @@
 #include <stdio.h>                                // for sprintf
 #include <stdlib.h>                               // for atoi
 #include <string.h>                               // for NULL, strlen, etc
-#include "codegen/CodeGenerator.hpp"              // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"              // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                   // for feGetEnv, etc
 #include "codegen/InstOpCode.hpp"                 // for InstOpCode, etc

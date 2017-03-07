@@ -27,7 +27,8 @@
 
 #include <stddef.h>                                // for NULL, size_t
 #include <stdint.h>                                // for int32_t, uint8_t, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd, etc
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc

@@ -31,7 +31,8 @@
 #include <string.h>                                 // for memset, memcpy
 #include <algorithm>                                // for std::find
 #include "codegen/CodeGenPhase.hpp"                 // for CodeGenPhase
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"                  // for Instruction
 #include "codegen/Linkage.hpp"                      // for Linkage
@@ -316,12 +317,6 @@ OMR::CodeGenerator::generateNop(TR::Node * node, TR::Instruction *instruction, T
       self()->comp()->getDebug()->resetDebugData();
 
 
-   }
-
-TR::CodeGenerator*
-OMR::CodeGenerator::self()
-   {
-   return static_cast<TR::CodeGenerator*>(this);
    }
 
 TR_StackMemory

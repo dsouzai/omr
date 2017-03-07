@@ -20,7 +20,8 @@
 
 #include <stdint.h>                         // for uint8_t
 #include "codegen/Analyser.hpp"             // for NUM_ACTIONS
-#include "codegen/CodeGenerator.hpp"        // for CodeGenerator, NEED_CC
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"        // for CodeGenerator, NEED_CC
 #include "codegen/MemoryReference.hpp"
 #include "codegen/Register.hpp"             // for Register
 #include "codegen/RegisterConstants.hpp"

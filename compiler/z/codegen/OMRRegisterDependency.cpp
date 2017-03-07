@@ -28,7 +28,8 @@
 #include <stddef.h>                                // for NULL
 #include <stdint.h>                                // for int32_t, uint32_t, etc
 #include "codegen/BackingStore.hpp"                // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for TR::IO::fprintf, etc
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc
 #include "codegen/Instruction.hpp"                 // for Instruction

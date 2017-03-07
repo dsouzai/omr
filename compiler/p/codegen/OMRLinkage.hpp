@@ -32,7 +32,8 @@ namespace OMR { typedef OMR::Power::Linkage LinkageConnector; }
 
 #include <stddef.h>                               // for NULL
 #include <stdint.h>                               // for uint32_t, uint8_t, etc
-#include "codegen/CodeGenerator.hpp"              // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"              // for CodeGenerator
 #include "codegen/InstOpCode.hpp"                 // for InstOpCode, etc
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"                   // for Register

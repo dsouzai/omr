@@ -23,7 +23,8 @@
 #include <stdio.h>                                 // for printf
 #include <string.h>                                // for NULL, memset, etc
 #include <algorithm>                               // for std::find
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd, etc
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc

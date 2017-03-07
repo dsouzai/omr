@@ -20,6 +20,7 @@
 
 #include "compile/Compilation.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "env/CompilerEnv.hpp"
 #include "il/Block.hpp"
 #include "il/Node.hpp"

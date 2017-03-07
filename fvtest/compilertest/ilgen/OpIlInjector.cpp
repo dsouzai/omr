@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "compile/Compilation.hpp"
 #include "env/FrontEnd.hpp"
 #include "compile/Method.hpp"

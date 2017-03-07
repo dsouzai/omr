@@ -19,7 +19,8 @@
 #include "compile/VirtualGuard.hpp"
 
 #include <stdint.h>                            // for int16_t, int32_t
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "compile/Compilation.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod

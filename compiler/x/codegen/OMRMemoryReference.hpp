@@ -32,7 +32,8 @@ namespace OMR { typedef OMR::X86::MemoryReference MemoryReferenceConnector; }
 
 #include <stddef.h>                                // for NULL
 #include <stdint.h>                                // for uint8_t, int32_t, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/Instruction.hpp"                 // for Instruction
 #include "codegen/Machine.hpp"                     // for Machine, etc
 #include "codegen/RealRegister.hpp"                // for RealRegister, etc

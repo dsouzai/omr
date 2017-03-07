@@ -18,7 +18,8 @@
 
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for int32_t, etc
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"                  // for Instruction

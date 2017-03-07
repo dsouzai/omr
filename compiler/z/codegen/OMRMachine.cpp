@@ -30,7 +30,8 @@
 #include <stdio.h>                                 // for NULL, printf, etc
 #include <string.h>                                // for memset
 #include "codegen/BackingStore.hpp"                // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for feGetEnv, etc
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc
 #include "codegen/Instruction.hpp"                 // for Instruction

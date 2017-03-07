@@ -22,7 +22,8 @@
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for NULL, memset
 #include <algorithm>                           // for std::find
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
 #include "codegen/RecognizedMethods.hpp"       // for RecognizedMethod, etc
 #include "compile/Compilation.hpp"             // for Compilation, etc

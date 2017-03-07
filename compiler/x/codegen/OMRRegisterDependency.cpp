@@ -20,7 +20,8 @@
 #include <stdint.h>                              // for int32_t, uint32_t, etc
 #include <string.h>                              // for NULL, memset
 #include "codegen/BackingStore.hpp"              // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/Instruction.hpp"               // for Instruction
 #include "codegen/LiveRegister.hpp"              // for TR_LiveRegisters
 #include "codegen/Machine.hpp"                   // for Machine

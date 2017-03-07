@@ -19,7 +19,8 @@
 #include "codegen/LiveRegister.hpp"       // for TR_LiveRegisters, etc
 
 #include <stdint.h>                       // for uint64_t
-#include "codegen/CodeGenerator.hpp"      // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"      // for CodeGenerator
 #include "codegen/RealRegister.hpp"       // for RealRegister
 #include "codegen/Register.hpp"           // for Register
 #include "codegen/RegisterConstants.hpp"  // for TR_RegisterKinds, etc

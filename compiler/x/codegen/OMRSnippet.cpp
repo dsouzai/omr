@@ -20,7 +20,8 @@
 
 #include <stddef.h>                                // for NULL
 #include <stdint.h>                                // for int32_t, uint8_t
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/ConstantDataSnippet.hpp"
 #include "infra/Assert.hpp"                        // for TR_ASSERT
 #include "ras/Debug.hpp"                           // for TR_Debug

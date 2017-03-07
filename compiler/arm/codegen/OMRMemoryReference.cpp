@@ -24,6 +24,7 @@
 #include "compile/SymbolReferenceTable.hpp"
 #endif
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/GenerateInstructions.hpp"
 #include "codegen/Machine.hpp"
 #include "codegen/Linkage.hpp"

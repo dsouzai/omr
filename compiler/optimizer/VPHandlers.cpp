@@ -20,7 +20,8 @@
 #include <stdint.h>                             // for int32_t, int64_t, etc
 #include <stdio.h>                              // for printf, fflush, etc
 #include <string.h>                             // for NULL, strncmp, etc
-#include "codegen/CodeGenerator.hpp"            // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"            // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                 // for TR_FrontEnd, etc
 #include "env/KnownObjectTable.hpp"         // for KnownObjectTable, etc
 #include "codegen/RecognizedMethods.hpp"        // for RecognizedMethod, etc

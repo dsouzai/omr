@@ -20,7 +20,8 @@
 
 #include <stdint.h>                            // for uint64_t, etc
 #include <stdio.h>                             // for NULL, printf, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, etc
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/TreeEvaluator.hpp"

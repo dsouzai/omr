@@ -19,7 +19,8 @@
 #include "optimizer/LocalLiveRangeReducer.hpp"
 
 #include <string.h>                            // for NULL, memset
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "compile/Compilation.hpp"             // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable, etc

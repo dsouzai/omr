@@ -18,7 +18,8 @@
 
 #include <stdint.h>                        // for uint32_t
 #include <stdlib.h>                        // for NULL, atoi
-#include "codegen/CodeGenerator.hpp"       // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"       // for CodeGenerator
 #include "codegen/FrontEnd.hpp"            // for feGetEnv
 #include "codegen/InstOpCode.hpp"          // for InstOpCode, etc
 #include "codegen/Instruction.hpp"         // for Instruction, etc

@@ -22,6 +22,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/GCStackAtlas.hpp"
 #include "codegen/GCStackMap.hpp"
 #include "compile/ResolvedMethod.hpp"

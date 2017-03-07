@@ -21,7 +21,8 @@
 #include <stdint.h>                                 // for int32_t, etc
 #include <stdlib.h>                                 // for atoi
 #include <string.h>                                 // for NULL, memset
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv, etc
 #include "compile/Compilation.hpp"                  // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"

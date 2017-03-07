@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/TreeEvaluator.hpp"
 #include "codegen/PPCEvaluator.hpp"
 #include "p/codegen/GenerateInstructions.hpp"

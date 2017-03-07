@@ -20,7 +20,8 @@
 
 #include <stddef.h>                              // for NULL
 #include <stdint.h>                              // for int64_t, int32_t
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                  // for feGetEnv, etc
 #include "compile/Compilation.hpp"               // for Compilation
 #include "compile/SymbolReferenceTable.hpp"

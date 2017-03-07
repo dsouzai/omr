@@ -20,7 +20,8 @@
 
 #include <limits.h>                                // for INT_MAX
 #include <stdio.h>                                 // for printf
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                    // for feGetEnv, etc
 #include "codegen/Linkage.hpp"                     // for Linkage
 #include "codegen/RealRegister.hpp"                // for RealRegister, etc

@@ -22,7 +22,8 @@
 #include <string.h>                            // for NULL, memcpy, memset
 #include <algorithm>                           // for std::find
 #include "codegen/BackingStore.hpp"            // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/Instruction.hpp"             // for Instruction, etc

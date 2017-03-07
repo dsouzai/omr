@@ -20,6 +20,7 @@
 
 #include "arm/codegen/ARMInstruction.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Register.hpp"
 #include "codegen/RegisterPair.hpp"
 #include "il/Node.hpp"

@@ -18,6 +18,7 @@
 
 #include <algorithm>                            // for std::find
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "il/Node.hpp"
 #include "il/Node_inlines.hpp"
 #include "codegen/Relocation.hpp"

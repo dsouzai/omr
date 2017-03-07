@@ -19,7 +19,8 @@
 #include "codegen/IA32SystemLinkage.hpp"
 
 #include <stdio.h>                         // for NULL, printf
-#include "codegen/CodeGenerator.hpp"       // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"       // for CodeGenerator
 #include "codegen/IA32LinkageUtils.hpp"    // for IA32LinkageUtils
 #include "codegen/Linkage.hpp"             // for TR::X86LinkageProperties, etc
 #include "codegen/Machine.hpp"             // for Machine

@@ -19,7 +19,8 @@
 #include <stddef.h>                                  // for NULL
 #include <stdint.h>                                  // for int32_t, etc
 #include "codegen/AheadOfTimeCompile.hpp"            // for AheadOfTimeCompile
-#include "codegen/CodeGenerator.hpp"                 // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                 // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                      // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"                    // for InstOpCode, etc
 #include "codegen/Instruction.hpp"                   // for Instruction, etc

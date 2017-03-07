@@ -26,6 +26,7 @@
 #include <math.h>
 #include "compile/Compilation.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/TreeEvaluator.hpp"
 #include "env/CompilerEnv.hpp"

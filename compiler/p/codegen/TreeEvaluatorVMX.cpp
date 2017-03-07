@@ -22,7 +22,8 @@
 #include <stdlib.h>                              // for strtol
 #include <string.h>                              // for strchr, strstr
 #include "codegen/BackingStore.hpp"              // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                  // for feGetEnv
 #include "codegen/InstOpCode.hpp"                // for InstOpCode, etc
 #include "codegen/Instruction.hpp"               // for Instruction

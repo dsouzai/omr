@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "compile/CompilationTypes.hpp"
 #include "compile/Method.hpp"
 #include "control/CompileMethod.hpp"

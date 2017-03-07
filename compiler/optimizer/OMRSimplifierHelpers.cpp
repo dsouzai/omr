@@ -22,6 +22,7 @@
 #include <limits.h>
 #include <math.h>
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/TreeEvaluator.hpp"
 #include "compile/Compilation.hpp"
 #include "env/CompilerEnv.hpp"

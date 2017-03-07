@@ -24,6 +24,7 @@
 #include "codegen/AheadOfTimeCompile.hpp"
 #include "codegen/ARMAOTRelocation.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/GCStackMap.hpp"
 #include "codegen/GenerateInstructions.hpp"

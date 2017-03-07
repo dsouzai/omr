@@ -28,7 +28,8 @@
 #include <string.h>                                   // for strlen, memcpy, etc
 #include "codegen/BackingStore.hpp"
 #include "codegen/CodeGenPhase.hpp"                   // for CodeGenPhase, etc
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                       // for feGetEnv, etc
 #include "codegen/GCStackAtlas.hpp"                   // for GCStackAtlas
 #include "codegen/GCStackMap.hpp"                     // for TR_GCStackMap, etc

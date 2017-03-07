@@ -35,6 +35,7 @@ namespace OMR { typedef OMR::Power::RegisterDependencyConditions RegisterDepende
 #include <stddef.h>
 #include <stdint.h>
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"
 #include "codegen/RegisterConstants.hpp"

@@ -33,7 +33,8 @@
 #include <stdint.h>                                   // for int32_t, etc
 #include "codegen/AheadOfTimeCompile.hpp"
 #include "codegen/CodeGenPhase.hpp"                   // for CodeGenPhase, etc
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                       // for TR_FrontEnd, etc
 #include "codegen/GCStackAtlas.hpp"                   // for GCStackAtlas
 #include "codegen/Linkage.hpp"                        // for Linkage

@@ -17,11 +17,13 @@
  *******************************************************************************/
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 
 #include <limits.h>                                 // for INT_MAX
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for int32_t, int64_t
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv
 #include "codegen/Machine.hpp"                      // for Machine
 #include "codegen/RealRegister.hpp"                 // for RealRegister, etc

@@ -24,6 +24,7 @@
 #include <stdlib.h>                                      // for atoi
 #include <string.h>                                      // for NULL, etc
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/FrontEnd.hpp"                          // for TR_FrontEnd, etc
 #include "compile/Compilation.hpp"                       // for Compilation
 #include "compile/CompilationTypes.hpp"                  // for TR_Hotness, etc

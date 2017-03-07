@@ -22,7 +22,8 @@
 #include <stdint.h>                            // for int32_t, uint32_t, etc
 #include <stdlib.h>                            // for NULL, atoi
 #include "codegen/BackingStore.hpp"            // for TR_BackingStore
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/Instruction.hpp"             // for Instruction, etc

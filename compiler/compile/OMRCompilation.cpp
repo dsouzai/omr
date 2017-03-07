@@ -28,7 +28,8 @@
 #include <stdlib.h>                            // for abs, atoi, malloc, etc
 #include <string.h>                            // for strncmp, strlen, etc
 #include <algorithm>                           // for std::find
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"             // for Instruction
 #include "codegen/RecognizedMethods.hpp"       // for RecognizedMethod, etc

@@ -21,7 +21,8 @@
 #include <string.h>                                   // for memcpy, memset
 #include <algorithm>                                  // for std::find
 #include "codegen/BackingStore.hpp"
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                       // for TR::IO::fprintf, etc
 #include "codegen/Instruction.hpp"                    // for Instruction

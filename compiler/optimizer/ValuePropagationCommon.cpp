@@ -26,7 +26,8 @@
 #include <stdint.h>                                // for int32_t, uint8_t, etc
 #include <stdlib.h>                                // for atoi
 #include <string.h>                                // for strncmp, memset, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd, etc
 #include "codegen/RecognizedMethods.hpp"           // for RecognizedMethod, etc
 #include "compile/Compilation.hpp"                 // for Compilation, comp

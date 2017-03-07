@@ -21,7 +21,8 @@
 
 #include <stdint.h>                   // for uint8_t
 #include "codegen/Analyser.hpp"       // for NUM_ACTIONS, TR_Analyser
-#include "codegen/CodeGenerator.hpp"  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
 #include "x/codegen/X86Ops.hpp"       // for TR_X86OpCodes
 
 #define EvalChild1   0x01

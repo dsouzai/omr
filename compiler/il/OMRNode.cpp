@@ -21,7 +21,8 @@
 #include <stddef.h>                             // for size_t, NULL
 #include <stdint.h>                             // for uint16_t, int32_t, uint32_t, etc
 #include <string.h>                             // for memcpy
-#include "codegen/CodeGenerator.hpp"            // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"            // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                 // for TR_FrontEnd, feGetEnv
 #include "codegen/Linkage.hpp"                  // for Linkage
 #include "codegen/LiveRegister.hpp"             // for TR_LiveRegisterInfo

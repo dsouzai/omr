@@ -21,7 +21,8 @@
 #include <stdint.h>                                 // for int32_t
 #include <stdio.h>                                  // for NULL, fflush, etc
 #include <string.h>                                 // for memset
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv
 #include "codegen/GCStackMap.hpp"                   // for TR_GCStackMap
 #include "codegen/Instruction.hpp"                  // for Instruction

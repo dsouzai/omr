@@ -29,7 +29,8 @@
 #include <string.h>                                       // for strncmp, etc
 #include <exception>
 #include <vector>                                         // for std::vector
-#include "codegen/CodeGenerator.hpp"                      // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                      // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                           // for TR_FrontEnd, etc
 #include "env/KnownObjectTable.hpp"
 #include "codegen/Linkage.hpp"                            // for Linkage

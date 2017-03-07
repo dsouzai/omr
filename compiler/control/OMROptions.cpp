@@ -27,6 +27,7 @@
 #include <stdio.h>                       // for sprintf, printf
 #include <stdlib.h>                      // for atoi, malloc, strtol
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "compile/Compilation.hpp"       // for Compilation, comp
 #include "compile/CompilationTypes.hpp"  // for TR_Hotness
 #include "compile/ResolvedMethod.hpp"    // for TR_ResolvedMethod

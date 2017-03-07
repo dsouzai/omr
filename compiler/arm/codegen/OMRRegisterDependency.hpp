@@ -35,6 +35,7 @@
 
 #include "codegen/RealRegister.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "env/IO.hpp"
 
 namespace TR { class Register; }

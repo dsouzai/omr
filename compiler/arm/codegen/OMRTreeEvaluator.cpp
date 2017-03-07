@@ -26,6 +26,7 @@
 #endif
 #include "codegen/CallSnippet.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/GenerateInstructions.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/RealRegister.hpp"

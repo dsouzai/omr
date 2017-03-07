@@ -20,7 +20,8 @@
 
 #include <stddef.h>                              // for NULL
 #include <stdint.h>                              // for uint16_t, int32_t, etc
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/RealRegister.hpp"              // for RealRegister
 #include "codegen/Register.hpp"                  // for Register
 #include "codegen/RegisterConstants.hpp"         // for TR_RegisterKinds, etc

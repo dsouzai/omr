@@ -19,7 +19,8 @@
 #include <stdint.h>                              // for int32_t
 #include <stdlib.h>                              // for NULL, atoi
 #include <string.h>                              // for memset
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                  // for feGetEnv
 #include "compile/Compilation.hpp"               // for Compilation
 #include "compile/Method.hpp"                    // for MAX_SCOUNT

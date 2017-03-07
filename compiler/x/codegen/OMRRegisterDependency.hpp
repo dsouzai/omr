@@ -35,7 +35,8 @@
 #include <stddef.h>                              // for size_t
 #include <stdint.h>                              // for uint8_t, uint32_t, etc
 #include <stdio.h>                               // for NULL, FILE
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"                  // for Register
 #include "codegen/RegisterConstants.hpp"         // for TR_RegisterKinds, etc

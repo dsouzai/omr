@@ -32,7 +32,8 @@ namespace OMR { typedef OMR::Z::Linkage LinkageConnector; }
 
 #include <stddef.h>                            // for NULL
 #include <stdint.h>                            // for int32_t, uint32_t, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/Machine.hpp"                 // for Machine

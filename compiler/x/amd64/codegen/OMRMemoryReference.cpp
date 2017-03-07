@@ -18,7 +18,8 @@
 
 #include <stddef.h>                                // for NULL
 #include <stdint.h>                                // for uint8_t, uint32_t, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/Instruction.hpp"                 // for Instruction
 #include "codegen/MemoryReference.hpp"             // for MemoryReference

@@ -22,7 +22,8 @@
 #include <limits.h>                            // for INT_MAX
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for strncmp, memset, NULL
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, feGetEnv
 #include "codegen/RecognizedMethods.hpp"
 #include "compile/Compilation.hpp"             // for Compilation

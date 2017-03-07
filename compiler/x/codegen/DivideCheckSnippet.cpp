@@ -19,7 +19,8 @@
 #include "x/codegen/DivideCheckSnippet.hpp"
 
 #include <stddef.h>                      // for NULL
-#include "codegen/CodeGenerator.hpp"     // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"     // for CodeGenerator
 #include "codegen/Machine.hpp"           // for Machine
 #include "codegen/RealRegister.hpp"      // for RealRegister, etc
 #include "il/ILOps.hpp"                  // for TR::ILOpCode

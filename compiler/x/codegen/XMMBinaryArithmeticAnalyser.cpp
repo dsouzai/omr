@@ -20,7 +20,8 @@
 
 #include <stddef.h>                                   // for NULL
 #include <stdint.h>                                   // for uint8_t
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
 #include "codegen/Machine.hpp"                        // for Machine
 #include "codegen/MemoryReference.hpp"
 #include "codegen/Register.hpp"                       // for Register

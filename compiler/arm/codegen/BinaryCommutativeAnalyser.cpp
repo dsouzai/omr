@@ -21,6 +21,7 @@
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/MemoryReference.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/BinaryCommutativeAnalyser.hpp"
 
 

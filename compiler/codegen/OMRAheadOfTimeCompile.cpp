@@ -18,7 +18,8 @@
 
 #include "codegen/AheadOfTimeCompile.hpp"
 
-#include "codegen/CodeGenerator.hpp"         // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"         // for CodeGenerator
 #include "codegen/Relocation.hpp"            // for TR::Relocation
 #include "compile/Method.hpp"                // for TR_AOTMethodInfo
 #include "compile/ResolvedMethod.hpp"        // for TR_ResolvedMethod

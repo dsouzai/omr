@@ -21,6 +21,7 @@
 #include "il/Node_inlines.hpp"
 #include "codegen/Relocation.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Machine.hpp"
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/Linkage.hpp"

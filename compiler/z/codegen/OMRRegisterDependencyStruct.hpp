@@ -33,7 +33,8 @@ namespace OMR { typedef OMR::Z::RegisterDependencyExt RegisterDependency; }
 #include "compiler/codegen/OMRRegisterDependencyStruct.hpp"
 
 #include <stddef.h>                   // for NULL
-#include "codegen/CodeGenerator.hpp"  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
 #include "codegen/RealRegister.hpp"   // for RealRegister, etc
 #include "codegen/Register.hpp"       // for Register
 #include "infra/Array.hpp"            // for TR_Array

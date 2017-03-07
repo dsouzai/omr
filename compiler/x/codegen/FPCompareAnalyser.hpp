@@ -21,7 +21,8 @@
 
 #include <stddef.h>                   // for NULL
 #include <stdint.h>                   // for uint8_t
-#include "codegen/CodeGenerator.hpp"  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
 #include "infra/Assert.hpp"           // for TR_ASSERT
 #include "x/codegen/X86Ops.hpp"       // for TR_X86OpCodes
 

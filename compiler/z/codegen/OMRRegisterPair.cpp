@@ -27,6 +27,7 @@
 #include "z/codegen/OMRRegisterPair.hpp"
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/LiveRegister.hpp"
 #include "codegen/Register.hpp"
 #include "codegen/RegisterPair.hpp"

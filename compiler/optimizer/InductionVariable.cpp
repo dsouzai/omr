@@ -22,7 +22,8 @@
 #include <stdint.h>                              // for int32_t, int64_t, etc
 #include <stdio.h>                               // for printf
 #include <string.h>                              // for NULL, memset
-#include "codegen/CodeGenerator.hpp"             // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                  // for TR_FrontEnd, etc
 #include "compile/Compilation.hpp"               // for Compilation
 #include "compile/SymbolReferenceTable.hpp"

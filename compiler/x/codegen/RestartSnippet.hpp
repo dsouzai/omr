@@ -22,7 +22,8 @@
 #include "codegen/Snippet.hpp"
 
 #include <stdint.h>                   // for int32_t, uint8_t, uint32_t, etc
-#include "codegen/CodeGenerator.hpp"  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
 #include "env/jittypes.h"             // for intptrj_t
 #include "il/symbol/LabelSymbol.hpp"  // for LabelSymbol
 #include "infra/Assert.hpp"           // for TR_ASSERT

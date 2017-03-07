@@ -20,7 +20,8 @@
 
 #include <stddef.h>                            // for NULL
 #include <stdint.h>                            // for uint16_t
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/RealRegister.hpp"            // for RealRegister

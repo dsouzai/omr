@@ -18,7 +18,8 @@
 
 #include "codegen/OMRUnresolvedDataSnippet.hpp"
 
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
 #include "codegen/UnresolvedDataSnippet.hpp"          // for UnresolvedDataSnippet
 #include "codegen/UnresolvedDataSnippet_inlines.hpp"  // for UnresolvedDataSnippet::self
 #include "il/symbol/LabelSymbol.hpp"                  // for LabelSymbol

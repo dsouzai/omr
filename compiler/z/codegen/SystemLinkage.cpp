@@ -22,7 +22,8 @@
 #include <algorithm>                                // for std::max
 #include <stddef.h>                                 // for NULL, size_t
 #include <stdint.h>                                 // for int32_t, etc
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc

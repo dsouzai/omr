@@ -17,7 +17,8 @@
  *******************************************************************************/
 
 #include <stdint.h>                                 // for int32_t
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "compile/Compilation.hpp"                  // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

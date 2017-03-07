@@ -22,7 +22,8 @@
 #include <stdint.h>                            // for int32_t, uint32_t, etc
 #include <string.h>                            // for NULL, strncmp
 #include <stdio.h>                             // for sprintf
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "compile/Compilation.hpp"             // for Compilation
 #include "compile/CompilationTypes.hpp"        // for TR_Hotness

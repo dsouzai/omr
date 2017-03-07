@@ -24,7 +24,8 @@
 #include <stdio.h>                              // for printf
 #include <stdlib.h>                             // for atoi
 #include <string.h>                             // for NULL, strncmp, etc
-#include "codegen/CodeGenerator.hpp"            // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"            // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                 // for TR_FrontEnd, etc
 #include "codegen/RecognizedMethods.hpp"
 #include "compile/Compilation.hpp"              // for Compilation, etc

@@ -19,7 +19,8 @@
 #include "x/codegen/X86SystemLinkage.hpp"
 
 #include <stddef.h>                            // for NULL
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/Instruction.hpp"             // for Instruction
 #include "codegen/Machine.hpp"                 // for Machine, etc
 #include "codegen/MemoryReference.hpp"

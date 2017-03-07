@@ -19,6 +19,7 @@
 #include "codegen/Snippet.hpp"
 #include "codegen/S390Snippets.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "env/IO.hpp"
 
 uint32_t

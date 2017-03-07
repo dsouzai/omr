@@ -25,7 +25,8 @@
 #include <stdio.h>                                 // for sprintf, snprintf
 #include <string.h>                                // for strcmp, NULL, etc
 #include "codegen/CodeGenPhase.hpp"                // for CodeGenPhase, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/GCRegisterMap.hpp"               // for GCRegisterMap

@@ -19,7 +19,8 @@
 #include "x/codegen/RegisterRematerialization.hpp"
 
 #include <stddef.h>                                   // for NULL
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
 #include "compile/Compilation.hpp"                    // for Compilation
 #include "codegen/MemoryReference.hpp"
 #include "codegen/Register.hpp"                       // for Register

@@ -21,7 +21,8 @@
 #include <stdint.h>                                   // for uint8_t, etc
 #include <stdlib.h>                                   // for NULL, atoi
 #include <string.h>                                   // for strstr
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                       // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"                    // for Instruction
 #include "codegen/Linkage.hpp"                        // for Linkage, etc

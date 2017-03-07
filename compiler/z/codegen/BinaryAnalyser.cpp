@@ -21,7 +21,8 @@
 #include <stddef.h>                                // for NULL
 #include <stdint.h>                                // for uint8_t
 #include "codegen/Analyser.hpp"                    // for NUM_ACTIONS
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc
 #include "codegen/MemoryReference.hpp"             // for MemoryReference, etc

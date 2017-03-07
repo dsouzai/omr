@@ -29,7 +29,8 @@
 #include <stdio.h>                             // for sprintf
 #include <stdlib.h>                            // for abs
 #include <string.h>                            // for NULL, strlen, strcmp, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/RecognizedMethods.hpp"

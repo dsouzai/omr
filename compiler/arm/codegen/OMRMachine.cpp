@@ -19,6 +19,7 @@
 #include <algorithm>                            // for std::find
 #include "codegen/BackingStore.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/Machine.hpp"
 #include "codegen/GenerateInstructions.hpp"

@@ -24,7 +24,8 @@
 #include <stdio.h>                             // for printf
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for memset
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/RegisterConstants.hpp"

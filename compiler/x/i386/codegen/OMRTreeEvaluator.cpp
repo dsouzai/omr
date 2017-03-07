@@ -19,6 +19,7 @@
 #include <stdint.h>                                      // for int32_t, etc
 #include <stdlib.h>                                      // for NULL, abs
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/FrontEnd.hpp"                          // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"                       // for Instruction
 #include "codegen/Linkage.hpp"                           // for Linkage

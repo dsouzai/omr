@@ -20,7 +20,8 @@
 
 #include <stdint.h>                                   // for uint8_t, etc
 #include <stdio.h>                                    // for NULL, printf, etc
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
 #include "codegen/ConstantDataSnippet.hpp"
 #include "codegen/FrontEnd.hpp"                       // for feGetEnv
 #include "codegen/Linkage.hpp"                        // for Linkage

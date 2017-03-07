@@ -19,6 +19,7 @@
 #include "codegen/InstOpCode.hpp"
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "env/CompilerEnv.hpp"
 #include "il/Node.hpp"                                         // for Node
 #include "il/Node_inlines.hpp"

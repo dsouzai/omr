@@ -23,7 +23,8 @@
 #include <stdio.h>                                 // for printf
 #include <stdlib.h>                                // for atoi, atof
 #include <string.h>                                // for NULL, memset, etc
-#include "codegen/CodeGenerator.hpp"               // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd, etc
 #include "compile/Compilation.hpp"                 // for Compilation
 #include "compile/Method.hpp"                      // for TR_Method

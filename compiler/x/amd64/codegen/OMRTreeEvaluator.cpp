@@ -21,6 +21,7 @@
 #include <stddef.h>                                      // for NULL
 #include <stdint.h>                                      // for uint8_t, etc
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/FrontEnd.hpp"                          // for TR_FrontEnd, etc
 #include "codegen/LiveRegister.hpp"
 #include "codegen/Machine.hpp"                           // for Machine

@@ -21,7 +21,8 @@
 #include <limits.h>                          // for INT_MAX
 #include <stddef.h>                          // for NULL
 #include <stdint.h>                          // for int32_t
-#include "codegen/CodeGenerator.hpp"         // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"         // for CodeGenerator, etc
 #include "codegen/LiveRegister.hpp"          // for TR_LiveRegisterInfo, etc
 #include "codegen/Register.hpp"              // for Register
 #include "codegen/RegisterPair.hpp"          // for RegisterPair

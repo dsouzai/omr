@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "env/ConcreteFE.hpp"
 #include "z/codegen/S390GenerateInstructions.hpp"
 #include "z/codegen/TRSystemLinkage.hpp"

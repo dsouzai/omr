@@ -22,7 +22,8 @@
 #include <stdint.h>                                   // for int32_t, etc
 #include <stdio.h>                                    // for NULL, etc
 #include <string.h>                                   // for memset
-#include "codegen/CodeGenerator.hpp"                  // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                       // for TR_FrontEnd, etc
 #include "env/KnownObjectTable.hpp"
 #include "codegen/RegisterConstants.hpp"

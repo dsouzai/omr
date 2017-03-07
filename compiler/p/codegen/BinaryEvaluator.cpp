@@ -18,7 +18,8 @@
 
 #include <stdint.h>                            // for int32_t, int64_t, etc
 #include <stdlib.h>                            // for NULL, abs
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                // for feGetEnv
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/Linkage.hpp"                 // for addDependency

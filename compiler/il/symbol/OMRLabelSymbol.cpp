@@ -23,7 +23,8 @@
 #include <stdio.h>                             // for sprintf
 #include <stdlib.h>                            // for calloc
 #include "codegen/CodeGenPhase.hpp"            // for CodeGenPhase
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "compile/Compilation.hpp"             // for Compilation, comp
 #include "env/TRMemory.hpp"                    // for PERSISTENT_NEW_DECLARE, etc
 #include "il/Block.hpp"                        // for Block

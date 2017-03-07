@@ -20,7 +20,8 @@
 #include <stddef.h>                            // for size_t
 #include <stdint.h>                            // for int32_t, uint8_t, etc
 #include <string.h>                            // for NULL, memcpy, strchr
-#include "codegen/CodeGenerator.hpp"           // for SharedSparseBitVector, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for SharedSparseBitVector, etc
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, etc
 #include "codegen/RecognizedMethods.hpp"
 #include "compile/Compilation.hpp"             // for Compilation, comp

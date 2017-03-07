@@ -25,6 +25,7 @@
 #if defined(TR_TARGET_64BIT)
 
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 
 #endif
 

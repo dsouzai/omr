@@ -20,7 +20,8 @@
 #include <stddef.h>                                 // for size_t
 #include <stdint.h>                                 // for int32_t, int64_t, etc
 #include <stdio.h>                                  // for NULL, printf, etc
-#include "codegen/CodeGenerator.hpp"                // for CodeGenerator, etc
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                     // for TR_FrontEnd, etc
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc
 #include "codegen/Instruction.hpp"                  // for Instruction

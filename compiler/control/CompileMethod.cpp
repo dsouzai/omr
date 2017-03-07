@@ -23,7 +23,8 @@
 #include <stdio.h>                             // for NULL, fprintf, fflush, etc
 #include <string.h>                            // for strlen
 #include <unistd.h>                            // for getpid, intptr_t, etc
-#include "codegen/CodeGenerator.hpp"           // for CodeGenerator
+#include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_VerboseLog, etc
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "compile/Compilation.hpp"             // for Compilation, comp

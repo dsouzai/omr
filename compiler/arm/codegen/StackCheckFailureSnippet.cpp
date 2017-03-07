@@ -23,6 +23,7 @@
 #include "il/symbol/RegisterMappedSymbol.hpp"
 #include "il/symbol/StaticSymbol.hpp"
 #include "codegen/CodeGenerator.hpp"
+#include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/StackCheckFailureSnippet.hpp"
 #include "codegen/SnippetGCMap.hpp"
 #include "codegen/GCStackAtlas.hpp" /* @@ */
