@@ -25,7 +25,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv
 #include "codegen/GCStackMap.hpp"                   // for TR_GCStackMap
-#include "codegen/Instruction.hpp"                  // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                  // for Instruction
 #include "codegen/Linkage.hpp"                      // for Linkage
 #include "codegen/Snippet.hpp"                      // for Snippet
 #include "compile/Compilation.hpp"                  // for Compilation

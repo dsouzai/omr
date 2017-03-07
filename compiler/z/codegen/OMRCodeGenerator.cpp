@@ -36,7 +36,8 @@
 #include "codegen/GCStackAtlas.hpp"                 // for GCStackAtlas
 #include "codegen/GCStackMap.hpp"                   // for TR_GCStackMap, etc
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc
-#include "codegen/Instruction.hpp"                  // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                  // for Instruction, etc
 #include "codegen/Linkage.hpp"                      // for Linkage, REGNUM, etc
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/LiveRegister.hpp"                 // for TR_LiveRegisters, etc

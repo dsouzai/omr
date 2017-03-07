@@ -26,7 +26,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
-#include "codegen/Instruction.hpp"             // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"             // for Instruction, etc
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/LiveRegister.hpp"            // for TR_LiveRegisters
 #include "codegen/Machine.hpp"                 // for MachineBase, Machine, etc

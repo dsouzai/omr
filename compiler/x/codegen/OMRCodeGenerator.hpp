@@ -51,6 +51,7 @@ namespace OMR { typedef OMR::X86::CodeGenerator CodeGeneratorConnector; }
 #endif
 
 #include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"
 #include "il/symbol/LabelSymbol.hpp"
 #include "il/symbol/StaticSymbol.hpp"
 #include "x/codegen/OutlinedInstructions.hpp"

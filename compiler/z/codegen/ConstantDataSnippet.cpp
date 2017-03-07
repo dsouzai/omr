@@ -26,7 +26,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"            // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                 // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"               // for InstOpCode
-#include "codegen/Instruction.hpp"              // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"              // for Instruction
 #include "codegen/Relocation.hpp"
 #include "codegen/Snippet.hpp"
 #include "codegen/UnresolvedDataSnippet.hpp"

@@ -28,7 +28,8 @@ int jitDebugPPC;
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd
 #include "codegen/GCRegisterMap.hpp"               // for GCRegisterMap
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc
-#include "codegen/Instruction.hpp"                 // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                 // for Instruction, etc
 #include "codegen/Machine.hpp"                     // for Machine
 #include "codegen/MemoryReference.hpp"             // for MemoryReference
 #include "codegen/RealRegister.hpp"                // for RealRegister, etc

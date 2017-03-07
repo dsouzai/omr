@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/GCStackAtlas.hpp"            // for GCStackAtlas
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
-#include "codegen/Instruction.hpp"             // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"             // for Instruction
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/LiveRegister.hpp"            // for TR_LiveRegisters
 #include "codegen/Machine.hpp"                 // for Machine, LOWER_IMMED, etc

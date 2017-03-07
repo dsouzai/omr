@@ -22,6 +22,7 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"
 
 
 void

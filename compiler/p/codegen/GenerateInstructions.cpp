@@ -26,7 +26,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
-#include "codegen/Instruction.hpp"             // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"             // for Instruction, etc
 #include "codegen/MemoryReference.hpp"         // for MemoryReference
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/Snippet.hpp"                 // for Snippet

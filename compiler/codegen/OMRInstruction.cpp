@@ -19,7 +19,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"               // for CodeGenerator
 #include "codegen/InstOpCode.hpp"                  // for InstOpCode, etc
-#include "codegen/Instruction.hpp"                 // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                 // for Instruction
 #include "codegen/Register.hpp"                    // for Register
 #include "compile/Compilation.hpp"                 // for Compilation
 #include "il/TreeTop.hpp"                          // for TreeTop
@@ -28,12 +29,6 @@
 #include "ras/Debug.hpp"                           // for TR_DebugBase
 
 namespace TR { class Node; }
-
-TR::Instruction *
-OMR::Instruction::self()
-   {
-   return static_cast<TR::Instruction *>(this);
-   }
 
 namespace OMR
 {

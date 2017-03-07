@@ -22,7 +22,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator, etc
 #include "codegen/GCRegisterMap.hpp"             // for GCRegisterMap
-#include "codegen/Instruction.hpp"               // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"               // for Instruction, etc
 #include "codegen/Linkage.hpp"
 #include "codegen/Machine.hpp"                   // for MachineBase, etc
 #include "codegen/MemoryReference.hpp"           // for MemoryReference

@@ -19,7 +19,8 @@
 #include <stddef.h>                         // for NULL
 #include <stdint.h>                         // for int32_t, uint32_t, etc
 #include "codegen/InstOpCode.hpp"           // for InstOpCode, etc
-#include "codegen/Instruction.hpp"          // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"          // for Instruction
 #include "codegen/Snippet.hpp"              // for Snippet
 #include "env/jittypes.h"                   // for intptrj_t, uintptrj_t
 #include "runtime/Runtime.hpp"

@@ -26,7 +26,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                  // for feGetEnv
 #include "codegen/InstOpCode.hpp"                // for InstOpCode, etc
-#include "codegen/Instruction.hpp"               // for Instruction
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"               // for Instruction
 #include "codegen/Linkage.hpp"                   // for addDependency
 #include "codegen/MemoryReference.hpp"           // for MemoryReference
 #include "codegen/RealRegister.hpp"              // for RealRegister, etc

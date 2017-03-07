@@ -27,7 +27,8 @@
 #include "codegen/FrontEnd.hpp"                        // for feGetEnv, etc
 #include "codegen/GCStackAtlas.hpp"                    // for GCStackAtlas
 #include "codegen/GCStackMap.hpp"                      // for TR_GCStackMap, etc
-#include "codegen/Instruction.hpp"                     // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                     // for Instruction, etc
 #include "codegen/Linkage.hpp"                         // for Linkage, etc
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/LiveRegister.hpp"

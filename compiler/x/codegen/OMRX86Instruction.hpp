@@ -23,7 +23,8 @@
 #include <stdint.h>                                   // for int32_t, etc
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
-#include "codegen/Instruction.hpp"                    // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"                    // for Instruction, etc
 #include "codegen/Machine.hpp"                        // for Machine
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RealRegister.hpp"                   // for RealRegister, etc

@@ -21,7 +21,8 @@
 #include <stddef.h>                            // for NULL
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
-#include "codegen/Instruction.hpp"             // for Instruction, etc
+#include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"             // for Instruction, etc
 #include "codegen/Machine.hpp"                 // for Machine
 #include "codegen/TreeEvaluator.hpp"           // for TreeEvaluator
 #include "compile/Compilation.hpp"             // for Compilation
