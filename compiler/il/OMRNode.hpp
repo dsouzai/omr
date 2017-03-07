@@ -154,7 +154,7 @@ public:
 
    inline TR::Node * self();
 
-   Node();
+   Node() {}
    ~Node();
 
    void * operator new(size_t s, TR::NodePool & nodePool, ncount_t poolIndex = 0);

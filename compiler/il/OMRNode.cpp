@@ -91,18 +91,6 @@ OMR::Node::operator new(size_t s, TR::NodePool& nodes, ncount_t poolIndex)
    return (void *) nodes.allocate(poolIndex);
    }
 
-OMR::Node::Node()
-   : _opCode(TR::BadILOp),
-     _numChildren(0),
-     _globalIndex(0),
-     _flags(0),
-     _byteCodeInfo(),
-     _optAttributes(NULL),
-     _unionBase(),
-     _unionPropertyA()
-   {
-   }
-
 OMR::Node::~Node()
    {
    _unionPropertyA = UnionPropertyA();
