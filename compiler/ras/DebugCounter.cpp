@@ -23,7 +23,8 @@
 #include <string.h>                          // for strlen, memset, strncpy
 #include <math.h>                            // for log, pow
 #include "codegen/FrontEnd.hpp"              // for TR_FrontEnd
-#include "compile/Compilation.hpp"           // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"           // for Compilation
 #include "compile/SymbolReferenceTable.hpp"  // for SymbolReferenceTable
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"       // for TR::Options, etc

@@ -22,6 +22,7 @@
 #include "env/VMAccessCriticalSection.hpp"
 #endif
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/CompilerEnv.hpp"
 
 

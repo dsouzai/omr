@@ -22,7 +22,8 @@
 #include <stdlib.h>                   // for free
 #include "env/TRMemory.hpp"           // for globalAllocator, etc
 #include "ras/CallStackIterator.hpp"  // for TR_CallStackIterator
-#include "compile/Compilation.hpp"    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"    // for Compilation
 
 
 void TR_CallStackIterator::printStackBacktrace(TR::Compilation *comp)

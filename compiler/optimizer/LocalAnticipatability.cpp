@@ -22,7 +22,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                  // for feGetEnv
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "compile/Method.hpp"                    // for MAX_SCOUNT
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

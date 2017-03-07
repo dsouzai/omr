@@ -27,6 +27,7 @@
 #include "codegen/GCStackMap.hpp"
 #include "compile/ResolvedMethod.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"
 #include "env/FEBase_t.hpp"
 #include "env/Processors.hpp"

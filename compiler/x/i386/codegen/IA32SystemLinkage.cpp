@@ -27,7 +27,8 @@
 #include "codegen/RealRegister.hpp"        // for TR::RealRegister::RegNum, etc
 #include "codegen/RegisterConstants.hpp"   // for TR_RegisterKinds::TR_X87
 #include "codegen/RegisterDependency.hpp"
-#include "compile/Compilation.hpp"         // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"         // for Compilation
 #include "compile/Method.hpp"              // for TR_Method
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

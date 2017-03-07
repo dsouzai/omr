@@ -26,7 +26,8 @@
 #include "codegen/Linkage.hpp"                      // for Linkage
 #include "codegen/Machine.hpp"                      // for Machine
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"              // for TR::Options, etc

@@ -21,6 +21,7 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Recompilation.hpp"

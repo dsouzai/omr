@@ -35,7 +35,8 @@ namespace OMR { typedef OMR::Block BlockConnector; }
 #include <limits.h>                 // for UINT_MAX
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for uint16_t, uint8_t
-#include "compile/Compilation.hpp"  // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation, comp
 #include "env/TRMemory.hpp"         // for TR_Memory, etc
 #include "env/jittypes.h"           // for TR_ByteCodeInfo, etc
 #include "il/Node.hpp"              // for Node (ptr only), etc

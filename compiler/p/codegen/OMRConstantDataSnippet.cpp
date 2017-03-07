@@ -20,7 +20,8 @@
 
 #include "codegen/FrontEnd.hpp"
 #include "codegen/Relocation.hpp"
-#include "compile/Compilation.hpp"            // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation, comp
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/CompilerEnv.hpp"

@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "il/Node.hpp"
 #include "il/Node_inlines.hpp"
 #include "codegen/Relocation.hpp"

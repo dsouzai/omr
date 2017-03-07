@@ -25,6 +25,7 @@
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/TreeEvaluator.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/CompilerEnv.hpp"
 #include "env/IO.hpp"                          // for POINTER_PRINTF_FORMAT
 #include "env/jittypes.h"

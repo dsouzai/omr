@@ -23,7 +23,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, etc
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

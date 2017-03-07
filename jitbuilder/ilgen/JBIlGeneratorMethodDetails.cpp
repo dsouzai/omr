@@ -21,6 +21,7 @@
 #include "ilgen/IlInjector.hpp"
 #include "env/FrontEnd.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"
 #include "compile/InlineBlock.hpp"
 #include "compile/ResolvedMethod.hpp"

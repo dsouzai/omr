@@ -29,7 +29,8 @@
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/Snippet.hpp"                   // for commentString, etc
 #include "codegen/SnippetGCMap.hpp"
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "env/IO.hpp"
 #include "env/jittypes.h"                        // for intptrj_t
 #include "il/DataTypes.hpp"                      // for FLOAT_NAN

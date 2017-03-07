@@ -31,7 +31,8 @@
 #include "codegen/MemoryReference.hpp"         // for MemoryReference
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/RegisterPair.hpp"            // for RegisterPair
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "env/CompilerEnv.hpp"
 #include "env/ObjectModel.hpp"                 // for ObjectModel
 #include "env/TRMemory.hpp"

@@ -47,7 +47,8 @@
 #include "codegen/RegisterPair.hpp"                   // for RegisterPair
 #include "codegen/RegisterRematerializationInfo.hpp"
 #include "codegen/Snippet.hpp"                        // for Snippet
-#include "compile/Compilation.hpp"                    // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation, etc
 #include "compile/Method.hpp"                         // for TR_Method
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"

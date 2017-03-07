@@ -20,7 +20,8 @@
 #define OUTLINEDINSTRUCTIONS_INCL
 
 #include "codegen/RegisterConstants.hpp"    // for TR_RegisterKinds
-#include "compile/Compilation.hpp"          // for comp, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for comp, etc
 #include "env/TRMemory.hpp"                 // for TR_Memory, etc
 #include "il/ILOpCodes.hpp"                 // for ILOpCodes
 #include "x/codegen/X86Ops.hpp"             // for TR_X86OpCodes

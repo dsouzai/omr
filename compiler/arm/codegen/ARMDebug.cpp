@@ -30,6 +30,7 @@ int jitDebugARM;
 #include "codegen/Snippet.hpp"
 #include "codegen/StackCheckFailureSnippet.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "control/Recompilation.hpp"
 #include "env/IO.hpp"
 #include "env/jittypes.h"

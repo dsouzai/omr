@@ -38,7 +38,8 @@
 #include "codegen/RegisterRematerializationInfo.hpp"
 #include "codegen/RegisterUsage.hpp"                  // for RegisterUsage
 #include "codegen/TreeEvaluator.hpp"                  // for TreeEvaluator
-#include "compile/Compilation.hpp"                    // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation, etc
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"                // for TR::Options, etc
 #include "env/CompilerEnv.hpp"

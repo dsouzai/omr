@@ -22,7 +22,8 @@
 #include <stdint.h>                              // for int32_t, int64_t
 #include <string.h>                              // for NULL, memset
 #include "codegen/FrontEnd.hpp"                  // for TR_FrontEnd, etc
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

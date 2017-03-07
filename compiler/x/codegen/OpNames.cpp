@@ -20,7 +20,8 @@
 
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
-#include "compile/Compilation.hpp"    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"    // for Compilation
 #include "ras/Debug.hpp"              // for TR_DebugBase
 #include "x/codegen/X86Ops.hpp"       // for TR_X86OpCode
 

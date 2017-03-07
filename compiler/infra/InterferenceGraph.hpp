@@ -23,7 +23,8 @@
 #include <stdint.h>                 // for int32_t
 #include "env/TRMemory.hpp"         // for Allocator, TR_HeapMemory, etc
 #include "env/jittypes.h"           // for uintptrj_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "cs2/bitvectr.h"           // for ABitVector
 #include "infra/Array.hpp"          // for TR_Array
 #include "infra/Assert.hpp"         // for TR_ASSERT

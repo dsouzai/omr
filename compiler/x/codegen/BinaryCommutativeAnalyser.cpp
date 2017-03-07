@@ -32,7 +32,8 @@
 #include "codegen/RegisterPair.hpp"                 // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"                // for TreeEvaluator, etc
 #include "codegen/X86Evaluator.hpp"
-#include "compile/Compilation.hpp"                  // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation, etc
 #include "env/IO.hpp"                               // for POINTER_PRINTF_FORMAT
 #include "env/CompilerEnv.hpp"
 #include "il/ILOpCodes.hpp"                         // for ILOpCodes::lushr, etc

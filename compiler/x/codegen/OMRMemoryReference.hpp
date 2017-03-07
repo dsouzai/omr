@@ -41,7 +41,8 @@ namespace OMR { typedef OMR::X86::MemoryReference MemoryReferenceConnector; }
 #include "codegen/Register.hpp"                    // for Register
 #include "codegen/Snippet.hpp"                     // for Snippet
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "env/TRMemory.hpp"                        // for TR_Memory, etc
 #include "env/jittypes.h"                          // for intptrj_t
 #include "il/Node.hpp"                             // for rcount_t

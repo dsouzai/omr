@@ -18,7 +18,8 @@
 
 #include "infra/Checklist.hpp"
 
-#include "compile/Compilation.hpp"     // for Compilation, BitVectorPool
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"     // for Compilation, BitVectorPool
 #include "il/Block.hpp"                // for Block
 #include "il/Node.hpp"                 // for Node
 #include "infra/BitVector.hpp"         // for TR_BitVector

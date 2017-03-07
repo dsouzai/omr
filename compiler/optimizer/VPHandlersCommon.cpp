@@ -19,7 +19,8 @@
 #include <stdint.h>                                  // for int32_t
 #include <string.h>                                  // for strncmp, strlen, etc
 #include "codegen/FrontEnd.hpp"                      // for TR_FrontEnd
-#include "compile/Compilation.hpp"                   // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                   // for Compilation
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "env/TRMemory.hpp"

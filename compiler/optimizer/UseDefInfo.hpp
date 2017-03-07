@@ -21,7 +21,8 @@
 
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for int32_t, uint32_t, intptr_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "cs2/arrayof.h"            // for ArrayOf
 #include "cs2/bitvectr.h"           // for ABitVector
 #include "cs2/cs2.h"                // for Pair

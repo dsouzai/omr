@@ -21,7 +21,8 @@
 
 #include <stddef.h>                           // for NULL
 #include <stdint.h>                           // for int32_t, int64_t, etc
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "cs2/hashtab.h"                      // for HashTable
 #include "env/TRMemory.hpp"                   // for TR_Memory, etc
 #include "env/jittypes.h"                     // for uintptrj_t

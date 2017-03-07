@@ -28,7 +28,8 @@
 #include "codegen/PPCInstruction.hpp"      // for PPCDepImmSymInstruction 
 #include "codegen/RegisterConstants.hpp"   // for TR_RegisterKinds
 #include "codegen/RegisterDependency.hpp"
-#include "compile/Compilation.hpp"         // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"         // for Compilation, comp
 #include "il/Block.hpp"                    // for Block
 #include "il/ILOpCodes.hpp"                // for ILOpCodes::BBStart
 #include "il/Node.hpp"                     // for Node

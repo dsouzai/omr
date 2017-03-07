@@ -19,7 +19,8 @@
 #include "env/ExceptionTable.hpp"
 
 #include <stdint.h>                 // for uint32_t, int32_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "env/TRMemory.hpp"
 #include "env/jittypes.h"           // for TR_ByteCodeInfo
 #include "il/Block.hpp"             // for Block, etc

@@ -23,7 +23,8 @@
 #include <stdint.h>                           // for int32_t, uint32_t, etc
 #include "env/KnownObjectTable.hpp"       // for KnownObjectTable, etc
 #include "codegen/RecognizedMethods.hpp"      // for RecognizedMethod
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "env/TRMemory.hpp"                   // for TR_Memory, etc
 #include "env/jittypes.h"
 #include "il/Block.hpp"                       // for Block

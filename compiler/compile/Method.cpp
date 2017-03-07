@@ -19,7 +19,8 @@
 #include "compile/Method.hpp"
 
 #include <string.h>                            // for memchr
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "control/Options.hpp"

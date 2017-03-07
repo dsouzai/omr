@@ -21,7 +21,8 @@
 #include <stdio.h>                             // for fflush, printf, stdout
 #include <string.h>                            // for NULL, memset
 #include "codegen/FrontEnd.hpp"                // for feGetEnv
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "env/TRMemory.hpp"                    // for TR_Link::operator new, TR_Memory, etc
 #include "il/Block.hpp"                        // for Block, toBlock, TR_BlockCloner

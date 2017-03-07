@@ -18,7 +18,8 @@
 
 #include "codegen/Analyser.hpp"
 
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable, etc
 #include "il/ILOps.hpp"             // for ILOpCode
 #include "il/Node.hpp"              // for Node

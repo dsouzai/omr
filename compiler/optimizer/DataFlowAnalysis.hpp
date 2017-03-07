@@ -21,7 +21,8 @@
 
 #include <stddef.h>                              // for NULL, size_t
 #include <stdint.h>                              // for int32_t, int8_t, etc
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "cs2/arrayof.h"                         // for ArrayOf

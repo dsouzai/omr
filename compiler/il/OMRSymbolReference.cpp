@@ -22,7 +22,8 @@
 #include <stdint.h>                            // for int32_t, uint32_t, etc
 #include <string.h>                            // for NULL, memset, strncmp
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/Method.hpp"                  // for TR_Method, mcount_t
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable, etc

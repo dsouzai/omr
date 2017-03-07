@@ -24,7 +24,8 @@
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for strlen, memcpy
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"         // for TR::Options, etc
 #include "cs2/bitvectr.h"                      // for ABitVector<>::BitRef

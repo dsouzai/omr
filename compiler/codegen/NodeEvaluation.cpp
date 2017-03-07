@@ -27,7 +27,8 @@
 #include "codegen/Register.hpp"              // for Register
 #include "codegen/RegisterPair.hpp"          // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"           // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"           // for Compilation, comp
 #include "compile/SymbolReferenceTable.hpp"  // for SymbolReferenceTable, etc
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

@@ -27,7 +27,8 @@
 #include "codegen/Machine.hpp"                      // for Machine
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"                  // for comp, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for comp, etc
 #include "il/Node.hpp"                              // for Node
 #include "il/Node_inlines.hpp"
 #include "infra/Assert.hpp"                         // for TR_ASSERT

@@ -27,7 +27,8 @@
 #include "codegen/Machine.hpp"                 // for Machine, UPPER_IMMED
 #include "codegen/RealRegister.hpp"            // for RealRegister
 #include "codegen/SnippetGCMap.hpp"
-#include "compile/Compilation.hpp"             // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp
 #include "env/IO.hpp"                          // for POINTER_PRINTF_FORMAT
 #include "env/jittypes.h"                      // for intptrj_t
 #include "il/DataTypes.hpp"                    // for TR::DataType

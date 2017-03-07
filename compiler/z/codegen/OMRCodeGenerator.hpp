@@ -45,7 +45,8 @@ namespace OMR { typedef OMR::Z::CodeGenerator CodeGeneratorConnector; }
 #include "codegen/ScratchRegisterManager.hpp"
 #include "codegen/Snippet.hpp"                      // for Snippet
 #include "codegen/TreeEvaluator.hpp"                // for TreeEvaluator
-#include "compile/Compilation.hpp"                  // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"              // for TR::Options, etc

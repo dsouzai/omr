@@ -21,7 +21,8 @@
 #include <stddef.h>                              // for NULL
 #include <stdint.h>                              // for int32_t, uint32_t
 #include "env/StackMemoryRegion.hpp"
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "env/TRMemory.hpp"                      // for TR_Memory
 #include "il/Block.hpp"                          // for Block, toBlock, etc
 #include "il/ILOpCodes.hpp"                      // for ILOpCodes::monent, etc

@@ -49,7 +49,8 @@
 #else
 #include "x/i386/codegen/IA32SystemLinkage.hpp"
 #endif
-#include "compile/Compilation.hpp"                     // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                     // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "compile/VirtualGuard.hpp"

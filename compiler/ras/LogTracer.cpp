@@ -19,7 +19,8 @@
 #include "ras/LogTracer.hpp"
 
 #include <stdarg.h>                            // for va_list
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "optimizer/Optimization.hpp"          // for Optimization
 #include "optimizer/Optimization_inlines.hpp"
 #include "ras/Debug.hpp"                       // for TR_DebugBase

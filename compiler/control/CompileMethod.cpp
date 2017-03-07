@@ -27,7 +27,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_VerboseLog, etc
 #include "codegen/LinkageConventionsEnum.hpp"
-#include "compile/Compilation.hpp"             // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp
 #include "compile/CompilationTypes.hpp"        // for TR_Hotness
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "control/OptimizationPlan.hpp"        // for TR_OptimizationPlan, etc

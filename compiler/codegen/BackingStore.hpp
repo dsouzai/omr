@@ -20,7 +20,8 @@
 #define BACKINGSTORE_INCL
 
 #include <stdint.h>                    // for int32_t, uint8_t, int8_t
-#include "compile/Compilation.hpp"     // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"     // for Compilation, comp
 #include "env/TRMemory.hpp"            // for TR_Memory, etc
 #include "il/SymbolReference.hpp"      // for SymbolReference
 #include "infra/Flags.hpp"             // for flags8_t

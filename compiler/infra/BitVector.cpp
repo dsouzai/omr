@@ -20,7 +20,8 @@
 
 #include <stdint.h>                   // for int32_t, uint32_t
 #include <stdio.h>                    // for sprintf
-#include "compile/Compilation.hpp"    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"    // for Compilation
 #include "ras/Debug.hpp"              // for TR_DebugBase
 
 // Number of bits set in a byte containing the index value

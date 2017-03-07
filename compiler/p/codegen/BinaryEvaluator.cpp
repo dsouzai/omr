@@ -31,7 +31,8 @@
 #include "codegen/RegisterPair.hpp"            // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"           // for TreeEvaluator, etc
 #include "codegen/PPCEvaluator.hpp"
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "env/CompilerEnv.hpp"
 #include "env/Processors.hpp"

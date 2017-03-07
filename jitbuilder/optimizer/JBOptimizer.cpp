@@ -21,6 +21,7 @@
 #include <stddef.h>                                       // for NULL
 #include <stdint.h>                                       // for uint16_t
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"                             // for TR_Method
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

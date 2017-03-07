@@ -30,7 +30,8 @@
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/RegisterDependencyStruct.hpp"
-#include "compile/Compilation.hpp"                       // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                       // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/jittypes.h"                                // for uintptrj_t

@@ -31,7 +31,8 @@
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"                       // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                       // for Compilation
 #include "env/CompilerEnv.hpp"
 #include "env/TRMemory.hpp"
 #include "il/DataTypes.hpp"                              // for DOUBLE_NAN, etc

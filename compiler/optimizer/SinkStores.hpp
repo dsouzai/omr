@@ -21,7 +21,8 @@
 
 #include <stddef.h>                           // for NULL
 #include <stdint.h>                           // for int32_t, uint64_t, etc
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "env/TRMemory.hpp"                   // for TR_Memory, etc
 #include "il/Node.hpp"                        // for vcount_t
 #include "infra/Flags.hpp"                    // for flags16_t

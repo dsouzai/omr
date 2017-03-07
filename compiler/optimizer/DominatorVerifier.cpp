@@ -23,7 +23,8 @@
 #include <stddef.h>                           // for NULL
 #include <stdint.h>                           // for int32_t
 #include "env/StackMemoryRegion.hpp"
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "cs2/arrayof.h"                      // for StaticArrayOf
 #include "env/TRMemory.hpp"
 #include "il/Block.hpp"                       // for Block

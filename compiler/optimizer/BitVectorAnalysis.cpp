@@ -19,6 +19,7 @@
 #include <stdint.h>                                 // for int32_t
 #include <string.h>                                 // for NULL, memset
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"                       // for HIGH_VISIT_COUNT
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

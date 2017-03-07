@@ -23,7 +23,8 @@
 
 #include <stddef.h>                   // for NULL
 #include <stdint.h>                   // for int32_t
-#include "compile/Compilation.hpp"    // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"    // for Compilation, comp
 #include "env/CompilerEnv.hpp"        // for TR::Host
 #include "env/Environment.hpp"        // for Environment
 #include "env/IO.hpp"                 // for POINTER_PRINTF_FORMAT

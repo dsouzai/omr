@@ -19,7 +19,8 @@
 #ifndef TR_OPTIMIZATIONDATA_INCL
 #define TR_OPTIMIZATIONDATA_INCL
 
-#include "compile/Compilation.hpp"      // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"      // for Compilation
 #include "env/TRMemory.hpp"             // for Allocator, Allocatable, etc
 
 namespace TR

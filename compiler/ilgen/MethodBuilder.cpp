@@ -31,6 +31,7 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Recompilation.hpp"
 #include "infra/Cfg.hpp"

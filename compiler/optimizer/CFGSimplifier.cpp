@@ -20,7 +20,8 @@
 
 #include <algorithm>                           // for std::max
 #include <stddef.h>                            // for NULL
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "env/StackMemoryRegion.hpp"
 #include "env/TRMemory.hpp"                    // for TR_Memory
 #include "il/Block.hpp"                        // for Block

@@ -23,7 +23,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for feGetEnv
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "cs2/sparsrbit.h"
 #include "env/TRMemory.hpp"                    // for SparseBitVector, etc

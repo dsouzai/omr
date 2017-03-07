@@ -18,6 +18,7 @@
 
 #include "compile/SymbolReferenceTable.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 
 #include <stddef.h>                            // for NULL, size_t
 #include <stdint.h>                            // for intptr_t, uint8_t, etc
@@ -32,7 +33,8 @@
 #include "codegen/RealRegister.hpp"            // for RealRegister
 #include "codegen/RecognizedMethods.hpp"       // for RecognizedMethod, etc
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"             // for Compilation, comp, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp, etc
 #include "compile/Method.hpp"                  // for TR_Method, etc
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "control/Options.hpp"

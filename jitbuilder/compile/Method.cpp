@@ -18,6 +18,7 @@
 
 #include "compile/Method.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "il/SymbolReference.hpp"
 #include "il/symbol/ParameterSymbol.hpp"
 #include "ilgen/TypeDictionary.hpp"

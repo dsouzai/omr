@@ -36,7 +36,8 @@
 #include "codegen/RegisterPair.hpp"                  // for RegisterPair
 #include "codegen/Snippet.hpp"                       // for TR::PPCSnippet, etc
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"                   // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                   // for Compilation, etc
 #include "compile/SymbolReferenceTable.hpp"
 #include "compile/VirtualGuard.hpp"                  // for TR_VirtualGuard
 #include "control/Options.hpp"

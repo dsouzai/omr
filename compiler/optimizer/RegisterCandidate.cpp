@@ -29,7 +29,8 @@
 #include "codegen/FrontEnd.hpp"                // for feGetEnv, TR_FrontEnd
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"             // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, etc
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"         // for TR::Options, etc

@@ -34,7 +34,8 @@
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"             // for Instruction
 #include "codegen/RecognizedMethods.hpp"       // for RecognizedMethod, etc
-#include "compile/Compilation.hpp"             // for self(), etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for self(), etc
 #include "compile/CompilationTypes.hpp"        // for TR_Hotness
 #include "compile/Method.hpp"                  // for TR_Method, etc
 #include "compile/OSRData.hpp"                 // for TR_OSRCompilationData, etc
@@ -568,13 +569,6 @@ OMR::Compilation::getHotnessName()
    {
    return TR::Compilation::getHotnessName(self()->getMethodHotness());
    }
-
-TR::Compilation *
-OMR::Compilation::self()
-   {
-   return static_cast<TR::Compilation *>(this);
-   }
-
 
 TR::ResolvedMethodSymbol * OMR::Compilation::createJittedMethodSymbol(TR_ResolvedMethod *resolvedMethod)
    {

@@ -33,7 +33,8 @@
 #include "codegen/Relocation.hpp"
 #include "codegen/Snippet.hpp"                     // for Snippet
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"                 // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"              // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

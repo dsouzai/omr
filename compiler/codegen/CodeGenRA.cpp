@@ -36,7 +36,8 @@
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"         // for TR::Options, etc
 #include "env/CompilerEnv.hpp"

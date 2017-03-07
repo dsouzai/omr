@@ -29,7 +29,8 @@
 #include "codegen/MemoryReference.hpp"         // for MemoryReference
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/Relocation.hpp"              // for TR::ExternalRelocation, etc
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "env/CompilerEnv.hpp"
 #ifdef J9_PROJECT_SPECIFIC

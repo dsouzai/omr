@@ -30,7 +30,8 @@ namespace OMR { typedef OMR::Optimization OptimizationConnector; }
 
 #include <stddef.h>                                   // for NULL
 #include <stdint.h>                                   // for int32_t
-#include "compile/Compilation.hpp"                    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation
 #include "env/TRMemory.hpp"                           // for Allocator, Allocatable, etc
 #include "il/ILOpCodes.hpp"                           // for ILOpCodes
 #include "infra/Assert.hpp"                           // for TR_ASSERT

@@ -20,7 +20,8 @@
 #define BYTECODEITERATOR_INCL
 
 #include <stdint.h>                 // for int32_t, uint16_t, uint32_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "infra/Link.hpp"           // for TR_Link
 
 class TR_Memory;

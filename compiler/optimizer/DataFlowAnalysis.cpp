@@ -20,7 +20,8 @@
 
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for uint8_t, int32_t
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "env/TRMemory.hpp"                         // for TR_Memory
 #include "il/AliasSetInterface.hpp"
 #include "il/ILOps.hpp"                             // for ILOpCode

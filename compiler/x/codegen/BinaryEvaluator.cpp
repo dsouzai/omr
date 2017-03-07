@@ -32,7 +32,8 @@
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/TreeEvaluator.hpp"
 #include "codegen/X86Evaluator.hpp"
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "env/IO.hpp"                               // for POINTER_PRINTF_FORMAT
 #include "env/ObjectModel.hpp"                      // for ObjectModel
 #include "env/TRMemory.hpp"                         // for TR_HeapMemory, etc

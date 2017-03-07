@@ -33,7 +33,8 @@
 #include "codegen/RegisterDependencyStruct.hpp"  // for RegisterDependency
 #include "codegen/Snippet.hpp"                   // for commentString
 #include "codegen/SnippetGCMap.hpp"
-#include "compile/Compilation.hpp"               // for Compilation, isSMP
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation, isSMP
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

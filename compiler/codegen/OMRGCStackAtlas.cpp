@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"              // for CodeGenerator
 #include "codegen/GCStackAtlas.hpp"               // for TR::GCStackAtlas
 #include "codegen/GCStackMap.hpp"                 // for TR_GCStackMap, etc
-#include "compile/Compilation.hpp"                // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "infra/List.hpp"                         // for List, ListIterator, etc

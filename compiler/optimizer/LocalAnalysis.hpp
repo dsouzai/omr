@@ -21,7 +21,8 @@
 
 #include <stdint.h>                 // for int32_t
 #include <string.h>                 // for memset
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "env/TRMemory.hpp"         // for TR_Memory, etc
 #include "il/ILOpCodes.hpp"         // for ILOpCodes::aiadd, etc
 #include "il/ILOps.hpp"             // for TR::ILOpCode

@@ -25,7 +25,8 @@
 #include "codegen/CodeGenPhase.hpp"            // for CodeGenPhase
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
-#include "compile/Compilation.hpp"             // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp
 #include "env/TRMemory.hpp"                    // for PERSISTENT_NEW_DECLARE, etc
 #include "il/Block.hpp"                        // for Block
 #include "il/DataTypes.hpp"                    // for TR_YesNoMaybe, etc

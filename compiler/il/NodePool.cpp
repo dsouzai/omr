@@ -19,7 +19,8 @@
 #include "il/NodePool.hpp"
 
 #include <stddef.h>                 // for NULL
-#include "compile/Compilation.hpp"  // for comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for comp
 #include "il/ILOps.hpp"             // for ILOpCode
 #include "il/Node.hpp"              // for Node
 #include "il/Node_inlines.hpp"      // for Node::getNodePoolIndex, etc

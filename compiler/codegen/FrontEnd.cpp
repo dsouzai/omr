@@ -21,7 +21,8 @@
 #include <stdarg.h>                            // for va_end, va_list, etc
 #include <stdint.h>                            // for int32_t
 #include "env/KnownObjectTable.hpp"        // for KnownObjectTable, etc
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/CompilationTypes.hpp"        // for TR_CallingContext
 #include "compile/Method.hpp"                  // for TR_Method
 #include "control/Options.hpp"

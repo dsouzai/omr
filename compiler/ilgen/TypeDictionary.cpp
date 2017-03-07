@@ -23,6 +23,7 @@
 #include "il/SymbolReference.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/FrontEnd.hpp"
 #include "ilgen/TypeDictionary.hpp"
 #include "env/Region.hpp"

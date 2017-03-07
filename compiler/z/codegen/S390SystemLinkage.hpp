@@ -35,7 +35,8 @@ namespace OMR { typedef TR::S390SystemLinkage SystemLinkageConnector; }
 #include "codegen/LinkageConventionsEnum.hpp"  // for TR_LinkageConventions, etc
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/Register.hpp"                // for Register
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "env/TRMemory.hpp"                    // for Allocator, etc
 #include "env/jittypes.h"                      // for intptrj_t
 #include "il/Symbol.hpp"                       // for Symbol

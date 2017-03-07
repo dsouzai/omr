@@ -40,7 +40,8 @@ namespace OMR { typedef OMR::Z::MemoryReference MemoryReferenceConnector; }
 #include "codegen/InstOpCode.hpp"           // for InstOpCode, etc
 #include "codegen/Register.hpp"             // for Register
 #include "codegen/Snippet.hpp"              // for Snippet
-#include "compile/Compilation.hpp"          // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for Compilation
 #include "env/TRMemory.hpp"                 // for TR_Memory, etc
 #include "env/jittypes.h"                   // for intptrj_t
 #include "il/DataTypes.hpp"                 // for DataTypes

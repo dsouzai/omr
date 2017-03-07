@@ -36,7 +36,8 @@
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/RegisterDependencyStruct.hpp"  // for RegisterDependency
 #include "codegen/RegisterPair.hpp"              // for RegisterPair
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/ObjectModel.hpp"                   // for ObjectModel

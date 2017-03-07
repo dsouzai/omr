@@ -33,7 +33,8 @@
 #include "codegen/RegisterPair.hpp"                // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"
 #include "codegen/S390Evaluator.hpp"               // for TR_S390ComputeCC
-#include "compile/Compilation.hpp"                 // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation, comp
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/TRMemory.hpp"

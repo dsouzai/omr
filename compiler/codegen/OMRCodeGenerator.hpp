@@ -38,7 +38,8 @@ namespace OMR { typedef OMR::CodeGenerator CodeGeneratorConnector; }
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/StorageInfo.hpp"
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"              // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"              // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "cs2/hashtab.h"                        // for HashTable, etc

@@ -18,7 +18,8 @@
 
 #include "infra/IGNode.hpp"
 
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "infra/List.hpp"           // for ListIterator, List
 
 void TR_IGNode::decWorkingDegreeOfNeighbours()

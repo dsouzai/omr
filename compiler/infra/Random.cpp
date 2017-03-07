@@ -20,7 +20,8 @@
 
 #include <limits.h>                 // for MIN_INT, MAX_INT
 #include <stdint.h>                 // for int32_t, uint32_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 
 TR_HasRandomGenerator::TR_HasRandomGenerator(TR::Compilation *comp)
   : _randomGenerator(comp->primaryRandom()) {}

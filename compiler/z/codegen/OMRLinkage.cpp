@@ -49,7 +49,8 @@
 #include "codegen/SystemLinkage.hpp"               // for SystemLinkage
 #include "codegen/TreeEvaluator.hpp"
 #include "codegen/S390Evaluator.hpp"
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

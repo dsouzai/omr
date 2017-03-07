@@ -35,7 +35,8 @@
 #include "codegen/RegisterPair.hpp"              // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"             // for TreeEvaluator
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"               // for isSMP, Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for isSMP, Compilation
 #include "compile/SymbolReferenceTable.hpp"
 #include "env/CompilerEnv.hpp"
 #include "env/Processors.hpp"

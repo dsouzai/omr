@@ -31,7 +31,8 @@
 #include "codegen/ScratchRegisterManager.hpp"
 #include "codegen/TreeEvaluator.hpp"               // for IS_32BIT_SIGNED
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"                 // for Compilation, isSMP
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation, isSMP
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/CompilerEnv.hpp"

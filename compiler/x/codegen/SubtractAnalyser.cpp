@@ -28,7 +28,8 @@
 #include "codegen/RegisterPair.hpp"         // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"        // for TR_X86ComputeCC, etc
 #include "codegen/X86Evaluator.hpp"
-#include "compile/Compilation.hpp"          // for isSMP
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for isSMP
 #include "il/ILOpCodes.hpp"                 // for ILOpCodes::iconst, etc
 #include "il/ILOps.hpp"                     // for ILOpCode
 #include "il/Node.hpp"                      // for Node

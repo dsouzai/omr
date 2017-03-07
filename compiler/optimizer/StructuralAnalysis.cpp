@@ -22,7 +22,8 @@
 #include <stdint.h>                                   // for int32_t, etc
 #include "env/StackMemoryRegion.hpp"
 #include "codegen/FrontEnd.hpp"                       // for TR_FrontEnd
-#include "compile/Compilation.hpp"                    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "cs2/arrayof.h"                              // for StaticArrayOf

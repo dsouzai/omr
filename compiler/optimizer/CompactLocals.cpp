@@ -23,7 +23,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"                // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                     // for feGetEnv
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "compile/CompilationTypes.hpp"             // for TR_Hotness
 #include "compile/Method.hpp"                       // for mcount_t
 #include "compile/SymbolReferenceTable.hpp"

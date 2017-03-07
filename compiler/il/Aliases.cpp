@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for SharedSparseBitVector, etc
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd, etc
 #include "codegen/RecognizedMethods.hpp"
-#include "compile/Compilation.hpp"             // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp
 #include "compile/Method.hpp"                  // for TR_Method
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable, etc

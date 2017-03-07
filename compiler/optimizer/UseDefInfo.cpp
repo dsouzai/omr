@@ -25,7 +25,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/FrontEnd.hpp"                          // for TR_FrontEnd
 #include "codegen/Linkage.hpp"                           // for Linkage
-#include "compile/Compilation.hpp"                       // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                       // for Compilation, etc
 #include "compile/Method.hpp"                            // for TR_Method, mcount_t
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

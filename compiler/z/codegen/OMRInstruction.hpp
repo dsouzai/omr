@@ -37,7 +37,8 @@ namespace OMR { typedef OMR::Z::Instruction InstructionConnector; }
 #include "codegen/InstOpCode.hpp"                      // for InstOpCode, InstOpCode::Mnemonic
 #include "codegen/Register.hpp"                        // for Register
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"                     // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                     // for Compilation, etc
 #include "cs2/arrayof.h"                               // for ArrayOf
 #include "cs2/hashtab.h"                               // for HashTable, etc
 #include "cs2/sparsrbit.h"

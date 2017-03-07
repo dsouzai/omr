@@ -40,7 +40,8 @@
 #include "codegen/Linkage.hpp"                        // for Linkage
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/Snippet.hpp"                        // for Snippet
-#include "compile/Compilation.hpp"                    // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation, etc
 #include "compile/OSRData.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

@@ -29,7 +29,8 @@
 #include "codegen/Machine.hpp"            // for MAXDISP
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RegisterPair.hpp"       // for RegisterPair
-#include "compile/Compilation.hpp"        // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"        // for Compilation, comp
 #include "env/CompilerEnv.hpp"
 #include "env/TRMemory.hpp"               // for TR_Memory, etc
 #include "env/jittypes.h"                 // for intptrj_t

@@ -38,7 +38,8 @@
 #include "codegen/RegisterPair.hpp"                   // for RegisterPair
 #include "codegen/RegisterRematerializationInfo.hpp"
 #include "codegen/TreeEvaluator.hpp"
-#include "compile/Compilation.hpp"                    // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

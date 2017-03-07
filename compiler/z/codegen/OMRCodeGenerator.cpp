@@ -55,7 +55,8 @@
 #include "codegen/StorageInfo.hpp"
 #include "codegen/SystemLinkage.hpp"                // for toSystemLinkage, etc
 #include "codegen/TreeEvaluator.hpp"                // for TreeEvaluator, etc
-#include "compile/Compilation.hpp"                  // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation, etc
 #include "compile/Method.hpp"                       // for TR_Method, mcount_t
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"

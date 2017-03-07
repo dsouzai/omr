@@ -42,7 +42,8 @@
 #include "codegen/TreeEvaluator.hpp"
 #include "codegen/PPCEvaluator.hpp"
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"                   // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                   // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "compile/VirtualGuard.hpp"                  // for TR_VirtualGuard

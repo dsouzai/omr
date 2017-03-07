@@ -18,7 +18,8 @@
 
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for int32_t, etc
-#include "compile/Compilation.hpp"                  // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation, etc
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

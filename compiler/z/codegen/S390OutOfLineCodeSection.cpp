@@ -33,7 +33,8 @@
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/RegisterPair.hpp"                // for RegisterPair
 #include "codegen/TreeEvaluator.hpp"               // for TreeEvaluator
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "env/CompilerEnv.hpp"
 #include "il/ILOpCodes.hpp"                        // for ILOpCodes
 #include "il/ILOps.hpp"                            // for ILOpCode

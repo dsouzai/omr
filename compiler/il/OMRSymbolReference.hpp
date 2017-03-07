@@ -30,7 +30,8 @@ namespace OMR { typedef OMR::SymbolReference SymbolReferenceConnector; }
 
 #include <stddef.h>                          // for NULL
 #include <stdint.h>                          // for int32_t, uint32_t, etc
-#include "compile/Compilation.hpp"           // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"           // for Compilation
 #include "compile/Method.hpp"                // for mcount_t
 #include "compile/SymbolReferenceTable.hpp"  // for SymbolReferenceTable, etc
 #include "cs2/sparsrbit.h"                   // for ASparseBitVector

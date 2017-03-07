@@ -52,7 +52,8 @@
 #include "codegen/TreeEvaluator.hpp"                // for TreeEvaluator
 #include "codegen/GCStackMap.hpp"                   // for GCStackMap
 #include "codegen/GCStackAtlas.hpp"                   // for GCStackMap
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "compile/OSRData.hpp"
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"

@@ -21,7 +21,8 @@
 
 #include <stdint.h>                           // for int32_t, int64_t, etc
 #include <string.h>                           // for NULL, memset
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "compile/SymbolReferenceTable.hpp"   // for SymbolReferenceTable
 #include "cs2/bitvectr.h"                     // for ABitVector
 #include "env/TRMemory.hpp"                   // for BitVector, TR_Memory, etc

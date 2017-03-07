@@ -22,7 +22,8 @@
 #include <stddef.h>                              // for NULL
 #include <stdint.h>                              // for int32_t, int64_t
 #include "codegen/LinkageConventionsEnum.hpp"
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "cs2/arrayof.h"                         // for ArrayOf
 #include "env/TRMemory.hpp"                      // for TR_Memory, etc
 #include "env/jittypes.h"                        // for intptrj_t

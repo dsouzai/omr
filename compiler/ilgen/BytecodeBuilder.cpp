@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/Method.hpp"
 #include "env/FrontEnd.hpp"
 #include "infra/List.hpp"

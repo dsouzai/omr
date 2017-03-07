@@ -25,7 +25,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/Linkage.hpp"                 // for Linkage
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "cs2/allocator.h"                     // for allocator
 #include "env/IO.hpp"                          // for POINTER_PRINTF_FORMAT
 #include "il/Block.hpp"                        // for Block

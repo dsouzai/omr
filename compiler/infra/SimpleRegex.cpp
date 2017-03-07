@@ -22,7 +22,8 @@
 #include <stdio.h>                     // for sprintf
 #include <string.h>                    // for NULL, strlen
 #include "codegen/FrontEnd.hpp"        // for TR_VerboseLog
-#include "compile/Compilation.hpp"     // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"     // for Compilation, comp
 #include "compile/ResolvedMethod.hpp"  // for TR_ResolvedMethod
 #include "env/StackMemoryRegion.hpp"
 #include "il/DataTypes.hpp"            // for CONSTANT64

@@ -22,7 +22,8 @@
 #include <stdint.h>                           // for uint8_t, int16_t
 #include "DataSnippet.hpp"                    // for TR::IA32DataSnippet
 #include "codegen/Snippet.hpp"                // for commentString, etc
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "il/symbol/LabelSymbol.hpp"          // for LabelSymbol
 #include "ras/Debug.hpp"                      // for TR_Debug
 #include "env/IO.hpp"

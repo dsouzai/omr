@@ -23,7 +23,8 @@
 #include <string.h>                                // for memset
 #include "env/StackMemoryRegion.hpp"
 #include "codegen/FrontEnd.hpp"                    // for feGetEnv
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "compile/VirtualGuard.hpp"                // for TR_VirtualGuard
 #include "cs2/sparsrbit.h"                         // for ASparseBitVector
 #include "env/jittypes.h"                          // for TR_ByteCodeInfo, etc

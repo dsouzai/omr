@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "env/FrontEnd.hpp"
 #include "compile/Method.hpp"

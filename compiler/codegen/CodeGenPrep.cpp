@@ -36,7 +36,8 @@
 #include "codegen/RecognizedMethods.hpp"
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/TreeEvaluator.hpp"           // for TreeEvaluator
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/Method.hpp"                  // for TR_Method, etc
 #include "compile/OSRData.hpp"                 // for TR_OSRMethodData, etc
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod

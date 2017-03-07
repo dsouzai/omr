@@ -22,7 +22,8 @@
 #include <string.h>                   // for NULL, memcpy
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"  // for CodeGenerator
-#include "compile/Compilation.hpp"    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"    // for Compilation
 #include "env/CompilerEnv.hpp"
 #include "env/IO.hpp"
 #include "env/TRMemory.hpp"           // for TR_HeapMemory

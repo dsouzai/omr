@@ -22,7 +22,8 @@
 #include <stdlib.h>                            // for atoi
 #include <string.h>                            // for strncmp, memset, NULL
 
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "env/StackMemoryRegion.hpp"

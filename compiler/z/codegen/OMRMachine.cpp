@@ -44,7 +44,8 @@
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/RegisterPair.hpp"                // for RegisterPair
-#include "compile/Compilation.hpp"                 // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation, comp
 #include "compile/ResolvedMethod.hpp"              // for TR_ResolvedMethod
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

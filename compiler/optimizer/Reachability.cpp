@@ -21,7 +21,8 @@
 #include <algorithm>                    // for std::min
 #include <limits.h>                     // for INT_MAX
 #include <string.h>                     // for NULL, memset
-#include "compile/Compilation.hpp"      // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"      // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/TRMemory.hpp"             // for TR_Memory

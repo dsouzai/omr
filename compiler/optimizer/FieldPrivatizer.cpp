@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/FrontEnd.hpp"                         // for TR_FrontEnd
-#include "compile/Compilation.hpp"                      // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                      // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

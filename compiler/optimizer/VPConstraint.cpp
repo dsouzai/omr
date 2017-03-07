@@ -21,7 +21,8 @@
 #include <ctype.h>                              // for isdigit
 #include <stddef.h>                             // for size_t
 #include "codegen/FrontEnd.hpp"                 // for TR::IO::fprintf, etc
-#include "compile/Compilation.hpp"              // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"              // for Compilation
 #include "compile/ResolvedMethod.hpp"           // for TR_ResolvedMethod
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

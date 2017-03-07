@@ -24,7 +24,8 @@
 #include <stdlib.h>                           // for atoi
 #include <string.h>                           // for strncmp, NULL, strchr, etc
 #include "codegen/FrontEnd.hpp"               // for TR_VerboseLog
-#include "compile/Compilation.hpp"            // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation, comp
 #include "compile/Method.hpp"                 // for TR_Method, etc
 #include "compile/ResolvedMethod.hpp"         // for TR_ResolvedMethod
 #include "control/Options.hpp"

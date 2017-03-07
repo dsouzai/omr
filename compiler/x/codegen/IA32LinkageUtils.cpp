@@ -27,7 +27,8 @@
 #include "codegen/RealRegister.hpp"          // for RealRegister
 #include "codegen/Register.hpp"              // for Register
 #include "codegen/RegisterConstants.hpp"     // for TR_RegisterKinds::TR_FPR
-#include "compile/Compilation.hpp"           // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"           // for Compilation
 #include "compile/SymbolReferenceTable.hpp"  // for SymbolReferenceTable
 #include "env/jittypes.h"                    // for uintptrj_t
 #include "il/ILOpCodes.hpp"                  // for ILOpCodes::dbits2l, etc

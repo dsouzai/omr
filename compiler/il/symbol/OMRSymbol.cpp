@@ -22,7 +22,8 @@
 #include <stdint.h>                            // for uint32_t, int32_t, etc
 #include <string.h>                            // for memcmp, strncmp
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "env/KnownObjectTable.hpp"            // for KnownObjectTable, etc

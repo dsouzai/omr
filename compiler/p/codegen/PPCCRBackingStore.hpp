@@ -21,7 +21,8 @@
 
 #include <stdint.h>                  // for uint8_t
 #include "codegen/BackingStore.hpp"  // for TR_BackingStore
-#include "compile/Compilation.hpp"   // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"   // for Compilation
 #include "il/SymbolReference.hpp"    // for SymbolReference
 
 class TR_PPCCRBackingStore;

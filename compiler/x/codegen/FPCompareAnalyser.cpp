@@ -29,7 +29,8 @@
 #include "codegen/Register.hpp"             // for Register
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/TreeEvaluator.hpp"        // for TreeEvaluator
-#include "compile/Compilation.hpp"          // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "il/ILOpCodes.hpp"                 // for ILOpCodes, etc

@@ -31,7 +31,8 @@
 #include "infra/Assert.hpp"                           // for TR_ASSERT
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator, etc
-#include "compile/Compilation.hpp"                    // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation, etc
 #include "optimizer/LoadExtensions.hpp"
 #include "optimizer/OptimizationManager.hpp"
 #include "il/TreeTop.hpp"

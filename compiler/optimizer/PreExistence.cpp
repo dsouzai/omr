@@ -20,7 +20,8 @@
 
 #include "env/CompilerEnv.hpp"
 #include "env/KnownObjectTable.hpp"    // for KnownObjectTable, etc
-#include "compile/Compilation.hpp"         // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"         // for Compilation
 #ifdef J9_PROJECT_SPECIFIC
 #include "env/VMAccessCriticalSection.hpp" // for VMAccessCriticalSEction
 #endif

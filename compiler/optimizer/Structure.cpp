@@ -21,7 +21,8 @@
 #include <algorithm>                                // for std::find, etc
 #include <limits.h>                                 // for INT_MAX
 #include <string.h>                                 // for memcpy
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "cs2/sparsrbit.h"
 #include "env/StackMemoryRegion.hpp"
 #include "env/TRMemory.hpp"

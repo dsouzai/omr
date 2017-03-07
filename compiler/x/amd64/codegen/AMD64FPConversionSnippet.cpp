@@ -25,7 +25,8 @@
 #include "codegen/RealRegister.hpp"              // for RealRegister, etc
 #include "codegen/RegisterConstants.hpp"         // for TR_RegisterSizes, etc
 #include "codegen/Snippet.hpp"                   // for commentString
-#include "compile/Compilation.hpp"               // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for Compilation
 #include "il/ILOpCodes.hpp"                      // for ILOpCodes
 #include "il/Node.hpp"                           // for Node
 #include "il/symbol/LabelSymbol.hpp"             // for LabelSymbol

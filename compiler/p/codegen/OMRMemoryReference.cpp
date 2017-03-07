@@ -35,7 +35,8 @@
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/Relocation.hpp"
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"                   // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                   // for Compilation, etc
 #include "compile/ResolvedMethod.hpp"
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"

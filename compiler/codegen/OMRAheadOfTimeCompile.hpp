@@ -27,7 +27,8 @@ namespace OMR { typedef OMR::AheadOfTimeCompile AheadOfTimeCompileConnector; }
 
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for uint32_t, uint8_t, int32_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "env/TRMemory.hpp"         // for TR_Memory, etc
 #include "infra/Link.hpp"           // for TR_LinkHead
 #include "infra/Annotations.hpp"    // for OMR_EXTENSIBLE

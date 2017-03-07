@@ -19,6 +19,7 @@
 #include <stddef.h>                                 // for NULL
 #include <stdint.h>                                 // for int32_t
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "cs2/bitvectr.h"
 #include "env/TRMemory.hpp"                         // for BitVector, etc
 #include "il/Block.hpp"                             // for Block

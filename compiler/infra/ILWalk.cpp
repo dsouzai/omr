@@ -19,6 +19,7 @@
 #include "infra/ILWalk.hpp"
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "il/Block.hpp"
 #include "il/Node_inlines.hpp"
 #include "il/TreeTop.hpp"

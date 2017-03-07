@@ -23,7 +23,8 @@
 
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for uint32_t, uint8_t, int32_t, etc
-#include "compile/Compilation.hpp"  // for comp, Compilation (ptr only)
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for comp, Compilation (ptr only)
 #include "env/jittypes.h"           // for uintptrj_t
 #include "infra/Assert.hpp"         // for TR_ASSERT
 

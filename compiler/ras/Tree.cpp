@@ -27,7 +27,8 @@
 #include "codegen/FrontEnd.hpp"                       // for TR_FrontEnd, etc
 #include "env/KnownObjectTable.hpp"
 #include "codegen/RegisterConstants.hpp"
-#include "compile/Compilation.hpp"                    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation
 #include "compile/Method.hpp"                         // for TR_Method, etc
 #include "compile/ResolvedMethod.hpp"
 #include "compile/SymbolReferenceTable.hpp"

@@ -25,7 +25,8 @@
 #include "codegen/Instruction_inlines.hpp"             // for Instruction, etc
 #include "codegen/Machine.hpp"                 // for Machine
 #include "codegen/TreeEvaluator.hpp"           // for TreeEvaluator
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "env/TRMemory.hpp"
 #include "il/ILOps.hpp"                        // for ILOpCode
 #include "il/Node.hpp"                         // for Node

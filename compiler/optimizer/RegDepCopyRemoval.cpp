@@ -19,6 +19,7 @@
 #include "optimizer/RegDepCopyRemoval.hpp"
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "env/CompilerEnv.hpp"

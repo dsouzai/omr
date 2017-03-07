@@ -36,7 +36,8 @@
 #include <stdint.h>                            // for int32_t, uint32_t, etc
 #include "env/KnownObjectTable.hpp"        // for KnownObjectTable, etc
 #include "codegen/RecognizedMethods.hpp"       // for RecognizedMethod
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"         // for TR::Options, etc
 #include "env/TRMemory.hpp"                    // for TR_Memory, etc

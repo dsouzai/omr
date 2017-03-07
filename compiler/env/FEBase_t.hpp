@@ -18,6 +18,7 @@
 
 #include <sys/mman.h>
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/FEBase.hpp"
 #include "env/jittypes.h"
 #include "runtime/CodeCacheExceptions.hpp"

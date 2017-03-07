@@ -22,7 +22,8 @@
 #include <stddef.h>                       // for NULL
 #include <stdint.h>                       // for uint64_t
 #include "codegen/RegisterConstants.hpp"  // for TR_RegisterMask
-#include "compile/Compilation.hpp"        // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"        // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/CompilerEnv.hpp"

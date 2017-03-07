@@ -22,7 +22,8 @@
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"                 // for Instruction
 #include "codegen/Register.hpp"                    // for Register
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "il/TreeTop.hpp"                          // for TreeTop
 #include "il/TreeTop_inlines.hpp"                  // for TreeTop::getNode
 #include "infra/Assert.hpp"                        // for TR_ASSERT

@@ -23,7 +23,8 @@
 #include "codegen/Register.hpp"           // for Register
 #include "codegen/RegisterConstants.hpp"  // for TR_RegisterKinds::TR_GPR, etc
 #include "codegen/TreeEvaluator.hpp"      // for TreeEvaluator
-#include "compile/Compilation.hpp"        // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"        // for Compilation
 #include "il/ILOpCodes.hpp"               // for ILOpCodes, etc
 #include "il/ILOps.hpp"                   // for ILOpCode
 #include "il/Node.hpp"                    // for Node, etc

@@ -43,6 +43,7 @@ namespace OMR { typedef OMR::Z::RegisterDependencyConditions RegisterDependencyC
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/RegisterDependencyStruct.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "cs2/hashtab.h"
 #include "env/TRMemory.hpp"
 #include "infra/Assert.hpp"

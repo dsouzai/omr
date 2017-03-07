@@ -25,7 +25,8 @@
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"          // for Instruction
 #include "codegen/Relocation.hpp"
-#include "compile/Compilation.hpp"          // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/CompilerEnv.hpp"

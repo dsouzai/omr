@@ -21,7 +21,8 @@
 #include <stddef.h>                                   // for NULL
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
-#include "compile/Compilation.hpp"                    // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                    // for Compilation
 #include "codegen/MemoryReference.hpp"
 #include "codegen/Register.hpp"                       // for Register
 #include "codegen/RegisterConstants.hpp"

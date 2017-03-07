@@ -34,7 +34,8 @@
 #include "codegen/RegisterDependencyStruct.hpp"
 #include "codegen/Snippet.hpp"                   // for Snippet
 #include "codegen/UnresolvedDataSnippet.hpp"
-#include "compile/Compilation.hpp"               // for comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"               // for comp
 #include "env/Processors.hpp"
 #include "env/TRMemory.hpp"
 #include "env/jittypes.h"                        // for uintptrj_t

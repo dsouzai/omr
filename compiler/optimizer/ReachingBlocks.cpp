@@ -18,7 +18,8 @@
 
 #include <stdint.h>                                 // for int32_t
 #include "env/StackMemoryRegion.hpp"
-#include "compile/Compilation.hpp"                  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                  // for Compilation
 #include "env/TRMemory.hpp"
 #include "infra/BitVector.hpp"                      // for TR_BitVector
 #include "infra/Cfg.hpp"                            // for CFG

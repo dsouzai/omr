@@ -32,7 +32,8 @@
 #include "codegen/RegisterDependencyStruct.hpp"
 #include "codegen/TreeEvaluator.hpp"               // for getConditionCode
 #include "codegen/S390Evaluator.hpp"
-#include "compile/Compilation.hpp"                 // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation
 #include "env/CompilerEnv.hpp"
 #include "env/TRMemory.hpp"
 #include "il/Block.hpp"                            // for Block

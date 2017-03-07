@@ -20,7 +20,8 @@
 
 #include <stdint.h>                 // for uint8_t, uint16_t, uint32_t, etc
 #include <string.h>                 // for memcmp, memcpy
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "env/TRMemory.hpp"
 #include "il/DataTypes.hpp"         // for DataTypes::Address

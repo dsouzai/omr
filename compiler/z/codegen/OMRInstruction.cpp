@@ -46,7 +46,8 @@
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/RegisterDependency.hpp"
 #include "codegen/RegisterPair.hpp"                // for RegisterPair
-#include "compile/Compilation.hpp"                 // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                 // for Compilation, comp
 #include "compile/Method.hpp"                      // for TR_Method
 #include "compile/SymbolReferenceTable.hpp"
 #include "control/Options.hpp"

@@ -21,7 +21,8 @@
 
 #include <stddef.h>                            // for NULL
 #include <stdint.h>                            // for uint32_t
-#include "compile/Compilation.hpp"             // for Compilation, comp, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, comp, etc
 #include "compile/SymbolReferenceTable.hpp"    // for SymbolReferenceTable
 #include "cs2/sparsrbit.h"
 #include "env/StackMemoryRegion.hpp"

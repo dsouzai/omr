@@ -24,6 +24,7 @@
 #include <stdio.h>                  // for NULL, fprintf
 #include <string.h>                 // for memset
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/TRMemory.hpp"         // for TR_Memory, etc
 #include "infra/Assert.hpp"         // for TR_ASSERT
 

@@ -19,6 +19,7 @@
 #include "optimizer/TrivialDeadBlockRemover.hpp"
 
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/StackMemoryRegion.hpp"
 #include "il/ILOpCodes.hpp"
 #include "il/Node.hpp"

@@ -20,7 +20,8 @@
 #include <stdlib.h>                     // for NULL, atoi
 #include <string.h>                     // for strlen
 #include "codegen/FrontEnd.hpp"         // for TR_VerboseLog, etc
-#include "compile/Compilation.hpp"      // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"      // for Compilation, comp
 #include "control/Options.hpp"
 #include "control/OptionsUtil.hpp"
 #include "control/Options_inlines.hpp"  // for TR::OptionTable, TR::Options, etc

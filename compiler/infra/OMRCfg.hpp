@@ -30,7 +30,8 @@ namespace OMR { typedef OMR::CFG CFGConnector; }
 
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for uint32_t
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "cs2/tableof.h"            // for TableOf
 #include "cs2/listof.h"             // for ListOf
 #include "env/TRMemory.hpp"         // for Allocator, TR_Memory, etc

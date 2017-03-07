@@ -35,7 +35,8 @@ namespace OMR { typedef OMR::X86::CodeGenerator CodeGeneratorConnector; }
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/RegisterIterator.hpp"        // for RegisterIterator
 #include "codegen/ScratchRegisterManager.hpp"
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "env/jittypes.h"                      // for intptrj_t
 #include "il/SymbolReference.hpp"              // for SymbolReference
 #include "il/symbol/AutomaticSymbol.hpp"       // for AutomaticSymbol

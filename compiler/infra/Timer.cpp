@@ -28,6 +28,7 @@
 #include <stdio.h>               // for sprintf, NULL
 #include <string.h>              // for strcpy, strlen
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "env/CompilerEnv.hpp"
 #include "env/IO.hpp"
 #include "env/TRMemory.hpp"      // for TR_Memory

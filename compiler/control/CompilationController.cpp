@@ -22,7 +22,8 @@
 #include <stdio.h>                            // for fprintf, NULL, stderr
 #include <stdlib.h>                           // for atoi
 #include "codegen/FrontEnd.hpp"               // for feGetEnv
-#include "compile/Compilation.hpp"            // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"            // for Compilation
 #include "compile/CompilationTypes.hpp"       // for TR_Hotness
 #include "control/OptimizationPlan.hpp"
 #include "control/Options.hpp"

@@ -22,6 +22,7 @@
 #include "env/FrontEnd.hpp"
 #include "compile/Method.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/ResolvedMethod.hpp"
 #include "compile/InlineBlock.hpp"
 #include "env/IO.hpp"

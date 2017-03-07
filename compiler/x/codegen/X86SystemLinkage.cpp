@@ -26,7 +26,8 @@
 #include "codegen/Machine.hpp"                 // for Machine, etc
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "env/TRMemory.hpp"                    // for TR_Memory, etc

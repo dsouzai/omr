@@ -19,7 +19,8 @@
 #include "infra/HashTab.hpp"
 
 #include <stdio.h>                     // for printf
-#include "compile/Compilation.hpp"     // for Compilation, comp
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"     // for Compilation, comp
 #include "infra/Bit.hpp"               // for ceilingPowerOfTwo
 
 #ifdef DEBUG

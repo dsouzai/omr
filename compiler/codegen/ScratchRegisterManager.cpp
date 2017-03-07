@@ -25,7 +25,8 @@
 #include "codegen/Register.hpp"            // for Register
 #include "codegen/RegisterConstants.hpp"   // for TR_RegisterKinds, etc
 #include "codegen/RegisterDependency.hpp"
-#include "compile/Compilation.hpp"         // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"         // for Compilation
 #include "env/TRMemory.hpp"
 #include "infra/Assert.hpp"                // for TR_ASSERT
 #include "infra/List.hpp"                  // for ListIterator, List

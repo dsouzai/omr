@@ -22,7 +22,8 @@
 #include <string.h>                            // for NULL, memset
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
-#include "compile/Compilation.hpp"             // for Compilation, etc
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation, etc
 #include "control/Options.hpp"
 #include "control/Options_inlines.hpp"
 #include "cs2/bitvectr.h"

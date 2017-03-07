@@ -18,6 +18,7 @@
 
 #include "compile/Method.hpp"
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/SymbolReferenceTable.hpp"
 #include "il/SymbolReference.hpp"
 #include "il/symbol/ParameterSymbol.hpp"

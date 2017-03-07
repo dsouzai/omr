@@ -23,7 +23,8 @@
 #include <stddef.h>                 // for NULL
 #include <stdint.h>                 // for int32_t, int16_t, uint32_t, etc
 #include "codegen/FrontEnd.hpp"     // for TR_FrontEnd
-#include "compile/Compilation.hpp"  // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"  // for Compilation
 #include "cs2/sparsrbit.h"          // for ASparseBitVector<>::Cursor
 #include "env/TRMemory.hpp"         // for TR_Memory, etc
 #include "il/Block.hpp"             // for Block

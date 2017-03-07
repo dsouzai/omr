@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"        // for CodeGenerator
 #include "codegen/Linkage.hpp"              // for Linkage
-#include "compile/Compilation.hpp"          // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"          // for Compilation
 #include "il/DataTypes.hpp"                 // for TR::DataType
 #include "il/ILOpCodes.hpp"                 // for ILOpCodes::aload, etc
 #include "il/ILOps.hpp"                     // for ILOpCode

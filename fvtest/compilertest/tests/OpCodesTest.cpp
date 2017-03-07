@@ -22,6 +22,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "compile/CompilationTypes.hpp"
 #include "compile/Method.hpp"
 #include "env/jittypes.h"

@@ -35,7 +35,8 @@
 #include "env/KnownObjectTable.hpp"
 #include "codegen/Linkage.hpp"                            // for Linkage
 #include "codegen/RecognizedMethods.hpp"
-#include "compile/Compilation.hpp"                        // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"                        // for Compilation
 #include "compile/InlineBlock.hpp"
 #include "compile/Method.hpp"                             // for TR_Method
 #include "compile/OSRData.hpp"                            // for HCRMode, etc

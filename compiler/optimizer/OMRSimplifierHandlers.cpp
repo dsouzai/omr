@@ -25,6 +25,7 @@
 #include <limits.h>
 #include <math.h>
 #include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Linkage.hpp"                 // for Linkage

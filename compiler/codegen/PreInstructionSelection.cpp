@@ -25,7 +25,8 @@
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/Linkage.hpp"                 // for Linkage
 #include "codegen/RealRegister.hpp"            // for RealRegister
-#include "compile/Compilation.hpp"             // for Compilation
+#include "compile/Compilation.hpp"
+#include "compile/Compilation_inlines.hpp"             // for Compilation
 #include "compile/Method.hpp"                  // for TR_Method
 #include "compile/ResolvedMethod.hpp"          // for TR_ResolvedMethod
 #include "control/Options.hpp"
