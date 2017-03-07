@@ -368,10 +368,11 @@ public: //FIXME: These public members should eventually be wrtapped in an interf
 class TR_CFGIterator
    {
 public:
-   TR_CFGIterator(TR::list<TR::CFGEdge*>& l1, TR::list<TR::CFGEdge*>& l2) : combinedList(l1)
+   TR_CFGIterator(TR::list<TR::CFGEdge*>& l1, TR::list<TR::CFGEdge*>& l2)
+      : listOne(l1),
+        listTwo(l2)
       {
-      combinedList.insert(combinedList.end(), l2.begin(), l2.end());
-      currentIterator = combinedList.begin();
+      currentIterator = listOne.begin();
       }
 
    /**
@@ -379,8 +380,13 @@ public:
     */
    TR::CFGEdge* getFirst()
       {
-      currentIterator = combinedList.begin();
-      return (combinedList.empty()) ? NULL : *currentIterator ;
+      TR::list<TR::CFGEdge*> *list;
+      if (listOne.empty())
+         list = &listTwo;
+      else
+         list = &listOne;
+      currentIterator = list->begin();
+      return (list->empty()) ? NULL : *currentIterator ;
       }
 
    /**
@@ -388,7 +394,9 @@ public:
     */
    TR::CFGEdge* getCurrent()
       {
-      return (currentIterator == combinedList.end()) ? NULL : *currentIterator;
+      if (currentIterator == listOne.end())
+         currentIterator = listTwo.begin();
+      return (currentIterator == listTwo.end()) ? NULL : *currentIterator;
       }
 
    /**
@@ -396,11 +404,14 @@ public:
     */
    TR::CFGEdge* getNext()
       {
-      return (++currentIterator == combinedList.end()) ? NULL : *currentIterator;
+      if (++currentIterator == listOne.end())
+         currentIterator = listTwo.begin();
+      return (currentIterator == listTwo.end()) ? NULL : *currentIterator;
       }
 
 private:
-   TR::list<TR::CFGEdge*> combinedList;
+   TR::list<TR::CFGEdge*> listOne;
+   TR::list<TR::CFGEdge*> listTwo;
 
    std::list<TR::CFGEdge*,
              TR::typed_allocator<TR::CFGEdge*,
