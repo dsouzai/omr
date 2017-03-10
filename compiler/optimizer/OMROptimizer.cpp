@@ -963,7 +963,7 @@ void OMR::initializeOpt(TR::Compilation *comp,
       // NOTE: Please add new OMR optimizations here!
 
       default:
-         // do nothing
+         self->initializeOpt(comp, opt, level+1);
          break;
       }
    }
@@ -1106,7 +1106,7 @@ void OMR::initializeGroup(TR::Compilation *comp,
       // NOTE: Please add new OMR optimization groups here!
 
       default:
-         // Do nothing
+         self->initializeGroup(comp, opt, level+1);
          break;
       }
    }
@@ -1178,9 +1178,9 @@ OMR::Optimizer::Optimizer(TR::Compilation *comp, TR::ResolvedMethodSymbol *metho
    while (opt->_num != endOpts)
       {
       if (opt->_num < numOpts)
-         initializeOpt(comp, self(), opt, _opts, 0);
+         OMR::initializeOpt(comp, self(), opt, _opts, 0);
       else
-         initializeGroup(comp, self(), opt, _opts, 0);
+         OMR::initializeGroup(comp, self(), opt, _opts, 0);
 
       opt++;
       }

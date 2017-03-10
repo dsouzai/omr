@@ -217,6 +217,14 @@ class Optimizer
    bool switchToProfiling() { return false; }
    int32_t changeContinueLoopsToNestedLoops();
 
+   void initializeOpt(TR::Compilation *comp,
+                      const OptimizationStrategy *opt,
+                      int32_t level) {}
+
+   void initializeGroup(TR::Compilation *comp,
+                      const OptimizationStrategy *opt,
+                      int32_t level) {}
+
    List<TR::Node>& getEliminatedCheckcastNodes() { return _eliminatedCheckcastNodes; }
    List<TR::Node>& getClassPointerNodes() { return _classPointerNodes; }
 
