@@ -5986,7 +5986,7 @@ void TR::ValuePropagation::versionBlocks()
          TR::Node *actualComparisonNode = comparisonNode->getData();
          TR::TreeTop *comparisonTree = TR::TreeTop::create(comp(), comparisonNode->getData(), NULL, NULL);
          TR::Block *comparisonBlock = TR::Block::createEmptyBlock(insertionPoint->getNode(), comp(), block->getFrequency(), block);
-         if(optimizer()->getLastRun(OMR::basicBlockExtension))
+         if(optimizer()->getLastRunIfOptExists(OMR::basicBlockExtension))
             comparisonBlock->setIsExtensionOfPreviousBlock(true);
          actualComparisonNode->setBranchDestination(clonedBlock->getEntry());
          TR::TreeTop *comparisonEntryTree = comparisonBlock->getEntry();
@@ -6033,7 +6033,7 @@ void TR::ValuePropagation::versionBlocks()
          comparisonNode = comparisonNode->getNextElement();
          }
 
-      if (chooserBlock && optimizer()->getLastRun(OMR::basicBlockExtension))
+      if (chooserBlock && optimizer()->getLastRunIfOptExists(OMR::basicBlockExtension))
          {
          chooserBlock->setIsExtensionOfPreviousBlock(false);
          block->setIsExtensionOfPreviousBlock(true);

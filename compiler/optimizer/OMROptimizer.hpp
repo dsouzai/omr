@@ -234,6 +234,7 @@ class Optimizer
    bool checkNumberOfLoopsAndBasicBlocks(TR::Compilation *, TR_Structure *);
    void countNumberOfLoops(TR_Structure *);
 
+   bool getLastRunIfOptExists(OMR::Optimizations opt);
    bool getLastRun(OMR::Optimizations opt);
 
    void setRequestOptimization(OMR::Optimizations optNum, bool value = true, TR::Block *block = NULL);

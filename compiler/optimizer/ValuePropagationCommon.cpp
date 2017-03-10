@@ -297,8 +297,8 @@ void TR::ValuePropagation::initialize()
        (!comp()->getOption(TR_DisableBlockVersioner)))
       {
       if (!comp()->getFlowGraph()->getStructure() &&
-          (((comp()->mayHaveLoops() && optimizer()->getLastRun(OMR::loopVersioner)) || !comp()->mayHaveLoops()) &&
-           optimizer()->getLastRun(OMR::basicBlockExtension)))
+          (((comp()->mayHaveLoops() && optimizer()->getLastRunIfOptExists(OMR::loopVersioner)) || !comp()->mayHaveLoops()) &&
+           optimizer()->getLastRunIfOptExists(OMR::basicBlockExtension)))
          {
 
          dumpOptDetails(comp(), "   (Doing structural analysis)\n");
@@ -584,7 +584,7 @@ void TR::ValuePropagation::processTrees(TR::TreeTop *startTree, TR::TreeTop *end
          lastTtIsBndchk = true;
 
       if ( block->isCatchBlock() ||
-           (blockStructure && blockStructure->getContainingLoop() && !optimizer()->getLastRun(OMR::loopVersioner)) ||
+           (blockStructure && blockStructure->getContainingLoop() && !optimizer()->getLastRunIfOptExists(OMR::loopVersioner)) ||
            ( block->isCold()))
          _disableVersionBlockForThisBlock = true;
 

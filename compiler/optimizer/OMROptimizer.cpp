@@ -3060,6 +3060,11 @@ void OMR::Optimizer::doStructureChecks()
    }
 #endif
 
+bool OMR::Optimizer::getLastRunIfOptExists(OMR::Optimizations opt)
+   {
+   return _opts[opt] ? getLastRun(opt) : false;
+   }
+
 bool OMR::Optimizer::getLastRun(OMR::Optimizations opt)
    {
    TR_ASSERT(_opts[opt], "Optimization manager for %s (%d) should be initialized first", getOptimizationName(opt), opt);
