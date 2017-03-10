@@ -350,6 +350,10 @@ class Optimizer
    TR_BitVector *                _successorBitsGRA; // used during the GRA as a global
    };
 
+void initializeOptsInGroup(TR::Compilation *comp, TR::Optimizer *self, const OptimizationStrategy *groupOfOpts, TR::OptimizationManager ** opts, int32_t level);
+void initializeGroup(TR::Compilation *comp, TR::Optimizer *self, const OptimizationStrategy *opt, TR::OptimizationManager ** _opts, int32_t level);
+void initializeOpt(TR::Compilation *comp, TR::Optimizer *self, const OptimizationStrategy *opt, TR::OptimizationManager ** _opts, int32_t level);
+
 }
 
 #endif
