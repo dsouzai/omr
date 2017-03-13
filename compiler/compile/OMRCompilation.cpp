@@ -2083,18 +2083,6 @@ OMR::Compilation::getOwningMethodSymbol(TR_OpaqueMethodBlock * method)
    }
 
 vcount_t
-OMR::Compilation::getVisitCount()
-   {
-   return _visitCount;
-   }
-
-vcount_t
-OMR::Compilation:: setVisitCount(vcount_t vc)
-   {
-   return (_visitCount = vc);
-   }
-
-vcount_t
 OMR::Compilation::incVisitCount()
    {
    if (_visitCount == MAX_VCOUNT-1)

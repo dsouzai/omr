@@ -9,4 +9,16 @@ OMR::Compilation::self()
    return static_cast<TR::Compilation *>(this);
    }
 
+vcount_t
+OMR::Compilation::getVisitCount()
+   {
+   return _visitCount;
+   }
+
+vcount_t
+OMR::Compilation:: setVisitCount(vcount_t vc)
+   {
+   return (_visitCount = vc);
+   }
+
 #endif

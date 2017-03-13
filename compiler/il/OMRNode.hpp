@@ -846,12 +846,12 @@ public:
     * UnionPropertyA functions
     */
 
-   TR::SymbolReference *  getSymbolReference();
+   inline TR::SymbolReference *  getSymbolReference();
    TR::SymbolReference *  setSymbolReference(TR::SymbolReference * p);
    TR::SymbolReference *  getRegLoadStoreSymbolReference();
    TR::SymbolReference *  setRegLoadStoreSymbolReference(TR::SymbolReference * p);
    TR::SymbolReference *  getSymbolReferenceOfAnyType();
-   TR::Symbol *           getSymbol();
+   inline TR::Symbol *           getSymbol();
 
    inline TR::TreeTop *   getBranchDestination();
    inline TR::TreeTop *   setBranchDestination(TR::TreeTop * p);

@@ -428,8 +428,8 @@ public:
    TR::Block * getCurrentBlock() {return _currentBlock;}
    void setCurrentBlock(TR::Block * block) {_currentBlock=block; }
 
-   vcount_t getVisitCount();
-   vcount_t setVisitCount(vcount_t vc);
+   inline vcount_t getVisitCount();
+   inline vcount_t setVisitCount(vcount_t vc);
    vcount_t incVisitCount();
 
    void resetVisitCounts(vcount_t);

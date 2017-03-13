@@ -704,6 +704,31 @@ OMR::Node::setDataType(TR::DataType dt)
    return (_unionPropertyA._dataType = dt.getDataType());
    }
 
+TR::SymbolReference *
+OMR::Node::getSymbolReference()
+   {
+#if !defined(REMOVE_REGLS_SYMREFS_FROM_GETSYMREF)
+   // This code is to be removed, once all illegal accesses of _regLoadStoreSymbolReference are removed
+   if (self()->hasRegLoadStoreSymbolReference())
+      return self()->getRegLoadStoreSymbolReference();
+#endif
+
+   TR_ASSERT(self()->hasSymbolReference(), "attempting to access _symbolReference field for node %s %p that does not have it", self()->getOpCode().getName(), this);
+   return _unionPropertyA._symbolReference;
+   }
+
+TR::Symbol *
+OMR::Node::getSymbol()
+   {
+#if !defined(REMOVE_REGLS_SYMREFS_FROM_GETSYMBOL)
+   if (self()->hasRegLoadStoreSymbolReference())
+      return self()->getRegLoadStoreSymbolReference() ? self()->getRegLoadStoreSymbolReference()->getSymbol() : NULL;
+#else
+   TR_ASSERT(hasSymbolReference(), "attempting to access _symbolReference field for node %s %p that does not have it", self()->getOpCode().getName(), this);
+#endif
+   return (_unionPropertyA._symbolReference != NULL) ? _unionPropertyA._symbolReference->getSymbol() : NULL;
+   }
+
 /**
  * UnionPropertyA functions end
  */
