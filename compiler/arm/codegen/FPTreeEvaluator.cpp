@@ -23,6 +23,7 @@
 #include "codegen/GenerateInstructions.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"
 #include "codegen/RegisterDependency.hpp"

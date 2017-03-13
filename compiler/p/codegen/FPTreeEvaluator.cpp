@@ -25,7 +25,8 @@
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"               // for Instruction
 #include "codegen/Linkage.hpp"                   // for addDependency, etc
-#include "codegen/Machine.hpp"                   // for Machine, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                   // for Machine, etc
 #include "codegen/MemoryReference.hpp"           // for MemoryReference
 #include "codegen/RealRegister.hpp"              // for RealRegister, etc
 #include "codegen/Register.hpp"                  // for Register

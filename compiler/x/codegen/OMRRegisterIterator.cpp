@@ -17,7 +17,8 @@
  *******************************************************************************/
 
 #include <stddef.h>                       // for NULL
-#include "codegen/Machine.hpp"            // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"            // for Machine
 #include "codegen/RealRegister.hpp"       // for RealRegister
 #include "codegen/Register.hpp"           // for Register
 #include "codegen/RegisterConstants.hpp"  // for TR_RegisterKinds, etc

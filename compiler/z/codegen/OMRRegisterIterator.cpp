@@ -17,6 +17,7 @@
  *******************************************************************************/
 
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/RealRegister.hpp"
 #include "codegen/RegisterIterator.hpp"
 

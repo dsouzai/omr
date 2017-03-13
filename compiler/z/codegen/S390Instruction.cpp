@@ -31,7 +31,8 @@
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"                 // for Instruction, etc
 #include "codegen/Linkage.hpp"                     // for Linkage, etc
-#include "codegen/Machine.hpp"                     // for MAX_IMMEDIATE_VAL, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                     // for MAX_IMMEDIATE_VAL, etc
 #include "codegen/MemoryReference.hpp"             // for MemoryReference, etc
 #include "codegen/RealRegister.hpp"                // for RealRegister, etc
 #include "codegen/Register.hpp"                    // for Register

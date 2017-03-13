@@ -34,7 +34,8 @@
 #include "codegen/Linkage.hpp"                      // for Linkage
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/LiveRegister.hpp"                 // for TR_LiveRegisters, etc
-#include "codegen/Machine.hpp"                      // for Machine, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                      // for Machine, etc
 #include "codegen/MemoryReference.hpp"              // for MemoryReference
 #include "codegen/RealRegister.hpp"                 // for RealRegister, etc
 #include "codegen/RecognizedMethods.hpp"            // for RecognizedMethod, etc

@@ -33,7 +33,8 @@ namespace OMR { typedef OMR::Power::CodeGenerator CodeGeneratorConnector; }
 #include "compiler/codegen/OMRCodeGenerator.hpp"
 
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
-#include "codegen/Machine.hpp"                 // for LOWER_IMMED, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for LOWER_IMMED, etc
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/ScratchRegisterManager.hpp"
 #include "compile/SymbolReferenceTable.hpp"

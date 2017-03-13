@@ -26,7 +26,8 @@
 #include "codegen/FrontEnd.hpp"             // for TR_FrontEnd
 #include "codegen/Linkage.hpp"              // for Linkage, etc
 #include "codegen/LiveRegister.hpp"         // for TR_LiveRegisters
-#include "codegen/Machine.hpp"              // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"              // for Machine
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RealRegister.hpp"         // for TR::RealRegister::RegNum
 #include "codegen/Register.hpp"             // for Register

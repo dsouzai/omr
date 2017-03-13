@@ -39,7 +39,8 @@
 #include "codegen/Linkage.hpp"                      // for Linkage
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/LiveRegister.hpp"
-#include "codegen/Machine.hpp"                      // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                      // for Machine
 #include "codegen/RealRegister.hpp"                 // for RealRegister
 #include "codegen/RecognizedMethods.hpp"
 #include "codegen/Register.hpp"                     // for Register

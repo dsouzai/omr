@@ -24,7 +24,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"        // for CodeGenerator
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"          // for Instruction
-#include "codegen/Machine.hpp"              // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"              // for Machine
 #include "codegen/MemoryReference.hpp"      // for MemoryReference, etc
 #include "codegen/Register.hpp"             // for Register
 #include "codegen/RegisterDependency.hpp"

@@ -22,6 +22,7 @@
 #include "codegen/Snippet.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/Register.hpp"
 #include "codegen/ARMInstruction.hpp"
 

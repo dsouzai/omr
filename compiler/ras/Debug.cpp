@@ -40,6 +40,7 @@
 #include "codegen/LinkageConventionsEnum.hpp"
 #include "codegen/LiveRegister.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"                       // for Register
 #include "codegen/RegisterConstants.hpp"

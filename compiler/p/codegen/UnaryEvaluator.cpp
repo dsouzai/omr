@@ -22,7 +22,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                // for TR_FrontEnd
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
-#include "codegen/Machine.hpp"                 // for LOWER_IMMED, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for LOWER_IMMED, etc
 #include "codegen/MemoryReference.hpp"         // for MemoryReference
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/RegisterConstants.hpp"

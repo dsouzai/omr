@@ -23,7 +23,8 @@
 #include "codegen/FrontEnd.hpp"                // for feGetEnv
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/Linkage.hpp"                 // for addDependency
-#include "codegen/Machine.hpp"                 // for LOWER_IMMED, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for LOWER_IMMED, etc
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/RegisterConstants.hpp"

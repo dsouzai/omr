@@ -23,7 +23,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"             // for Instruction, etc
-#include "codegen/Machine.hpp"                 // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for Machine
 #include "codegen/TreeEvaluator.hpp"           // for TreeEvaluator
 #include "compile/Compilation.hpp"
 #include "compile/Compilation_inlines.hpp"             // for Compilation

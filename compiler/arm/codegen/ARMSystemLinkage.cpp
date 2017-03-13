@@ -25,6 +25,7 @@
 #include "il/symbol/StaticSymbol.hpp"
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/ARMSystemLinkage.hpp"
 #include "codegen/GCStackAtlas.hpp"
 #include "codegen/GCStackMap.hpp"

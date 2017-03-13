@@ -25,7 +25,8 @@
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"             // for toPPCCursor, etc
-#include "codegen/Machine.hpp"                 // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for Machine
 #include "codegen/MemoryReference.hpp"         // for MemoryReference
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/Relocation.hpp"              // for TR::ExternalRelocation, etc

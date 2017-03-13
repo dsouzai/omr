@@ -36,7 +36,8 @@ namespace OMR { typedef OMR::Z::Linkage LinkageConnector; }
 #include "codegen/CodeGenerator_inlines.hpp"           // for CodeGenerator
 #include "codegen/InstOpCode.hpp"              // for InstOpCode, etc
 #include "codegen/LinkageConventionsEnum.hpp"
-#include "codegen/Machine.hpp"                 // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for Machine
 #include "codegen/RealRegister.hpp"            // for RealRegister, etc
 #include "codegen/RegisterConstants.hpp"
 #include "codegen/Snippet.hpp"                 // for Snippet

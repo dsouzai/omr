@@ -23,6 +23,7 @@
 #include "il/Node_inlines.hpp"
 #include "codegen/Relocation.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "arm/codegen/ARMInstruction.hpp"
 #include "infra/Bit.hpp"
 #ifdef J9_PROJECT_SPECIFIC

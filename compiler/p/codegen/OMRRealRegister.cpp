@@ -19,7 +19,8 @@
 #include <stdint.h>                       // for int32_t, uint8_t
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"      // for CodeGenerator
-#include "codegen/Machine.hpp"            // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"            // for Machine
 #include "codegen/RealRegister.hpp"       // for RealRegister, etc
 #include "codegen/RegisterConstants.hpp"  // for TR_RegisterKinds, etc
 

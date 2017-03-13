@@ -33,7 +33,8 @@
 #include <stdint.h>                         // for int32_t, uint32_t, etc
 #include <stdio.h>                          // for FILE
 #include <string.h>                         // for strcpy
-#include "codegen/Machine.hpp"              // for MachineBaseConnector
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"              // for MachineBaseConnector
 #include "codegen/RegisterConstants.hpp"    // for TR_RegisterKinds, etc
 #include "compile/Method.hpp"               // for TR_Method, etc
 #include "compile/VirtualGuard.hpp"         // for TR_VirtualGuardKind, etc.

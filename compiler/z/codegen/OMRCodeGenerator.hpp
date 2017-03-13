@@ -38,7 +38,8 @@ namespace OMR { typedef OMR::Z::CodeGenerator CodeGeneratorConnector; }
 #include "codegen/FrontEnd.hpp"
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc
 #include "codegen/LinkageConventionsEnum.hpp"
-#include "codegen/Machine.hpp"                      // for Machine, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                      // for Machine, etc
 #include "codegen/RealRegister.hpp"                 // for RealRegister, etc
 #include "codegen/RecognizedMethods.hpp"            // for RecognizedMethod
 #include "codegen/RegisterConstants.hpp"

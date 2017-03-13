@@ -23,7 +23,8 @@
 #include "codegen/CodeGenerator_inlines.hpp"       // for CodeGenerator
 #include "codegen/IA32LinkageUtils.hpp"    // for IA32LinkageUtils
 #include "codegen/Linkage.hpp"             // for TR::X86LinkageProperties, etc
-#include "codegen/Machine.hpp"             // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"             // for Machine
 #include "codegen/RealRegister.hpp"        // for TR::RealRegister::RegNum, etc
 #include "codegen/RegisterConstants.hpp"   // for TR_RegisterKinds::TR_X87
 #include "codegen/RegisterDependency.hpp"

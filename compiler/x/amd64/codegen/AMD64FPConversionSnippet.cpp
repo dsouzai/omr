@@ -21,7 +21,8 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"             // for CodeGenerator
 #include "codegen/Linkage.hpp"                   // for Linkage
-#include "codegen/Machine.hpp"                   // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                   // for Machine
 #include "codegen/RealRegister.hpp"              // for RealRegister, etc
 #include "codegen/RegisterConstants.hpp"         // for TR_RegisterSizes, etc
 #include "codegen/Snippet.hpp"                   // for commentString

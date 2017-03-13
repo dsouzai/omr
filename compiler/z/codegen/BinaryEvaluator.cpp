@@ -26,7 +26,8 @@
 #include "codegen/InstOpCode.hpp"                   // for InstOpCode, etc
 #include "codegen/Instruction.hpp"
 #include "codegen/Instruction_inlines.hpp"                  // for Instruction
-#include "codegen/Machine.hpp"                      // for MAXDISP, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                      // for MAXDISP, etc
 #include "codegen/MemoryReference.hpp"
 #include "codegen/RealRegister.hpp"                 // for RealRegister, etc
 #include "codegen/Register.hpp"                     // for Register

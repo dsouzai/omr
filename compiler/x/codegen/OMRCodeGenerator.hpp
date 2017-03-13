@@ -30,7 +30,8 @@ namespace OMR { typedef OMR::X86::CodeGenerator CodeGeneratorConnector; }
 
 #include "compiler/codegen/OMRCodeGenerator.hpp"
 
-#include "codegen/Machine.hpp"                 // for Machine, etc
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                 // for Machine, etc
 #include "codegen/RealRegister.hpp"
 #include "codegen/Register.hpp"                // for Register
 #include "codegen/RegisterIterator.hpp"        // for RegisterIterator

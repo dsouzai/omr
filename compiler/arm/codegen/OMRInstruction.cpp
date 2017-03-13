@@ -24,6 +24,7 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"
 #include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"
 #include "codegen/ARMInstruction.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/UnresolvedDataSnippet.hpp"

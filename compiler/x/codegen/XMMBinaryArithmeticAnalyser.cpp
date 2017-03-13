@@ -22,7 +22,8 @@
 #include <stdint.h>                                   // for uint8_t
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/CodeGenerator_inlines.hpp"                  // for CodeGenerator
-#include "codegen/Machine.hpp"                        // for Machine
+#include "codegen/Machine.hpp"
+#include "codegen/Machine_inlines.hpp"                        // for Machine
 #include "codegen/MemoryReference.hpp"
 #include "codegen/Register.hpp"                       // for Register
 #include "codegen/RegisterConstants.hpp"
