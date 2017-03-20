@@ -37,15 +37,15 @@ class OMR_EXTENSIBLE Instruction : public OMR::InstructionConnector
    Instruction(TR::Node *node, TR_X86OpCodes op, TR::CodeGenerator *cg) :
       OMR::InstructionConnector(cg, TR::InstOpCode::BAD, node)
       {
-      self()->setOpCodeValue(op);
-      self()->initialize();
+      setOpCodeValue(op);
+      initialize();
       }
 
    Instruction(TR_X86OpCodes op, TR::Instruction *precedingInstruction, TR::CodeGenerator *cg) :
       OMR::InstructionConnector(cg, precedingInstruction, TR::InstOpCode::BAD)
       {
-      self()->setOpCodeValue(op);
-      self()->initialize();
+      setOpCodeValue(op);
+      initialize();
       }
 
 
@@ -55,17 +55,17 @@ class OMR_EXTENSIBLE Instruction : public OMR::InstructionConnector
    Instruction(TR::RegisterDependencyConditions *cond, TR::Node *node, TR_X86OpCodes op, TR::CodeGenerator *cg) :
       OMR::InstructionConnector(cg, TR::InstOpCode::BAD, node)
       {
-      self()->setOpCodeValue(op);
-      self()->setDependencyConditions(cond);
-      self()->initialize(cg, cond, op, true);
+      setOpCodeValue(op);
+      setDependencyConditions(cond);
+      initialize(cg, cond, op, true);
       }
 
    Instruction(TR::RegisterDependencyConditions *cond, TR_X86OpCodes op, TR::Instruction *precedingInstruction, TR::CodeGenerator *cg) :
       OMR::InstructionConnector(cg, precedingInstruction, TR::InstOpCode::BAD)
       {
-      self()->setOpCodeValue(op);
-      self()->setDependencyConditions(cond);
-      self()->initialize(cg, cond, op);
+      setOpCodeValue(op);
+      setDependencyConditions(cond);
+      initialize(cg, cond, op);
       }
 
    };

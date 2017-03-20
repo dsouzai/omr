@@ -50,13 +50,13 @@ class OMR_EXTENSIBLE Instruction : public OMR::InstructionConnector
                TR::InstOpCode::Mnemonic op,
                TR::RegisterDependencyConditions *cond,
                TR::CodeGenerator                    *cg) :
-               OMR::InstructionConnector(cg, precedingInstruction, op) { self()->initialize(precedingInstruction, true, cond, false); }
+               OMR::InstructionConnector(cg, precedingInstruction, op) { initialize(precedingInstruction, true, cond, false); }
 
    Instruction(TR::InstOpCode::Mnemonic    op,
                TR::Node          *n,
                TR::RegisterDependencyConditions *cond,
                TR::CodeGenerator *cg) :
-               OMR::InstructionConnector(cg, op, n) { self()->initialize(NULL, false, cond, true); }
+               OMR::InstructionConnector(cg, op, n) { initialize(NULL, false, cond, true); }
 
 
    Instruction(TR::InstOpCode::Mnemonic    op,
@@ -64,7 +64,7 @@ class OMR_EXTENSIBLE Instruction : public OMR::InstructionConnector
                TR::RegisterDependencyConditions * cond,
                TR::Instruction   *precedingInstruction,
                TR::CodeGenerator *cg) :
-               OMR::InstructionConnector(cg, precedingInstruction, op, n) { self()->initialize(precedingInstruction, true, cond, true); }
+               OMR::InstructionConnector(cg, precedingInstruction, op, n) { initialize(precedingInstruction, true, cond, true); }
 
    };
 
