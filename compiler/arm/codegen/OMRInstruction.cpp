@@ -23,6 +23,7 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/Machine.hpp"
 #include "codegen/ARMInstruction.hpp"
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/UnresolvedDataSnippet.hpp"
 #include "infra/Bit.hpp"

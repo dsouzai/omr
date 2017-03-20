@@ -23,6 +23,7 @@
 #include "codegen/CodeGenerator.hpp"              // for CodeGenerator, etc
 #include "codegen/InstOpCode.hpp"                 // for InstOpCode, etc
 #include "codegen/Instruction.hpp"                // for Instruction
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/Machine.hpp"                    // for Machine, etc
 #include "codegen/MemoryReference.hpp"            // for MemoryReference
 #include "codegen/RealRegister.hpp"               // for RealRegister, etc

@@ -23,6 +23,7 @@
 #include "codegen/Relocation.hpp"
 #include "codegen/Machine.hpp"
 #include "arm/codegen/ARMInstruction.hpp"
+#include "codegen/Instruction_inlines.hpp"
 #include "infra/Bit.hpp"
 #ifdef J9_PROJECT_SPECIFIC
 #include "env/CHTable.hpp"                     // for TR_VirtualGuardSite

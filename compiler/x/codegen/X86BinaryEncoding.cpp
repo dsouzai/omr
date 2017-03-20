@@ -23,6 +23,7 @@
 #include "codegen/CodeGenerator.hpp"               // for CodeGenerator, etc
 #include "codegen/FrontEnd.hpp"                    // for TR_FrontEnd, etc
 #include "codegen/Instruction.hpp"                 // for EnlargementResult, etc
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/Linkage.hpp"
 #include "codegen/Machine.hpp"                     // for Machine
 #include "codegen/MemoryReference.hpp"             // for MemoryReference, etc

@@ -21,6 +21,7 @@
 #include "codegen/CodeGenerator.hpp"             // for CodeGenerator, etc
 #include "codegen/InstOpCode.hpp"                // for InstOpCode, etc
 #include "codegen/Instruction.hpp"               // for Instruction, etc
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/Machine.hpp"                   // for Machine
 #include "codegen/MemoryReference.hpp"           // for MemoryReference
 #include "codegen/RealRegister.hpp"              // for RealRegister, etc

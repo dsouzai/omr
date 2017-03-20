@@ -25,6 +25,7 @@
 #pragma csect(TEST,"OMRZInstBase#T")
 
 #include "codegen/Instruction.hpp"
+#include "codegen/Instruction_inlines.hpp"
 
 #include <stdint.h>                                // for int32_t
 #include <stdio.h>                                 // for sprintf

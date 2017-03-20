@@ -22,6 +22,7 @@
 #include <stdint.h>                                   // for int32_t, etc
 #include "codegen/CodeGenerator.hpp"                  // for CodeGenerator, etc
 #include "codegen/Instruction.hpp"                    // for Instruction, etc
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/Linkage.hpp"                        // for Linkage
 #include "codegen/Machine.hpp"                        // for Machine
 #include "codegen/MemoryReference.hpp"

@@ -22,6 +22,7 @@
 #include "codegen/FrontEnd.hpp"            // for feGetEnv
 #include "codegen/InstOpCode.hpp"          // for InstOpCode, etc
 #include "codegen/Instruction.hpp"         // for Instruction, etc
+#include "codegen/Instruction_inlines.hpp"
 #include "codegen/MemoryReference.hpp"     // for MemoryReference
 #include "codegen/PPCInstruction.hpp"      // for PPCDepImmSymInstruction 
 #include "codegen/RegisterConstants.hpp"   // for TR_RegisterKinds
