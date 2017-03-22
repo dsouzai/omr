@@ -4898,12 +4898,6 @@ OMR::Node::hasSymbolReference()
    }
 
 bool
-OMR::Node::hasRegLoadStoreSymbolReference()
-   {
-   return self()->getOpCode().isStoreReg() || self()->getOpCode().isLoadReg();
-   }
-
-bool
 OMR::Node::hasSymbolReferenceOfAnyType()
    {
    return self()->hasSymbolReference() || self()->hasRegLoadStoreSymbolReference();

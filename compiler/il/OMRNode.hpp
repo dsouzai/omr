@@ -1566,7 +1566,7 @@ protected:
 
    // For UnionPropertyA
    bool hasSymbolReference();
-   bool hasRegLoadStoreSymbolReference();
+   inline bool hasRegLoadStoreSymbolReference();
    bool hasSymbolReferenceOfAnyType();
    bool hasBranchDestinationNode();
    bool hasBlock();

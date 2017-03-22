@@ -703,6 +703,12 @@ OMR::Node::setDataType(TR::DataType dt)
    return (_unionPropertyA._dataType = dt.getDataType());
    }
 
+bool
+OMR::Node::hasRegLoadStoreSymbolReference()
+   {
+   return self()->getOpCode().isStoreReg() || self()->getOpCode().isLoadReg();
+   }
+
 /**
  * UnionPropertyA functions end
  */
