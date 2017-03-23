@@ -1146,6 +1146,12 @@ TR::Register *OMR::X86::TreeEvaluator::fpConvertToLong(TR::Node *node, TR::Symbo
       TR_OutlinedInstructions *outlinedHelperCall = new (cg->trHeapMemory()) TR_OutlinedInstructions(node, TR::lcall, targetRegister, CallLabel, reStartLabel, cg);
       cg->getOutlinedInstructionsList().push_front(outlinedHelperCall);
 
+      TR::DebugCounter::incStaticDebugCounter(comp,
+          TR::DebugCounter::debugCounterName(comp,
+              "outlineInstrCount/fpConvertToLong/%s/%s",
+              comp->getHotnessName(comp->getMethodHotness()),
+              comp->signature()));
+
       cg->decReferenceCount(child);
       node->setRegister(targetRegister);
 
@@ -1865,6 +1871,12 @@ TR::Register *OMR::X86::TreeEvaluator::fbits2iEvaluator(TR::Node *node, TR::Code
          generateRegImmInstruction(     MOV4RegImm4, node, treg, FLOAT_NAN, cg);
          generateLabelInstruction(      JMP4,        node, endLabel,        cg);
          slowPath->swapInstructionListsWithCompilation();
+
+         TR::DebugCounter::incStaticDebugCounter(comp,
+             TR::DebugCounter::debugCounterName(comp,
+                 "outlineInstrCount/fbits2iEvaluator/%s/%s",
+                 comp->getHotnessName(comp->getMethodHotness()),
+                 comp->signature()));
 
          // Merge point
          //

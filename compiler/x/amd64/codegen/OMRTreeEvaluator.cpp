@@ -432,6 +432,13 @@ TR::Register *OMR::X86::AMD64::TreeEvaluator::dbits2lEvaluator(TR::Node *node, T
          generateLabelInstruction(      JMP4,        node, endLabel,         cg);
          slowPath->swapInstructionListsWithCompilation();
 
+         TR::Compilation *comp = cg->comp();
+         TR::DebugCounter::incStaticDebugCounter(comp,
+                                                 TR::DebugCounter::debugCounterName(comp,
+                                                   "outlineInstrCount/dbits2lEvaluator/%s/%s",
+                                                   comp->getHotnessName(comp->getMethodHotness()),
+                                                   comp->signature()));
+
          // Merge point
          //
          generateLabelInstruction(LABEL, node, endLabel, internalControlFlowDeps, cg);

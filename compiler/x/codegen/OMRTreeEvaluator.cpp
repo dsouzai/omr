@@ -3166,6 +3166,12 @@ TR::Register *OMR::X86::TreeEvaluator::arraycopyEvaluator(TR::Node *node, TR::Co
          cg->getOutlinedInstructionsList().push_front(outlinedCall);
          outlinedCall->swapInstructionListsWithCompilation();
          generateLabelInstruction(LABEL, node, helperCallLabel, cg);
+
+         TR::DebugCounter::incStaticDebugCounter(comp,
+             TR::DebugCounter::debugCounterName(comp,
+                 "outlineInstrCount/arraycopyEvaluator/%s/%s",
+                 comp->getHotnessName(comp->getMethodHotness()),
+                 comp->signature()));
          }
 
       generateHelperCallInstruction(node, helper, dependencies, cg)->setAdjustsFramePointerBy(-argSize);
