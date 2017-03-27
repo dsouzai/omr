@@ -626,7 +626,7 @@ class TR_RegionStructure : public TR_Structure
         void reset() {_iter.SetToFirstOne();}
 
         private:
-          TR::SparseBitVector _nodes;
+          TR::SparseBitVector &_nodes;
           TR::SparseBitVector::Cursor _iter;
           TR::CFG * _cfg;
        };
