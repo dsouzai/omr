@@ -1661,8 +1661,15 @@ OMR::Block::setExceptionClassName(char *name, int32_t length, TR::Compilation *c
       return;
       }
 
-   _catchBlockExtension->_exceptionClass =
-      self()->getOwningMethod()->fe()->getClassFromSignature(name, length, self()->getOwningMethod());
+   if (!comp->compileRelocatableCode())
+      {
+      _catchBlockExtension->_exceptionClass =
+         self()->getOwningMethod()->fe()->getClassFromSignature(name, length, self()->getOwningMethod());
+      }
+   else
+      {
+      _catchBlockExtension->_exceptionClass = NULL;
+      }
 
    // Set up flags for which standard exceptions can be caught by this block
    //

@@ -8055,7 +8055,9 @@ TR_ColdBlockMarker::hasNotYetRun(TR::Node *node)
          if (name)
             {
             char *sig = classNameToSignature(name, len, comp());
+            comp()->enterHeuristicRegion();
             TR_OpaqueClassBlock *classObject = fe()->getClassFromSignature(sig, len, node->getSymbolReference()->getOwningMethod(comp()));
+            comp()->exitHeuristicRegion();
             if (classObject && !TR::Compiler->cls.isInterfaceClass(comp(), classObject))
                return true;
             }
