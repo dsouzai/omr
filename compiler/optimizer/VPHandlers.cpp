@@ -1630,6 +1630,9 @@ TR::Node *constrainAload(OMR::ValuePropagation *vp, TR::Node *node)
                if (classInfo && classInfo->isInitialized())
                   isClassInitialized = true;
 
+               if (classInfo)
+                  traceMsg(vp->comp(), "findClassInfoAfterLocking: constrainAload 1: %p\n", classOfStatic);
+
                if (classOfStatic != vp->comp()->getSystemClassPointer() &&
                    isClassInitialized &&
                    (type == TR::Address))
@@ -1666,6 +1669,10 @@ TR::Node *constrainAload(OMR::ValuePropagation *vp, TR::Node *node)
                {
                TR_PersistentClassInfo * classInfo =
                   vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(symRef->getOwningMethod(vp->comp())->classOfStatic(symRef->getCPIndex()), vp->comp(), allowForAOT);
+
+               if (classInfo)
+                  traceMsg(vp->comp(), "findClassInfoAfterLocking: constrainAload 2: %p\n", symRef->getOwningMethod(vp->comp())->classOfStatic(symRef->getCPIndex()));
+
                if (classInfo && classInfo->getFieldInfo())
                   {
                   TR_PersistentFieldInfo * fieldInfo = classInfo->getFieldInfo()->findFieldInfo(vp->comp(), node, false);
@@ -2434,6 +2441,9 @@ TR::Node *constrainIaload(OMR::ValuePropagation *vp, TR::Node *node)
                if (classInfo && classInfo->isInitialized())
                   isClassInitialized = true;
 
+               if (classInfo)
+                  traceMsg(vp->comp(), "findClassInfoAfterLocking: constrainIaload 1: %p\n", classOfStatic);
+
                if ((classOfStatic != vp->comp()->getSystemClassPointer() &&
                    isClassInitialized &&
                     (type == TR::Address)))
@@ -2475,6 +2485,10 @@ TR::Node *constrainIaload(OMR::ValuePropagation *vp, TR::Node *node)
                {
                TR_PersistentClassInfo * classInfo =
                   vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(vp->comp()->getCurrentMethod()->containingClass(), vp->comp());
+
+               if (classInfo)
+                  traceMsg(vp->comp(), "findClassInfoAfterLocking: constrainAload 2: %p\n", vp->comp()->getCurrentMethod()->containingClass());
+
                if (classInfo && classInfo->getFieldInfo())
                   {
                   TR_PersistentFieldInfo * fieldInfo = classInfo->getFieldInfo()->findFieldInfo(vp->comp(), node, false);
@@ -8941,6 +8955,8 @@ TR_ResolvedMethod * findSingleImplementer(
 
 
    TR_PersistentClassInfo * classInfo = comp->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(thisClass, comp, true);
+   if (classInfo)
+      traceMsg(comp, "findClassInfoAfterLocking: findSingleImplementer: %p\n", thisClass);
    if (!classInfo)
       {
       return 0;

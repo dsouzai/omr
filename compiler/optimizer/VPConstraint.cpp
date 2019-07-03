@@ -1220,6 +1220,7 @@ TR::VPClassType *TR::VPClassType::create(OMR::ValuePropagation *vp, const char *
          vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(classObject, vp->comp(), allowForAOT);
       if (classInfo && classInfo->isInitialized())
          {
+         traceMsg(comp(), "findClassInfoAfterLocking: TR::VPClassType::create: %p\n", classObject);
          if (isFixed)
             return TR::VPFixedClass::create(vp, classObject);
          return TR::VPResolvedClass::create(vp, classObject);

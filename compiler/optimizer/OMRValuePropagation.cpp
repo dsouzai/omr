@@ -7612,6 +7612,7 @@ void OMR::ValuePropagation::doDelayedTransformations()
       TR_PersistentClassInfo *classInfo = comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(prexClazz, comp());
       if (classInfo)
          {
+         traceMsg(comp(), "findClassInfoAfterLocking: OMR::ValuePropagation::doDelayedTransformations: %p\n", prexClazz);
          TR_ScratchList<TR_PersistentClassInfo> subClasses(trMemory());
          TR_ClassQueries::collectAllSubClasses(classInfo, &subClasses, comp());
          ListIterator<TR_PersistentClassInfo> subClassesIt(&subClasses);

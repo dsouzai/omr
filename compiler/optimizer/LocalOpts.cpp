@@ -7338,6 +7338,9 @@ void TR_InvariantArgumentPreexistence::processIndirectCall(TR::Node *node, TR::T
                {
                classInfo = comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(receiverInfo.getClass(), comp());
 
+               if (classInfo)
+                  traceMsg(comp(), "findClassInfoAfterLocking: TR_InvariantArgumentPreexistence::processIndirectCall 1: %p\n", receiverInfo.getClass());
+
                // if the number of recompile assumptions on this particular
                // class has exceeded a threshold, don't do prex anymore for this class
                //
@@ -7478,6 +7481,9 @@ void TR_InvariantArgumentPreexistence::processIndirectCall(TR::Node *node, TR::T
             if (method && !method->virtualMethodIsOverridden())
                {
                TR_PersistentClassInfo *classInfo = comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(receiverInfo.getClass(), comp());
+
+               if (classInfo)
+                  traceMsg(comp(), "findClassInfoAfterLocking: TR_InvariantArgumentPreexistence::processIndirectCall 2: %p\n", receiverInfo.getClass());
 
                // if the number of recompile assumptions on this particular
                // class has exceeded a threshold, don't do prex anymore for this class
