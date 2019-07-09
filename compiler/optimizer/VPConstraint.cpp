@@ -1210,19 +1210,22 @@ TR::VPClassType *TR::VPClassType::create(OMR::ValuePropagation *vp, TR::SymbolRe
 TR::VPClassType *TR::VPClassType::create(OMR::ValuePropagation *vp, const char *sig, int32_t len, TR_ResolvedMethod *method, bool isFixed, TR_OpaqueClassBlock *classObject)
    {
 #ifdef J9_PROJECT_SPECIFIC
-   if (!classObject)
-      classObject = vp->fe()->getClassFromSignature(sig, len, method);
-   if (classObject)
+   if (!vp->comp()->compileRelocatableCode())
       {
-      bool isClassInitialized = false;
-      bool allowForAOT = vp->comp()->getOption(TR_UseSymbolValidationManager);
-      TR_PersistentClassInfo * classInfo =
-         vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(classObject, vp->comp(), allowForAOT);
-      if (classInfo && classInfo->isInitialized())
+      if (!classObject)
+         classObject = vp->fe()->getClassFromSignature(sig, len, method);
+      if (classObject)
          {
-         if (isFixed)
-            return TR::VPFixedClass::create(vp, classObject);
-         return TR::VPResolvedClass::create(vp, classObject);
+         bool isClassInitialized = false;
+         bool allowForAOT = vp->comp()->getOption(TR_UseSymbolValidationManager);
+         TR_PersistentClassInfo * classInfo =
+            vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(classObject, vp->comp(), allowForAOT);
+         if (classInfo && classInfo->isInitialized())
+            {
+            if (isFixed)
+               return TR::VPFixedClass::create(vp, classObject);
+            return TR::VPResolvedClass::create(vp, classObject);
+            }
          }
       }
 #endif
