@@ -109,6 +109,9 @@
 
 #ifdef J9_PROJECT_SPECIFIC
 #include "env/VMJ9.h"
+#include "control/CompilationRuntime.hpp"
+#include "jvmimage.h"
+#include "jvmimageport.h"
 #endif
 
 
@@ -729,6 +732,22 @@ OMR_InlinerPolicy::tryToInlineGeneral(TR_CallTarget * calltarget, TR_CallStack *
    const char * signature = calltarget->_calleeMethod->signature(comp()->trMemory());
 
    TR::SimpleRegex * regex = NULL;
+
+#ifdef J9_PROJECT_SPECIFIC
+   if (IS_RAM_CACHE_ON(TR::CompilationInfo::get()->getJITConfig()->javaVM))
+      {
+      if (toInline)
+         {
+         if (calltarget->_calleeMethod->isNative())
+            return false;
+         }
+      else
+         {
+         if (calltarget->_calleeMethod->isNative())
+            return true;
+         }
+      }
+#endif
 
    if (toInline)
       regex=comp()->getOptions()->getTryToInline();
