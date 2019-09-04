@@ -70,7 +70,8 @@ TR_PersistentMemory::TR_PersistentMemory(
    _signature(MEMINFO_SIGNATURE),
    _persistentInfo(this),
    _persistentAllocator(TR::ref(persistentAllocator)),
-   _totalPersistentAllocations()
+   _totalPersistentAllocations(),
+   _methodToPCMap((methodToPCComparator()), methodToPCAllocator(persistentAllocator))
    {
    }
 
@@ -82,7 +83,8 @@ TR_PersistentMemory::TR_PersistentMemory(
    _signature(MEMINFO_SIGNATURE),
    _persistentInfo(this),
    _persistentAllocator(TR::ref(persistentAllocator)),
-   _totalPersistentAllocations()
+   _totalPersistentAllocations(),
+   _methodToPCMap((methodToPCComparator()), methodToPCAllocator(persistentAllocator))
    {
    }
 
@@ -107,4 +109,32 @@ TR_PersistentMemory::printMemStatsToVlog()
       TR_VerboseLog::writeLine(TR_Vlog_MEMORY, "\t_totalPersistentAllocations[%s]=%lu", objectName[i], (unsigned long)_totalPersistentAllocations[i]);
       }
    TR_VerboseLog::vlogRelease();
+   }
+
+void
+TR_PersistentMemory::addMethodToMap(void *method, void *startPC)
+   {
+   MethodToPCMap::iterator it = _methodToPCMap.find(method);
+   if (it != _methodToPCMap.end())
+      {
+      it->second = startPC;
+      }
+   else
+      {
+      _methodToPCMap.insert(std::make_pair(method, startPC));
+      }
+   }
+
+void *
+TR_PersistentMemory::getPCFromMap(void *method)
+   {
+   MethodToPCMap::iterator it = _methodToPCMap.find(method);
+   if (it != _methodToPCMap.end())
+      {
+      return it->second;
+      }
+   else
+      {
+      return NULL;
+      }
    }

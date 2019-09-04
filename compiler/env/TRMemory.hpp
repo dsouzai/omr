@@ -59,6 +59,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <map>
 #include "cs2/allocator.h"
 #include "cs2/bitvectr.h"
 #include "cs2/sparsrbit.h"
@@ -496,6 +497,9 @@ public:
    void printMemStats();
    void printMemStatsToVlog();
 
+   void addMethodToMap(void *method, void *startPC);
+   void *getPCFromMap(void *method);
+
    uintptr_t _signature;        // eyecatcher
 
    friend class TR_Memory;
@@ -507,6 +511,11 @@ public:
    TR::PersistentInfo _persistentInfo;
    TR::reference_wrapper<TR::PersistentAllocator> _persistentAllocator;
    size_t _totalPersistentAllocations[TR_MemoryBase::NumObjectTypes];
+
+   typedef TR::typed_allocator<std::pair<void* const, void*>, TR::PersistentAllocator&> methodToPCAllocator;
+   typedef std::less<void*> methodToPCComparator;
+   typedef std::map<void*, void*, methodToPCComparator, methodToPCAllocator> MethodToPCMap;
+   MethodToPCMap _methodToPCMap;
    };
 
 extern TR_PersistentMemory * trPersistentMemory;
