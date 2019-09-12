@@ -161,6 +161,8 @@ public:
 
    void addCodeCache(TR::CodeCache *codeCache);
 
+   bool registerCodeCaches() { return true; }
+
    TR::CodeCacheMemorySegment *getNewCodeCacheMemorySegment(size_t segmentSize, size_t & codeCacheSizeAllocated);
 
    void        unreserveCodeCache(TR::CodeCache *codeCache);
