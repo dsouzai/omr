@@ -69,6 +69,11 @@
 #include "runtime/Runtime.hpp"
 #include "infra/SimpleRegex.hpp"
 
+#ifdef J9_PROJECT_SPECIFIC
+#include "jvmimage.h"
+#include "jvmimageport.h"
+#endif
+
 
 TR::ResolvedMethodSymbol *
 OMR::ResolvedMethodSymbol::self()
@@ -154,6 +159,9 @@ OMR::ResolvedMethodSymbol::ResolvedMethodSymbol(TR_ResolvedMethod * method, TR::
    // the method that's being jitted
    //
    if ((_methodIndex > JITTED_METHOD_INDEX && !_resolvedMethod->isSameMethod(comp->getJittedMethodSymbol()->getResolvedMethod()))
+#ifdef J9_PROJECT_SPECIFIC
+       || IS_RAM_CACHE_ON(comp->fej9()->getJ9JITConfig()->javaVM)
+#endif
        || comp->isDLT()
        || (comp->getOption(TR_UseSymbolValidationManager) && comp->compileRelocatableCode()))
       {
