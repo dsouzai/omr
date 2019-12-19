@@ -271,7 +271,7 @@ enum TR_CompilationOptions
    // Option word 6
    //
    TR_EnableAggressiveLoopVersioning      = 0x00000020 + 6,
-   // Available                           = 0x00000040 + 6,
+   TR_EnableDummyCheckPrologue            = 0x00000040 + 6,
    TR_CompileBit                          = 0x00000080 + 6,
    TR_WaitBit                             = 0x00000100 + 6,
    TR_DisableZ14                          = 0x00000200 + 6,
@@ -1871,6 +1871,8 @@ public:
    static TR::SimpleRegex *_debugCounterInsertByteCode;
    static TR::SimpleRegex *_debugCounterInsertJittedBody;
    static TR::SimpleRegex *_debugCounterInsertMethod;
+
+   static uintptrj_t _dummyTest;
 
    static TR_Debug * getDebug() { return _debug; }
    static bool createDebug();

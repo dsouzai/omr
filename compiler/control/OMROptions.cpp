@@ -653,6 +653,8 @@ TR::OptionTable OMR::Options::_jitOptions[] = {
    {"enableDLTBytecodeIndex=",            "O<nnn>\tforce attempted DLT compilation to use specified bytecode index", TR::Options::set32BitNumeric, offsetof(OMR::Options,_enableDLTBytecodeIndex), 0, " %d"},
    {"enableDowngradeOnHugeQSZ",           "M\tdowngrade first time compilations when the compilation queue is huge (1000+ entries)", SET_OPTION_BIT(TR_EnableDowngradeOnHugeQSZ), "F", NOT_IN_SUBSET},
    {"enableDualTLH",                      "D\tEnable use of non-zero initialized TLH. TR_EnableBatchClear must be set too.", RESET_OPTION_BIT(TR_DisableDualTLH), "F"},
+   {"enableDummyCheckPrologue",       "D\tinsert entry breakpoint instruction in generated code",
+        SET_OPTION_BIT(TR_EnableDummyCheckPrologue), "F" },
    {"enableDupRetTree",                   "O\tEnable duplicate return tree",                  SET_OPTION_BIT(TR_EnableDupRetTree), "F"},
    {"enableDynamicRIBufferProcessing",    "O\tenable disabling buffer processing", RESET_OPTION_BIT(TR_DisableDynamicRIBufferProcessing), "F", NOT_IN_SUBSET},
    {"enableDynamicSamplingWindow",        "M\t", RESET_OPTION_BIT(TR_DisableDynamicSamplingWindow), "F", NOT_IN_SUBSET},
@@ -1694,6 +1696,8 @@ int32_t       OMR::Options::_minimalNumberOfTreeTopsInsideTMMonitor = 6;
 TR::SimpleRegex *OMR::Options::_debugCounterInsertByteCode = NULL;
 TR::SimpleRegex *OMR::Options::_debugCounterInsertJittedBody = NULL;
 TR::SimpleRegex *OMR::Options::_debugCounterInsertMethod = NULL;
+
+uintptrj_t OMR::Options::_dummyTest = 0;
 
 size_t OMR::Options::_scratchSpaceLimit = 0;
 size_t OMR::Options::_scratchSpaceLowerBound = 0;
