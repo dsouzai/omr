@@ -4067,6 +4067,23 @@ void TR_InlinerBase::applyPolicyToTargets(TR_CallStack *callStack, TR_CallSite *
       {
       TR_CallTarget *calltarget = callsite->getTarget(i);
 
+      if (comp()->getOption(TR_EnableLimitClassloaderInlining))
+         {
+         TR_OpaqueClassBlock *caller = callsite->_callerResolvedMethod->containingClass();
+         TR_OpaqueClassBlock *callee = calltarget->_calleeMethod->containingClass();
+         bool okToInline = true;
+#ifdef J9_PROJECT_SPECIFIC
+         okToInline = comp()->fej9()->sameClassLoaders(caller, callee)
+               || comp()->fej9()->isClassLoadedBySystemClassLoader(callee);
+#endif
+         if (!okToInline)
+            {
+            callsite->removecalltarget(i,tracer(),DontInline_Callee);
+            i--;
+            continue;
+            }
+         }
+
       if (!supportsMultipleTargetInlining () && i > 0)
          {
          callsite->removecalltarget(i,tracer(),Exceeds_ByteCode_Threshold);
