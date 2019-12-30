@@ -4067,6 +4067,18 @@ void TR_InlinerBase::applyPolicyToTargets(TR_CallStack *callStack, TR_CallSite *
       {
       TR_CallTarget *calltarget = callsite->getTarget(i);
 
+      if (comp()->getOption(TR_EnableLimitClassloaderInlining))
+         {
+         TR_OpaqueClassBlock *caller = callsite->_callerResolvedMethod->containingClass();
+         TR_OpaqueClassBlock *callee = calltarget->_calleeMethod->containingClass();
+         if (!TR::Compiler->cls.sameClassLoaders(comp(), caller, callee))
+            {
+            callsite->removecalltarget(i,tracer(),DontInline_Callee);
+            i--;
+            continue;
+            }
+         }
+
       if (!supportsMultipleTargetInlining () && i > 0)
          {
          callsite->removecalltarget(i,tracer(),Exceeds_ByteCode_Threshold);
