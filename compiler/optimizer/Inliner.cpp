@@ -4082,6 +4082,42 @@ static void printClassNameSignatureFromMethod(J9Method *caller, J9Method *callee
             J9UTF8_LENGTH(calleeName), (char *)J9UTF8_DATA(calleeName),
             J9UTF8_LENGTH(calleeSignature), (char *)J9UTF8_DATA(calleeSignature));
    }
+
+struct WhiteList
+   {
+   const char *className;
+   const char *name;
+   const char *signature;
+   };
+
+WhiteList whiteList[] = { 
+                           {
+                              "com/ibm/websphere/ras/TraceComponent",
+                              "isAnyTracingEnabled",
+                              "()Z"
+                           }
+                        };
+
+static bool methodInWhiteList(J9Method *callee)
+   {
+   uint32_t numElements = sizeof(whiteList)/sizeof(whiteList[0]);
+
+   J9UTF8 *calleeClassName = J9ROMCLASS_CLASSNAME(J9_CLASS_FROM_METHOD(callee)->romClass);
+   J9UTF8 *calleeName = J9ROMMETHOD_NAME(J9_ROM_METHOD_FROM_RAM_METHOD(callee));
+   J9UTF8 *calleeSignature = J9ROMMETHOD_SIGNATURE(J9_ROM_METHOD_FROM_RAM_METHOD(callee));
+
+   for (auto i = 0; i < numElements; i++)
+      {
+      if (0==strncmp((char *)J9UTF8_DATA(calleeClassName), whiteList[i].className, J9UTF8_LENGTH(calleeClassName))
+          && 0==strncmp((char *)J9UTF8_DATA(calleeName), whiteList[i].name, J9UTF8_LENGTH(calleeName))
+          && 0==strncmp((char *)J9UTF8_DATA(calleeSignature), whiteList[i].signature, J9UTF8_LENGTH(calleeSignature)))
+         {
+         return true;
+         }
+      }
+
+   return false;
+   }
 #endif
 
 void TR_InlinerBase::applyPolicyToTargets(TR_CallStack *callStack, TR_CallSite *callsite)
@@ -4096,15 +4132,16 @@ void TR_InlinerBase::applyPolicyToTargets(TR_CallStack *callStack, TR_CallSite *
          TR_OpaqueClassBlock *caller = callsite->_callerResolvedMethod->containingClass();
          TR_OpaqueClassBlock *callee = calltarget->_calleeMethod->containingClass();
 
+         J9Method *calleeMethod = (J9Method *)calltarget->_calleeMethod->getPersistentIdentifier();
+
          bool okToInline = comp()->fej9()->sameClassLoaders(caller, callee)
-               || comp()->fej9()->isClassLoadedBySystemClassLoader(callee);
+               || comp()->fej9()->isClassLoadedBySystemClassLoader(callee)
+               || methodInWhiteList(calleeMethod);
 
          if (!okToInline)
             {
-            J9Method *callerMethod = (J9Method *)callsite->_callerResolvedMethod->getPersistentIdentifier();
-            J9Method *calleeMethod = (J9Method *)calltarget->_calleeMethod->getPersistentIdentifier();
-
-            printClassNameSignatureFromMethod(callerMethod, calleeMethod, comp());
+            //J9Method *callerMethod = (J9Method *)callsite->_callerResolvedMethod->getPersistentIdentifier();
+            //printClassNameSignatureFromMethod(callerMethod, calleeMethod, comp());
 
             callsite->removecalltarget(i,tracer(),DontInline_Callee);
             i--;
