@@ -108,6 +108,8 @@
 #include "runtime/Runtime.hpp"
 
 #ifdef J9_PROJECT_SPECIFIC
+#include "j9.h"
+#include "j9nonbuilder.h"
 #include "env/VMJ9.h"
 #endif
 
@@ -4061,28 +4063,55 @@ bool OMR_InlinerPolicy::canInlineMethodWhileInstrumenting(TR_ResolvedMethod *met
    return true;
    }
 
+#ifdef J9_PROJECT_SPECIFIC
+static void printClassNameSignatureFromMethod(J9Method *caller, J9Method *callee, TR::Compilation *comp)
+   {
+   J9UTF8 *callerClassName = J9ROMCLASS_CLASSNAME(J9_CLASS_FROM_METHOD(caller)->romClass);
+   J9UTF8 *callerName = J9ROMMETHOD_NAME(J9_ROM_METHOD_FROM_RAM_METHOD(caller));
+   J9UTF8 *callerSignature = J9ROMMETHOD_SIGNATURE(J9_ROM_METHOD_FROM_RAM_METHOD(caller));
+
+   J9UTF8 *calleeClassName = J9ROMCLASS_CLASSNAME(J9_CLASS_FROM_METHOD(callee)->romClass);
+   J9UTF8 *calleeName = J9ROMMETHOD_NAME(J9_ROM_METHOD_FROM_RAM_METHOD(callee));
+   J9UTF8 *calleeSignature = J9ROMMETHOD_SIGNATURE(J9_ROM_METHOD_FROM_RAM_METHOD(callee));
+
+   traceMsg(comp, "Rejecting caller %.*s.%.*s%.*s callee %.*s.%.*s%.*s\n",
+            J9UTF8_LENGTH(callerClassName), (char *)J9UTF8_DATA(callerClassName),
+            J9UTF8_LENGTH(callerName), (char *)J9UTF8_DATA(callerName),
+            J9UTF8_LENGTH(callerSignature), (char *)J9UTF8_DATA(callerSignature),
+            J9UTF8_LENGTH(calleeClassName), (char *)J9UTF8_DATA(calleeClassName),
+            J9UTF8_LENGTH(calleeName), (char *)J9UTF8_DATA(calleeName),
+            J9UTF8_LENGTH(calleeSignature), (char *)J9UTF8_DATA(calleeSignature));
+   }
+#endif
+
 void TR_InlinerBase::applyPolicyToTargets(TR_CallStack *callStack, TR_CallSite *callsite)
    {
    for (int32_t i=0; i<callsite->numTargets(); i++)
       {
       TR_CallTarget *calltarget = callsite->getTarget(i);
 
+#ifdef J9_PROJECT_SPECIFIC
       if (comp()->getOption(TR_EnableLimitClassloaderInlining))
          {
          TR_OpaqueClassBlock *caller = callsite->_callerResolvedMethod->containingClass();
          TR_OpaqueClassBlock *callee = calltarget->_calleeMethod->containingClass();
-         bool okToInline = true;
-#ifdef J9_PROJECT_SPECIFIC
-         okToInline = comp()->fej9()->sameClassLoaders(caller, callee)
+
+         bool okToInline = comp()->fej9()->sameClassLoaders(caller, callee)
                || comp()->fej9()->isClassLoadedBySystemClassLoader(callee);
-#endif
+
          if (!okToInline)
             {
+            J9Method *callerMethod = (J9Method *)callsite->_callerResolvedMethod->getPersistentIdentifier();
+            J9Method *calleeMethod = (J9Method *)calltarget->_calleeMethod->getPersistentIdentifier();
+
+            printClassNameSignatureFromMethod(callerMethod, calleeMethod, comp());
+
             callsite->removecalltarget(i,tracer(),DontInline_Callee);
             i--;
             continue;
             }
          }
+#endif
 
       if (!supportsMultipleTargetInlining () && i > 0)
          {
