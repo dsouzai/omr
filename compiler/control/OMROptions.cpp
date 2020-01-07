@@ -1271,6 +1271,8 @@ TR::OptionTable OMR::Options::_jitOptions[] = {
    {"turnOffSelectiveNoOptServerIfNoStartupHint", "M\t", SET_OPTION_BIT(TR_TurnOffSelectiveNoOptServerIfNoStartupHint), "F", NOT_IN_SUBSET },
    {"unleashStaticFieldFolding",        "O\tbypass the class white-list, and allow static final fields to be folded aggressively", RESET_OPTION_BIT(TR_RestrictStaticFieldFolding), "F"},
    {"unresolvedSymbolsAreNotColdAtCold", "R\tMark unresolved symbols as cold blocks at cold or lower", SET_OPTION_BIT(TR_UnresolvedAreNotColdAtCold), "F"},
+   {"unwritableCodeCache",       "D\tinsert entry breakpoint instruction in generated code",
+        SET_OPTION_BIT(TR_UnwritableCodeCache), "F" },
    {"upgradeBootstrapAtWarm",           "R\tRecompile bootstrap AOT methods at warm instead of cold", SET_OPTION_BIT(TR_UpgradeBootstrapAtWarm), "F", NOT_IN_SUBSET},
    {"useGlueIfMethodTrampolinesAreNotNeeded", "O\tSafety measure; return to the old behaviour of always going through the glue", SET_OPTION_BIT(TR_UseGlueIfMethodTrampolinesAreNotNeeded), "F"},
    {"useHigherCountsForNonSCCMethods", "M\tuse the default high counts for methods belonging to classes not in SCC", SET_OPTION_BIT(TR_UseHigherCountsForNonSCCMethods), "F", NOT_IN_SUBSET },

@@ -325,7 +325,7 @@ enum TR_CompilationOptions
    TR_DisableTOC                          = 0x08000000 + 7,
    TR_UseLowPriorityQueueDuringCLP        = 0x10000000 + 7,
    TR_DisableVectorBCD                    = 0x20000000 + 7,
-   // Available                           = 0x40000000 + 7,
+   TR_UnwritableCodeCache                 = 0x40000000 + 7,
    TR_DisableTraps                        = 0x80000000 + 7,
 
    // Option word 8
