@@ -242,6 +242,7 @@ public:
    bool usingRepository()                          { return _codeCacheRepositorySegment != NULL; }
    TR::CodeCache * getRepositoryCodeCacheAddress() { return _repositoryCodeCache; }
    TR::Monitor *   getCodeCacheRepositoryMonitor() { return _codeCacheRepositoryMonitor; }
+   TR::CodeCacheMemorySegment *getRepository()     { return _codeCacheRepositorySegment; }
 
    uint8_t * allocateCodeMemoryWithRetries(size_t warmCodeSize,
                                            size_t coldCodeSize,
