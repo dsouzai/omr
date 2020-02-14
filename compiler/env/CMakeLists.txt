@@ -33,6 +33,7 @@ compiler_library(env
 	${CMAKE_CURRENT_LIST_DIR}/SegmentProvider.cpp
 	${CMAKE_CURRENT_LIST_DIR}/SystemSegmentProvider.cpp
 	${CMAKE_CURRENT_LIST_DIR}/DebugSegmentProvider.cpp
+	${CMAKE_CURRENT_LIST_DIR}/OMRTestSegmentAllocator.cpp
 	${CMAKE_CURRENT_LIST_DIR}/Region.cpp
 	${CMAKE_CURRENT_LIST_DIR}/StackMemoryRegion.cpp
 	${CMAKE_CURRENT_LIST_DIR}/OMRPersistentInfo.cpp
