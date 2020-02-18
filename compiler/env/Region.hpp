@@ -30,11 +30,20 @@
 #include "infra/ReferenceWrapper.hpp"
 #include "env/TypedAllocator.hpp"
 #include "env/MemorySegment.hpp"
+
+#if defined (NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#include "env/OMRTestSegmentAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 
 namespace TR {
 
+#if !defined (NEW_MEMORY)
 class SegmentProvider;
+#endif
+
 class RegionProfiler;
 
 class Region
@@ -85,7 +94,11 @@ class Region
       };
 
 public:
+#if defined (NEW_MEMORY)
+   Region(TestAlloc::SegmentAllocator &segmentProvider, TestAlloc::RawAllocator &rawAllocator);
+#else
    Region(TR::SegmentProvider &segmentProvider, TR::RawAllocator rawAllocator);
+#endif
    Region(const Region &prototype);
    virtual ~Region() throw();
    void * allocate(const size_t bytes, void * hint = 0);
@@ -143,8 +156,15 @@ private:
    size_t round(size_t bytes);
 
    size_t _bytesAllocated;
+
+#if defined (NEW_MEMORY)
+   TestAlloc::SegmentAllocator &_segmentProvider;
+   TestAlloc::RawAllocator &_rawAllocator;
+#else
    TR::SegmentProvider &_segmentProvider;
    TR::RawAllocator _rawAllocator;
+#endif
+
    TR::MemorySegment _initialSegment;
    TR::reference_wrapper<TR::MemorySegment> _currentSegment;
 

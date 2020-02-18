@@ -20,14 +20,24 @@
  *******************************************************************************/
 
 #include "env/MemorySegment.hpp"
+
+#if defined (NEW_MEMORY)
+#include "env/OMRTestSegmentAllocator.hpp"
+#else
 #include "env/SegmentProvider.hpp"
+#endif
+
 #include "env/Region.hpp"
 #include "infra/ReferenceWrapper.hpp"
 #include "env/TRMemory.hpp"
 
 namespace TR {
 
+#if defined (NEW_MEMORY)
+Region::Region(TestAlloc::SegmentAllocator &segmentProvider, TestAlloc::RawAllocator &rawAllocator) :
+#else
 Region::Region(TR::SegmentProvider &segmentProvider, TR::RawAllocator rawAllocator) :
+#endif
    _bytesAllocated(0),
    _segmentProvider(segmentProvider),
    _rawAllocator(rawAllocator),
@@ -68,7 +78,11 @@ Region::~Region() throw()
       )
       {
       _currentSegment = TR::ref(latestSegment.get().unlink());
+#if defined (NEW_MEMORY)
+      _segmentProvider.deallocate(latestSegment);
+#else
       _segmentProvider.release(latestSegment);
+#endif
       }
    TR_ASSERT(_currentSegment.get() == _initialSegment, "self-referencial link was broken");
    }
@@ -82,7 +96,11 @@ Region::allocate(size_t const size, void *hint)
       _bytesAllocated += roundedSize;
       return _currentSegment.get().allocate(roundedSize);
       }
+#if defined (NEW_MEMORY)
+   TR::MemorySegment &newSegment = _segmentProvider.allocate(roundedSize);
+#else
    TR::MemorySegment &newSegment = _segmentProvider.request(roundedSize);
+#endif
    TR_ASSERT(newSegment.remaining() >= roundedSize, "Allocated segment is too small");
    newSegment.link(_currentSegment.get());
    _currentSegment = TR::ref(newSegment);
