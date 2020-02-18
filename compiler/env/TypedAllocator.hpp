@@ -67,7 +67,11 @@ public:
       }
 
 protected:
+#if defined (NEW_MEMORY)
+   explicit typed_allocator( untyped_allocator &backingAllocator ) throw() : _backingAllocator(backingAllocator) {}
+#else
    explicit typed_allocator( untyped_allocator backingAllocator ) throw() : _backingAllocator(backingAllocator) {}
+#endif
 
    pointer allocate(size_type n, const_pointer hint)
       {
@@ -80,7 +84,11 @@ protected:
       }
 
 private:
+#if defined (NEW_MEMORY)
+   untyped_allocator &_backingAllocator;
+#else
    untyped_allocator _backingAllocator;
+#endif
 
    };
 
@@ -104,7 +112,11 @@ class typed_allocator : public typed_allocator<void, Alloc>
    static pointer address(reference r) { return &r; }
    static const_pointer address(const_reference r) { return &r; }
 
+#if defined (NEW_MEMORY)
+   explicit typed_allocator(untyped_allocator &backingAllocator) throw() :
+#else
    explicit typed_allocator(untyped_allocator backingAllocator) throw() :
+#endif
       typed_allocator<void, untyped_allocator>(backingAllocator)
       {
       }
