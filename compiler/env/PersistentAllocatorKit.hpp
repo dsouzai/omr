@@ -30,7 +30,11 @@ namespace TR { using OMR::PersistentAllocatorKit; }
 
 #endif // TR_PERSISTENT_ALLOCATOR_KIT
 
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 
 
 namespace OMR
@@ -43,7 +47,11 @@ struct PersistentAllocatorKit
       {
       }
 
+#if defined(NEW_MEMORY)
+   TestAlloc::RawAllocator &rawAllocator;
+#else
    TR::RawAllocator rawAllocator;
+#endif
    };
 
 }

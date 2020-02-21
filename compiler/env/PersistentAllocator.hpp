@@ -35,7 +35,11 @@ namespace TR { using OMR::PersistentAllocator; }
 #include <stddef.h>
 #include <stdint.h>
 
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "env/PersistentAllocatorKit.hpp"
 
 namespace OMR {
@@ -62,7 +66,11 @@ public:
 private:
    PersistentAllocator(const PersistentAllocator &);
 
+#if defined(NEW_MEMORY)
+   TestAlloc::RawAllocator &_rawAllocator;
+#else
    TR::RawAllocator _rawAllocator;
+#endif
 
    };
 
