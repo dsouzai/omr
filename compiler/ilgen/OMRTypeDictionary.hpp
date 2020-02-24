@@ -32,7 +32,11 @@ class TR_Memory;
 namespace OMR { class StructType; }
 namespace OMR { class UnionType; }
 namespace TR  { class IlReference; }
+#if defined (NEW_MEMORY)
+namespace TestAlloc { class SegmentAllocator; }
+#else
 namespace TR  { class SegmentProvider; }
+#endif
 namespace TR  { class Region; }
 
 extern "C" {
@@ -203,7 +207,11 @@ protected:
       MemoryManager();
       ~MemoryManager();
 
+#if defined(NEW_MEMORY)
+      TestAlloc::SegmentAllocator *_segmentProvider;
+#else
       TR::SegmentProvider *_segmentProvider;
+#endif
       TR::Region *_memoryRegion;
       TR_Memory *_trMemory;
       } MemoryManager;

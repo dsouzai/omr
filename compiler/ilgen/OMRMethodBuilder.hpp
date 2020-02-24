@@ -38,7 +38,11 @@ namespace TR { class ResolvedMethod; }
 namespace TR { class SymbolReference; }
 namespace TR { class VirtualMachineState; }
 
+#if defined(NEW_MEMORY)
+namespace TestAlloc { class SegmentAllocator; }
+#else
 namespace TR { class SegmentProvider; }
+#endif
 namespace TR { class Region; }
 
 extern "C"
@@ -297,7 +301,12 @@ class MethodBuilder : public TR::IlBuilder
       MemoryManager();
       ~MemoryManager();
 
+#if defined(NEW_MEMORY)
+      TestAlloc::SegmentAllocator *_segmentProvider;
+#else
       TR::SegmentProvider *_segmentProvider;
+#endif
+
       TR::Region *_memoryRegion;
       TR_Memory *_trMemory;
       } MemoryManager;

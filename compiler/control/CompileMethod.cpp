@@ -54,8 +54,12 @@
 #include "ilgen/IlGeneratorMethodDetails.hpp"
 #include "infra/Assert.hpp"
 #include "ras/Debug.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestSegmentAllocator.hpp"
+#else
 #include "env/SystemSegmentProvider.hpp"
 #include "env/DebugSegmentProvider.hpp"
+#endif
 #include "omrformatconsts.h"
 #include "runtime/CodeCacheManager.hpp"
 
@@ -277,6 +281,16 @@ compileMethodFromDetails(
    uint64_t translationStartTime = TR::Compiler->vm.getUSecClock();
    OMR::FrontEnd &fe = OMR::FrontEnd::singleton();
    auto jitConfig = fe.jitConfig();
+
+#if defined(NEW_MEMORY)
+   TestAlloc::MallocRA rawAllocator;
+   TestAlloc::OMRSystemSegmentProvider defaultSegmentProvider(1 << 16, rawAllocator);
+   TestAlloc::OMRDebugSegmentProvider debugSegmentProvider(1 << 16, rawAllocator);
+   TestAlloc::SegmentAllocator &scratchSegmentProvider =
+      TR::Options::getCmdLineOptions()->getOption(TR_EnableScratchMemoryDebugging) ?
+         static_cast<TestAlloc::SegmentAllocator &>(debugSegmentProvider) :
+         static_cast<TestAlloc::SegmentAllocator &>(defaultSegmentProvider);
+#else
    TR::RawAllocator rawAllocator;
    TR::SystemSegmentProvider defaultSegmentProvider(1 << 16, rawAllocator);
    TR::DebugSegmentProvider debugSegmentProvider(1 << 16, rawAllocator);
@@ -284,6 +298,8 @@ compileMethodFromDetails(
       TR::Options::getCmdLineOptions()->getOption(TR_EnableScratchMemoryDebugging) ?
          static_cast<TR::SegmentAllocator &>(debugSegmentProvider) :
          static_cast<TR::SegmentAllocator &>(defaultSegmentProvider);
+#endif
+
    TR::Region dispatchRegion(scratchSegmentProvider, rawAllocator);
    TR_Memory trMemory(*fe.persistentMemory(), dispatchRegion);
    TR_ResolvedMethod & compilee = *((TR_ResolvedMethod *)details.getMethod());
