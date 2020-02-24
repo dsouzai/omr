@@ -28,7 +28,11 @@
 #include "env/FrontEnd.hpp"
 #include "env/IO.hpp"
 #include "compile/ResolvedMethod.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "ilgen/IlGeneratorMethodDetails_inlines.hpp"
 #include "ilgen/MethodBuilder.hpp"
 #include "runtime/CodeCache.hpp"
@@ -148,7 +152,13 @@ initializeTestJit(TR_RuntimeHelper *helperIDs, void **helperAddresses, int32_t n
 
    // Create a bootstrap raw allocator.
    //
+#if defined(NEW_MEMORY)
+   TestAlloc::MallocRA localMallocRA;
+   TestAlloc::MallocRA *mallocRA = new (localMallocRA) TestAlloc::MallocRA();
+   TestAlloc::RawAllocator &rawAllocator = *mallocRA;
+#else
    TR::RawAllocator rawAllocator;
+#endif
 
    try
       {

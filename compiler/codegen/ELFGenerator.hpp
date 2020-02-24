@@ -27,7 +27,11 @@
 #include <elf.h>
 #include <string>
 #include "env/TypedAllocator.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "runtime/CodeCacheManager.hpp"
 
 class TR_Memory;
@@ -48,7 +52,11 @@ public:
      * @param[in] codeStart the code segment base
      * @param[in] codeSize the size of the code segment
     */
+#if defined(NEW_MEMORY)
+    ELFGenerator(TestAlloc::RawAllocator &rawAllocator,
+#else
     ELFGenerator(TR::RawAllocator rawAllocator,
+#endif
                  uint8_t const * codeStart, size_t codeSize):
                         _rawAllocator(rawAllocator),
                         _codeStart(codeStart),
@@ -267,7 +275,11 @@ protected:
      */
     void writeRelaEntriesToFile(::FILE *fp);
 
+#if defined(NEW_MEMORY)
+    TestAlloc::RawAllocator &_rawAllocator;
+#else
     TR::RawAllocator _rawAllocator; /**< the RawAllocator passed to the constructor */
+#endif
     
     ELFEHeader       *_header;          /**< The ELFEHeader, required for all ELF files */
     ELFProgramHeader *_programHeader;   /**< The ELFProgramHeader, required for executable ELF */
@@ -315,7 +327,11 @@ public:
      * @param[in] codeStart the codeStart is the base of the code segment
      * @param[in] codeSize the size of the region of the code segment
     */
+#if defined(NEW_MEMORY)
+   ELFExecutableGenerator(TestAlloc::RawAllocator &rawAllocator,
+#else
     ELFExecutableGenerator(TR::RawAllocator rawAllocator,
+#endif
                             uint8_t const * codeStart, size_t codeSize);
 
     /**
@@ -365,7 +381,11 @@ public:
 class ELFRelocatableGenerator : public ELFGenerator
 {
 public:
+#if defined(NEW_MEMORY)
+   ELFRelocatableGenerator(TestAlloc::RawAllocator &rawAllocator,
+#else
     ELFRelocatableGenerator(TR::RawAllocator rawAllocator,
+#endif
                             uint8_t const * codeStart, size_t codeSize);
 
     ~ELFRelocatableGenerator() throw()

@@ -32,7 +32,11 @@ namespace TR
 class OMR_EXTENSIBLE CodeCacheManager : public OMR::CodeCacheManagerConnector
    {
    public:
+#if defined(NEW_MEMORY)
+   CodeCacheManager(TestAlloc::RawAllocator &rawAllocator) : OMR::CodeCacheManagerConnector(rawAllocator) { }
+#else
    CodeCacheManager(TR::RawAllocator rawAllocator) : OMR::CodeCacheManagerConnector(rawAllocator) { }
+#endif
    };
 
 }

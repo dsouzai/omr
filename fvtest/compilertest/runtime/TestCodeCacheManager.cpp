@@ -37,7 +37,11 @@
 
 
 TR::CodeCacheManager *TestCompiler::CodeCacheManager::_codeCacheManager = NULL;
+#if defined(NEW_MEMORY)
+TestCompiler::CodeCacheManager::CodeCacheManager(TestAlloc::RawAllocator &rawAllocator)
+#else
 TestCompiler::CodeCacheManager::CodeCacheManager(TR::RawAllocator rawAllocator)
+#endif
    : OMR::CodeCacheManagerConnector(rawAllocator)
    {
    _codeCacheManager = self();

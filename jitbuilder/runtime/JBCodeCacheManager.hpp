@@ -52,7 +52,11 @@ class OMR_EXTENSIBLE CodeCacheManager : public OMR::CodeCacheManagerConnector
    TR::CodeCacheManager *self();
 
 public:
+#if defined(NEW_MEMORY)
+   CodeCacheManager(TestAlloc::RawAllocator &rawAllocator);
+#else
    CodeCacheManager(TR::RawAllocator rawAllocator);
+#endif
 
    void *operator new(size_t s, TR::CodeCacheManager *m) { return m; }
 

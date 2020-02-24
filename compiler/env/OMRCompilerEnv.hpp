@@ -33,7 +33,11 @@ namespace OMR { typedef OMR::CompilerEnv CompilerEnvConnector; }
 
 
 #include "infra/Annotations.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "env/Environment.hpp"
 #include "env/DebugEnv.hpp"
 #include "env/PersistentAllocator.hpp"
@@ -54,13 +58,21 @@ class OMR_EXTENSIBLE CompilerEnv
 
 public:
 
+#if defined(NEW_MEMORY)
+   CompilerEnv(TestAlloc::RawAllocator &raw, const TR::PersistentAllocatorKit &persistentAllocatorKit);
+#else
    CompilerEnv(TR::RawAllocator raw, const TR::PersistentAllocatorKit &persistentAllocatorKit);
+#endif
 
    TR::CompilerEnv *self();
 
    /// Primordial raw allocator.  This is guaranteed to be thread safe.
    ///
+#if defined(NEW_MEMORY)
+   TestAlloc::RawAllocator &rawAllocator;
+#else
    TR::RawAllocator rawAllocator;
+#endif
 
    // Compilation host environment
    //

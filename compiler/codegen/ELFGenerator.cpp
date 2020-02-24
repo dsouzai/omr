@@ -31,14 +31,22 @@
 #include "control/Options_inlines.hpp"
 #include "runtime/CodeCacheManager.hpp"
 
+#if defined(NEW_MEMORY)
+TR::ELFExecutableGenerator::ELFExecutableGenerator(TestAlloc::RawAllocator &rawAllocator,
+#else
 TR::ELFExecutableGenerator::ELFExecutableGenerator(TR::RawAllocator rawAllocator,
+#endif
                             uint8_t const * codeStart, size_t codeSize):
                             ELFGenerator(rawAllocator, codeStart, codeSize)
                             {
                                 initialize();
                             }
 
+#if defined(NEW_MEMORY)
+TR::ELFRelocatableGenerator::ELFRelocatableGenerator(TestAlloc::RawAllocator &rawAllocator,
+#else
 TR::ELFRelocatableGenerator::ELFRelocatableGenerator(TR::RawAllocator rawAllocator,
+#endif
                             uint8_t const * codeStart, size_t codeSize):
                             ELFGenerator(rawAllocator, codeStart, codeSize)
                             {

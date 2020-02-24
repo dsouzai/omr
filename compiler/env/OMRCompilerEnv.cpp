@@ -26,7 +26,11 @@
 
 
 OMR::CompilerEnv::CompilerEnv(
+#if defined(NEW_MEMORY)
+   TestAlloc::RawAllocator &raw,
+#else
    TR::RawAllocator raw,
+#endif
    const TR::PersistentAllocatorKit &persistentAllocatorKit
    ) :
       rawAllocator(raw),

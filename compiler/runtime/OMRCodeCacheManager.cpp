@@ -53,7 +53,11 @@ TR::CodeCacheSymbolContainer * OMR::CodeCacheManager::_symbolContainer = NULL;
 
 #endif //HOST_OS == OMR_LINUX
 
+#if defined(NEW_MEMORY)
+OMR::CodeCacheManager::CodeCacheManager(TestAlloc::RawAllocator &rawAllocator) :
+#else
 OMR::CodeCacheManager::CodeCacheManager(TR::RawAllocator rawAllocator) :
+#endif
    _rawAllocator(rawAllocator),
    _initialized(false),
    _codeCacheFull(false),

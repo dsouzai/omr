@@ -42,7 +42,11 @@ namespace OMR
 
 struct PersistentAllocatorKit
    {
+#if defined(NEW_MEMORY)
+   PersistentAllocatorKit(TestAlloc::RawAllocator &rawAllocator) :
+#else
    PersistentAllocatorKit(TR::RawAllocator rawAllocator) :
+#endif
       rawAllocator(rawAllocator)
       {
       }

@@ -23,7 +23,11 @@
 #define TR_COMPILER_ENV_INCL
 
 #include "env/OMRCompilerEnv.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "infra/Annotations.hpp"
 
 namespace TR
@@ -32,7 +36,11 @@ namespace TR
 class OMR_EXTENSIBLE CompilerEnv : public OMR::CompilerEnvConnector
    {
 public:
+#if defined(NEW_MEMORY)
+   CompilerEnv(TestAlloc::RawAllocator &raw, const TR::PersistentAllocatorKit &persistentAllocatorKit) :
+#else
    CompilerEnv(TR::RawAllocator raw, const TR::PersistentAllocatorKit &persistentAllocatorKit) :
+#endif
          OMR::CompilerEnvConnector(raw, persistentAllocatorKit)
       {}
    };

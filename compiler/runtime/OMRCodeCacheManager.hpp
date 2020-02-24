@@ -30,7 +30,11 @@
 #include "runtime/MethodExceptionData.hpp"
 #include "runtime/Runtime.hpp"
 #include "runtime/CodeCacheTypes.hpp"
+#if defined(NEW_MEMORY)
+#include "env/OMRTestRawAllocator.hpp"
+#else
 #include "env/RawAllocator.hpp"
+#endif
 #include "codegen/StaticRelocation.hpp"
 #include "codegen/ELFRelocationResolver.hpp"
 
@@ -114,7 +118,11 @@ protected:
 
 public:
 
+#if defined(NEW_MEMORY)
+   CodeCacheManager(TestAlloc::RawAllocator &rawAllocator);
+#else
    CodeCacheManager(TR::RawAllocator rawAllocator);
+#endif
 
    class CacheListCriticalSection : public CriticalSection
       {
@@ -287,7 +295,11 @@ public:
 
 protected:
 
+#if defined(NEW_MEMORY)
+   TestAlloc::RawAllocator       &_rawAllocator;
+#else
    TR::RawAllocator               _rawAllocator;
+#endif
    TR::CodeCacheConfig            _config;
    TR::CodeCache                 *_lastCache;                         /*!< last code cache round robined through */
    CodeCacheList                  _codeCacheList;                     /*!< list of allocated code caches */
