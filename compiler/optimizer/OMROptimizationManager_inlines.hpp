@@ -79,7 +79,11 @@ TR_PersistentMemory *OMR::OptimizationManager::trPersistentMemory()
    }
 
 inline
+#if defined(NEW_MEMORY)
+TR::Allocator& OMR::OptimizationManager::allocator()
+#else
 TR::Allocator OMR::OptimizationManager::allocator()
+#endif
    {
    return self()->comp()->allocator();
    }

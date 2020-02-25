@@ -414,7 +414,11 @@ public:
 
    bool allocateAtThisOptLevel();
 
+#if defined(NEW_MEMORY)
+   TR::Allocator &allocator(const char *name = NULL) { TR::Allocator *alloc = new (_heapMemoryRegion) TR::Allocator(_allocator); return *alloc; }
+#else
    TR::Allocator allocator(const char *name = NULL) { return TR::Allocator(_allocator); }
+#endif
 
    TR_ArenaAllocator  *arenaAllocator() { return &_arenaAllocator; }
    void setAllocatorName(const char *name) { _allocatorName = name; }

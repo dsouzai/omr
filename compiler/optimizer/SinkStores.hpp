@@ -52,9 +52,15 @@ class TR_LiveOnNotAllPaths
    {
    public:
 
+#if defined(NEW_MEMORY)
+   static void *operator new(size_t size, TR::Allocator &a)
+      { return a.allocate(size); }
+   static void  operator delete(void *ptr, TR::Allocator &a)
+#else
    static void *operator new(size_t size, TR::Allocator a)
       { return a.allocate(size); }
    static void  operator delete(void *ptr, TR::Allocator a)
+#endif
       {
       // If there is an exception thrown during construction, the compilation
       // will be aborted, and all memory associated with that compilation will get freed.
@@ -74,7 +80,11 @@ class TR_LiveOnNotAllPaths
    TR_Memory *          trMemory()      { return comp()->trMemory(); }
    TR_StackMemory       trStackMemory() { return trMemory(); }
 
+#if defined(NEW_MEMORY)
+   TR::Allocator&       allocator()     { return comp()->allocator(); }
+#else
    TR::Allocator        allocator()     { return comp()->allocator(); }
+#endif
 
    TR::Compilation * _comp;
 

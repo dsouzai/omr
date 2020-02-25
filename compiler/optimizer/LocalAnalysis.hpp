@@ -133,7 +133,12 @@ class TR_LocalAnalysisInfo
          memset(chunk, 0, sizeof(Chunk));
          return chunk;
          }
+
+#if defined(NEW_MEMORY)
+      TR::Allocator &_allocator;
+#else
       TR::Allocator _allocator;
+#endif
       int32_t _numBuckets;
       Chunk **_buckets;
       };

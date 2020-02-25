@@ -1763,7 +1763,11 @@ OMR::Node::duplicateTreeForCodeMotion()
  * Method to duplicate an entire subtree. Tries to do so 'safely' by maintaining a mapping of visited (and duplicated) nodes
  */
 TR::Node *
+#if defined(NEW_MEMORY)
+OMR::Node::duplicateTreeWithCommoning(TR::Allocator &allocator)
+#else
 OMR::Node::duplicateTreeWithCommoning(TR::Allocator allocator)
+#endif
    {
    CS2::HashTable<TR::Node*, TR::Node*, TR::Allocator> nodeMapping(allocator);
    return self()->duplicateTreeWithCommoningImpl(nodeMapping);

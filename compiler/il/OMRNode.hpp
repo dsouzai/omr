@@ -471,7 +471,11 @@ public:
 
    TR::Node *             duplicateTree(bool duplicateChildren = true);
    TR::Node *             duplicateTreeForCodeMotion();
+#if defined(NEW_MEMORY)
+   TR::Node *             duplicateTreeWithCommoning(TR::Allocator &allocator);
+#else
    TR::Node *             duplicateTreeWithCommoning(TR::Allocator allocator);
+#endif
    TR::Node *             duplicateTree_DEPRECATED(bool duplicateChildren = true);
    bool                   isUnsafeToDuplicateAndExecuteAgain(int32_t *nodeVisitBudget);
 

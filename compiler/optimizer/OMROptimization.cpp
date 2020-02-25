@@ -111,7 +111,11 @@ OMR::Optimization::trPersistentMemory()
    return self()->comp()->trPersistentMemory();
    }
 
+#if defined(NEW_MEMORY)
+TR::Allocator&
+#else
 TR::Allocator
+#endif
 OMR::Optimization::allocator()
    {
    return self()->comp()->allocator();

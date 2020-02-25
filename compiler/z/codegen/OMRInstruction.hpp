@@ -319,9 +319,15 @@ class OMR_EXTENSIBLE Instruction : public OMR::Instruction
    class RegisterArray
       {
       public:
+#if defined(NEW_MEMORY)
+         TR::Allocator& allocator() { return TR::comp()->allocator(); }
+
+         static void *operator new(size_t size, TR::Allocator &a)
+#else
          TR::Allocator allocator() { return TR::comp()->allocator(); }
 
          static void *operator new(size_t size, TR::Allocator a)
+#endif
             { return a.allocate(size); }
          static void  operator delete(void *ptr, size_t size)
             { ((RegisterArray*)ptr)->allocator().deallocate(ptr, size); } /* t->allocator() must return the same allocator as used for new */
@@ -369,7 +375,11 @@ class OMR_EXTENSIBLE Instruction : public OMR::Instruction
       {
       public:
 
+#if defined(NEW_MEMORY)
+         static void *operator new(size_t size, TR::Allocator &a)
+#else
          static void *operator new(size_t size, TR::Allocator a)
+#endif
             { return a.allocate(size); }
          static void  operator delete(void *ptr, size_t size)
             { ((RegisterBitVector*)ptr)->allocator().deallocate(ptr, size); } /* t->allocator() must return the same allocator as used for new */
@@ -379,7 +389,11 @@ class OMR_EXTENSIBLE Instruction : public OMR::Instruction
           */
          virtual ~RegisterBitVector() {}
 
+#if defined(NEW_MEMORY)
+         TR::Allocator& allocator() { return TR::comp()->allocator(); }
+#else
          TR::Allocator allocator() { return TR::comp()->allocator(); }
+#endif
 
       private:
          CS2::ASparseBitVector< TR::Allocator > _impl;

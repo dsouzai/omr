@@ -1237,6 +1237,21 @@ typedef CS2::arena_allocator  <65536, TR::Allocator> TR_ArenaAllocator;
  * reduce the verbosity involved in declaring a typed_allocator
  * everytime we need an stl object.
  */
+#if defined(NEW_MEMORY)
+template <typename T, class Alloc>
+static inline TR::typed_allocator<T, Alloc> getTypedAllocator(Alloc &al)
+{
+   TR::typed_allocator<T, Alloc> ta(al);
+   return ta;
+}
+
+template <typename T>
+static inline TR::typed_allocator<T, TR::Allocator> getTypedAllocator(TR::Allocator &al)
+{
+   TR::typed_allocator<T, TR::Allocator> ta(al);
+   return ta;
+}
+#else
 template <typename T, class Alloc>
 static inline TR::typed_allocator<T, Alloc> getTypedAllocator(Alloc al)
 {
@@ -1247,8 +1262,9 @@ static inline TR::typed_allocator<T, Alloc> getTypedAllocator(Alloc al)
 template <typename T>
 static inline TR::typed_allocator<T, TR::Allocator> getTypedAllocator(TR::Allocator al)
 {
-	TR::typed_allocator<T, TR::Allocator> ta(al);
-	return ta;
+   TR::typed_allocator<T, TR::Allocator> ta(al);
+   return ta;
 }
+#endif
 
 #endif
