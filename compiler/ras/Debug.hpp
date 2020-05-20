@@ -448,9 +448,11 @@ public:
    virtual char *          inlinefileOption(char *, void *, TR::OptionTable *, TR::Options *);
    virtual char *          limitOption(char *, void *, TR::OptionTable *, TR::Options *, bool loadLimit);
    virtual int32_t *       loadCustomStrategy(char *optFileName);
-   virtual bool            methodCanBeCompiled(TR_Memory *mem, TR_ResolvedMethod *, TR_FilterBST * &);
-   virtual bool            methodCanBeRelocated(TR_Memory *mem, TR_ResolvedMethod *, TR_FilterBST * &);
+   virtual bool            methodCanBeCompiled(TR_Memory *trMemory, TR_ResolvedMethod *, TR_FilterBST * &);
+   virtual bool            methodCanBeRelocatableCompiled(TR_Memory *trMemory, TR_ResolvedMethod *, TR_FilterBST * &);
+   virtual bool            methodCanBeRelocated(TR_Memory *trMemory, TR_ResolvedMethod *, TR_FilterBST * &);
    virtual bool            methodSigCanBeCompiled(const char *, TR_FilterBST * & , TR::Method::Type methodType);
+   virtual bool            methodSigCanBeRelocatableCompiled(const char *, TR_FilterBST * & , TR::Method::Type methodType);
    virtual bool            methodSigCanBeRelocated(const char *, TR_FilterBST * & );
    virtual bool            methodSigCanBeCompiledOrRelocated(const char *, TR_FilterBST * &, LimitType limit, TR::Method::Type methodType);
    virtual bool            methodCanBeFound(TR_Memory *, TR_ResolvedMethod *, TR::CompilationFilters *, TR_FilterBST * &);

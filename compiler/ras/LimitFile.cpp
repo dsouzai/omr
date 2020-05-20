@@ -1249,6 +1249,12 @@ TR_Debug::methodSigCanBeCompiled(const char *methodSig, TR_FilterBST * & filter,
    }
 
 bool
+TR_Debug::methodSigCanBeRelocatableCompiled(const char *methodSig, TR_FilterBST *& filter, OMR::Method::Type methodType)
+   {
+   return methodSigCanBeCompiledOrRelocated(methodSig, filter, LimitType::relocatablecompilation, methodType);
+   }
+
+bool
 TR_Debug::methodSigCanBeRelocated(const char *methodSig, TR_FilterBST * & filter)
    {
    return methodSigCanBeCompiledOrRelocated(methodSig, filter, LimitType::load, TR::Method::J9);
@@ -1430,6 +1436,13 @@ TR_Debug::methodCanBeCompiled(TR_Memory *trMemory, TR_ResolvedMethod *method, TR
    {
    const char * methodSig = method->signature(trMemory);
    return methodSigCanBeCompiled(methodSig, filter, method->convertToMethod()->methodType());
+   }
+
+bool
+TR_Debug::methodCanBeRelocatableCompiled(TR_Memory *trMemory, TR_ResolvedMethod *method, TR_FilterBST *&filter)
+   {
+   const char * methodSig = method->signature(trMemory);
+   return methodSigCanBeRelocatableCompiled(methodSig, filter, method->convertToMethod()->methodType());
    }
 
 bool
