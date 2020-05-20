@@ -1947,7 +1947,11 @@ OMR::Options::latePostProcess(TR::Options *options, void *jitConfig, bool isAOT)
          if (!optionSet->getOptions()->feLatePostProcess(_feBase, optionSet))
             return options->_startOptions;
          if (optionSet->getIndex() == TR_EXCLUDED_OPTIONSET_INDEX)
-            TR::Options::findOrCreateDebug()->addExcludedMethodFilter(isAOT); // Not sure isAOT is exactly the right thing to pass here
+            {
+            // Not sure isAOT is exactly the right thing here
+            TR_Debug::LimitType limitType = isAOT ? TR_Debug::LimitType::load : TR_Debug::LimitType::compilation;
+            TR::Options::findOrCreateDebug()->addExcludedMethodFilter(limitType);
+            }
          }
       }
 

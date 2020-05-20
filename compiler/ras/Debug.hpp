@@ -389,6 +389,12 @@ TR_Debug *createDebugObject(TR::Compilation *);
 class TR_Debug
    {
 public:
+   enum LimitType
+      {
+      compilation,
+      relocatablecompilation,
+      load,
+      };
 
    void * operator new (size_t s, TR_HeapMemory m);
    void * operator new(size_t s, TR::PersistentAllocator &allocator);
@@ -446,19 +452,19 @@ public:
    virtual bool            methodCanBeRelocated(TR_Memory *mem, TR_ResolvedMethod *, TR_FilterBST * &);
    virtual bool            methodSigCanBeCompiled(const char *, TR_FilterBST * & , TR::Method::Type methodType);
    virtual bool            methodSigCanBeRelocated(const char *, TR_FilterBST * & );
-   virtual bool            methodSigCanBeCompiledOrRelocated(const char *, TR_FilterBST * &, bool isRelocation, TR::Method::Type methodType);
+   virtual bool            methodSigCanBeCompiledOrRelocated(const char *, TR_FilterBST * &, LimitType limit, TR::Method::Type methodType);
    virtual bool            methodCanBeFound(TR_Memory *, TR_ResolvedMethod *, TR::CompilationFilters *, TR_FilterBST * &);
    virtual bool            methodSigCanBeFound(const char *, TR::CompilationFilters *, TR_FilterBST * &, TR::Method::Type methodType);
    virtual TR::CompilationFilters * getCompilationFilters() { return _compilationFilters; }
    virtual TR::CompilationFilters * getRelocatableCompilationFilters() { return _relocatableCompilationFilters; }
    virtual TR::CompilationFilters * getRelocationFilters() { return _relocationFilters; }
    virtual void            clearFilters(TR::CompilationFilters *);
-   void                    clearFilters(bool loadLimit);
+   void                    clearFilters(LimitType limit);
    virtual bool            scanInlineFilters(FILE *, int32_t &, TR::CompilationFilters *);
    virtual TR_FilterBST *  addFilter(char * &, int32_t, int32_t, int32_t, TR::CompilationFilters *);
-   virtual TR_FilterBST *  addFilter(char * &, int32_t, int32_t, int32_t, bool loadLimit);
-   virtual TR_FilterBST *  addExcludedMethodFilter(bool loadLimit);
-   virtual bool            addSamplingPoint(char *, TR_FilterBST * &, bool loadLimit);
+   virtual TR_FilterBST *  addFilter(char * &, int32_t, int32_t, int32_t, LimitType limit);
+   virtual TR_FilterBST *  addExcludedMethodFilter(LimitType limit);
+   virtual bool            addSamplingPoint(char *, TR_FilterBST * &, LimitType limit);
    virtual int32_t         scanFilterName(char *, TR_FilterBST *);
    virtual void            printFilters(TR::CompilationFilters *);
    virtual void            printFilters();
@@ -725,7 +731,7 @@ public:
    void printLoadConst(TR::Node *, TR_PrettyPrinterString&);
 
    TR::CompilationFilters * findOrCreateFilters(TR::CompilationFilters *);
-   TR::CompilationFilters * findOrCreateFilters(bool loadLimit);
+   TR::CompilationFilters * findOrCreateFilters(LimitType limit);
 
    void printFilterTree(TR_FilterBST *root);
 

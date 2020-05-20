@@ -64,12 +64,30 @@ TR_Debug::clearFilters(TR::CompilationFilters * filters)
    }
 
 void
-TR_Debug::clearFilters(bool loadLimit)
+TR_Debug::clearFilters(LimitType limit)
    {
-   if (loadLimit)
-      clearFilters(_relocationFilters);
-   else
-      clearFilters(_compilationFilters);
+   switch (limit)
+      {
+      case LimitType::compilation:
+         {
+         clearFilters(_compilationFilters);
+         break;
+         }
+      case LimitType::relocatablecompilation:
+         {
+         clearFilters(_relocatableCompilationFilters);
+         break;
+         }
+      case LimitType::load:
+         {
+         clearFilters(_relocationFilters);
+         break;
+         }
+      default:
+         {
+         TR_ASSERT_FATAL(false, "Unknown limit type %d\n", limit);
+         }
+      }
    }
 
 TR::CompilationFilters *
@@ -90,14 +108,27 @@ TR_Debug::findOrCreateFilters(TR::CompilationFilters * filters)
   }
 
 TR::CompilationFilters *
-TR_Debug::findOrCreateFilters(bool loadLimit)
+TR_Debug::findOrCreateFilters(LimitType limit)
    {
-   if (loadLimit)
-      // initializing filters using the new interface
-      return _relocationFilters=findOrCreateFilters(_relocationFilters);
-   else
-      // initializing filters using the new interface
-      return _compilationFilters=findOrCreateFilters(_compilationFilters);
+   switch (limit)
+      {
+      case LimitType::compilation:
+         {
+         return _compilationFilters = findOrCreateFilters(_compilationFilters);
+         }
+      case LimitType::relocatablecompilation:
+         {
+         return _relocatableCompilationFilters = findOrCreateFilters(_relocatableCompilationFilters);
+         }
+      case LimitType::load:
+         {
+         return _relocationFilters = findOrCreateFilters(_relocationFilters);
+         }
+      default:
+         {
+         TR_ASSERT_FATAL(false, "Unknown limit type %d\n", limit);
+         }
+      }
    }
 
 TR_FilterBST *
@@ -183,41 +214,65 @@ TR_Debug::addFilter(char * & filterString, int32_t scanningExclude, int32_t opti
    }
 
 TR_FilterBST *
-TR_Debug::addFilter(char * & filterString, int32_t scanningExclude, int32_t optionSetIndex, int32_t lineNum, bool loadLimit)
+TR_Debug::addFilter(char * & filterString, int32_t scanningExclude, int32_t optionSetIndex, int32_t lineNum, LimitType limit)
    {
-   if (loadLimit)
+   switch (limit)
       {
-      // initializing filters using the new interface
-      _relocationFilters=findOrCreateFilters(_relocationFilters);
-      return addFilter(filterString, scanningExclude, optionSetIndex, lineNum, _relocationFilters);
-      }
-   else
-      {
-      // initializing filters using the new interface
-      _compilationFilters=findOrCreateFilters(_compilationFilters);
-      return addFilter(filterString, scanningExclude, optionSetIndex, lineNum, _compilationFilters);
+      case LimitType::compilation:
+         {
+         _compilationFilters = findOrCreateFilters(_compilationFilters);
+         return addFilter(filterString, scanningExclude, optionSetIndex, lineNum, _compilationFilters);
+         }
+      case LimitType::relocatablecompilation:
+         {
+         _relocatableCompilationFilters = findOrCreateFilters(_relocatableCompilationFilters);
+         return addFilter(filterString, scanningExclude, optionSetIndex, lineNum, _relocatableCompilationFilters);
+         }
+      case LimitType::load:
+         {
+         _relocationFilters = findOrCreateFilters(_relocationFilters);
+         return addFilter(filterString, scanningExclude, optionSetIndex, lineNum, _relocationFilters);
+         }
+      default:
+         {
+         TR_ASSERT_FATAL(false, "Unknown limit type %d\n", limit);
+         }
       }
    }
 
 TR_FilterBST *
-TR_Debug::addExcludedMethodFilter(bool loadLimit)
+TR_Debug::addExcludedMethodFilter(LimitType limit)
    {
    TR_FilterBST * filterBST = new (TR::Compiler->regionAllocator) TR_FilterBST(TR_FILTER_EXCLUDE_SPECIFIC_METHOD, TR_EXCLUDED_OPTIONSET_INDEX);
-   if (loadLimit)
+
+   switch (limit)
       {
-      _relocationFilters=findOrCreateFilters(_relocationFilters);
-      _relocationFilters->excludedMethodFilter = filterBST;
+      case LimitType::compilation:
+         {
+         _compilationFilters = findOrCreateFilters(_compilationFilters);
+         _compilationFilters->excludedMethodFilter = filterBST;
+         }
+      case LimitType::relocatablecompilation:
+         {
+         _relocatableCompilationFilters = findOrCreateFilters(_relocatableCompilationFilters);
+         _relocatableCompilationFilters->excludedMethodFilter = filterBST;
+         }
+      case LimitType::load:
+         {
+         _relocationFilters=findOrCreateFilters(_relocationFilters);
+         _relocationFilters->excludedMethodFilter = filterBST;
+         }
+      default:
+         {
+         TR_ASSERT_FATAL(false, "Unknown limit type %d\n", limit);
+         }
       }
-   else
-      {
-      _compilationFilters = findOrCreateFilters(_compilationFilters);
-      _compilationFilters->excludedMethodFilter = filterBST;
-      }
+
    return filterBST;
    }
 
 bool
-TR_Debug::addSamplingPoint(char * filterString, TR_FilterBST * & lastSamplingPoint, bool loadLimit)
+TR_Debug::addSamplingPoint(char * filterString, TR_FilterBST * & lastSamplingPoint, LimitType limit)
    {
    char *p;
    int32_t tickCount;
@@ -253,7 +308,7 @@ TR_Debug::addSamplingPoint(char * filterString, TR_FilterBST * & lastSamplingPoi
       return false;
    p += 2;
 
-   TR::CompilationFilters *filters = findOrCreateFilters(loadLimit);
+   TR::CompilationFilters *filters = findOrCreateFilters(limit);
    TR_FilterBST * filterBST = new (TR::Compiler->regionAllocator) TR_FilterBST(type, tickCount);
    if (!scanFilterName(methodName, filterBST))
       return false;
@@ -492,6 +547,16 @@ TR_Debug::inlinefileOption(char *option, void *base, TR::OptionTable *entry, TR:
 char *
 TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::Options * cmdLineOptions, bool loadLimit, TR_PseudoRandomNumbersListElement **pseudoRandomListHeadPtr)
    {
+   LimitType limitType;
+   if (loadLimit)
+      {
+      limitType = LimitType::load;
+      }
+   else
+      {
+      limitType = (cmdLineOptions == TR::Options::getJITCmdLineOptions()) ? LimitType::compilation : LimitType::relocatablecompilation;
+      }
+
    char *endOpt = option;
    char *name = option;
    char *fail = option;
@@ -531,7 +596,7 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
    FILE *limitFile = fopen(limitFileName, "r");
    if (limitFile)
       {
-      TR::CompilationFilters * filters = findOrCreateFilters(loadLimit);
+      TR::CompilationFilters * filters = findOrCreateFilters(limitType);
       if (!cmdLineOptions->getOption(TR_OrderCompiles))
          filters->setDefaultExclude(true);
 
@@ -555,7 +620,7 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
          if (strncmp(limitReadBuffer,"-precompileMethod",17) == 0)
             {
             char *p = limitReadBuffer+18;
-            if (!addFilter(p, 0, 0, lineNumber, loadLimit))
+            if (!addFilter(p, 0, 0, lineNumber, limitType))
                {
                limitFileError = true;
                break;
@@ -564,7 +629,7 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
          else if (strncmp(limitReadBuffer,"-noprecompileMethod",19) == 0)
             {
             char *p = limitReadBuffer+20;
-            if (!addFilter(p, 1, 0, lineNumber, loadLimit))
+            if (!addFilter(p, 1, 0, lineNumber, limitType))
                {
                limitFileError = true;
                break;
@@ -604,7 +669,7 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
             //if (optionSet > 0)
             //   filters->setDefaultExclude(false);
 
-            if (!addFilter(p, (('+' == includeFlag) ? 0 : 1), optionSet, lineNumber, loadLimit))
+            if (!addFilter(p, (('+' == includeFlag) ? 0 : 1), optionSet, lineNumber, limitType))
                {
                limitFileError = true;
                break;
@@ -682,7 +747,7 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
             // Recognize new sampling point
             //
             static TR_FilterBST *lastSamplingPoint = NULL;
-            addSamplingPoint(limitReadBuffer, lastSamplingPoint, loadLimit);
+            addSamplingPoint(limitReadBuffer, lastSamplingPoint, limitType);
             }
          }
       if (limitFileError)
@@ -703,10 +768,20 @@ TR_Debug::limitfileOption(char *option, void *base, TR::OptionTable *entry, TR::
 char *
 TR_Debug::limitOption(char *option, void *base, TR::OptionTable *entry, TR::Options * cmdLineOptions, bool loadLimit)
    {
+   LimitType limitType;
+   if (loadLimit)
+      {
+      limitType = LimitType::load;
+      }
+   else
+      {
+      limitType = (cmdLineOptions == TR::Options::getJITCmdLineOptions()) ? LimitType::compilation : LimitType::relocatablecompilation;
+      }
+
    char *p = option;
 
    // this use the old interface
-   TR_FilterBST *filter = addFilter(p, entry->parm1, 0, 0, loadLimit);
+   TR_FilterBST *filter = addFilter(p, entry->parm1, 0, 0, limitType);
 
    if (!filter)
       return option;
@@ -1170,13 +1245,13 @@ TR_Debug::scanFilterName(char *string, TR_FilterBST *filter)
 bool
 TR_Debug::methodSigCanBeCompiled(const char *methodSig, TR_FilterBST * & filter, TR::Method::Type methodType)
    {
-   return methodSigCanBeCompiledOrRelocated(methodSig, filter, false, methodType);
+   return methodSigCanBeCompiledOrRelocated(methodSig, filter, LimitType::compilation, methodType);
    }
 
 bool
 TR_Debug::methodSigCanBeRelocated(const char *methodSig, TR_FilterBST * & filter)
    {
-   return methodSigCanBeCompiledOrRelocated(methodSig, filter, true, TR::Method::J9);
+   return methodSigCanBeCompiledOrRelocated(methodSig, filter, LimitType::load, TR::Method::J9);
    }
 
 bool
@@ -1302,23 +1377,37 @@ TR_Debug::methodCanBeFound(TR_Memory *trMemory, TR_ResolvedMethod *method, TR::C
    }
 
 bool
-TR_Debug::methodSigCanBeCompiledOrRelocated(const char *methodSig, TR_FilterBST * & filter, bool loadLimit, TR::Method::Type methodType)
+TR_Debug::methodSigCanBeCompiledOrRelocated(const char *methodSig, TR_FilterBST * & filter, LimitType limit, TR::Method::Type methodType)
    {
    TR::CompilationFilters *compOrReloFilter = NULL;
 
-   if (loadLimit)
+   switch (limit)
       {
-      if (!_relocationFilters)
-         return true;
-      else
-         compOrReloFilter = _relocationFilters;
-      }
-   else
-      {
-      if (!_compilationFilters)
-         return true;
-      else
-         compOrReloFilter = _compilationFilters;
+      case LimitType::compilation:
+         {
+         if (!_compilationFilters)
+            return true;
+         else
+            compOrReloFilter = _compilationFilters;
+         }
+      case LimitType::relocatablecompilation:
+         {
+         if (!_relocatableCompilationFilters)
+            return true;
+         else
+            compOrReloFilter = _relocatableCompilationFilters;
+         }
+      case LimitType::load:
+         {
+         if (!_relocationFilters)
+            return true;
+         else
+            compOrReloFilter = _relocationFilters;
+         }
+      default:
+         {
+         TR_ASSERT_FATAL(false, "Unknown limit type %d\n", limit);
+         }
       }
 
    bool found = methodSigCanBeFound(methodSig, compOrReloFilter, filter, methodType);
