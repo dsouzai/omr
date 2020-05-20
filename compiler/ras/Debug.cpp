@@ -213,7 +213,7 @@ TR_Debug::debugOnCreate()
 
 TR_Debug::TR_Debug( TR::Compilation * c)
    : _comp(c),
-   _compilationFilters(0), _relocationFilters(0), _inlineFilters(0),
+   _compilationFilters(0), _relocatableCompilationFilters(0), _relocationFilters(0), _inlineFilters(0),
    _lastFrequency(-1), _isCold(false), _currentParent(NULL),
    _currentChildIndex(0),
    _mainEntrySeen(false)

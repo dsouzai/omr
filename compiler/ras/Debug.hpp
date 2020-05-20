@@ -450,6 +450,7 @@ public:
    virtual bool            methodCanBeFound(TR_Memory *, TR_ResolvedMethod *, TR::CompilationFilters *, TR_FilterBST * &);
    virtual bool            methodSigCanBeFound(const char *, TR::CompilationFilters *, TR_FilterBST * &, TR::Method::Type methodType);
    virtual TR::CompilationFilters * getCompilationFilters() { return _compilationFilters; }
+   virtual TR::CompilationFilters * getRelocatableCompilationFilters() { return _relocatableCompilationFilters; }
    virtual TR::CompilationFilters * getRelocationFilters() { return _relocationFilters; }
    virtual void            clearFilters(TR::CompilationFilters *);
    void                    clearFilters(bool loadLimit);
@@ -1202,6 +1203,7 @@ protected:
    uint32_t                   _nextStructureNumber;
    uint32_t                   _nextVariableSizeSymbolNumber;
    TR::CompilationFilters    * _compilationFilters;
+   TR::CompilationFilters    * _relocatableCompilationFilters;
    TR::CompilationFilters    * _relocationFilters;
    TR::CompilationFilters    * _inlineFilters;
    bool                       _usesSingleAllocMetaData;
