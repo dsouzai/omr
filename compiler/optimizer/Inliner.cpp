@@ -3740,7 +3740,9 @@ bool TR_IndirectCallSite::tryToRefineReceiverClassBasedOnResolvedTypeArgInfo(TR_
    if (hasResolvedTypeArgInfo())
       {
       TR_OpaqueClassBlock* classFromArgInfo = getClassFromArgInfo();
-      if (_receiverClass && comp()->fe()->isInstanceOf(classFromArgInfo, _receiverClass, true, true) == TR_yes)
+      if (_receiverClass
+          && (!comp()->compileRelocatableCode() || comp()->getOption(TR_UseSymbolValidationManager))
+          && comp()->fe()->isInstanceOf(classFromArgInfo, _receiverClass, true, true) == TR_yes)
          {
          heuristicTrace(inliner->tracer(), "refining _receiverClass %p to %p", _receiverClass, classFromArgInfo);
          _receiverClass = classFromArgInfo;
@@ -3981,8 +3983,14 @@ void TR_InlinerBase::getSymbolAndFindInlineTargets(TR_CallStack *callStack, TR_C
             int32_t len = 0;
             const char * s = receiverNode->getTypeSignature(len);
             TR_OpaqueClassBlock * type = s ? fe()->getClassFromSignature(s, len, callsite->_callerResolvedMethod, true) : 0;
-            if (type && (!callsite->_receiverClass || (type != callsite->_receiverClass && fe()->isInstanceOf(type, callsite->_receiverClass, true, true) == TR_yes)))
+            if (type
+                && (!callsite->_receiverClass
+                    || ((!comp()->compileRelocatableCode() || comp()->getOption(TR_UseSymbolValidationManager))
+                         && type != callsite->_receiverClass
+                         && fe()->isInstanceOf(type, callsite->_receiverClass, true, true) == TR_yes)))
+               {
                callsite->_receiverClass = type;
+               }
             }
          }
       }
