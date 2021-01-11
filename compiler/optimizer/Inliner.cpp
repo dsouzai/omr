@@ -1823,26 +1823,41 @@ TR_InlinerBase::addGuardForVirtual(
       // we merge virtual guards and OSR guards for simplicity in most modes
       // when using OSR to implement HCR we keep the HCR guards distinct since they
       // will undergo special processing later in the compilation
-      if (virtualGuard &&
-          comp()->cg()->supportsMergingGuards())
+      if (virtualGuard && comp()->cg()->supportsMergingGuards())
          {
          TR::Node *guardNode = virtualGuard->getNode();
          if (guardNode)
             {
             TR_VirtualGuard *virtualGuard = comp()->findVirtualGuardInfo(guardNode);
-            if (virtualGuard &&
-                virtualGuard->getThisClass() &&
-                virtualGuard->getThisClass() == methodClass)
+            if (virtualGuard && virtualGuard->getThisClass())
                {
-               virtualGuard->setMergedWithHCRGuard();
-               skipHCRGuardCreation = true;
-               if (comp()->trace(OMR::inlining))
-                  traceMsg(comp(), "Merge HCR guard with virtual guard %p n%dn\n", guardNode, guardNode->getGlobalIndex());
+               if (virtualGuard->getThisClass() == methodClass)
+                  {
+                  virtualGuard->setMergedWithHCRGuard();
+                  skipHCRGuardCreation = true;
+                  if (comp()->trace(OMR::inlining))
+                     traceMsg(comp(), "Merge HCR guard with virtual guard %p n%dn\n", guardNode, guardNode->getGlobalIndex());
+                  }
+               else
+                  {
+                  TR_ASSERT_FATAL(!comp()->compileRelocatableCode() || comp()->getOption(TR_UseSymbolValidationManager),
+                                  "virtualGuard->getThisClass() (%p) != methodClass (%p)",
+                                  virtualGuard->getThisClass(),
+                                  methodClass);
+                  }
                }
             }
          }
 
-      if (!skipHCRGuardCreation)
+      // Under AOT, direct calls use a TR_DirectMethodGuard (which from a philosophical
+      // point of view is the same as an HCR guard) which will get class redefinition
+      // assumptions added to it during relocation; this is true for all other guards
+      // as well. For non-SVM AOT, the inliner will not refine the receiver under AOT;
+      // this is necessary as it not always possible to know how to materialize a
+      // refined receiver in non-SVM AOT.
+      if (!skipHCRGuardCreation
+          && (!comp()->compileRelocatableCode()
+              || comp()->getOption(TR_UseSymbolValidationManager)))
          {
          hcrBlock = TR::Block::createEmptyBlock(callNode, comp(), block1->getFrequency());
          callerCFG->addNode(hcrBlock);
