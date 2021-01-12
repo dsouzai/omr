@@ -146,6 +146,7 @@ virtualGuardHelper(TR::Node * node, TR::CodeGenerator * cg)
          case TR_InterfaceGuard:
          case TR_MethodEnterExitGuard:
          case TR_HCRGuard:
+         case TR_OSRGuard:
          case TR_AbstractGuard:
          case TR_BreakpointGuard:
             aotSite->setGuard(virtualGuard);
