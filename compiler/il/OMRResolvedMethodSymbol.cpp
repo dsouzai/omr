@@ -157,7 +157,7 @@ OMR::ResolvedMethodSymbol::ResolvedMethodSymbol(TR_ResolvedMethod * method, TR::
    //
    if ((_methodIndex > JITTED_METHOD_INDEX && !_resolvedMethod->isSameMethod(comp->getJittedMethodSymbol()->getResolvedMethod()))
        || comp->isDLT()
-       || (comp->getOption(TR_UseSymbolValidationManager) && comp->compileRelocatableCode()))
+       || comp->compileRelocatableCode())
       {
       if (_resolvedMethod->isInterpreted())
          {
@@ -165,7 +165,9 @@ OMR::ResolvedMethodSymbol::ResolvedMethodSymbol(TR_ResolvedMethod * method, TR::
          self()->setMethodAddress(_resolvedMethod->resolvedMethodAddress());
          }
       else
+         {
          self()->setMethodAddress(_resolvedMethod->startAddressForJittedMethod());
+         }
       }
 
    if (!_resolvedMethod->isJNINative())
