@@ -507,6 +507,10 @@ const char *TR::ExternalRelocation::_externalRelocationTargetKindNames[TR_NumExt
    "TR_Breakpoint (107)",
    "TR_InlinedMethodPointer (108)",
    "TR_VMINLMethod (109)",
+   "TR_ValidateDynamicMethodFromCSTable (110)",
+   "TR_ValidateHandleMethodFromCP (111)",
+   "TR_CallSiteTableEntryAddress (112)",
+   "TR_MethodTypeTableEntryAddress (113)",
    };
 
 uintptr_t TR::ExternalRelocation::_globalValueList[TR_NumGlobalValueItems] =

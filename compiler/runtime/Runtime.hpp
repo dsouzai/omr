@@ -335,7 +335,11 @@ typedef enum
    TR_Breakpoint                          = 107,
    TR_InlinedMethodPointer                = 108,
    TR_VMINLMethod                         = 109,
-   TR_NumExternalRelocationKinds          = 110,
+   TR_ValidateDynamicMethodFromCSTable    = 110,
+   TR_ValidateHandleMethodFromCP          = 111,
+   TR_CallSiteTableEntryAddress           = 112,
+   TR_MethodTypeTableEntryAddress         = 113,
+   TR_NumExternalRelocationKinds          = 114,
    TR_ExternalRelocationTargetKindMask    = 0xff,
    } TR_ExternalRelocationTargetKind;
 
