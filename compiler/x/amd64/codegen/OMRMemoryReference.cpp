@@ -528,7 +528,7 @@ OMR::X86::AMD64::MemoryReference::addMetaDataForCodeAddressWithLoad(
             info->data3 = 0;
             cg->addExternalRelocation(
                      new (cg->trHeapMemory()) TR::ExternalRelocation(
-                        displacementLocation, info, TR_CallSiteTableEntryAddress, cg),
+                        displacementLocation, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg),
                      __FILE__,__LINE__,
                      containingInstruction->getNode());
             }
@@ -548,7 +548,7 @@ OMR::X86::AMD64::MemoryReference::addMetaDataForCodeAddressWithLoad(
             info->data3 = 0;
             cg->addExternalRelocation(
                      new (cg->trHeapMemory()) TR::ExternalRelocation(
-                        displacementLocation, info, TR_MethodTypeTableEntryAddress, cg),
+                        displacementLocation, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg),
                      __FILE__,__LINE__,
                      containingInstruction->getNode());
             }
