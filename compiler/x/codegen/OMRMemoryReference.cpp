@@ -1303,6 +1303,40 @@ OMR::X86::MemoryReference::addMetaDataForCodeAddress(
                                                              node,
                                                              counter);
                         }
+                     else if (symbol->isCallSiteTableEntry())
+                        {
+                        TR::SymbolReference *sr = self()->getSymbolReference();
+                        TR_RelocationRecordInformation *info =
+                           (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
+                              sizeof (TR_RelocationRecordInformation),
+                              heapAlloc);
+                        TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg->comp());
+
+                        info->data1 = reinterpret_cast<uintptr_t>(sr);
+                        info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+                        info->data3 = 0;
+                        cg->addExternalRelocation(
+                                 new (cg->trHeapMemory()) TR::ExternalRelocation(
+                                    cursor, info, TR_CallSiteTableEntryAddress, cg),
+                                 __FILE__,__LINE__,node);
+                        }
+                     else if (symbol->isMethodTypeTableEntry())
+                        {
+                        TR::SymbolReference *sr = self()->getSymbolReference();
+                        TR_RelocationRecordInformation *info =
+                           (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
+                              sizeof (TR_RelocationRecordInformation),
+                              heapAlloc);
+                        TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg->comp());
+
+                        info->data1 = reinterpret_cast<uintptr_t>(sr);
+                        info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+                        info->data3 = 0;
+                        cg->addExternalRelocation(
+                                 new (cg->trHeapMemory()) TR::ExternalRelocation(
+                                    cursor, info, TR_MethodTypeTableEntryAddress, cg),
+                                 __FILE__,__LINE__,node);
+                        }
                      else
                         {
                         cg->addExternalRelocation(new (cg->trHeapMemory()) TR::ExternalRelocation(cursor,

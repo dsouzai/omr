@@ -1187,6 +1187,42 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                                                     getNode(),
                                                     counter);
                }
+            else if (sym->isCallSiteTableEntry())
+               {
+               TR::SymbolReference *sr = getSymbolReference();
+               TR_RelocationRecordInformation *info =
+                  (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+                     sizeof (TR_RelocationRecordInformation),
+                     heapAlloc);
+               TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+               info->data1 = reinterpret_cast<uintptr_t>(sr);
+               info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+               info->data3 = 0;
+               cg()->addExternalRelocation(
+                        new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                           cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                        __FILE__,__LINE__,
+                        getNode());
+               }
+            else if (sym->isMethodTypeTableEntry())
+               {
+               TR::SymbolReference *sr = getSymbolReference();
+               TR_RelocationRecordInformation *info =
+                  (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+                     sizeof (TR_RelocationRecordInformation),
+                     heapAlloc);
+               TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+               info->data1 = reinterpret_cast<uintptr_t>(sr);
+               info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+               info->data3 = 0;
+               cg()->addExternalRelocation(
+                        new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                           cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                        __FILE__,__LINE__,
+                        getNode());
+               }
             else if (sym->isBlockFrequency())
                {
                TR_RelocationRecordInformation *recordInfo = ( TR_RelocationRecordInformation *)comp->trMemory()->allocateMemory(sizeof( TR_RelocationRecordInformation), heapAlloc);
@@ -1772,6 +1808,44 @@ TR::X86RegImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
          }
          break;
 
+      case TR_CallSiteTableEntryAddress:
+         {
+         TR::SymbolReference *sr = getSymbolReference();
+         TR_RelocationRecordInformation *info =
+            (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+               sizeof (TR_RelocationRecordInformation),
+               heapAlloc);
+         TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+         info->data1 = reinterpret_cast<uintptr_t>(sr);
+         info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+         info->data3 = 0;
+         cg()->addExternalRelocation(
+                  new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                     cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                  __FILE__,__LINE__,getNode());
+         }
+         break;
+
+      case TR_MethodTypeTableEntryAddress:
+         {
+         TR::SymbolReference *sr = getSymbolReference();
+         TR_RelocationRecordInformation *info =
+            (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+               sizeof (TR_RelocationRecordInformation),
+               heapAlloc);
+         TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+         info->data1 = reinterpret_cast<uintptr_t>(sr);
+         info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+         info->data3 = 0;
+         cg()->addExternalRelocation(
+                  new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                     cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                  __FILE__,__LINE__,getNode());
+         }
+         break;
+
       case TR_BlockFrequency:
          {
          TR_RelocationRecordInformation *recordInfo = ( TR_RelocationRecordInformation *)comp->trMemory()->allocateMemory(sizeof( TR_RelocationRecordInformation), heapAlloc);
@@ -2203,6 +2277,42 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                                            cursor,
                                            getNode(),
                                            counter);
+      }
+   else if (symbol->isCallSiteTableEntry())
+      {
+      TR::SymbolReference *sr = getSymbolReference();
+      TR_RelocationRecordInformation *info =
+         (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+            sizeof (TR_RelocationRecordInformation),
+            heapAlloc);
+      TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+      info->data1 = reinterpret_cast<uintptr_t>(sr);
+      info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+      info->data3 = 0;
+      cg()->addExternalRelocation(
+               new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                  cursor, info, TR_CallSiteTableEntryAddress, cg()),
+               __FILE__,__LINE__,
+               getNode());
+      }
+   else if (symbol->isMethodTypeTableEntry())
+      {
+      TR::SymbolReference *sr = getSymbolReference();
+      TR_RelocationRecordInformation *info =
+         (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+            sizeof (TR_RelocationRecordInformation),
+            heapAlloc);
+      TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+      info->data1 = reinterpret_cast<uintptr_t>(sr);
+      info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+      info->data3 = 0;
+      cg()->addExternalRelocation(
+               new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                  cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+               __FILE__,__LINE__,
+               getNode());
       }
    else if (symbol->isBlockFrequency())
       {
@@ -2911,6 +3021,45 @@ TR::AMD64RegImm64SymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                }
             }
             break;
+
+         case TR_CallSiteTableEntryAddress:
+            {
+            TR::SymbolReference *sr = getSymbolReference();
+            TR_RelocationRecordInformation *info =
+               (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+                  sizeof (TR_RelocationRecordInformation),
+                  heapAlloc);
+            TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+            info->data1 = reinterpret_cast<uintptr_t>(sr);
+            info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+            info->data3 = 0;
+            cg()->addExternalRelocation(
+                     new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                        cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                     __FILE__,__LINE__,getNode());
+            }
+            break;
+
+         case TR_MethodTypeTableEntryAddress:
+            {
+            TR::SymbolReference *sr = getSymbolReference();
+            TR_RelocationRecordInformation *info =
+               (TR_RelocationRecordInformation *)cg()->comp()->trMemory()->allocateMemory(
+                  sizeof (TR_RelocationRecordInformation),
+                  heapAlloc);
+            TR_ResolvedMethod *resolvedMethod = sr->getOwningMethod(cg()->comp());
+
+            info->data1 = reinterpret_cast<uintptr_t>(sr);
+            info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
+            info->data3 = 0;
+            cg()->addExternalRelocation(
+                     new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                        cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                     __FILE__,__LINE__,getNode());
+            }
+            break;
+
          case TR_BlockFrequency:
             {
             TR_RelocationRecordInformation *recordInfo = ( TR_RelocationRecordInformation *)comp->trMemory()->allocateMemory(sizeof( TR_RelocationRecordInformation), heapAlloc);
