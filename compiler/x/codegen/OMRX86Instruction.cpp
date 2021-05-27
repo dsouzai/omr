@@ -1146,6 +1146,14 @@ TR::X86RegImmSymInstruction::autoSetReloKind()
       {
       setReloKind(TR_DebugCounter);
       }
+   else if (symbol->isCallSiteTableEntry())
+      {
+      setReloKind(TR_CallSiteTableEntryAddress);
+      }
+   else if (symbol->isMethodTypeTableEntry())
+      {
+      setReloKind(TR_MethodTypeTableEntryAddress);
+      }
    else if (symbol->isBlockFrequency())
       {
       setReloKind(TR_BlockFrequency);
@@ -3908,6 +3916,10 @@ TR::AMD64RegImm64SymInstruction::autoSetReloKind()
    TR::Symbol *symbol = getSymbolReference()->getSymbol();
    if (symbol->isDebugCounter())
       setReloKind(TR_DebugCounter);
+   else if (symbol->isCallSiteTableEntry())
+      setReloKind(TR_CallSiteTableEntryAddress);
+   else if (symbol->isMethodTypeTableEntry())
+      setReloKind(TR_MethodTypeTableEntryAddress);
    else if (symbol->isConst() || symbol->isConstantPoolAddress())
       setReloKind(TR_ConstantPool);
    else if (symbol->isStatic() && !getSymbolReference()->isUnresolved() && !symbol->isClassObject() && !symbol->isNotDataAddress())
