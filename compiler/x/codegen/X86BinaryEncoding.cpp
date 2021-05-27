@@ -1218,7 +1218,7 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                info->data3 = 0;
                cg()->addExternalRelocation(
                         new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                           cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                           cursor, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg()),
                         __FILE__,__LINE__,
                         getNode());
                }
@@ -1236,7 +1236,7 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                info->data3 = 0;
                cg()->addExternalRelocation(
                         new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                           cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                           cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
                         __FILE__,__LINE__,
                         getNode());
                }
@@ -1839,7 +1839,7 @@ TR::X86RegImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
          info->data3 = 0;
          cg()->addExternalRelocation(
                   new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                     cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                     cursor, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg()),
                   __FILE__,__LINE__,getNode());
          }
          break;
@@ -1858,7 +1858,7 @@ TR::X86RegImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
          info->data3 = 0;
          cg()->addExternalRelocation(
                   new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                     cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                     cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
                   __FILE__,__LINE__,getNode());
          }
          break;
@@ -2309,7 +2309,7 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
       info->data3 = 0;
       cg()->addExternalRelocation(
                new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                  cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                  cursor, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg()),
                __FILE__,__LINE__,
                getNode());
       }
@@ -2327,7 +2327,7 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
       info->data3 = 0;
       cg()->addExternalRelocation(
                new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                  cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                  cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
                __FILE__,__LINE__,
                getNode());
       }
@@ -3076,7 +3076,7 @@ TR::AMD64RegImm64SymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
             info->data3 = 0;
             cg()->addExternalRelocation(
                      new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                        cursor, info, TR_CallSiteTableEntryAddress, cg()),
+                        cursor, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg()),
                      __FILE__,__LINE__,getNode());
             }
             break;
@@ -3095,7 +3095,7 @@ TR::AMD64RegImm64SymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
             info->data3 = 0;
             cg()->addExternalRelocation(
                      new (cg()->trHeapMemory()) TR::ExternalRelocation(
-                        cursor, info, TR_MethodTypeTableEntryAddress, cg()),
+                        cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
                      __FILE__,__LINE__,getNode());
             }
             break;

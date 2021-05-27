@@ -1305,7 +1305,7 @@ OMR::X86::MemoryReference::addMetaDataForCodeAddress(
                         }
                      else if (symbol->isCallSiteTableEntry())
                         {
-                        TR::SymbolReference *sr = self()->getSymbolReference();
+                        TR::SymbolReference *sr = &self()->getSymbolReference();
                         TR_RelocationRecordInformation *info =
                            (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
                               sizeof (TR_RelocationRecordInformation),
@@ -1317,12 +1317,12 @@ OMR::X86::MemoryReference::addMetaDataForCodeAddress(
                         info->data3 = 0;
                         cg->addExternalRelocation(
                                  new (cg->trHeapMemory()) TR::ExternalRelocation(
-                                    cursor, info, TR_CallSiteTableEntryAddress, cg),
+                                    cursor, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg),
                                  __FILE__,__LINE__,node);
                         }
                      else if (symbol->isMethodTypeTableEntry())
                         {
-                        TR::SymbolReference *sr = self()->getSymbolReference();
+                        TR::SymbolReference *sr = &self()->getSymbolReference();
                         TR_RelocationRecordInformation *info =
                            (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
                               sizeof (TR_RelocationRecordInformation),
@@ -1334,7 +1334,7 @@ OMR::X86::MemoryReference::addMetaDataForCodeAddress(
                         info->data3 = 0;
                         cg->addExternalRelocation(
                                  new (cg->trHeapMemory()) TR::ExternalRelocation(
-                                    cursor, info, TR_MethodTypeTableEntryAddress, cg),
+                                    cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg),
                                  __FILE__,__LINE__,node);
                         }
                      else
