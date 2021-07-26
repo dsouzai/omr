@@ -513,46 +513,6 @@ OMR::X86::AMD64::MemoryReference::addMetaDataForCodeAddressWithLoad(
                                                  counter);
             }
          }
-      else if (sr.getSymbol()->isCallSiteTableEntry())
-         {
-         if (cg->needRelocationsForStatics())
-            {
-            TR_RelocationRecordInformation *info =
-               (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
-                  sizeof (TR_RelocationRecordInformation),
-                  heapAlloc);
-            TR_ResolvedMethod *resolvedMethod = sr.getOwningMethod(cg->comp());
-
-            info->data1 = reinterpret_cast<uintptr_t>(&sr);
-            info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
-            info->data3 = 0;
-            cg->addExternalRelocation(
-                     new (cg->trHeapMemory()) TR::ExternalRelocation(
-                        displacementLocation, reinterpret_cast<uint8_t *>(info), TR_CallSiteTableEntryAddress, cg),
-                     __FILE__,__LINE__,
-                     containingInstruction->getNode());
-            }
-         }
-      else if (sr.getSymbol()->isMethodTypeTableEntry())
-         {
-         if (cg->needRelocationsForStatics())
-            {
-            TR_RelocationRecordInformation *info =
-               (TR_RelocationRecordInformation *)cg->comp()->trMemory()->allocateMemory(
-                  sizeof (TR_RelocationRecordInformation),
-                  heapAlloc);
-            TR_ResolvedMethod *resolvedMethod = sr.getOwningMethod(cg->comp());
-
-            info->data1 = reinterpret_cast<uintptr_t>(&sr);
-            info->data2 = reinterpret_cast<uintptr_t>(resolvedMethod->getNonPersistentIdentifier());
-            info->data3 = 0;
-            cg->addExternalRelocation(
-                     new (cg->trHeapMemory()) TR::ExternalRelocation(
-                        displacementLocation, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg),
-                     __FILE__,__LINE__,
-                     containingInstruction->getNode());
-            }
-         }
       }
    else
       {
