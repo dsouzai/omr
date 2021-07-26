@@ -1187,7 +1187,7 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                                                     getNode(),
                                                     counter);
                }
-            else if (sym->isCallSiteTableEntry())
+            else if (sym->isCallSiteTableEntry() && !getSymbolReference()->isUnresolved())
                {
                TR::SymbolReference *sr = getSymbolReference();
                TR_RelocationRecordInformation *info =
@@ -1205,7 +1205,7 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                         __FILE__,__LINE__,
                         getNode());
                }
-            else if (sym->isMethodTypeTableEntry())
+            else if (sym->isMethodTypeTableEntry() && !getSymbolReference()->isUnresolved())
                {
                TR::SymbolReference *sr = getSymbolReference();
                TR_RelocationRecordInformation *info =
