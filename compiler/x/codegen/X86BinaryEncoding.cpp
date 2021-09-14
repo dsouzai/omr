@@ -1240,6 +1240,18 @@ TR::X86ImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                         __FILE__,__LINE__,
                         getNode());
                }
+            else if ((sym->isConstString() || sym->isNonSpecificConstObject()) && !getSymbolReference()->isUnresolved())
+               {
+               TR::SymbolReference *sr = getSymbolReference();
+               cg()->addExternalRelocation(
+                        new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                           cursor,
+                           (uint8_t *)sr,
+                           getNode() ? (uint8_t *)(intptr_t)getNode()->getInlinedSiteIndex() : (uint8_t *)-1,
+                           TR_ArbObjectConstantAddress, cg()),
+                        __FILE__,__LINE__,
+                        getNode());
+               }
             else if (sym->isBlockFrequency())
                {
                TR_RelocationRecordInformation *recordInfo = ( TR_RelocationRecordInformation *)comp->trMemory()->allocateMemory(sizeof( TR_RelocationRecordInformation), heapAlloc);
@@ -1863,6 +1875,20 @@ TR::X86RegImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
          }
          break;
 
+      case TR_ArbObjectConstantAddress:
+         {
+         TR::SymbolReference *sr = getSymbolReference();
+         cg()->addExternalRelocation(
+                  new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                     cursor,
+                     (uint8_t *)sr,
+                     getNode() ? (uint8_t *)(intptr_t)getNode()->getInlinedSiteIndex() : (uint8_t *)-1,
+                     TR_ArbObjectConstantAddress, cg()),
+                  __FILE__,__LINE__,
+                  getNode());
+         }
+         break;
+
       case TR_BlockFrequency:
          {
          TR_RelocationRecordInformation *recordInfo = ( TR_RelocationRecordInformation *)comp->trMemory()->allocateMemory(sizeof( TR_RelocationRecordInformation), heapAlloc);
@@ -2295,7 +2321,7 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                                            getNode(),
                                            counter);
       }
-   else if (symbol->isCallSiteTableEntry())
+   else if (symbol->isCallSiteTableEntry() && !getSymbolReference()->isUnresolved())
       {
       TR::SymbolReference *sr = getSymbolReference();
       TR_RelocationRecordInformation *info =
@@ -2313,7 +2339,7 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                __FILE__,__LINE__,
                getNode());
       }
-   else if (symbol->isMethodTypeTableEntry())
+   else if (symbol->isMethodTypeTableEntry() && !getSymbolReference()->isUnresolved())
       {
       TR::SymbolReference *sr = getSymbolReference();
       TR_RelocationRecordInformation *info =
@@ -2328,6 +2354,18 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
       cg()->addExternalRelocation(
                new (cg()->trHeapMemory()) TR::ExternalRelocation(
                   cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
+               __FILE__,__LINE__,
+               getNode());
+      }
+   else if ((symbol->isConstString() || symbol->isNonSpecificConstObject()) && !getSymbolReference()->isUnresolved())
+      {
+      TR::SymbolReference *sr = getSymbolReference();
+      cg()->addExternalRelocation(
+               new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                  cursor,
+                  (uint8_t *)sr,
+                  getNode() ? (uint8_t *)(intptr_t)getNode()->getInlinedSiteIndex() : (uint8_t *)-1,
+                  TR_ArbObjectConstantAddress, cg()),
                __FILE__,__LINE__,
                getNode());
       }
@@ -3097,6 +3135,20 @@ TR::AMD64RegImm64SymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
                      new (cg()->trHeapMemory()) TR::ExternalRelocation(
                         cursor, reinterpret_cast<uint8_t *>(info), TR_MethodTypeTableEntryAddress, cg()),
                      __FILE__,__LINE__,getNode());
+            }
+            break;
+
+         case TR_ArbObjectConstantAddress:
+            {
+            TR::SymbolReference *sr = getSymbolReference();
+            cg()->addExternalRelocation(
+                     new (cg()->trHeapMemory()) TR::ExternalRelocation(
+                        cursor,
+                        (uint8_t *)sr,
+                        getNode() ? (uint8_t *)(intptr_t)getNode()->getInlinedSiteIndex() : (uint8_t *)-1,
+                        TR_ArbObjectConstantAddress, cg()),
+                     __FILE__,__LINE__,
+                     getNode());
             }
             break;
 

@@ -340,7 +340,9 @@ typedef enum
    TR_ValidateHandleMethodFromCP          = 112,
    TR_CallSiteTableEntryAddress           = 113,
    TR_MethodTypeTableEntryAddress         = 114,
-   TR_NumExternalRelocationKinds          = 115,
+   TR_ValidateArbObjectConstant           = 115,
+   TR_ArbObjectConstantAddress            = 116,
+   TR_NumExternalRelocationKinds          = 117,
    TR_ExternalRelocationTargetKindMask    = 0xff,
    } TR_ExternalRelocationTargetKind;
 
