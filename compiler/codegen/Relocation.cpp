@@ -511,6 +511,8 @@ const char *TR::ExternalRelocation::_externalRelocationTargetKindNames[TR_NumExt
    "TR_ValidateHandleMethodFromCP (111)",
    "TR_CallSiteTableEntryAddress (112)",
    "TR_MethodTypeTableEntryAddress (113)",
+   "TR_ValidateArbObjectConstant (114)",
+   "TR_ArbObjectConstantAddress (115)",
    };
 
 uintptr_t TR::ExternalRelocation::_globalValueList[TR_NumGlobalValueItems] =
