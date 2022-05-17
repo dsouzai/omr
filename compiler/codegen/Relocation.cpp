@@ -508,6 +508,10 @@ const char *TR::ExternalRelocation::_externalRelocationTargetKindNames[TR_NumExt
    "TR_InlinedMethodPointer (108)",
    "TR_VMINLMethod (109)",
    "TR_ValidateJ2IThunkFromMethod (110)",
+   "TR_ValidateDynamicMethodFromCSTable (111)",
+   "TR_ValidateHandleMethodFromCP (112)",
+   "TR_CallSiteTableEntryAddress (113)",
+   "TR_MethodTypeTableEntryAddress (114)",
    };
 
 uintptr_t TR::ExternalRelocation::_globalValueList[TR_NumGlobalValueItems] =

@@ -336,7 +336,11 @@ typedef enum
    TR_InlinedMethodPointer                = 108,
    TR_VMINLMethod                         = 109,
    TR_ValidateJ2IThunkFromMethod          = 110,
-   TR_NumExternalRelocationKinds          = 111,
+   TR_ValidateDynamicMethodFromCSTable    = 111,
+   TR_ValidateHandleMethodFromCP          = 112,
+   TR_CallSiteTableEntryAddress           = 113,
+   TR_MethodTypeTableEntryAddress         = 114,
+   TR_NumExternalRelocationKinds          = 115,
    TR_ExternalRelocationTargetKindMask    = 0xff,
    } TR_ExternalRelocationTargetKind;
 
