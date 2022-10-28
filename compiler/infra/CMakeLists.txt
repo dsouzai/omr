@@ -37,4 +37,5 @@ compiler_library(infra
 	${CMAKE_CURRENT_LIST_DIR}/Timer.cpp
 	${CMAKE_CURRENT_LIST_DIR}/TreeServices.cpp
 	${CMAKE_CURRENT_LIST_DIR}/OMRCfg.cpp
+	${CMAKE_CURRENT_LIST_DIR}/UnitTester.cpp
 )

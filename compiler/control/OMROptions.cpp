@@ -1056,6 +1056,7 @@ TR::OptionTable OMR::Options::_jitOptions[] = {
    {"restrictInlinerDuringStartup", "O\trestrict trivial inliner during startup", SET_OPTION_BIT(TR_RestrictInlinerDuringStartup), "F", NOT_IN_SUBSET },
    {"restrictStaticFieldFolding", "O\trestrict instance field folding", SET_OPTION_BIT(TR_RestrictStaticFieldFolding), "F"},
    {"rtGCMapCheck", "D\tEnable runtime GC Map checking at every async check.", SET_OPTION_BIT(TR_RTGCMapCheck), "F"},
+   {"runUnitTests", "D\tRun Unit Tests.", SET_OPTION_BIT(TR_RunUnitTests), "F"},
    {"sampleDensityBaseThreshold=", "M<nnn>\t", TR::Options::setStaticNumeric, (intptr_t)&OMR::Options::_sampleDensityBaseThreshold, 0, "F%d", NOT_IN_SUBSET},
    {"sampleDensityIncrementThreshold=", "M<nnn>\t", TR::Options::setStaticNumeric, (intptr_t)&OMR::Options::_sampleDensityIncrementThreshold, 0, "F%d", NOT_IN_SUBSET},
    {"sampleInterval=",    "R<nnn>\tThe number of samples taken on a method between times when it is considered for recompilation",

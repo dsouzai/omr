@@ -495,7 +495,7 @@ enum TR_CompilationOptions
    TR_PaintAllocatedFrameSlotsDead            = 0x01000000 + 13, //x86 Only
    TR_PaintAllocatedFrameSlotsFauxObject      = 0x02000000 + 13, //x86 Only
    // Available                               = 0x04000000 + 13,
-   // Available                               = 0x08000000 + 13,
+   TR_RunUnitTests                            = 0x08000000 + 13,
    TR_RTGCMapCheck                            = 0x10000000 + 13, //x86 Only
    TR_ImmediateCountingRecompilation          = 0x20000000 + 13,
    TR_DisableDumpFlowGraph                    = 0x40000000 + 13,

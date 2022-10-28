@@ -62,6 +62,8 @@
 #include "optimizer/VPConstraint.hpp"
 #include "ras/Debug.hpp"
 
+#include "infra/UnitTester.hpp"
+
 #define OPT_DETAILS "O^O LOOP TRANSFORMATION: "
 
 
@@ -352,6 +354,28 @@ TR_Arraycopy::checkArrayStore(TR::Node * storeNode)
    _storeNode = storeNode;
 
    return checkStore && checkLoad;
+   }
+
+bool
+TR_UnitTester::test_trarraycopy_checkArrayStore(TR_UnitTester &unitTester)
+   {
+   fprintf(stderr, "Starting test_trarraycopy_checkArrayStore!\n");
+   TR::Compilation *comp = unitTester.comp();
+
+   TR_InductionVariable *newv
+      = new (comp->trMemory()->trHeapMemory()) TR_InductionVariable(
+         NULL,
+         new (comp->trMemory()->trHeapMemory()) TR::VPIntConst(0),
+         new (comp->trMemory()->trHeapMemory()) TR::VPIntConst(0),
+         new (comp->trMemory()->trHeapMemory()) TR::VPIntConst(0),
+         TR_maybe);
+
+   TR::Node *istore = TR::Node::create(TR::istore, 1, TR::Node::iconst(1));
+   TR_Arraycopy arrayCopy(comp, newv);
+   if (false == arrayCopy.checkArrayStore(istore))
+      return true;
+   else
+      return false;
    }
 
 bool
