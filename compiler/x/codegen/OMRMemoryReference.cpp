@@ -1298,6 +1298,15 @@ OMR::X86::MemoryReference::addMetaDataForCodeAddress(
                                                              node,
                                                              counter);
                         }
+                     else if (symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress())
+                        {
+                        TR::ExternalRelocation* r= new (cg->trHeapMemory())
+                           TR::ExternalRelocation(cursor,
+                                                  (uint8_t *)&self()->getSymbolReference(),
+                                                  NULL,
+                                                  TR_MethodEnterExitHookAddress, cg);
+                        cg->addExternalRelocation(r, __FILE__, __LINE__, node);
+                        }
                      else
                         {
                         cg->addExternalRelocation(new (cg->trHeapMemory()) TR::ExternalRelocation(cursor,

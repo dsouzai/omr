@@ -275,6 +275,13 @@ TR::S390ConstantDataSnippet::addMetaDataForCodeAddress(uint8_t *cursor)
          }
          break;
 
+      case TR_MethodEnterExitHookAddress:
+         {
+         TR::Relocation *relocation = new (cg()->trHeapMemory()) TR::ExternalRelocation(cursor, (uint8_t *) getNode()->getSymbolReference(), NULL, TR_MethodEnterExitHookAddress, cg());
+         cg()->addExternalRelocation(relocation, __FILE__, __LINE__, getNode());
+         }
+         break;
+
       default:
          TR_ASSERT( 0,"relocation type not handled yet");
       }
