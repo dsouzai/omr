@@ -2408,7 +2408,7 @@ TR::X86MemImmSymInstruction::addMetaDataForCodeAddress(uint8_t *cursor)
       TR::Relocation *relocation = new (cg()->trHeapMemory()) TR::ExternalRelocation(cursor, NULL, TR_RecompQueuedFlag, cg());
       cg()->addExternalRelocation(relocation, __FILE__, __LINE__, getNode());
       }
-   else if (sym->isEnterEventHookAddress() || sym->isExitEventHookAddress())
+   else if (symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress())
       {
       TR::Relocation *relocation = new (cg()->trHeapMemory()) TR::ExternalRelocation(cursor, (uint8_t *)getSymbolReference(), NULL, TR_MethodEnterExitHookAddress, cg());
       cg()->addExternalRelocation(relocation, __FILE__, __LINE__, getNode());
