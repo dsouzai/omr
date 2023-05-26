@@ -426,13 +426,19 @@ TR_VirtualGuard::createAOTInliningGuard(TR::Compilation *comp, int16_t calleeInd
    }
 
 TR::Node *
-TR_VirtualGuard::createAOTGuard(TR::Compilation *comp, int16_t siteIndex, TR::Node *callNode, TR::TreeTop *destination, TR_VirtualGuardKind kind)
+TR_VirtualGuard::createPermanentGuard(TR::Compilation *comp, int16_t siteIndex, TR::Node *callNode, TR::TreeTop *destination, TR_VirtualGuardKind kind)
    {
    TR::Node *guard = createDummyOrSideEffectGuard(comp, callNode, destination);
    TR_VirtualGuard *vguard=new (comp->trHeapMemory()) TR_VirtualGuard(TR_NonoverriddenTest, kind, comp, callNode, guard, siteIndex);
    vguard->dontGenerateChildrenCode();
    vguard->setCannotBeRemoved();
    return guard;
+   }
+
+TR::Node *
+TR_VirtualGuard::createAOTGuard(TR::Compilation *comp, int16_t siteIndex, TR::Node *callNode, TR::TreeTop *destination, TR_VirtualGuardKind kind)
+   {
+   return createPermanentGuard(comp, siteIndex, callNode, destination, kind);
    }
 
 TR::Node *

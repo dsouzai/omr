@@ -1600,6 +1600,12 @@ OMR::Compilation::createDummyGuard(TR::Compilation * comp, int16_t calleeIndex, 
    return TR_VirtualGuard::createDummyGuard(comp, calleeIndex, node, destination);
    }
 
+TR::Node *
+OMR::Compilation::createPermanentGuard(TR::Compilation * comp, int16_t calleeIndex, TR::Node * node, TR::TreeTop * destination, TR_VirtualGuardKind kind)
+   {
+   return TR_VirtualGuard::createPermanentGuard(comp, calleeIndex, node, destination, kind);
+   }
+
 
 bool OMR::Compilation::generateArraylets()
    {
