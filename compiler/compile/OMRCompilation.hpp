@@ -817,6 +817,7 @@ public:
    TR::Node *createAOTInliningGuard(TR::Compilation *, int16_t, TR::Node *, TR::TreeTop *, TR_VirtualGuardKind);
    TR::Node *createAOTGuard(TR::Compilation *, int16_t, TR::Node *, TR::TreeTop *, TR_VirtualGuardKind);
    TR::Node *createDummyGuard(TR::Compilation *, int16_t, TR::Node *, TR::TreeTop *);
+   TR::Node *createPermanentGuard(TR::Compilation *, int16_t, TR::Node *, TR::TreeTop *, TR_VirtualGuardKind);
 
    TR_LinkHead<TR_ClassLoadCheck> *getClassesThatShouldNotBeLoaded() { return &_classesThatShouldNotBeLoaded; }
    TR_LinkHead<TR_ClassExtendCheck> *getClassesThatShouldNotBeNewlyExtended() { return &_classesThatShouldNotBeNewlyExtended;}
