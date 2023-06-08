@@ -5727,6 +5727,16 @@ addMetaDataForLoadAddressConstantFixed(TR::CodeGenerator *cg, TR::Node *node, TR
             }
          break;
          }
+
+      case TR_MethodEnterExitHookAddress:
+         {
+         relo = new (cg->trHeapMemory()) TR::BeforeBinaryEncodingExternalRelocation(
+            firstInstruction,
+            (uint8_t *)node->getSymbolReference(),
+            NULL,
+            TR_MethodEnterExitHookAddress, cg);
+         break;
+         }
       }
 
    if (!relo)
