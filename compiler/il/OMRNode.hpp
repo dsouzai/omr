@@ -1336,6 +1336,7 @@ public:
    bool isHCRGuard() { return isGuardOfKind(TR_HCRGuard); }
    bool isMutableCallSiteTargetGuard() { return isGuardOfKind(TR_MutableCallSiteTargetGuard); }
    bool isMethodEnterExitGuard() { return isGuardOfKind(TR_MethodEnterExitGuard); }
+   bool isMethodTraceGuard() { return isGuardOfKind(TR_MethodTraceGuard); }
    bool isDirectMethodGuard() { return isGuardOfKind(TR_DirectMethodGuard); }
    bool isOSRGuard() { return isGuardOfKind(TR_OSRGuard); }
    bool isBreakpointGuard() { return isGuardOfKind(TR_BreakpointGuard); }

@@ -9296,6 +9296,7 @@ bool TR_LoopVersioner::guardOkForExpr(TR::Node *node, bool onlySearching)
       case TR_SideEffectGuard:
       case TR_MutableCallSiteTargetGuard:
       case TR_MethodEnterExitGuard:
+      case TR_MethodTraceGuard:
       case TR_InnerGuard:
       case TR_ArrayStoreCheckGuard:
       case TR_RemovedProfiledGuard:

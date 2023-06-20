@@ -2964,6 +2964,8 @@ uint8_t *OMR::X86::CodeGenerator::generatePadding(uint8_t              *cursor,
                   guardKind = "MutableCallSiteTargetGuard"; break;
                case TR_MethodEnterExitGuard:
                   guardKind = "MethodEnterExitGuard"; break;
+               case TR_MethodTraceGuard:
+                  guardKind = "MethodTraceGuard"; break;
                case TR_DirectMethodGuard:
                   guardKind = "DirectMethodGuard"; break;
                case TR_InnerGuard:

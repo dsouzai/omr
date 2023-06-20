@@ -1599,7 +1599,7 @@ TR::Register *OMR::Power::TreeEvaluator::ireturnEvaluator(TR::Node *node, TR::Co
    cg->decReferenceCount(node->getFirstChild());
    return NULL;
    }
- 
+
 TR::Register *OMR::Power::TreeEvaluator::lreturnEvaluator(TR::Node *node, TR::CodeGenerator *cg)
    {
    TR::Register *returnRegister = cg->evaluate(node->getFirstChild());
@@ -4573,6 +4573,7 @@ static bool virtualGuardHelper(TR::Node *node, TR::CodeGenerator *cg)
          case TR_InterfaceGuard:
          case TR_AbstractGuard:
          case TR_MethodEnterExitGuard:
+         case TR_MethodTraceGuard:
          case TR_HCRGuard:
          case TR_BreakpointGuard:
             aotSite->setGuard(virtualGuard);

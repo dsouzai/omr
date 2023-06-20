@@ -55,6 +55,7 @@ enum TR_VirtualGuardKind
    TR_HCRGuard,
    TR_MutableCallSiteTargetGuard,
    TR_MethodEnterExitGuard,
+   TR_MethodTraceGuard,
    TR_DirectMethodGuard,
    TR_InnerGuard,
    TR_ArrayStoreCheckGuard,

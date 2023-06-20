@@ -1483,6 +1483,7 @@ TR_InlinerBase::createVirtualGuard(
             fidelity = TR::DebugCounter::Moderate;
          break;
       case TR_MethodEnterExitGuard:
+      case TR_MethodTraceGuard:
          fidelity = TR::DebugCounter::Cheap;
          break;
       default:

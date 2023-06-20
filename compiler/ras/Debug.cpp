@@ -4308,6 +4308,8 @@ TR_Debug::getVirtualGuardKindName(TR_VirtualGuardKind kind)
          return "MutableCallSiteTargetGuard";
       case TR_MethodEnterExitGuard:
          return "MethodEnterExitGuard";
+      case TR_MethodTraceGuard:
+         return "MethodTraceGuard";
       case TR_DirectMethodGuard:
          return "DirectMethodGuard";
       case TR_InnerGuard:
