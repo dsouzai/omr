@@ -1632,7 +1632,7 @@ void OMR::Power::MemoryReference::accessStaticItem(TR::Node *node, TR::SymbolRef
          loadAddressConstant(cg, true, nodeForSymbol, 1, reg, NULL, false, TR_RecompQueuedFlag);
          return;
          }
-      else if ((symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress()) && cg->compileRelocatableCode())
+      else if ((symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress()) && cg->comp()->compileRelocatableCode())
          {
          TR::Register *reg = _baseRegister = cg->allocateRegister();
          loadAddressConstant(cg, true, nodeForSymbol, 1, reg, NULL, false, TR_MethodEnterExitHookAddress);
@@ -1788,7 +1788,7 @@ void OMR::Power::MemoryReference::accessStaticItem(TR::Node *node, TR::SymbolRef
          loadAddressConstant(cg, true, nodeForSymbol, 1, reg, NULL, false, TR_RecompQueuedFlag);
          return;
          }
-      else if ((symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress()) && cg->compileRelocatableCode())
+      else if ((symbol->isEnterEventHookAddress() || symbol->isExitEventHookAddress()) && cg->comp()->compileRelocatableCode())
          {
          TR::Register *reg = _baseRegister = cg->allocateRegister();
          loadAddressConstant(cg, true, nodeForSymbol, 1, reg, NULL, false, TR_MethodEnterExitHookAddress);
