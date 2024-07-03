@@ -70,6 +70,12 @@ public:
       CacheCriticalSection(TR::CodeCache *codeCache);
       };
 
+   enum CacheKind
+      {
+      DEFAULT,
+      FILEBACKED,
+      };
+
    uint8_t *getCodeAlloc();
    uint8_t *getCodeBase();
    uint8_t *getCodeTop();
@@ -218,7 +224,8 @@ public:
     */
    bool                       initialize(TR::CodeCacheManager *manager,
                                          TR::CodeCacheMemorySegment *codeCacheSegment,
-                                         size_t allocatedCodeCacheSizeInBytes);
+                                         size_t allocatedCodeCacheSizeInBytes,
+                                         CacheKind kind = CacheKind::DEFAULT);
 
 private:
    void                       updateMaxSizeOfFreeBlocks(CodeCacheFreeCacheBlock *blockPtr, size_t blockSize);
@@ -406,6 +413,8 @@ public:
    uint8_t * _warmCodeAlloc;
 
    uint8_t * _coldCodeAlloc;
+
+   CacheKind _kind;
 
    TR::CodeCacheManager *_manager;
 
