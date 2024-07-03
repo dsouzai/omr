@@ -279,6 +279,8 @@ OMR::CodeCache::initialize(TR::CodeCacheManager *manager,
    // If codeCachePadKB is not set, heapSize is segmentSize anyway
    _segment = codeCacheSegment;
 
+   _kind = CacheKind::DEFAULT;
+
    // helperTop is heapTop, usually
    // When codeCachePadKB > segmentSize, the helperTop is not at the very end of the segemnt
    _helperTop = _segment->segmentBase() + allocatedCodeCacheSizeInBytes;

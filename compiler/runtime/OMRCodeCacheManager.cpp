@@ -307,7 +307,8 @@ TR::CodeCache *
 OMR::CodeCacheManager::reserveCodeCache(bool compilationCodeAllocationsMustBeContiguous,
                                       size_t sizeEstimate,
                                       int32_t compThreadID,
-                                      int32_t *numReserved)
+                                      int32_t *numReserved,
+                                      TR::CodeCache::CacheKind kind)
    {
    int32_t numCachesAlreadyReserved = 0;
    TR::CodeCache *codeCache = NULL;
@@ -318,7 +319,7 @@ OMR::CodeCacheManager::reserveCodeCache(bool compilationCodeAllocationsMustBeCon
       CacheListCriticalSection scanCacheList(self());
       for (codeCache = self()->getFirstCodeCache(); codeCache; codeCache = codeCache->next())
          {
-         if (!codeCache->isReserved()) // we cannot touch the reserved ones
+         if (!codeCache->isReserved() && codeCache->_kind == kind) // we cannot touch the reserved ones
             {
             TR_YesNoMaybe almostFull = codeCache->almostFull();
             if (almostFull == TR_no || (almostFull == TR_maybe && !compilationCodeAllocationsMustBeContiguous))

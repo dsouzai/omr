@@ -29,6 +29,7 @@
 #include "runtime/CodeCacheConfig.hpp"
 #include "runtime/MethodExceptionData.hpp"
 #include "runtime/Runtime.hpp"
+#include "runtime/CodeCache.hpp"
 #include "runtime/CodeCacheTypes.hpp"
 #include "env/RawAllocator.hpp"
 #include "codegen/StaticRelocation.hpp"
@@ -172,7 +173,8 @@ public:
    TR::CodeCache * reserveCodeCache(bool compilationCodeAllocationsMustBeContiguous,
                                     size_t sizeEstimate,
                                     int32_t compThreadID,
-                                    int32_t *numReserved);
+                                    int32_t *numReserved,
+                                    TR::CodeCache::CacheKind kind = TR::CodeCache::CacheKind::DEFAULT);
    TR::CodeCache * getNewCodeCache(int32_t reservingCompThreadID);
 
    uint8_t * allocateCodeMemory(size_t warmCodeSize,
