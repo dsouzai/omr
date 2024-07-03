@@ -69,6 +69,12 @@ public:
       CacheCriticalSection(TR::CodeCache *codeCache);
       };
 
+   enum CacheKind
+      {
+      DEFAULT,
+      FILEBACKED,
+      };
+
    uint8_t *getCodeAlloc();
    uint8_t *getCodeBase();
    uint8_t *getCodeTop();
@@ -405,6 +411,8 @@ public:
    uint8_t * _warmCodeAlloc;
 
    uint8_t * _coldCodeAlloc;
+
+   CacheKind _kind;
 
    TR::CodeCacheManager *_manager;
 

@@ -705,6 +705,7 @@ TR::OptionTable OMR::Options::_jitOptions[] = {
    {"enableFastHotRecompilation",         "R\ttry to recompile at hot sooner", SET_OPTION_BIT(TR_EnableFastHotRecompilation), "F"},
    {"enableFastScorchingRecompilation",   "R\ttry to recompile at scorching sooner", SET_OPTION_BIT(TR_EnableFastScorchingRecompilation), "F"},
    {"enableFpreductionAnnotation",        "O\tenable fpreduction annotation", SET_OPTION_BIT(TR_EnableFpreductionAnnotation), "F"},
+   {"enableFSDCodeCachesDisclaiming",     "O\tenable basic GRA in FSD mode", SET_OPTION_BIT(TR_FSDCodeCachesDisclaiming), "F", NOT_IN_SUBSET},
    {"enableFSDGRA",                       "O\tenable basic GRA in FSD mode", SET_OPTION_BIT(TR_FSDGRA), "F"},
    {"enableGCRPatching",                  "R\tenable patching of the GCR guard", SET_OPTION_BIT(TR_EnableGCRPatching), "F"},
    {"enableGPU",                          "L\tenable GPU support  (basic)",
