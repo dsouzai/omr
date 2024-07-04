@@ -69,6 +69,7 @@ namespace OMR { typedef OMR::Compilation CompilationConnector; }
 #include "ras/Debug.hpp"
 #include "ras/DebugCounter.hpp"
 #include "ras/ILValidationStrategies.hpp"
+#include "runtime/CodeCache.hpp"
 
 
 
@@ -353,6 +354,8 @@ public:
    // snapshot/restore setting.
    //
    bool compilePortableCode() { return false; }
+
+   TR::CodeCache::CacheKind codeCacheKind();
 
    // Maximum number of internal pointers that can be managed.
    //

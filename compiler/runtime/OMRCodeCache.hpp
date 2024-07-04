@@ -223,7 +223,8 @@ public:
     */
    bool                       initialize(TR::CodeCacheManager *manager,
                                          TR::CodeCacheMemorySegment *codeCacheSegment,
-                                         size_t allocatedCodeCacheSizeInBytes);
+                                         size_t allocatedCodeCacheSizeInBytes,
+                                         CacheKind kind = CacheKind::DEFAULT);
 
 private:
    void                       updateMaxSizeOfFreeBlocks(CodeCacheFreeCacheBlock *blockPtr, size_t blockSize);

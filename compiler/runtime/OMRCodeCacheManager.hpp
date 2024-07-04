@@ -158,7 +158,8 @@ public:
    void  freeMemory(void *memoryToFree);
 
    TR::CodeCache * allocateCodeCacheObject(TR::CodeCacheMemorySegment *codeCacheSegment,
-                                           size_t codeCacheSize);
+                                           size_t codeCacheSize,
+                                           TR::CodeCache::CacheKind kind = TR::CodeCache::CacheKind::DEFAULT);
    void * chooseCacheStartAddress(size_t repositorySize);
 
    TR::CodeCache * getFirstCodeCache()            { return _codeCacheList._head; }
@@ -175,7 +176,8 @@ public:
                                     int32_t compThreadID,
                                     int32_t *numReserved,
                                     TR::CodeCache::CacheKind kind = TR::CodeCache::CacheKind::DEFAULT);
-   TR::CodeCache * getNewCodeCache(int32_t reservingCompThreadID);
+   TR::CodeCache * getNewCodeCache(int32_t reservingCompThreadID,
+                                   TR::CodeCache::CacheKind kind = TR::CodeCache::CacheKind::DEFAULT);
 
    uint8_t * allocateCodeMemory(size_t warmCodeSize,
                                 size_t coldCodeSize,
@@ -199,7 +201,8 @@ public:
     */
    TR::CodeCache * allocateCodeCacheFromNewSegment(
       size_t segmentSizeInBytes,
-      int32_t reservingCompilationTID);
+      int32_t reservingCompilationTID,
+      TR::CodeCache::CacheKind kind = TR::CodeCache::CacheKind::DEFAULT);
 
    TR::CodeCache * findCodeCacheFromPC(void *inCacheAddress);
 

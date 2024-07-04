@@ -256,7 +256,8 @@ OMR::CodeCacheManager::freeMemory(void *memoryToFree)
 
 TR::CodeCache *
 OMR::CodeCacheManager::allocateCodeCacheObject(TR::CodeCacheMemorySegment *codeCacheSegment,
-                                               size_t codeCacheSize)
+                                               size_t codeCacheSize,
+                                               TR::CodeCache::CacheKind kind)
    {
    TR::CodeCache *codeCache = static_cast<TR::CodeCache *>(self()->getMemory(sizeof(TR::CodeCache)));
    if (codeCache)
@@ -354,7 +355,7 @@ OMR::CodeCacheManager::reserveCodeCache(bool compilationCodeAllocationsMustBeCon
    if (self()->canAddNewCodeCache())
       {
       TR::CodeCacheConfig &config = self()->codeCacheConfig();
-      codeCache = self()->allocateCodeCacheFromNewSegment(config.codeCacheKB() << 10, compThreadID);
+      codeCache = self()->allocateCodeCacheFromNewSegment(config.codeCacheKB() << 10, compThreadID, kind);
       }
    else
       {
@@ -386,13 +387,13 @@ OMR::CodeCacheManager::reserveCodeCache(bool compilationCodeAllocationsMustBeCon
 // Side effects: the new cache is reserved
 //----------------------------------------------------------------------------
 TR::CodeCache *
-OMR::CodeCacheManager::getNewCodeCache(int32_t reservingCompThreadID)
+OMR::CodeCacheManager::getNewCodeCache(int32_t reservingCompThreadID, TR::CodeCache::CacheKind kind)
    {
    TR::CodeCache *codeCache = NULL;
    if (self()->canAddNewCodeCache())
       {
       TR::CodeCacheConfig &config = self()->codeCacheConfig();
-      codeCache = self()->allocateCodeCacheFromNewSegment(config.codeCacheKB() << 10, reservingCompThreadID);
+      codeCache = self()->allocateCodeCacheFromNewSegment(config.codeCacheKB() << 10, reservingCompThreadID, kind);
       }
 
    return codeCache;
@@ -736,7 +737,7 @@ OMR::CodeCacheManager::allocateCodeMemoryWithRetries(size_t warmCodeSize,
       }
 
    /* Create a new code cache structure and initialize it */
-   codeCache = self()->allocateCodeCacheFromNewSegment(segmentSize, compThreadID);
+   codeCache = self()->allocateCodeCacheFromNewSegment(segmentSize, compThreadID, (*codeCache_pp)->_kind);
    if (!codeCache)
       {
       self()->setCodeCacheFull();
@@ -1193,7 +1194,8 @@ OMR::CodeCacheManager::initializeExecutableELFGenerator(void)
 TR::CodeCache *
 OMR::CodeCacheManager::allocateCodeCacheFromNewSegment(
       size_t segmentSizeInBytes,
-      int32_t reservingCompilationTID)
+      int32_t reservingCompilationTID,
+      TR::CodeCache::CacheKind kind)
    {
    TR::CodeCacheConfig & config = self()->codeCacheConfig();
    bool verboseCodeCache = config.verboseCodeCache();
