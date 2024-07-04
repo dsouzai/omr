@@ -263,7 +263,7 @@ OMR::CodeCacheManager::allocateCodeCacheObject(TR::CodeCacheMemorySegment *codeC
    if (codeCache)
       {
       new (codeCache) TR::CodeCache();
-      if (!codeCache->initialize(self(), codeCacheSegment, codeCacheSize))
+      if (!codeCache->initialize(self(), codeCacheSegment, codeCacheSize, kind))
          {
          self()->freeMemory(codeCache);
          codeCache = NULL;
@@ -1205,7 +1205,7 @@ OMR::CodeCacheManager::allocateCodeCacheFromNewSegment(
 
    if (codeCacheSegment)
       {
-      TR::CodeCache *codeCache = self()->allocateCodeCacheObject(codeCacheSegment, actualCodeCacheSizeAllocated);
+      TR::CodeCache *codeCache = self()->allocateCodeCacheObject(codeCacheSegment, actualCodeCacheSizeAllocated, kind);
 
       if (codeCache)
          {
