@@ -354,6 +354,8 @@ public:
    //
    bool compilePortableCode() { return false; }
 
+   bool generateSubOptimalCode() { return false; }
+
    // Maximum number of internal pointers that can be managed.
    //
    int32_t maxInternalPointers();
