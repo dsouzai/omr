@@ -8655,7 +8655,7 @@ TR_ColdBlockMarker::hasNotYetRun(TR::Node *node)
       bool isUnresolved;
 
       if (comp()->compileRelocatableCode() &&
-          !comp()->getOption(TR_UseSymbolValidationManager) &&
+          comp()->generateSubOptimalCode() &&
           !comp()->getOption(TR_DisablePeekAOTResolutions))
          isUnresolved = symRef->isUnresolvedMethodInCP(comp());
       else
@@ -8690,7 +8690,7 @@ TR_ColdBlockMarker::hasNotYetRun(TR::Node *node)
       else
          {
          if (comp()->compileRelocatableCode() &&
-             !comp()->getOption(TR_UseSymbolValidationManager) &&
+             comp()->generateSubOptimalCode() &&
              !comp()->getOption(TR_DisablePeekAOTResolutions))
             {
             bool isUnresolved = node->getSymbolReference()->isUnresolvedFieldInCP(comp());
@@ -8707,7 +8707,7 @@ TR_ColdBlockMarker::hasNotYetRun(TR::Node *node)
          else
             {
             if (comp()->compileRelocatableCode()
-                && comp()->getOption(TR_UseSymbolValidationManager)
+                && !comp()->generateSubOptimalCode()
                 && node->getSymbol()->isConstString())
                {
                return false;

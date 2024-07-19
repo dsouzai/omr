@@ -1261,7 +1261,7 @@ TR::VPClassType *TR::VPClassType::create(OMR::ValuePropagation *vp, const char *
    if (classObject)
       {
       bool isClassInitialized = false;
-      bool allowForAOT = vp->comp()->getOption(TR_UseSymbolValidationManager);
+      bool allowForAOT = !vp->comp()->generateSubOptimalCode();
       TR_PersistentClassInfo * classInfo =
          vp->comp()->getPersistentInfo()->getPersistentCHTable()->findClassInfoAfterLocking(classObject, vp->comp(), allowForAOT);
       if (classInfo && classInfo->isInitialized())

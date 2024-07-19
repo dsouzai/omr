@@ -409,7 +409,7 @@ static bool tryFoldCompileTimeLoad(
             // Non SVM AOT can deal with transformed loadaddr of system class only while Symbol Validation Manager can handle any class.
             // Skip the transformation under non SVM AOT when class is not loaded by bootstrap class loader.
             // TODO: Disabling tranformation on Power for non SVM AOT because it does not add external relocation record. Enable this once it is fixed.
-            if (vp->comp()->compileRelocatableCode() && !vp->comp()->getOption(TR_UseSymbolValidationManager) && (vp->comp()->target().cpu.isPower() || fej9->getClassLoader(clazz) != fej9->getSystemClassLoader()))
+            if (vp->comp()->compileRelocatableCode() && vp->comp()->generateSubOptimalCode() && (vp->comp()->target().cpu.isPower() || fej9->getClassLoader(clazz) != fej9->getSystemClassLoader()))
                return false;
 #endif
             // performTransformation() is needed here but not in the other cases
@@ -726,9 +726,9 @@ static bool refineUnsafeAccess(OMR::ValuePropagation *vp, TR::Node *node)
       }
 
    if (comp->compileRelocatableCode()
-       && !comp->getOption(TR_UseSymbolValidationManager))
+       && comp->generateSubOptimalCode())
       {
-      return refuseToConstrainUnsafe(vp, node, "AOT without SVM");
+      return refuseToConstrainUnsafe(vp, node, "Suboptimal AOT, or AOT without SVM");
       }
 
    if (symRef->getOffset() != 0)
@@ -1823,7 +1823,7 @@ TR::Node *constrainAload(OMR::ValuePropagation *vp, TR::Node *node)
       if (!symRef->getSymbol()->isArrayShadowSymbol())
          {
          TR::Symbol *sym = symRef->getSymbol();
-         bool allowForAOT = vp->comp()->getOption(TR_UseSymbolValidationManager);
+         bool allowForAOT = !vp->comp()->generateSubOptimalCode();
          if (sym->isStatic() && !symRef->isUnresolved() && (sym->isPrivate() || sym->isFinal()))
             {
             TR_PersistentClassInfo * classInfo =
@@ -9351,7 +9351,7 @@ static TR::Node *constrainIfcmpeqne(OMR::ValuePropagation *vp, TR::Node *node, b
             if (typeConstraint)
                {
                TR::VPConstraint *resolvedTypeConstraint = typeConstraint->asResolvedClass();
-               bool allowForAOT = vp->comp()->getOption(TR_UseSymbolValidationManager);
+               bool allowForAOT = !vp->comp()->generateSubOptimalCode();
                if (resolvedTypeConstraint)
                   {
                   TR_OpaqueClassBlock *clazz = resolvedTypeConstraint->getClass();

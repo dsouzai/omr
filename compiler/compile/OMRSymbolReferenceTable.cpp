@@ -1355,7 +1355,7 @@ OMR::SymbolReferenceTable::findOrCreateClassSymbol(
    sym->setClassObject();
 
 #ifdef J9_PROJECT_SPECIFIC
-   if (cpIndex == -1 && comp()->compileRelocatableCode() && !comp()->getOption(TR_UseSymbolValidationManager))
+   if (cpIndex == -1 && comp()->compileRelocatableCode() && comp()->generateSubOptimalCode())
       {
       // Restricting TR_ArbitraryClassAddress to classes loaded by the
       // bootstrap loader ensures that there is no ambiguity when correlating
