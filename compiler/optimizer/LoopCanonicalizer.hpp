@@ -42,12 +42,14 @@ class TR_LoopVersioner;
 class TR_RegionStructure;
 class TR_Structure;
 class TR_StructureSubGraphNode;
-namespace TR { class Block; }
-namespace TR { class CFG; }
-namespace TR { class NodeChecklist; }
-namespace TR { class RegisterMappedSymbol; }
-namespace TR { class SymbolReference; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFG;
+ class NodeChecklist;
+ class RegisterMappedSymbol;
+ class SymbolReference;
+ class TreeTop;
+}
 
 class TR_NodeParentPair
    {
@@ -252,9 +254,9 @@ class TR_LoopTransformer : public TR::Optimization
  * Class TR_LoopCanonicalizer
  * ==========================
  *
- * The loop canonicalizer optimization transforms a while loop into 
- * an if-guarded do-while loop with a loop invariant (pre-header) 
- * block. The loop test is placed at the end of the trees for the 
+ * The loop canonicalizer optimization transforms a while loop into
+ * an if-guarded do-while loop with a loop invariant (pre-header)
+ * block. The loop test is placed at the end of the trees for the
  * loop, so that the loop back-edge is almost always a backwards branch.
  */
 
@@ -315,13 +317,13 @@ class TR_LoopCanonicalizer : public TR_LoopTransformer
  * Class TR_LoopInverter
  * =====================
  *
- * The loop inverter optimization converts a loop in which the induction 
- * variable counts up from zero into one in which the induction variable 
- * counts down to zero. Note that this is legal only if the inversion of 
- * the loop does not affect program semantics inside the loop (order of 
- * exceptions thrown, etc.). The benefit of inversion is that there are, 
- * in general, instructions that can perform compare/branch against zero 
- * in an efficient manner, and in some cases (e.g. PowerPC) special count 
+ * The loop inverter optimization converts a loop in which the induction
+ * variable counts up from zero into one in which the induction variable
+ * counts down to zero. Note that this is legal only if the inversion of
+ * the loop does not affect program semantics inside the loop (order of
+ * exceptions thrown, etc.). The benefit of inversion is that there are,
+ * in general, instructions that can perform compare/branch against zero
+ * in an efficient manner, and in some cases (e.g. PowerPC) special count
  * registers can be used for counting.
  */
 

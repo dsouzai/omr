@@ -26,7 +26,9 @@
 #include "ilgen/VirtualMachineRegisterInStruct.hpp"
 #include "ilgen/IlBuilder.hpp"
 
-namespace TR { class VirtualMachineRegisterInStruct; }
+namespace TR {
+ class VirtualMachineRegisterInStruct;
+}
 
 namespace OMR
 {
@@ -38,7 +40,7 @@ namespace OMR
  * of the virtual machine that are candidates for VirtualMachineRegisterInStruct. An
  * alternative is VirtualMachineRegister, which can be more convenient if the virtual
  * machine value is stored in a more arbitrary place or in a structure that isn't readily
- * accessible inside the compiled method. 
+ * accessible inside the compiled method.
  * VirtualMachineRegisterInStruct is a subclass of VirtualMachineRegister
  *
  * The simulated register value is simply stored in a single local variable, which

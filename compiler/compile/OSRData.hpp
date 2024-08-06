@@ -35,13 +35,15 @@
 class TR_BitVector;
 class TR_OSRMethodData;
 class TR_OSRSlotSharingInfo;
-namespace TR { class Block; }
-namespace TR { class Compilation; }
-namespace TR { class Instruction; }
-namespace TR { class Node; }
-namespace TR { class ResolvedMethodSymbol; }
-namespace TR { class SymbolReference; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class Compilation;
+ class Instruction;
+ class Node;
+ class ResolvedMethodSymbol;
+ class SymbolReference;
+ class TreeTop;
+}
 template <class T> class List;
 
 namespace TR
@@ -218,7 +220,7 @@ class TR_OSRCompilationData
    int32_t getNumOfSymsThatShareSlot() {return numOfSymsThatShareSlot;}
    void updateNumOfSymsThatShareSlot(int32_t value) {numOfSymsThatShareSlot += value;}
    void buildSymRefOrderMap();
-      
+
    int32_t getSymRefOrder(int32_t symRefNumber);
    TR_OSRSlotSharingInfo* getSlotsInfo(const TR_ByteCodeInfo &bcInfo);
 
@@ -243,7 +245,7 @@ class TR_OSRCompilationData
    void buildFinalMap(int32_t callerIndex,
                       DefiningMap *finalMap,
                       DefiningMap *workingCatchBlockMap,
-                      DefiningMaps &definingSymRefsMapAtOSRCodeBlocks, 
+                      DefiningMaps &definingSymRefsMapAtOSRCodeBlocks,
                       DefiningMaps &symRefNumberMapForPrepareForOSRCalls
                       );
    /**
@@ -412,7 +414,7 @@ class TR_OSRMethodData
 
    TR_BCLiveRangeInfoHashTable  bcLiveRangeInfoHashTab;
    TR_BCLiveRangeInfoHashTable  bcPendingPushLivenessInfoHashTab;
-   DefiningMap                  *_symRefDefiningMap; 
+   DefiningMap                  *_symRefDefiningMap;
    TR_BitVector                 *_symRefs;
 
    TR_ArgInfoHashTable argInfoHashTab;

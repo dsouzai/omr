@@ -27,8 +27,10 @@
  */
 #ifndef OMR_VMMETHODENV_CONNECTOR
 #define OMR_VMMETHODENV_CONNECTOR
-namespace OMR { class VMMethodEnv; }
-namespace OMR { typedef OMR::VMMethodEnv VMMethodEnvConnector; }
+namespace OMR {
+ class VMMethodEnv;
+ typedef OMR::VMMethodEnv VMMethodEnvConnector;
+}
 #endif
 
 #include <stdint.h>
@@ -52,7 +54,7 @@ public:
    /**
     * \brief  Is this method compiled?
     * \return true if compiled, false if not or unknown
-    */ 
+    */
    bool isCompiledMethod(TR_OpaqueMethodBlock *method) { return false; }
 
    /**

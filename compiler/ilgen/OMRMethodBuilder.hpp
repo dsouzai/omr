@@ -33,13 +33,17 @@
 #define MAX_LINE_NUM_LEN 7
 
 class TR_BitVector;
-namespace TR { class BytecodeBuilder; }
-namespace TR { class ResolvedMethod; }
-namespace TR { class SymbolReference; }
-namespace TR { class VirtualMachineState; }
+namespace TR {
+ class BytecodeBuilder;
+ class ResolvedMethod;
+ class SymbolReference;
+ class VirtualMachineState;
+}
 
-namespace TR { class SegmentProvider; }
-namespace TR { class Region; }
+namespace TR {
+ class SegmentProvider;
+ class Region;
+}
 
 extern "C"
 {
@@ -252,7 +256,7 @@ class MethodBuilder : public TR::IlBuilder
     * @returns the directly inlining MethodBuilder or NULL if no MethodBuilder inlined this one
     */
    TR::MethodBuilder *callerMethodBuilder();
-   
+
    /**
     * @brief returns the client object associated with this object, allocating it if necessary
     */
@@ -341,7 +345,7 @@ class MethodBuilder : public TR::IlBuilder
    typedef TR::typed_allocator<std::pair<int32_t const, const char *>, TR::Region &> SlotToSymNameMapAllocator;
    typedef std::map<int32_t, const char *, std::less<int32_t>, SlotToSymNameMapAllocator> SlotToSymNameMap;
    SlotToSymNameMap            _symbolNameFromSlot;
-   
+
    typedef TR::typed_allocator<const char *, TR::Region &> StringSetAllocator;
    typedef std::set<const char *, StrComparator, StringSetAllocator> ArrayIdentifierSet;
 

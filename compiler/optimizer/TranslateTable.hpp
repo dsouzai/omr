@@ -26,8 +26,10 @@
 #include <stdint.h>
 #include "env/TRMemory.hpp"
 
-namespace TR { class SymbolReference; }
-namespace TR { class Compilation; }
+namespace TR {
+ class SymbolReference;
+ class Compilation;
+}
 
 class TR_TranslateTable
    {
@@ -49,7 +51,7 @@ class TR_TranslateTable
          TR_ALLOC(TR_Memory::LoopTransformer)
 
          TR_TranslateTableData() {}
-         
+
          TR_TranslateTableData* next;  // next table in linked list
          uint8_t* data;                // pointer to data table
          uint32_t defaultValue;        // default value

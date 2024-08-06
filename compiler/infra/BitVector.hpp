@@ -31,7 +31,9 @@
 
 class TR_BitVector;
 class TR_BitVectorCursor;
-namespace TR { class Compilation; }
+namespace TR {
+ class Compilation;
+}
 
 #if defined(BITVECTOR_64BIT)
 typedef uint64_t chunk_t;
@@ -318,7 +320,7 @@ class TR_BitVector
          default:
             TR_ASSERT(false, "Unhandled allocation type!");
          }
-      
+
       _growable = growable;
       _chunks = NULL;
       _numChunks = 0;

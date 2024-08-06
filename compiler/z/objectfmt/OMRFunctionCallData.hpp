@@ -27,20 +27,24 @@
  */
 #ifndef OMR_FUNCTIONCALLDATA_CONNECTOR
 #define OMR_FUNCTIONCALLDATA_CONNECTOR
-namespace OMR { namespace Z { class FunctionCallData; } }
-namespace OMR { typedef OMR::Z::FunctionCallData FunctionCallDataConnector; }
+namespace OMR {
+ namespace Z { class FunctionCallData; }
+ typedef OMR::Z::FunctionCallData FunctionCallDataConnector;
+}
 #endif
 
 #include "compiler/objectfmt/OMRFunctionCallData.hpp"
 #include "runtime/Runtime.hpp"
 
-namespace TR { class Instruction; }
-namespace TR { class SymbolReference; }
-namespace TR { class Node; }
-namespace TR { class Register; }
-namespace TR { class RegisterDependencyConditions; }
-namespace TR { class CodeGenerator; }
-namespace TR { class Snippet; }
+namespace TR {
+ class Instruction;
+ class SymbolReference;
+ class Node;
+ class Register;
+ class RegisterDependencyConditions;
+ class CodeGenerator;
+ class Snippet;
+}
 
 namespace OMR
 {
@@ -58,7 +62,7 @@ public:
     * @param methodSymRef : \c TR::SymbolReference of the function to call
     * @param callNode : \c TR::Node associcated with the function call
     * @param bufferAddress : \c In case encoding a function call, instruction
-    *          for call will be encoded from this address. 
+    *          for call will be encoded from this address.
     * @param targetAddress : \c a specific function address to call that
     *          overrides the address in the symbol reference; or 0 if none
     * @param returnAddressReg : \c A register to be used to hold the return
@@ -99,9 +103,9 @@ public:
          snippet(snippet),
          out_loadInstr(NULL),
          out_callInstr(NULL) {}
-         
 
-   
+
+
    /**
     * If a non-zero targetAddress is provided, use that as the address of the function to call
     */

@@ -37,7 +37,9 @@
 #include "env/ConcreteFE.hpp"
 #endif
 
-namespace TR { class CodeGenerator; }
+namespace TR {
+ class CodeGenerator;
+}
 
 namespace TR {
 

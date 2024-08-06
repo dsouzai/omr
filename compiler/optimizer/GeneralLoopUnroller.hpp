@@ -55,12 +55,14 @@ class TR_RegionStructure;
 class TR_Structure;
 class TR_StructureSubGraphNode;
 class TR_UseDefInfo;
-namespace TR { class AutomaticSymbol; }
-namespace TR { class CFG; }
-namespace TR { class CFGEdge; }
-namespace TR { class Optimization; }
-namespace TR { class Optimizer; }
-namespace TR { class ParameterSymbol; }
+namespace TR {
+ class AutomaticSymbol;
+ class CFG;
+ class CFGEdge;
+ class Optimization;
+ class Optimizer;
+ class ParameterSymbol;
+}
 
 class TR_LoopUnroller
    {
@@ -284,21 +286,21 @@ class TR_LoopUnroller
  * Class TR_GeneralLoopUnroller
  * ============================
  *
- * The general loop unroller optimization can unroll or peel a majority of 
- * loops with or without the loop driving tests done after each iteration 
- * (loop) body. Usually a peel is inserted before the unrolled loop, and 
- * the residual iterations to be done (at most u - 1 residual iterations 
- * where u is the unroll factor) are also done using the peeled code. 
- * Peeling aids partial redundancy elimination (PRE) as code does not have 
- * to be moved; instead dominated expressions can be commoned (which is far 
- * easier than code motion due to problems introduced by exception 
+ * The general loop unroller optimization can unroll or peel a majority of
+ * loops with or without the loop driving tests done after each iteration
+ * (loop) body. Usually a peel is inserted before the unrolled loop, and
+ * the residual iterations to be done (at most u - 1 residual iterations
+ * where u is the unroll factor) are also done using the peeled code.
+ * Peeling aids partial redundancy elimination (PRE) as code does not have
+ * to be moved; instead dominated expressions can be commoned (which is far
+ * easier than code motion due to problems introduced by exception
  * checks in Java).
  *
- * Async checks (yield points) are eliminated from u - 1 unrolled bodies 
+ * Async checks (yield points) are eliminated from u - 1 unrolled bodies
  * and only one remains.
- * 
- * Unroll factors and code growth thresholds are arrived at based on 
- * profiling information when available. This analysis uses induction 
+ *
+ * Unroll factors and code growth thresholds are arrived at based on
+ * profiling information when available. This analysis uses induction
  * variable information found by value propagation.
  */
 

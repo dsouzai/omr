@@ -35,7 +35,7 @@
  *       2. ILValidationStrategies.hpp must also be updated
  *          for a newly added `Rule` to become part of a particular
  *          Validation Strategy.
- *     
+ *
  *       3. Finally, the ILValidator is responsible for validating
  *          the IL based on a certain ILValidationStrategy.
  *          So please instantiate the said `*ValidationRule` object
@@ -54,10 +54,12 @@
 #include "ras/ILValidationUtils.hpp"
 
 
-namespace TR { class Compilation; }
-namespace TR { class NodeChecklist; }
-namespace TR { class ResolvedMethodSymbol; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Compilation;
+ class NodeChecklist;
+ class ResolvedMethodSymbol;
+ class TreeTop;
+}
 
 namespace TR {
 
@@ -122,8 +124,8 @@ class ValidateLivenessBoundaries : public MethodValidationRule
 
 
 /**
- * BlockValidationRule: 
- * 
+ * BlockValidationRule:
+ *
  * Verify that the IL for a particular extended block has certain properties.
  */
 
@@ -165,8 +167,8 @@ class ValidateNodeRefCountWithinBlock : public BlockValidationRule
 
 
 /**
- * NodeValidationRule: 
- * 
+ * NodeValidationRule:
+ *
  * Verify that the IL for a particular TR::Node has certain properties.
  */
 class NodeValidationRule

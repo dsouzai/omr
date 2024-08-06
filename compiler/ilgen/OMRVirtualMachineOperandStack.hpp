@@ -26,12 +26,14 @@
 
 #include "ilgen/VirtualMachineState.hpp"
 
-namespace TR { class IlBuilder; }
-namespace TR { class IlValue; }
-namespace TR { class IlType; }
-namespace TR { class MethodBuilder; }
-namespace TR { class VirtualMachineOperandStack; }
-namespace TR { class VirtualMachineRegister; }
+namespace TR {
+ class IlBuilder;
+ class IlValue;
+ class IlType;
+ class MethodBuilder;
+ class VirtualMachineOperandStack;
+ class VirtualMachineRegister;
+}
 
 namespace OMR
 {
@@ -68,7 +70,7 @@ namespace OMR
  *   expressions are stored in the TR::IlValue's for the state being merged
  *   *to*. So the purpose of MergeInto() is to store the values of the current
  *   state into the same variables as in the "other" state.
- * 
+ *
  * VirtualMachineOperandStack provides several stack-y operations:
  *   Push() pushes a TR::IlValue onto the stack
  *   Pop() pops and returns a TR::IlValue from the stack
@@ -82,22 +84,22 @@ namespace OMR
 class VirtualMachineOperandStack : public TR::VirtualMachineState
    {
    public:
-  
+
   /**
     * @brief public constructor, must be instantiated inside a compilation because uses heap memory
     * @param mb TR::MethodBuilder object of the method currently being compiled
     * @param sizeHint initial size used to allocate the stack; will grow larger if needed
     * @param elementType TR::IlType representing the underlying type of the virtual machine's operand stack entries
     * @param stackTop previously allocated and initialized VirtualMachineRegister representing the top of stack
-    * @param growsUp to configure virtual machine stack growth direction, set to true if virtual machine stack grows towards larger addresses, false otherwise 
-    * @param stackInitialOffset to configure virtual machine stack stack offset 
+    * @param growsUp to configure virtual machine stack growth direction, set to true if virtual machine stack grows towards larger addresses, false otherwise
+    * @param stackInitialOffset to configure virtual machine stack stack offset
     * set to the difference in elements between initial stack pointer and actual bottom of stack
     * Some stacks Push by incrementing stack pointer then storing, some by storing and then
     * incrementing stack pointer. In the first case, stackInitialOffset should be -1
     * because the stack pointer initially points one element below the bottom of the stack.
     * In the second case, stackInitialOffset should be 0, because the stack pointer
     * initially points at the bottom of the stack. Other values are possible but would be
-    * considered highly unusual. 
+    * considered highly unusual.
     * Default behaviour for compatibility constructor will be optional arguments, growsUp is true, and stackInitialOffset is -1.
     */
 
@@ -115,12 +117,12 @@ class VirtualMachineOperandStack : public TR::VirtualMachineState
     * @param b the builder where the operations will be placed to recreate the virtual machine operand stack
     */
    virtual void Commit(TR::IlBuilder *b);
-   
+
    /**
     * @brief read the virtual machine stack back into the simulated operand stack
-    * @param b the builder where the operations will be placed to recreate the simulated operand stack 
+    * @param b the builder where the operations will be placed to recreate the simulated operand stack
     * Users can call Drop beforehand with the appropriate positive or negative count to ensure the simulated
-    * stack accounts for new or dropped virtual machine stack elements. 
+    * stack accounts for new or dropped virtual machine stack elements.
     */
    virtual void Reload(TR::IlBuilder *b);
 

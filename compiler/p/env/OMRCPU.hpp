@@ -27,8 +27,10 @@
  */
 #ifndef OMR_CPU_CONNECTOR
 #define OMR_CPU_CONNECTOR
-namespace OMR { namespace Power { class CPU; } }
-namespace OMR { typedef OMR::Power::CPU CPUConnector; }
+namespace OMR {
+ namespace Power { class CPU; }
+ typedef OMR::Power::CPU CPUConnector;
+}
 #else
 #error OMR::Power::CPU expected to be a primary connector, but a OMR connector is already defined
 #endif
@@ -55,7 +57,7 @@ protected:
       _processorDescription.physicalProcessor = OMR_PROCESSOR_PPC_UNKNOWN;
       memset(_processorDescription.features, 0, OMRPORT_SYSINFO_FEATURES_SIZE*sizeof(uint32_t));
       }
-   
+
    CPU(const OMRProcessorDesc& processorDescription) : OMR::CPU(processorDescription) {}
 
 public:
@@ -125,7 +127,7 @@ public:
     * @return true if the target is within range; false otherwise.
     */
    bool isTargetWithinIFormBranchRange(intptr_t targetAddress, intptr_t sourceAddress);
-  
+
    bool supportsFeature(uint32_t feature);
    bool is(OMRProcessorArchitecture p);
    bool isAtLeast(OMRProcessorArchitecture p);
@@ -138,7 +140,7 @@ public:
    const char* getProcessorName();
 
 private:
-   
+
    TR_Processor getOldProcessorTypeFromNewProcessorType(OMRProcessorArchitecture p);
 
    };

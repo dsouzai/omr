@@ -22,7 +22,9 @@
 #ifndef IlVerifier_hpp
 #define IlVerifier_hpp
 
-namespace TR { class ResolvedMethodSymbol; }
+namespace TR {
+ class ResolvedMethodSymbol;
+}
 
 namespace TR {
 
@@ -35,7 +37,7 @@ class IlVerifier
     * @return 0 on success, or a non-zero error code. If non-zero is returned,
     * compilation stops.
     */
-   virtual int32_t verify(TR::ResolvedMethodSymbol *methodSymbol) = 0; 
+   virtual int32_t verify(TR::ResolvedMethodSymbol *methodSymbol) = 0;
    };
 
 }

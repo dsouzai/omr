@@ -37,8 +37,10 @@
 class TR_FrontEnd;
 class TR_OpaqueMethodBlock;
 class TR_PrexArgInfo;
-namespace TR { class IlGeneratorMethodDetails; }
-namespace TR { class LabelSymbol; }
+namespace TR {
+ class IlGeneratorMethodDetails;
+ class LabelSymbol;
+}
 
 bool TR_ResolvedMethod::isDAAMarshallingWrapperMethod()
    {

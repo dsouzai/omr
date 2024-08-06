@@ -27,15 +27,19 @@
  */
 #ifndef OMR_CODE_METADATA_CONNECTOR
 #define OMR_CODE_METADATA_CONNECTOR
-namespace OMR { struct CodeMetaData; }
-namespace OMR { typedef OMR::CodeMetaData CodeMetaDataConnector; }
+namespace OMR {
+ struct CodeMetaData;
+ typedef OMR::CodeMetaData CodeMetaDataConnector;
+}
 #endif
 
 #include "env/jittypes.h"
 #include "infra/Annotations.hpp"
 
-namespace TR { class CodeMetaData; }
-namespace TR { class Compilation; }
+namespace TR {
+ class CodeMetaData;
+ class Compilation;
+}
 
 /**
  * CodeMetaData contains metadata information about a single method.
@@ -62,7 +66,7 @@ class OMR_EXTENSIBLE CodeMetaData
    uintptr_t codeAllocStart() { return _codeAllocStart; }
 
    /**
-    * @brief Returns the total size of code memory allocated for a method 
+    * @brief Returns the total size of code memory allocated for a method
     * within a code cache.
     */
    uint32_t codeAllocSize() { return _codeAllocSize; }
@@ -71,12 +75,12 @@ class OMR_EXTENSIBLE CodeMetaData
     * @brief Returns the starting address of compiled code for a
     * method when invoked from an interpreter.
     *
-    * Interpreter entry PC may preceed compiled entry PC and may point 
-    * to code necessary for proper execution of this method if invoked 
-    * from an interpreter. For example, it may need to marshall method 
+    * Interpreter entry PC may preceed compiled entry PC and may point
+    * to code necessary for proper execution of this method if invoked
+    * from an interpreter. For example, it may need to marshall method
     * arguments from an interpreter linkage to a compiled method linkage.
     *
-    * By default, the interpreter entry PC and compiled entry PC point 
+    * By default, the interpreter entry PC and compiled entry PC point
     * to the same address.
     */
    uintptr_t interpreterEntryPC() { return _interpreterEntryPC; }
@@ -84,8 +88,8 @@ class OMR_EXTENSIBLE CodeMetaData
    /**
     * @brief Returns the starting address of compiled code for a
     * method when invoked from compiled code.
-    * 
-    * By default, the interpreter entry PC and compiled entry PC point 
+    *
+    * By default, the interpreter entry PC and compiled entry PC point
     * to the same address.
     */
    uintptr_t compiledEntryPC() { return _compiledEntryPC; }

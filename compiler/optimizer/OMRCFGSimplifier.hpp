@@ -26,11 +26,13 @@
 #include "optimizer/Optimization.hpp"
 #include "optimizer/OptimizationManager.hpp"
 
-namespace TR { class Block; }
-namespace TR { class CFG; }
-namespace TR { class CFGEdge; }
-namespace TR { class Node; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFG;
+ class CFGEdge;
+ class Node;
+ class TreeTop;
+}
 template <class T> class ListElement;
 
 namespace OMR
@@ -48,11 +50,11 @@ class CFGSimplifier : public TR::Optimization
 
    virtual int32_t perform();
    virtual const char * optDetailString() const throw();
-   
+
    protected:
    /**
     * \brief
-    *    This function calls individual routines to try to match different `if` control flow structure 
+    *    This function calls individual routines to try to match different `if` control flow structure
     *    for simplification.
     *
     * \parm needToDuplicateTree
@@ -64,7 +66,7 @@ class CFGSimplifier : public TR::Optimization
 
    /**
     * \brief
-    *    This function tries to match a triangle or dimond like (if (cond) x = 0; else x = y) and tries to 
+    *    This function tries to match a triangle or dimond like (if (cond) x = 0; else x = y) and tries to
     *    remove the control flow if the condition can be represented by the result of "cmp" node.
     *
     * \parm needToDuplicateTree
@@ -76,7 +78,7 @@ class CFGSimplifier : public TR::Optimization
 
    /**
     * \brief
-    *    This function tries to match an ifacmpeq/ifacmpne of NULL node to a block ending in throw 
+    *    This function tries to match an ifacmpeq/ifacmpne of NULL node to a block ending in throw
     *    and reaplce with a NULLCHK to a catch.
     *
     * \parm needToDuplicateTree
@@ -88,7 +90,7 @@ class CFGSimplifier : public TR::Optimization
 
    /**
     * \brief
-    *    This function tries to match a simple diamond or traigle that performs conditional store in a temp 
+    *    This function tries to match a simple diamond or traigle that performs conditional store in a temp
     *    and repalce with an appropriate select node.
     *
     * \parm needToDuplicateTree
@@ -100,7 +102,7 @@ class CFGSimplifier : public TR::Optimization
 
    /**
     * \brief
-    *    This function tries to match diamond or traigle that performs conditional stores in temps 
+    *    This function tries to match diamond or traigle that performs conditional stores in temps
     *    and repalce with seqeunce of appropriate select nodes.
     *
     * \parm needToDuplicateTree
@@ -131,7 +133,7 @@ class CFGSimplifier : public TR::Optimization
     *
     * \return Boolean that indicates true if tranformation is performed based on a matched pattern.
     */
-   bool simplifyBoundCheckWithThrowException(bool needToDuplicateTree); 
+   bool simplifyBoundCheckWithThrowException(bool needToDuplicateTree);
 
    TR::TreeTop *getNextRealTreetop(TR::TreeTop *treeTop);
    TR::TreeTop *getLastRealTreetop(TR::Block *block);

@@ -31,10 +31,12 @@
 #include "infra/Checklist.hpp"
 
 class TR_BitVector;
-namespace TR { class SymbolReference; }
-namespace TR { class Block; }
-namespace TR { class Node; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class SymbolReference;
+ class Block;
+ class Node;
+ class TreeTop;
+}
 
 // Copy Propagation
 //
@@ -116,7 +118,7 @@ class TR_CopyPropagation : public TR::Optimization
    typedef std::less<TR::Node*> UseTreeMapComparator;
    typedef std::map<TR::Node*, TR::TreeTop*, UseTreeMapComparator, UseTreeMapAllocator> UseTreeMap;
    UseTreeMap _useTreeTops;
-   
+
    TR::Block *_storeBlock;
    bool _lookForOriginalDefs;
    bool _propagatingWholeExpression;

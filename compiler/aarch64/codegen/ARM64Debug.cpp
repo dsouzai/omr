@@ -48,7 +48,9 @@
 #include "aarch64/codegen/CallSnippet.hpp"
 #include "aarch64/codegen/StackCheckFailureSnippet.hpp"
 
-namespace TR { class ARM64ForceRecompilationSnippet; }
+namespace TR {
+ class ARM64ForceRecompilationSnippet;
+}
 #endif
 
 static const char *ARM64ConditionNames[] =
@@ -1776,7 +1778,7 @@ TR_Debug::print(TR::FILE *pOutFile, TR::ARM64Trg1Src1ImmInstruction *instr)
             done = true;
             trfprintf(pOutFile, "sxt%cw \t", (imms == 7) ? 'b' : 'h');
             print(pOutFile, instr->getTargetRegister(), TR_WordReg); trfprintf(pOutFile, ", ");
-            print(pOutFile, instr->getSource1Register(), TR_WordReg); 
+            print(pOutFile, instr->getSource1Register(), TR_WordReg);
             }
          }
       if (!done)

@@ -25,12 +25,14 @@
 #include <stdint.h>
 #include "ilgen/VirtualMachineState.hpp"
 
-namespace TR { class IlBuilder; }
-namespace TR { class IlType; }
-namespace TR { class IlValue; }
-namespace TR { class MethodBuilder; }
-namespace TR { class VirtualMachineRegister; }
-namespace TR { class VirtualMachineOperandArray; }
+namespace TR {
+ class IlBuilder;
+ class IlType;
+ class IlValue;
+ class MethodBuilder;
+ class VirtualMachineRegister;
+ class VirtualMachineOperandArray;
+}
 
 namespace OMR
 {
@@ -43,7 +45,7 @@ namespace OMR
  * that represent the value computed by the bytecodes.
  *
  * The array is represented as an array of pointers to TR::IlValue's, making it
- * easy to use IlBuilder services to consume and compute new values. 
+ * easy to use IlBuilder services to consume and compute new values.
  *
  * The current implementation does not share anything among different
  * VirtualMachineOperandArray objects. Possibly, some of the state could be
@@ -87,11 +89,11 @@ class VirtualMachineOperandArray : public TR::VirtualMachineState
     * @param b the builder where the operations will be placed to recreate the virtual machine operand array
     */
    virtual void Commit(TR::IlBuilder *b);
-   
+
    /**
     * @brief read the virtual machine array back into the simulated operand array
     * @param b the builder where the operations will be placed to recreate the simulated operand array
-    * stack accounts for new or dropped virtual machine stack elements. 
+    * stack accounts for new or dropped virtual machine stack elements.
     */
    virtual void Reload(TR::IlBuilder *b);
 
@@ -107,7 +109,7 @@ class VirtualMachineOperandArray : public TR::VirtualMachineState
     * @param b builder object where the operations will be added to make the current operand array the same as the other
     */
    virtual void MergeInto(TR::VirtualMachineState *other, TR::IlBuilder *b);
-   
+
    /**
     * @brief update the values used to read and write the virtual machine array
     * @param b the builder where the values will be placed
@@ -121,19 +123,19 @@ class VirtualMachineOperandArray : public TR::VirtualMachineState
     * @returns the expression at the given index
     */
    virtual TR::IlValue *Get(int32_t index);
-   
+
    /**
     * @brief Set the expression into the simulated operand array at the given index
     * @param index the location to store the expression
     * @param value expression to store into the simulated operand array
     */
    virtual void Set(int32_t index, TR::IlValue *value);
-  
+
    /**
     * @brief Move the expression from one index to another index in the simulated operand array
     * @param dstIndex the location to store the expression
     * @param srcIndex the location to copy the expression from
-    */ 
+    */
    virtual void Move(TR::IlBuilder *b, int32_t dstIndex, int32_t srcIndex);
 
    /**

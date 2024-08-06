@@ -25,8 +25,12 @@
 #ifndef TR_PERSISTENT_ALLOCATOR_KIT
 #define TR_PERSISTENT_ALLOCATOR_KIT
 
-namespace OMR { class PersistentAllocatorKit; }
-namespace TR { using OMR::PersistentAllocatorKit; }
+namespace OMR {
+ class PersistentAllocatorKit;
+}
+namespace TR {
+ using OMR::PersistentAllocatorKit;
+}
 
 #endif // TR_PERSISTENT_ALLOCATOR_KIT
 
@@ -39,7 +43,7 @@ namespace OMR
 class PersistentAllocatorKit
    {
    public:
-   
+
    PersistentAllocatorKit(TR::RawAllocator rawAllocator) :
       rawAllocator(rawAllocator)
       {

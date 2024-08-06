@@ -39,12 +39,14 @@ class TR_LiveVariableInformation;
 class TR_Liveness;
 class TR_MovableStore;
 class TR_SinkStores;
-namespace TR { class Block; }
-namespace TR { class CFGEdge; }
-namespace TR { class CFGNode; }
-namespace TR { class RegisterMappedSymbol; }
-namespace TR { class SymbolReference; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFGEdge;
+ class CFGNode;
+ class RegisterMappedSymbol;
+ class SymbolReference;
+ class TreeTop;
+}
 
 // Store Sinking
 

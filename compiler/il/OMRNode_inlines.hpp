@@ -38,7 +38,9 @@
 #include "infra/Assert.hpp"
 #include "infra/Flags.hpp"
 
-namespace TR { class TreeTop; }
+namespace TR {
+ class TreeTop;
+}
 
 /*
  * Performance sensitive implementations are included here to support inlining.
@@ -165,7 +167,7 @@ OMR::Node::mayUse()
       TR_UseOnlyAliasSetInterface aliasSetInterface(self()->getSymbolReference());
       return aliasSetInterface;
       }
-   else 
+   else
       {
       //if there is no symbolreference, then return an empty aliseset
        TR_UseOnlyAliasSetInterface aliasSetInterface(NULL);

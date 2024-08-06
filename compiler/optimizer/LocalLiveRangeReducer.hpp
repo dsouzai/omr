@@ -33,7 +33,9 @@
 
 class DepPair;
 class TR_TreeRefInfo;
-namespace TR { class TreeTop; }
+namespace TR {
+ class TreeTop;
+}
 
 // Local Live Range Reduction
 //
@@ -46,21 +48,21 @@ namespace TR { class TreeTop; }
  * Class TR_LocalLiveRangeReduction
  * ================================
  *
- * Local live range reduction is the more general optimization/implementation 
+ * Local live range reduction is the more general optimization/implementation
  * of local reordering.
- * 
- * It is essentially a general pass that operates at the granularity of a block 
- * at a time and aims to reduce the live range of commoned nodes (virtual registers 
- * in the code generator) with a view to reducing the likelihood of register spilling. 
- * Entire trees are moved if necessary and also subtrees are extracted and anchored 
- * under treetop nodes with a view of keeping all the references to a particular node 
- * as close together as possible (while also trying to do the same wrt live ranges 
- * of the children of the node). Since the optimization moves nodes around it needs 
- * to consult aliasing to ensure that the semantics of the original program are not 
- * changed. Some other IL rules that are not expressed as aliasing relationships 
- * (e.g. an idiv node must be under a DIVCHK in Java) need to be enforced by 
+ *
+ * It is essentially a general pass that operates at the granularity of a block
+ * at a time and aims to reduce the live range of commoned nodes (virtual registers
+ * in the code generator) with a view to reducing the likelihood of register spilling.
+ * Entire trees are moved if necessary and also subtrees are extracted and anchored
+ * under treetop nodes with a view of keeping all the references to a particular node
+ * as close together as possible (while also trying to do the same wrt live ranges
+ * of the children of the node). Since the optimization moves nodes around it needs
+ * to consult aliasing to ensure that the semantics of the original program are not
+ * changed. Some other IL rules that are not expressed as aliasing relationships
+ * (e.g. an idiv node must be under a DIVCHK in Java) need to be enforced by
  * checking explicitly that the code motion would still result in correct IL.
- * 
+ *
  */
 
 class TR_LocalLiveRangeReduction  : public TR::Optimization

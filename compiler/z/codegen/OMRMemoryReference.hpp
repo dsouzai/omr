@@ -27,8 +27,10 @@
 */
 #ifndef OMR_MEMREF_CONNECTOR
 #define OMR_MEMREF_CONNECTOR
-namespace OMR {namespace Z { class MemoryReference; } }
-namespace OMR { typedef OMR::Z::MemoryReference MemoryReferenceConnector; }
+namespace OMR {
+namespace Z { class MemoryReference; }
+ typedef OMR::Z::MemoryReference MemoryReferenceConnector;
+}
 #else
 #error OMR::Z::MemoryReference expected to be a primary connector, but a OMR connector is already defined
 #endif
@@ -53,11 +55,13 @@ namespace OMR { typedef OMR::Z::MemoryReference MemoryReferenceConnector; }
 #include "infra/List.hpp"
 
 class TR_StorageReference;
-namespace TR { class Instruction; }
-namespace TR { class MemoryReference; }
-namespace TR { class Node; }
-namespace TR { class ParameterSymbol; }
-namespace TR { class UnresolvedDataSnippet; }
+namespace TR {
+ class Instruction;
+ class MemoryReference;
+ class Node;
+ class ParameterSymbol;
+ class UnresolvedDataSnippet;
+}
 
 #define S390MemRef_UnresolvedDataSnippet         0x01
 #define MemRef_ConstantDataSnippet               0x04
@@ -291,7 +295,7 @@ bool isAligned();
  *    A return value of `false` does not imply long displacement is not required. This is because the displacement of
  *    this memory reference is not fully known until binary encoding. Only after the binary encoding of this memory
  *    reference will a return value of `false` indicate that long displacement is not required. The offset may increase
- *    by some amount during code generation, however it will never decrease. This is why a return value of `true` 
+ *    by some amount during code generation, however it will never decrease. This is why a return value of `true`
  *    always implies long displacement will be required.
  */
 const bool isLongDisplacementRequired();
@@ -468,7 +472,7 @@ void setMemRefAndGetUnresolvedData(TR::Snippet *& snippet) {}
 
 /**
  * \brief
- *   Create a MemoryReference from a given node. 
+ *   Create a MemoryReference from a given node.
  *
  * \param[in] node
  *   The node which describes the memory reference.

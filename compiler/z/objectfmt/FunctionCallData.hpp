@@ -26,12 +26,14 @@
 #include "objectfmt/OMRFunctionCallData.hpp"
 #include "runtime/Runtime.hpp"
 
-namespace TR { class Instruction; }
-namespace TR { class SymbolReference; }
-namespace TR { class Node; }
-namespace TR { class Register; }
-namespace TR { class RegisterDependencyConditions; }
-namespace TR { class CodeGenerator; }
+namespace TR {
+ class Instruction;
+ class SymbolReference;
+ class Node;
+ class Register;
+ class RegisterDependencyConditions;
+ class CodeGenerator;
+}
 
 namespace TR
 {
@@ -84,7 +86,7 @@ public:
          TR::Node *callNode,
          uint8_t *bufferAddress,
          TR::Snippet *snippet,
-         TR_ExternalRelocationTargetKind reloKind = TR_NoRelocation) : 
+         TR_ExternalRelocationTargetKind reloKind = TR_NoRelocation) :
       OMR::FunctionCallDataConnector(cg, methodSymRef, callNode, bufferAddress,
          static_cast<intptr_t>(0), NULL, NULL, NULL, NULL,
          (TR_RuntimeHelper)0, reloKind, snippet) {}

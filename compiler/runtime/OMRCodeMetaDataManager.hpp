@@ -27,14 +27,18 @@
  */
 #ifndef OMR_CODE_METADATA_MANAGER_CONNECTOR
 #define OMR_CODE_METADATA_MANAGER_CONNECTOR
-namespace OMR { class CodeMetaDataManager; }
-namespace OMR { typedef OMR::CodeMetaDataManager CodeMetaDataManagerConnector; }
+namespace OMR {
+ class CodeMetaDataManager;
+ typedef OMR::CodeMetaDataManager CodeMetaDataManagerConnector;
+}
 #endif
 
 #ifndef OMR_METADATA_HASHTABLE_CONNECTOR
 #define OMR_METADATA_HASHTABLE_CONNECTOR
-namespace OMR { class MetaDataHashTable; }
-namespace OMR { typedef OMR::MetaDataHashTable MetaDataHashTableConnector; }
+namespace OMR {
+ class MetaDataHashTable;
+ typedef OMR::MetaDataHashTable MetaDataHashTableConnector;
+}
 #endif
 
 #include <stdint.h>
@@ -42,10 +46,12 @@ namespace OMR { typedef OMR::MetaDataHashTable MetaDataHashTableConnector; }
 #include "infra/Annotations.hpp"
 #include "j9nongenerated.h"
 
-namespace TR { class CodeCache; }
-namespace TR { class CodeMetaDataManager; }
-namespace TR { class MetaDataHashTable; }
-namespace TR { struct MethodMetaDataPOD; }
+namespace TR {
+ class CodeCache;
+ class CodeMetaDataManager;
+ class MetaDataHashTable;
+ struct MethodMetaDataPOD;
+}
 
 namespace OMR
 {
@@ -79,7 +85,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
     * hashtable in the AVL tree and inserts the data pointer.
 
     * Note, insertMetaData does not check to verify that an metadata's given range
-    * is not already occupied by an existing metadata.  This is because metadata  
+    * is not already occupied by an existing metadata.  This is because metadata
     * ranges represent the virtual memory actually occupied by compiled code.
     * Thus, if two metadata ranges overlap, then two pieces of compiled code
     * co-exist on top of each other, which is inherently incorrect.  If the
@@ -121,7 +127,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
 
    /**
     * @brief Attempts to find a registered metadata for a given metadata's startPC.
-    * 
+    *
     * Note: findMetaDataForPC does not locally acquire the JIT metadata monitor.
     * Users must first manually acquire the monitor or go through another function
     * that does.
@@ -134,7 +140,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
 
 
    /**
-    * @brief Register code cache with metadata manager. 
+    * @brief Register code cache with metadata manager.
     *
     * Whenever a new codecache is allocated, register it with this metadata
     * manager so that subsequent insertion and query is aware of the contents.
@@ -157,7 +163,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
     * @brief Inserts an metadata into the metadata manager causing it to represent a
     * given memory range.
     *
-    * Note this method expects to be called via another method in the metadata  
+    * Note this method expects to be called via another method in the metadata
     * manager and thus does not acquire the metadata manager's monitor.
     *
     * @param metadata The MethodMetaDataPOD which will represent the given memory
@@ -173,7 +179,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
     * @brief Removes an metadata from the metadata manager  causing it to no longer
     * represent a given memory range.
     *
-    * Note this method expects to be called via another method in the metadata  
+    * Note this method expects to be called via another method in the metadata
     * manager and thus does not acquire the metadata manager's monitor.
     *
     * @param metadata The MethodMetaDataPOD to remove from representing the given
@@ -191,7 +197,7 @@ class OMR_EXTENSIBLE CodeMetaDataManager
     * metadata as the previous query, and if not, searches for and retrieves the
     * new metadata's code cache's hash table.
     *
-    * Note this method expects to be called via another method in the metadata  
+    * Note this method expects to be called via another method in the metadata
     * manager and thus does not acquire the metadata manager's monitor.
     *
     * @param currentPC The PC we are currently inquiring about.
@@ -232,8 +238,8 @@ class OMR_EXTENSIBLE CodeMetaDataManager
 
    J9AVLTree *allocateMetaDataAVL();
 
-   // Singleton: Protected to allow manipulation of singleton pointer 
-   // in test cases. 
+   // Singleton: Protected to allow manipulation of singleton pointer
+   // in test cases.
    static TR::CodeMetaDataManager *_codeMetaDataManager;
 
    J9AVLTree *_metaDataAVL;

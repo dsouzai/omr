@@ -31,14 +31,16 @@
 #include "codegen/S390GenerateInstructions.hpp"
 #include "codegen/S390Instruction.hpp"
 
-namespace TR { class Node; }
+namespace TR {
+ class Node;
+}
 
 static bool
 isBarrierToPeepHoleLookback(TR::Instruction* cursor)
    {
    if (cursor == NULL)
       return true;
-   
+
    if (cursor->isLabel())
       return true;
 
@@ -254,7 +256,7 @@ OMR::Z::Peephole::performOnInstruction(TR::Instruction* cursor)
 
             if (!performedCurrentPeephole)
                performedCurrentPeephole |= self()->tryToRemoveDuplicateLoadRegister();
-            
+
             performed |= performedCurrentPeephole;
             break;
             }
@@ -942,7 +944,7 @@ OMR::Z::Peephole::tryToReduceAGI()
          {
          if (performTransformation(self()->comp(), "O^O S390 PEEPHOLE: AGI LA reduction on [%p] from source load [%p].\n", current, cursor))
             {
-            auto laInst = generateRXInstruction(self()->cg(), TR::InstOpCode::LA, cursor->getNode(), lgrTargetReg, 
+            auto laInst = generateRXInstruction(self()->cg(), TR::InstOpCode::LA, cursor->getNode(), lgrTargetReg,
                generateS390MemoryReference(lgrSourceReg, 0, self()->cg()), cursor->getPrev());
 
             self()->cg()->replaceInst(cursor, laInst);
@@ -1328,7 +1330,7 @@ OMR::Z::Peephole::tryToReduceLLCToLLGC()
             memRef->resetMemRefUsedBefore();
             auto llgcInst = generateRXInstruction(self()->cg(), TR::InstOpCode::LLGC, cursor->getNode(), llcTgtReg, memRef, cursor->getPrev());
             self()->cg()->replaceInst(cursor, llgcInst);
-            
+
             return true;
             }
          }
@@ -1419,7 +1421,7 @@ OMR::Z::Peephole::tryToReduceLTRToCHI()
    TR::InstOpCode lgrOpCode = cursor->getOpCode();
 
    if (lgrTargetReg == lgrSourceReg &&
-      (lgrOpCode.getOpCodeValue() == TR::InstOpCode::LTR || 
+      (lgrOpCode.getOpCodeValue() == TR::InstOpCode::LTR ||
        lgrOpCode.getOpCodeValue() == TR::InstOpCode::LTGR))
       {
       if (seekRegInFutureMemRef(cursor, 4, lgrTargetReg))
@@ -1528,7 +1530,7 @@ OMR::Z::Peephole::tryToRemoveDuplicateLoadRegister()
                   windowSize = 0;
                   setCC = setCC || current->getOpCode().setsCC();
                   useCC = useCC || current->getOpCode().readsCC();
-                  
+
                   rrInst->remove();
 
                   continue;
@@ -1740,7 +1742,7 @@ OMR::Z::Peephole::tryToRemoveRedundantLA()
       if (performTransformation(self()->comp(), "O^O S390 PEEPHOLE: Removing redundant LA [%p].\n", cursor))
          {
          cursor->remove();
-         
+
          return true;
          }
       }
@@ -1828,7 +1830,7 @@ OMR::Z::Peephole::tryToRemoveRedundantLTR()
 
    TR::Register *lgrSourceReg = cursor->getRegisterOperand(2);
    TR::Register *lgrTargetReg = cursor->getRegisterOperand(1);
-   
+
    if (lgrTargetReg == lgrSourceReg)
       {
       TR::Instruction *prevInst = cursor->getPrev();

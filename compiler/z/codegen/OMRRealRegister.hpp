@@ -27,8 +27,10 @@
  */
 #ifndef OMR_REAL_REGISTER_CONNECTOR
 #define OMR_REAL_REGISTER_CONNECTOR
-namespace OMR { namespace Z { class RealRegister; } }
-namespace OMR { typedef OMR::Z::RealRegister RealRegisterConnector; }
+namespace OMR {
+ namespace Z { class RealRegister; }
+ typedef OMR::Z::RealRegister RealRegisterConnector;
+}
 #else
 #error OMR::Z::RealRegister expected to be a primary connector, but a OMR connector is already defined
 #endif
@@ -39,8 +41,10 @@ namespace OMR { typedef OMR::Z::RealRegister RealRegisterConnector; }
 #include "codegen/RegisterConstants.hpp"
 #include "infra/Flags.hpp"
 
-namespace TR { class CodeGenerator; }
-namespace TR { class RealRegister; }
+namespace TR {
+ class CodeGenerator;
+ class RealRegister;
+}
 
 namespace OMR
 {
@@ -56,7 +60,7 @@ class OMR_EXTENSIBLE RealRegister : public OMR::RealRegister
    RealRegister(TR_RegisterKinds, uint16_t, RegState, RegNum, RegMask, TR::CodeGenerator *);
 
    public:
-   
+
    bool setHasBeenAssignedInMethod(bool b); // derived from base class
 
 

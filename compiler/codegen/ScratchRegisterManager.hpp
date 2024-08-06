@@ -27,9 +27,11 @@
 #include "env/TRMemory.hpp"
 #include "infra/List.hpp"
 
-namespace TR { class CodeGenerator; }
-namespace TR { class Register; }
-namespace TR { class RegisterDependencyConditions; }
+namespace TR {
+ class CodeGenerator;
+ class Register;
+ class RegisterDependencyConditions;
+}
 
 enum TR_ManagedScratchRegisterStates
    {
@@ -62,12 +64,12 @@ public:
  * assigner to behave properly. Before the scratch register manager, If you had
  * complex logic in your internal control flow, requiring many short-lived
  * virtual registers, you had only two choices:
- * 
+ *
  * A. Add all these registers to the end-of-control-flow label. This causes all
  *    the registers to be live at the same time, increasing register pressure and
  *    causing unnecessary spills. It also stops working as soon as you need more
  *    virtuals than you have real registers in the processor.
- * 
+ *
  * B. Re-use virtuals. This is a very awkward ad-hoc approach that had a terrible
  *    effect on the tree evaluator code. Often, the logic for a particular evaluator
  *    (like checkcast or write barriers) is split among several functions, so to
@@ -75,14 +77,14 @@ public:
  *    another as parameters. Some functions ended up with three or four such
  *    parameters with increasingly obscure names, and it became hard to tell
  *    when register reuse decisions were for correctness or for efficiency.
- * 
+ *
  * Neither of these choices is very appealing. B has the potential for generating
  * good code, but the functions that implement B quickly become very hard to
  * maintain.
- * 
+ *
  * What the scratch register manager (SRM) does is to keep track of which virtuals
  * are available for reuse. The steps look like this:
- * 
+ *
  * 1. The code that creates an internal control flow region also creates an SRM The
  * 2. SRM is passed around to all the tree evaluator code implementing the internal
  *    control flow.

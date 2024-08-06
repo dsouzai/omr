@@ -26,8 +26,10 @@
  */
 #ifndef OMR_MACHINE_CONNECTOR
 #define OMR_MACHINE_CONNECTOR
-namespace OMR {namespace Z { class Machine; } }
-namespace OMR { typedef OMR::Z::Machine MachineConnector; }
+namespace OMR {
+namespace Z { class Machine; }
+ typedef OMR::Z::Machine MachineConnector;
+}
 #else
 #error OMR::Z::Machine expected to be a primary connector, but an OMR connector is already defined
 #endif
@@ -41,10 +43,12 @@ namespace OMR { typedef OMR::Z::Machine MachineConnector; }
 #include "infra/TRlist.hpp"
 
 class TR_Debug;
-namespace TR { class CodeGenerator; }
-namespace TR { class Instruction; }
-namespace TR { class Register; }
-namespace TR { class RegisterDependencyConditions; }
+namespace TR {
+ class CodeGenerator;
+ class Instruction;
+ class Register;
+ class RegisterDependencyConditions;
+}
 template <class T> class TR_Stack;
 template <typename ListKind> class List;
 
@@ -133,7 +137,7 @@ class OMR_EXTENSIBLE Machine : public OMR::Machine
    uint16_t                     _registerWeightSnapShot[TR::RealRegister::NumRegisters];
    TR::Register                *_assignedRegisterSnapShot[TR::RealRegister::NumRegisters];
    uint32_t                     _globalRegisterNumberToRealRegisterMapSnapShot[TR::RealRegister::NumRegisters];
-   
+
    TR_GlobalRegisterNumber  _firstGlobalGPRRegisterNumber;
    TR_GlobalRegisterNumber  _lastGlobalGPRRegisterNumber;
    TR_GlobalRegisterNumber  _last8BitGlobalGPRRegisterNumber;
@@ -233,7 +237,7 @@ class OMR_EXTENSIBLE Machine : public OMR::Machine
                                 TR::Instruction* currInst, uint64_t availRegMask=0x0000ffff);
    void    freeBestFPRegisterPair(TR::RealRegister** firstReg, TR::RealRegister** lastReg,
                                   TR::Instruction* currInst, uint64_t availRegMask=0x0000ffff);
-   
+
    // High Register managed
    void spillAllVolatileHighRegisters(TR::Instruction  *currentInstruction);
 
@@ -295,7 +299,7 @@ class OMR_EXTENSIBLE Machine : public OMR::Machine
       }
 
    TR_GlobalRegisterNumber setLastGlobalGPRRegisterNumber(TR_GlobalRegisterNumber reg);
-   
+
    TR_GlobalRegisterNumber getFirstGlobalGPRRegisterNumber()
       {
       return _firstGlobalGPRRegisterNumber;

@@ -27,9 +27,11 @@
 #include "infra/List.hpp"
 #include "optimizer/Optimization.hpp"
 
-namespace TR { class Block; }
-namespace TR { class OptimizationManager; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class OptimizationManager;
+ class TreeTop;
+}
 
 namespace OMR
 {
@@ -67,12 +69,12 @@ namespace TR
  * Class DeadTreesElimination
  * ==========================
  *
- * Expressions that are evaluated and not used for a few instructions can 
- * actually be evaluated exactly where required (subject to the constraint 
- * that their values should be the same if evaluated later). This optimization 
- * attempts to simply delay evaluation of expressions and has the effect of 
- * reducing register pressure by shortening live ranges. It has the effect 
- * of removing some IL trees that are simply anchors for (already) evaluated 
+ * Expressions that are evaluated and not used for a few instructions can
+ * actually be evaluated exactly where required (subject to the constraint
+ * that their values should be the same if evaluated later). This optimization
+ * attempts to simply delay evaluation of expressions and has the effect of
+ * reducing register pressure by shortening live ranges. It has the effect
+ * of removing some IL trees that are simply anchors for (already) evaluated
  * expressions and making the trees more compact.
  */
 

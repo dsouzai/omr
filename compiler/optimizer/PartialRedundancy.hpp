@@ -36,38 +36,42 @@
 class TR_BlockStructure;
 class TR_ExceptionCheckMotion;
 class TR_RegionStructure;
-namespace TR { class RegisterCandidate; }
+namespace TR {
+ class RegisterCandidate;
+}
 class TR_Structure;
-namespace TR { class Block; }
-namespace TR { class CFGNode; }
-namespace TR { class Compilation; }
-namespace TR { class ILOpCode; }
-namespace TR { class Optimizer; }
-namespace TR { class Symbol; }
-namespace TR { class SymbolReference; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFGNode;
+ class Compilation;
+ class ILOpCode;
+ class Optimizer;
+ class Symbol;
+ class SymbolReference;
+ class TreeTop;
+}
 
 
 /**
  * Class TR_PartialRedundancy
  * ==========================
  *
- * Partial Redundancy Elimination (PRE) is a traditional optimization 
- * that aims to compute optimal placement points for computations that 
- * are chosen to participate in the analysis. This technique works quite 
- * well for computations that are unrelated to exception checks since 
- * they can be moved around independently of other computations. 
- * Expressions that are dependent on some other exception checking being 
- * done, e.g. an array access needs to either be explicitly bounds checked 
- * or it can only be moved across a region of code where it is known that 
- * the array access will not result in an exception. Because exceptions 
- * complicate code motion done by PRE, we implemented an enhancement to 
- * the traditional algorithm described in: 
+ * Partial Redundancy Elimination (PRE) is a traditional optimization
+ * that aims to compute optimal placement points for computations that
+ * are chosen to participate in the analysis. This technique works quite
+ * well for computations that are unrelated to exception checks since
+ * they can be moved around independently of other computations.
+ * Expressions that are dependent on some other exception checking being
+ * done, e.g. an array access needs to either be explicitly bounds checked
+ * or it can only be moved across a region of code where it is known that
+ * the array access will not result in an exception. Because exceptions
+ * complicate code motion done by PRE, we implemented an enhancement to
+ * the traditional algorithm described in:
  * http://dl.acm.org/citation.cfm?id=1356077&dl=&coll=&preflayout=tabs
  *
- * PRE is quite expensive to run and so it only runs at optimization 
- * levels > warm and so we also rely on other cheaper optimizations 
- * specifically directed at exception checks to optimize them out of 
+ * PRE is quite expensive to run and so it only runs at optimization
+ * levels > warm and so we also rely on other cheaper optimizations
+ * specifically directed at exception checks to optimize them out of
  * loops. One example is loop versioning.
  */
 

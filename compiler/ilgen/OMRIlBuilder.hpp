@@ -30,19 +30,27 @@
 
 #include "ilgen/IlValue.hpp" // must go after IlInjector.hpp or TR_ALLOC isn't cleaned up
 
-namespace OMR { class MethodBuilder; }
+namespace OMR {
+ class MethodBuilder;
+}
 
-namespace TR { class Block; }
-namespace TR { class BytecodeBuilder; }
-namespace TR { class IlGeneratorMethodDetails; }
-namespace TR { class IlBuilder; }
-namespace TR { class ResolvedMethodSymbol; } 
-namespace TR { class SymbolReference; }
-namespace TR { class SymbolReferenceTable; }
-namespace TR { class VirtualMachineState; }
+namespace TR {
+ class Block;
+ class BytecodeBuilder;
+ class IlGeneratorMethodDetails;
+ class IlBuilder;
+}
+ class ResolvedMethodSymbol;
+namespace TR {
+ class SymbolReference;
+ class SymbolReferenceTable;
+ class VirtualMachineState;
+}
 
-namespace TR { class IlType; }
-namespace TR { class TypeDictionary; }
+namespace TR {
+ class IlType;
+ class TypeDictionary;
+}
 
 template <class T> class List;
 template <class T> class ListAppender;
@@ -623,7 +631,7 @@ public:
 
    /**
     * @brief Set the ClientCallback buildIL function
-    * 
+    *
     * @param callback function pointer to the buildIL() callback for the client
     */
    void setClientCallback_buildIL(void *callback)
@@ -633,7 +641,7 @@ public:
 
    /**
     * @brief Set the Client Allocator function
-    * 
+    *
     * @param allocator function pointer to the client object allocator
     */
    static void setClientAllocator(ClientAllocator allocator)
@@ -657,7 +665,7 @@ protected:
     * @brief pointer to a client object that corresponds to this object
     */
    void                        * _client;
- 
+
    /**
     * @brief pointer to buildIL callback function for this object
     * usually NULL, but client objects can set this via setBuildILCallback() to be called
@@ -790,7 +798,7 @@ protected:
       }
 
    TR::Block *emptyBlock();
-   
+
    virtual uint32_t countBlocks();
 
    void pullInBuilderTrees(TR::IlBuilder *builder,

@@ -39,16 +39,18 @@
 
 class TR_EntryPoint;
 class TR_zOSGlobalCompilationInfo;
-namespace TR { class S390ConstantDataSnippet; }
-namespace TR { class AutomaticSymbol; }
-namespace TR { class CodeGenerator; }
-namespace TR { class Instruction; }
-namespace TR { class LabelSymbol; }
-namespace TR { class Node; }
-namespace TR { class ParameterSymbol; }
-namespace TR { class RegisterDependencyConditions; }
-namespace TR { class ResolvedMethodSymbol; }
-namespace TR { class Symbol; }
+namespace TR {
+ class S390ConstantDataSnippet;
+ class AutomaticSymbol;
+ class CodeGenerator;
+ class Instruction;
+ class LabelSymbol;
+ class Node;
+ class ParameterSymbol;
+ class RegisterDependencyConditions;
+ class ResolvedMethodSymbol;
+ class Symbol;
+}
 template <class T> class List;
 
 enum TR_XPLinkFrameType
@@ -77,7 +79,7 @@ class S390zOSSystemLinkage : public TR::SystemLinkage
 
    /** \brief
     *
-    *  Represents the XPLINK 31-bit call descriptor relocation which is a (positive) signed offset in doublewords from 
+    *  Represents the XPLINK 31-bit call descriptor relocation which is a (positive) signed offset in doublewords from
     *  the doubleword at or preceding the return point (NOP) to the XPLINK call descriptor for this signature.
     *
     *  [1] https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zOSV2R3SA380688/$file/ceev100_v2r3.pdf (page 137)
@@ -96,7 +98,7 @@ class S390zOSSystemLinkage : public TR::SystemLinkage
        *     The label marking the call descriptor for this signature
        */
       XPLINKCallDescriptorRelocation(TR::Instruction* nop, TR::LabelSymbol* callDescriptor);
-      
+
       virtual uint8_t* getUpdateLocation();
       virtual void apply(TR::CodeGenerator* cg);
 

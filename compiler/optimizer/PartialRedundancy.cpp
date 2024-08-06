@@ -72,7 +72,9 @@
 #endif
 
 
-namespace TR { class RegisterCandidate; }
+namespace TR {
+ class RegisterCandidate;
+}
 
 static int32_t numIterations = 0;
 

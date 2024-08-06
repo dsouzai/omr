@@ -26,15 +26,17 @@
 #include "ilgen/IlBuilder.hpp"
 #include "ilgen/TypeDictionary.hpp"
 
-namespace TR { class IlBuilder; }
-namespace TR { class VirtualMachineRegister; }
+namespace TR {
+ class IlBuilder;
+ class VirtualMachineRegister;
+}
 
 namespace OMR
 {
 
 /**
  * @brief simulate virtual machine state variable via an address
- * 
+ *
  * VirtualMachineRegister can be used to represent values in the virtual machine
  * at any address. The value does not need to be a virtual machine register, but
  * often it is the registers of the virtual machine that are candidates for

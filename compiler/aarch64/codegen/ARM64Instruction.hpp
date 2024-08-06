@@ -36,7 +36,9 @@
 #include "infra/Assert.hpp"
 
 class TR_VirtualGuardSite;
-namespace TR { class SymbolReference; }
+namespace TR {
+ class SymbolReference;
+}
 
 #define ARM64_INSTRUCTION_LENGTH 4
 
@@ -2325,7 +2327,7 @@ class ARM64Trg1Src1ImmInstruction : public ARM64Trg1Src1Instruction
     * @brief Sets the N bit (bit 22)
     * @param[in] n : N bit value
     * @return N bit value
-    */ 
+    */
    bool setNbit(bool n) { return (_Nbit = n);}
 
    /**

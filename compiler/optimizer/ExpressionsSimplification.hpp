@@ -31,9 +31,11 @@
 class TR_BitVector;
 class TR_RegionStructure;
 class TR_Structure;
-namespace TR { class Block; }
-namespace TR { class CFGNode; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFGNode;
+ class TreeTop;
+}
 template <class T> class List;
 template <class T> class ListIterator;
 
@@ -41,11 +43,11 @@ template <class T> class ListIterator;
  * Class TR_ExpressionsSimplification
  * ==================================
  *
- * Expression simplification is a loop optimization that aims to optimize 
- * local variable updates (inside the loop) that can be predicted and done 
- * in the loop pre-header (outside the loop). The optimization only runs 
+ * Expression simplification is a loop optimization that aims to optimize
+ * local variable updates (inside the loop) that can be predicted and done
+ * in the loop pre-header (outside the loop). The optimization only runs
  * at higher optimization levels like scorching. Here is an example:
- * 
+ *
  * i=0;
  * total = 0;
  * while (i < N)
@@ -54,9 +56,9 @@ template <class T> class ListIterator;
  *    ...other code..
  *    i = i + 1;
  *    }
- * 
+ *
  * would be converted by expression simplification to:
- * 
+ *
  * i=0;
  * total = 0;
  * total = total + M*N;
@@ -65,22 +67,22 @@ template <class T> class ListIterator;
  *    ...other code..
  *    i = i + 1;
  *    }
- * 
- * Thereby avoiding the update to total every time through the loop. This 
- * optimization is currently done for updates that are additions, subtractions, 
- * xors and negations inside the loop, i.e. the optimization knows the 
- * equivalent expression to emit in the loop pre-header for these kinds of 
- * updates inside the loop. Note that there are simplifying assumptions 
- * around the complexity of expressions allowed as M and N in the above 
+ *
+ * Thereby avoiding the update to total every time through the loop. This
+ * optimization is currently done for updates that are additions, subtractions,
+ * xors and negations inside the loop, i.e. the optimization knows the
+ * equivalent expression to emit in the loop pre-header for these kinds of
+ * updates inside the loop. Note that there are simplifying assumptions
+ * around the complexity of expressions allowed as M and N in the above
  * example to keep the analysis relatively cheap.
- * 
- * While the optimization does win big when it succeeds in microbenchmarks 
- * it rarely makes a significant difference in real world programs (that 
- * simply do not contain enough such opportunities typically) meaning it 
- * has not received too much development focus over and above what was needed 
- * to catch some important cases that were observed in relevant benchmarks. 
- * Since this only runs at higher opt levels and is not particularly expensive, 
- * it does not interfere too much in real world Java programs either 
+ *
+ * While the optimization does win big when it succeeds in microbenchmarks
+ * it rarely makes a significant difference in real world programs (that
+ * simply do not contain enough such opportunities typically) meaning it
+ * has not received too much development focus over and above what was needed
+ * to catch some important cases that were observed in relevant benchmarks.
+ * Since this only runs at higher opt levels and is not particularly expensive,
+ * it does not interfere too much in real world Java programs either
  * in terms of compile time or throughput.
  */
 class TR_ExpressionsSimplification : public TR::Optimization

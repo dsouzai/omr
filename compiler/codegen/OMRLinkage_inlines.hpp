@@ -26,8 +26,10 @@
 #include "codegen/Linkage.hpp"
 #include "env/TRMemory.hpp"
 
-namespace TR { class Compilation; }
-namespace TR { class Machine; }
+namespace TR {
+ class Compilation;
+ class Machine;
+}
 class TR_FrontEnd;
 class TR_Memory;
 
@@ -81,7 +83,7 @@ OMR::Linkage::trStackMemory()
 
 int32_t
 OMR::Linkage::getOffsetToFirstParm() const
-   { 
+   {
    return _offsetToFirstParm;
    }
 

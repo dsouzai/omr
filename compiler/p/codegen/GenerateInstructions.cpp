@@ -51,9 +51,11 @@
 #include "runtime/Runtime.hpp"
 
 class TR_VirtualGuardSite;
-namespace TR { class LabelSymbol; }
-namespace TR { class RegisterDependencyConditions; }
-namespace TR { class SymbolReference; }
+namespace TR {
+ class LabelSymbol;
+ class RegisterDependencyConditions;
+ class SymbolReference;
+}
 
 int estimateLikeliness(TR::CodeGenerator *cg, TR::Node *n);
 
@@ -325,7 +327,7 @@ TR::Instruction *generateDepConditionalBranchInstruction(TR::CodeGenerator *cg, 
    TR::LabelSymbol *sym, TR::Register *cr, TR::RegisterDependencyConditions *cond, TR::Instruction *preced)
    {
    // if processor does not support branch hints
-   if (!cg->comp()->target().cpu.isAtLeast(OMR_PROCESSOR_PPC_GP))  
+   if (!cg->comp()->target().cpu.isAtLeast(OMR_PROCESSOR_PPC_GP))
       return generateDepConditionalBranchInstruction(cg, op, n, sym, cr, cond, preced);
 
    if (preced)

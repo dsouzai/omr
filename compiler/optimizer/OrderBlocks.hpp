@@ -31,12 +31,14 @@
 #include "optimizer/OptimizationManager.hpp"
 
 class TR_RegionStructure;
-namespace TR { class Block; }
-namespace TR { class CFG; }
-namespace TR { class CFGEdge; }
-namespace TR { class CFGNode; }
-namespace TR { class Compilation; }
-namespace TR { class TreeTop; }
+namespace TR {
+ class Block;
+ class CFG;
+ class CFGEdge;
+ class CFGNode;
+ class Compilation;
+ class TreeTop;
+}
 
 
 typedef List<TR::CFGNode> TR_BlockList;
@@ -61,9 +63,9 @@ class TR_BlockOrderingOptimization : public TR::Optimization
 /*
  * Class TR_OrderBlocks
  * ====================
- * 
- * Block ordering moves blocks around with the goal of making the hot path 
- * the fall through. The hot path is determined by profiling and/or static 
+ *
+ * Block ordering moves blocks around with the goal of making the hot path
+ * the fall through. The hot path is determined by profiling and/or static
  * criteria like loop nesting depth, expected code synergy, etc.
  */
 
@@ -160,7 +162,7 @@ class TR_OrderBlocks : public TR_BlockOrderingOptimization
  * Class TR_BlockShuffling
  * =======================
  *
- * Block shuffling changes the textual order in which the blocks/trees appear 
+ * Block shuffling changes the textual order in which the blocks/trees appear
  * in the method without changing the CFG in any way. This is more of a RAS pass.
  */
 

@@ -33,20 +33,22 @@ class TR_BitVector;
 class TR_HashTabInt;
 class TR_InterferenceGraph;
 class TR_Liveness;
-namespace TR { class AutomaticSymbol; }
-namespace TR { class Block; }
-namespace TR { class ResolvedMethodSymbol; }
+namespace TR {
+ class AutomaticSymbol;
+ class Block;
+ class ResolvedMethodSymbol;
+}
 template <class T> class TR_Array;
 
 /*
  * Class TR_CompactLocals
  * ======================
  *
- * Compact locals tries to minimize the stack size required by the 
- * compiled method. This is done by computing interferences between the 
- * live ranges of the locals/temps in the method before code generation 
- * is done; based on these interferences, locals that are never live 
- * simultaneously can be mapped on to the same stack slot. 
+ * Compact locals tries to minimize the stack size required by the
+ * compiled method. This is done by computing interferences between the
+ * live ranges of the locals/temps in the method before code generation
+ * is done; based on these interferences, locals that are never live
+ * simultaneously can be mapped on to the same stack slot.
  * Liveness information is used by this analysis.
  */
 

@@ -34,13 +34,15 @@ class TR_ArrayLoop;
 class TR_InductionVariable;
 class TR_ParentOfChildNode;
 class TR_RegionStructure;
-namespace TR { class Block; }
-namespace TR { class CFGEdge; }
-namespace TR { class CodeGenerator; }
-namespace TR { class Compilation; }
-namespace TR { class Optimization; }
-namespace TR { class Symbol; }
-namespace TR { class SymbolReference; }
+namespace TR {
+ class Block;
+ class CFGEdge;
+ class CodeGenerator;
+ class Compilation;
+ class Optimization;
+ class Symbol;
+ class SymbolReference;
+}
 
 //
 // The intent of the loop reduction phase will be to transform simple loops
@@ -324,18 +326,18 @@ private:
  * Class TR_LoopReducer
  * ====================
  *
- * The loop reduction optimization can reduce loops that match a particular 
- * pattern to a tree consisting of a helper-method call-out, taking a series 
- * of parameters. To date, loop reduction pattern matching catches 
- * array-compare, array-init, array-translate, and array-copy loops. 
- * array-init and array-translate are very close to loops one would code 
- * for the ANSI C functions memcmp() and memset(). Code generator support 
- * is required for each platform wanting to exploit array-compare, array-init, 
- * and array-translate nodes and is similar to array-copy. Only S/390 
- * supports code generation for array-init, array-compare, array-translate 
- * nodes. array-copy reductions are done for all platforms that support 
- * primitive array-copy (which is currently all platforms). At present, there 
- * should not be issues for enabling S390 only nodes on other platfforms, 
+ * The loop reduction optimization can reduce loops that match a particular
+ * pattern to a tree consisting of a helper-method call-out, taking a series
+ * of parameters. To date, loop reduction pattern matching catches
+ * array-compare, array-init, array-translate, and array-copy loops.
+ * array-init and array-translate are very close to loops one would code
+ * for the ANSI C functions memcmp() and memset(). Code generator support
+ * is required for each platform wanting to exploit array-compare, array-init,
+ * and array-translate nodes and is similar to array-copy. Only S/390
+ * supports code generation for array-init, array-compare, array-translate
+ * nodes. array-copy reductions are done for all platforms that support
+ * primitive array-copy (which is currently all platforms). At present, there
+ * should not be issues for enabling S390 only nodes on other platfforms,
  * other than writing the code generator support for the new nodes.
  */
 

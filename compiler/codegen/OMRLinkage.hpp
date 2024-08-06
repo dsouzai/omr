@@ -27,8 +27,10 @@
  */
 #ifndef OMR_LINKAGE_CONNECTOR
 #define OMR_LINKAGE_CONNECTOR
-namespace OMR { class Linkage; }
-namespace OMR { typedef OMR::Linkage LinkageConnector; }
+namespace OMR {
+ class Linkage;
+ typedef OMR::Linkage LinkageConnector;
+}
 #endif
 
 #include <stddef.h>
@@ -43,17 +45,19 @@ class TR_FrontEnd;
 class TR_HeapMemory;
 class TR_Memory;
 class TR_StackMemory;
-namespace TR { class AutomaticSymbol; }
-namespace TR { class CodeGenerator; }
-namespace TR { class Compilation; }
-namespace TR { class Linkage; }
-namespace TR { class Machine; }
-namespace TR { class Instruction; }
-namespace TR { class Node; }
-namespace TR { class ParameterSymbol; }
-namespace TR { class ResolvedMethodSymbol; }
-namespace TR { class Symbol; }
-namespace TR { class SymbolReference; }
+namespace TR {
+ class AutomaticSymbol;
+ class CodeGenerator;
+ class Compilation;
+ class Linkage;
+ class Machine;
+ class Instruction;
+ class Node;
+ class ParameterSymbol;
+ class ResolvedMethodSymbol;
+ class Symbol;
+ class SymbolReference;
+}
 template <class T> class List;
 
 namespace OMR
@@ -134,7 +138,7 @@ class OMR_EXTENSIBLE Linkage
 
    /** @brief
     *    Gets the offset (in number of bytes) from the stack frame pointer to the location on the stack where the first
-    *    (closest to the frame pointer) parameter is located. 
+    *    (closest to the frame pointer) parameter is located.
     *
     *  @details
     *    For example given the following stack frame layout, for a stack which grows towards 0x0000 (we subtract the
@@ -164,7 +168,7 @@ class OMR_EXTENSIBLE Linkage
 
    /** @brief
     *    Sets the offset (in number of bytes) from the stack frame pointer to the location on the stack where the first
-    *    (closest to the frame pointer) parameter is located. 
+    *    (closest to the frame pointer) parameter is located.
     */
    inline int32_t setOffsetToFirstParm(int32_t offset);
 
