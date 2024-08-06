@@ -25,19 +25,18 @@
 #include "optimizer/OMROptimization.hpp"
 
 namespace TR {
- class OptimizationManager;
+class OptimizationManager;
 }
 
-namespace TR
-{
+namespace TR {
 
-class OMR_EXTENSIBLE Optimization : public OMR::OptimizationConnector
-   {
-   public:
+class OMR_EXTENSIBLE Optimization : public OMR::OptimizationConnector {
+public:
+    Optimization(TR::OptimizationManager* manager)
+        : OMR::OptimizationConnector(manager)
+    { }
+};
 
-   Optimization(TR::OptimizationManager *manager) : OMR::OptimizationConnector(manager) {}
-   };
-
-}
+} // namespace TR
 
 #endif

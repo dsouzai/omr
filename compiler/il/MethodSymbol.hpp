@@ -27,27 +27,23 @@
 #include "il/OMRMethodSymbol.hpp"
 
 namespace TR {
- class Method;
+class Method;
 }
 
-namespace TR
-{
+namespace TR {
 
-class OMR_EXTENSIBLE MethodSymbol : public OMR::MethodSymbolConnector
-   {
+class OMR_EXTENSIBLE MethodSymbol : public OMR::MethodSymbolConnector {
 
 protected:
-
-   MethodSymbol(TR_LinkageConventions lc = TR_Private, TR::Method *m = NULL) :
-      OMR::MethodSymbolConnector(lc, m) { }
+    MethodSymbol(TR_LinkageConventions lc = TR_Private, TR::Method* m = NULL)
+        : OMR::MethodSymbolConnector(lc, m)
+    { }
 
 private:
+    // When adding another class to the heirarchy, add it as a friend here
+    friend class OMR::MethodSymbol;
+};
 
-   // When adding another class to the heirarchy, add it as a friend here
-   friend class OMR::MethodSymbol;
-
-   };
-
-}
+} // namespace TR
 
 #endif

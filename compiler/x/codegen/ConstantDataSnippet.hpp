@@ -28,20 +28,20 @@
 #include "codegen/Snippet.hpp"
 
 namespace TR {
- class CodeGenerator;
- class Node;
-}
+class CodeGenerator;
+class Node;
+} // namespace TR
 
 namespace TR {
 
-class X86ConstantDataSnippet : public TR::X86DataSnippet
-   {
-   public:
+class X86ConstantDataSnippet : public TR::X86DataSnippet {
+public:
+    inline X86ConstantDataSnippet(TR::CodeGenerator* cg, TR::Node* n, void* c, size_t size)
+        : TR::X86DataSnippet(cg, n, c, size)
+    { }
+    virtual Kind getKind() { return IsConstantData; }
+};
 
-   inline X86ConstantDataSnippet(TR::CodeGenerator *cg, TR::Node *n, void *c, size_t size) : TR::X86DataSnippet(cg, n, c, size) { }
-   virtual Kind getKind() { return IsConstantData; }
-   };
-
-}
+} // namespace TR
 
 #endif

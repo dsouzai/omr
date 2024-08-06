@@ -27,14 +27,14 @@
 
 int tolower_ignore_locale(int c);
 int toupper_ignore_locale(int c);
-int stricmp_ignore_locale(const char *s1, const char *s2);
-int strnicmp_ignore_locale(const char *s1, const char *s2, size_t n);
+int stricmp_ignore_locale(const char* s1, const char* s2);
+int strnicmp_ignore_locale(const char* s1, const char* s2, size_t n);
 
 #if defined(OMR_OS_WINDOWS)
-   #define STRICMP _stricmp
-   #define STRNICMP _strnicmp
+#define STRICMP _stricmp
+#define STRNICMP _strnicmp
 #else
-   #include <strings.h>
-   #define STRICMP strcasecmp
-   #define STRNICMP strncasecmp
+#include <strings.h>
+#define STRICMP strcasecmp
+#define STRNICMP strncasecmp
 #endif /* OMR_OS_WINDOWS */

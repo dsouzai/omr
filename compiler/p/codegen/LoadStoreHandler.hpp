@@ -24,10 +24,9 @@
 
 #include "codegen/OMRLoadStoreHandler.hpp"
 
-namespace TR
-{
-class OMR_EXTENSIBLE LoadStoreHandler : public OMR::Power::LoadStoreHandler {};
-class OMR_EXTENSIBLE LoadStoreHandlerImpl : public OMR::Power::LoadStoreHandlerImpl {};
-}
+namespace TR {
+class OMR_EXTENSIBLE LoadStoreHandler : public OMR::Power::LoadStoreHandler { };
+class OMR_EXTENSIBLE LoadStoreHandlerImpl : public OMR::Power::LoadStoreHandlerImpl { };
+} // namespace TR
 
 #endif

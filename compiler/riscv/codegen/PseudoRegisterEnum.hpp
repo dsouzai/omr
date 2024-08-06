@@ -23,4 +23,3 @@
  * This file will be included within an enum.  Only comments and enumerator
  * definitions are permitted.
  */
-

@@ -28,9 +28,11 @@
 #ifndef OMR_REAL_REGISTER_CONNECTOR
 #define OMR_REAL_REGISTER_CONNECTOR
 namespace OMR {
- namespace Power { class RealRegister; }
- typedef OMR::Power::RealRegister RealRegisterConnector;
+namespace Power {
+class RealRegister;
 }
+typedef OMR::Power::RealRegister RealRegisterConnector;
+} // namespace OMR
 #else
 #error OMR::Power::RealRegister expected to be a primary connector, but a OMR connector is already defined
 #endif
@@ -41,121 +43,117 @@ namespace OMR {
 #include "codegen/RegisterConstants.hpp"
 
 namespace TR {
- class CodeGenerator;
- class RealRegister;
-}
+class CodeGenerator;
+class RealRegister;
+} // namespace TR
 
-namespace OMR
-{
+namespace OMR { namespace Power {
 
-namespace Power
-{
+class OMR_EXTENSIBLE RealRegister : public OMR::RealRegister {
+protected:
+    RealRegister(TR::CodeGenerator* cg)
+        : OMR::RealRegister(cg, NoReg)
+    { }
 
-class OMR_EXTENSIBLE RealRegister : public OMR::RealRegister
-   {
-   protected:
+    RealRegister(TR_RegisterKinds rk, uint16_t w, RegState s, RegNum rn, RegMask m, TR::CodeGenerator* cg)
+        : OMR::RealRegister(rk, w, s, (uint16_t)0, rn, m, cg)
+        , _useVSR(false)
+    { }
 
-   RealRegister(TR::CodeGenerator *cg) : OMR::RealRegister(cg, NoReg) {}
+public:
+    typedef enum {
+        pos_RT = 21,
+        pos_RS = 21,
+        pos_TO = 12,
+        pos_RA = 16,
+        pos_RB = 11,
+        pos_RC = 6,
+        pos_SH = 11,
+        pos_BF = 23,
+        pos_BI = 18,
+        pos_XBI = 7,
+        pos_MBE = 5,
+        pos_FRD = 21,
+        pos_FRA = 16,
+        pos_FRC = 6,
+        pos_FRB = 11,
+        pos_TX = 0,
+        pos_SX = 0,
+        pos_BX = 1,
+        pos_AX = 2,
+        pos_CX = 3
+    } PPCOperandPosition;
 
-   RealRegister(TR_RegisterKinds rk, uint16_t  w, RegState s, RegNum rn, RegMask m, TR::CodeGenerator * cg) :
-          OMR::RealRegister(rk, w, s, (uint16_t)0, rn, m, cg), _useVSR(false) {}
+    enum CRCC {
+        // Condition Register Condition Code (CRCC)
+        CRCC_LT = 0x0, // less than
+        CRCC_GT = 0x1, // greater than
+        CRCC_EQ = 0x2, // equal
+        CRCC_SO = 0x3, // summary overflow
+        CRCC_FU = CRCC_SO // floating-point unordered
+    };
 
-   public:
+    bool getUseVSR() { return _useVSR; }
+    void setUseVSR(bool value) { _useVSR = value; }
+    bool isNewVSR() { return _registerNumber >= vsr32 && _registerNumber <= LastVSR; }
 
-   typedef enum  {
-      pos_RT     = 21,
-      pos_RS     = 21,
-      pos_TO     = 12,
-      pos_RA     = 16,
-      pos_RB     = 11,
-      pos_RC     = 6,
-      pos_SH     = 11,
-      pos_BF     = 23,
-      pos_BI     = 18,
-      pos_XBI    = 7,
-      pos_MBE    = 5,
-      pos_FRD    = 21,
-      pos_FRA    = 16,
-      pos_FRC    = 6,
-      pos_FRB    = 11,
-      pos_TX     = 0,
-      pos_SX     = 0,
-      pos_BX     = 1,
-      pos_AX     = 2,
-      pos_CX     = 3
-   } PPCOperandPosition;
+    bool isConditionRegister()
+    {
+        return ((_registerNumber >= FirstCCR) && (_registerNumber <= LastCCR)) ? true : false;
+    }
 
-   enum CRCC {
-      //Condition Register Condition Code (CRCC)
-      CRCC_LT = 0x0,    // less than
-      CRCC_GT = 0x1,    // greater than
-      CRCC_EQ = 0x2,    // equal
-      CRCC_SO = 0x3,    // summary overflow
-      CRCC_FU = CRCC_SO // floating-point unordered
-   };
+    void setRegisterFieldRT(uint32_t* instruction);
 
-   bool getUseVSR() { return _useVSR; }
-   void setUseVSR(bool value) { _useVSR = value; }
-   bool isNewVSR() { return _registerNumber >= vsr32 && _registerNumber <= LastVSR; }
+    void setRegisterFieldRS(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_RS;
+    }
 
-   bool isConditionRegister() { return ((_registerNumber>=FirstCCR) && (_registerNumber<=LastCCR))?true:false; }
+    void setRegisterFieldBI(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_BI;
+    }
 
-   void setRegisterFieldRT(uint32_t *instruction);
+    void setRegisterFieldRA(uint32_t* instruction);
 
-   void setRegisterFieldRS(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_RS;
-      }
+    void setRegisterFieldRB(uint32_t* instruction);
 
-   void setRegisterFieldBI(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_BI;
-      }
+    void setRegisterFieldRC(uint32_t* instruction);
 
-   void setRegisterFieldRA(uint32_t *instruction);
+    void setRegisterFieldFRA(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRA;
+    }
 
-   void setRegisterFieldRB(uint32_t *instruction);
+    void setRegisterFieldFRB(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRB;
+    }
 
-   void setRegisterFieldRC(uint32_t *instruction);
+    void setRegisterFieldFRC(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRC;
+    }
 
-   void setRegisterFieldFRA(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRA;
-      }
+    void setRegisterFieldFRD(uint32_t* instruction)
+    {
+        *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRD;
+    }
 
-   void setRegisterFieldFRB(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRB;
-      }
+    void setRegisterFieldXS(uint32_t* instruction);
+    void setRegisterFieldXT(uint32_t* instruction);
+    void setRegisterFieldXA(uint32_t* instruction);
+    void setRegisterFieldXB(uint32_t* instruction);
+    void setRegisterFieldXC(uint32_t* instruction);
 
-   void setRegisterFieldFRC(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRC;
-      }
+    static TR::RealRegister* regMaskToRealRegister(TR_RegisterMask mask, TR_RegisterKinds rk, TR::CodeGenerator* cg);
+    static TR_RegisterMask getAvailableRegistersMask(TR_RegisterKinds rk);
 
-   void setRegisterFieldFRD(uint32_t *instruction)
-      {
-      *instruction |= fullRegBinaryEncodings[_registerNumber] << pos_FRD;
-      }
+private:
+    bool _useVSR;
+    static const uint8_t fullRegBinaryEncodings[NumRegisters];
+};
 
-   void setRegisterFieldXS(uint32_t *instruction);
-   void setRegisterFieldXT(uint32_t *instruction);
-   void setRegisterFieldXA(uint32_t *instruction);
-   void setRegisterFieldXB(uint32_t *instruction);
-   void setRegisterFieldXC(uint32_t *instruction);
-
-   static TR::RealRegister *regMaskToRealRegister(TR_RegisterMask mask, TR_RegisterKinds rk, TR::CodeGenerator *cg);
-   static TR_RegisterMask getAvailableRegistersMask(TR_RegisterKinds rk);
-
-   private:
-
-   bool _useVSR;
-   static const uint8_t fullRegBinaryEncodings[NumRegisters];
-
-   };
-
-}
-
-}
+}} // namespace OMR::Power
 
 #endif

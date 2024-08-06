@@ -25,38 +25,39 @@
 #include "compile/Compilation.hpp"
 #include "env/TRMemory.hpp"
 
-namespace TR
-{
+namespace TR {
 
-class OptimizationPolicy
-   {
-   public:
-   static void *operator new(size_t size, TR::Allocator a)
-      { return a.allocate(size); }
-   static void  operator delete(void *ptr, TR::Allocator a)
-      {
-      // If there is an exception thrown during construction, the compilation
-      // will be aborted, and all memory associated with that compilation will get freed.
-      }
-   static void  operator delete(void *ptr, size_t size)
-      { ((OptimizationPolicy*)ptr)->allocator().deallocate(ptr, size); } /* t->allocator() must return the same allocator as used for new */
+class OptimizationPolicy {
+public:
+    static void* operator new(size_t size, TR::Allocator a) { return a.allocate(size); }
+    static void operator delete(void* ptr, TR::Allocator a)
+    {
+        // If there is an exception thrown during construction, the compilation
+        // will be aborted, and all memory associated with that compilation will get freed.
+    }
+    static void operator delete(void* ptr, size_t size)
+    {
+        ((OptimizationPolicy*)ptr)->allocator().deallocate(ptr, size);
+    } /* t->allocator() must return the same allocator as used for new */
 
-   /* Virtual destructor is necessary for the above delete operator to work
-    * See "Modern C++ Design" section 4.7
-    */
-   virtual ~OptimizationPolicy() {}
-   
-   OptimizationPolicy(TR::Compilation *comp) : _comp(comp) {}
+    /* Virtual destructor is necessary for the above delete operator to work
+     * See "Modern C++ Design" section 4.7
+     */
+    virtual ~OptimizationPolicy() { }
 
-   TR::Compilation *comp()   { return _comp; }
-   TR_FrontEnd *fe()         { return _comp->fe(); }
-   TR::Allocator allocator() { return comp()->allocator(); }
-   TR_Memory * trMemory()    { return comp()->trMemory(); }
+    OptimizationPolicy(TR::Compilation* comp)
+        : _comp(comp)
+    { }
 
-   private:
-   TR::Compilation *_comp;
-   };
+    TR::Compilation* comp() { return _comp; }
+    TR_FrontEnd* fe() { return _comp->fe(); }
+    TR::Allocator allocator() { return comp()->allocator(); }
+    TR_Memory* trMemory() { return comp()->trMemory(); }
 
-}
+private:
+    TR::Compilation* _comp;
+};
+
+} // namespace TR
 
 #endif

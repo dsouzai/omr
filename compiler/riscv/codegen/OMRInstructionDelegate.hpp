@@ -28,9 +28,11 @@
 #ifndef OMR_INSTRUCTIONDELEGATE_CONNECTOR
 #define OMR_INSTRUCTIONDELEGATE_CONNECTOR
 namespace OMR {
- namespace RV { class InstructionDelegate; }
- typedef OMR::RV::InstructionDelegate InstructionDelegateConnector;
+namespace RV {
+class InstructionDelegate;
 }
+typedef OMR::RV::InstructionDelegate InstructionDelegateConnector;
+} // namespace OMR
 #else
 #error OMR::RV::InstructionDelegate expected to be a primary connector, but an OMR connector is already defined
 #endif
@@ -38,22 +40,13 @@ namespace OMR {
 #include "compiler/codegen/OMRInstructionDelegate.hpp"
 #include "infra/Annotations.hpp"
 
-namespace OMR
-{
+namespace OMR { namespace RV {
 
-namespace RV
-{
-
-class OMR_EXTENSIBLE InstructionDelegate : public OMR::InstructionDelegate
-   {
+class OMR_EXTENSIBLE InstructionDelegate : public OMR::InstructionDelegate {
 protected:
+    InstructionDelegate() { }
+};
 
-   InstructionDelegate() {}
-
-   };
-
-}
-
-}
+}} // namespace OMR::RV
 
 #endif

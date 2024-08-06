@@ -25,21 +25,17 @@
 #include "compile/OMRAliasBuilder.hpp"
 
 namespace TR {
- class Compilation;
- class SymbolReferenceTable;
-}
+class Compilation;
+class SymbolReferenceTable;
+} // namespace TR
 
-namespace TR
-   {
-   class AliasBuilder : public OMR::AliasBuilderConnector
-      {
-      public:
-
-      AliasBuilder(TR::SymbolReferenceTable *symRefTab, size_t sizeHint, TR::Compilation *c) :
-         OMR::AliasBuilderConnector(symRefTab, sizeHint, c)
-         {
-         }
-      };
-   }
+namespace TR {
+class AliasBuilder : public OMR::AliasBuilderConnector {
+public:
+    AliasBuilder(TR::SymbolReferenceTable* symRefTab, size_t sizeHint, TR::Compilation* c)
+        : OMR::AliasBuilderConnector(symRefTab, sizeHint, c)
+    { }
+};
+} // namespace TR
 
 #endif

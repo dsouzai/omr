@@ -28,7 +28,7 @@
 #include "optimizer/abstractinterpreter/InliningMethodSummary.hpp"
 
 namespace TR {
- class IDTNode;
+class IDTNode;
 }
 
 namespace TR {
@@ -36,109 +36,100 @@ namespace TR {
 /**
  * IDTNode is the abstract representation of a candidate method containing useful information for inlining.
  */
-class IDTNode
-   {
-   public:
-   IDTNode(
-      int32_t idx,
-      TR_CallTarget* callTarget,
-      TR::ResolvedMethodSymbol* symbol,
-      uint32_t byteCodeIndex,
-      float callRatio,
-      TR::IDTNode *parent,
-      uint32_t budget);
+class IDTNode {
+public:
+    IDTNode(int32_t idx, TR_CallTarget* callTarget, TR::ResolvedMethodSymbol* symbol, uint32_t byteCodeIndex,
+        float callRatio, TR::IDTNode* parent, uint32_t budget);
 
-   /**
-    * @brief Add a child
-    *
-    * @param idx the global index of the child to be added
-    * @param callTarget the call target
-    * @param symbol the method symbol
-    * @param byteCodeIndex the call site bytecode index
-    * @param callRatio call ratio of the method
-    * @param region the region where the child node will be allocated
-    *
-    * @return the newly created node
-    */
-   TR::IDTNode* addChild(
-      int32_t idx,
-      TR_CallTarget* callTarget,
-      TR::ResolvedMethodSymbol* symbol,
-      uint32_t byteCodeIndex,
-      float callRatio,
-      TR::Region& region);
+    /**
+     * @brief Add a child
+     *
+     * @param idx the global index of the child to be added
+     * @param callTarget the call target
+     * @param symbol the method symbol
+     * @param byteCodeIndex the call site bytecode index
+     * @param callRatio call ratio of the method
+     * @param region the region where the child node will be allocated
+     *
+     * @return the newly created node
+     */
+    TR::IDTNode* addChild(int32_t idx, TR_CallTarget* callTarget, TR::ResolvedMethodSymbol* symbol,
+        uint32_t byteCodeIndex, float callRatio, TR::Region& region);
 
-   TR::InliningMethodSummary* getInliningMethodSummary() { return _inliningMethodSummary; }
-   void setInliningMethodSummary(TR::InliningMethodSummary* inliningMethodSummary) { _inliningMethodSummary = inliningMethodSummary; }
+    TR::InliningMethodSummary* getInliningMethodSummary() { return _inliningMethodSummary; }
+    void setInliningMethodSummary(TR::InliningMethodSummary* inliningMethodSummary)
+    {
+        _inliningMethodSummary = inliningMethodSummary;
+    }
 
-   const char* getName(TR_Memory* mem) { return _symbol->signature(mem); }
+    const char* getName(TR_Memory* mem) { return _symbol->signature(mem); }
 
-   TR::IDTNode *getParent() { return _parent; }
+    TR::IDTNode* getParent() { return _parent; }
 
-   int32_t getGlobalIndex() { return _idx; }
-   int32_t getParentGlobalIndex()  { return isRoot() ? -2 : getParent()->getGlobalIndex(); }
+    int32_t getGlobalIndex() { return _idx; }
+    int32_t getParentGlobalIndex() { return isRoot() ? -2 : getParent()->getGlobalIndex(); }
 
-   double getBenefit();
+    double getBenefit();
 
-   uint32_t getStaticBenefit() { return _staticBenefit; };
+    uint32_t getStaticBenefit() { return _staticBenefit; };
 
-   void setStaticBenefit(uint32_t staticBenefit) { _staticBenefit = staticBenefit; }
+    void setStaticBenefit(uint32_t staticBenefit) { _staticBenefit = staticBenefit; }
 
-   uint32_t getNumDescendants();
+    uint32_t getNumDescendants();
 
-   uint32_t getCost() { return isRoot() ? 0 : getByteCodeSize(); }
-   uint32_t getRecursiveCost();
+    uint32_t getCost() { return isRoot() ? 0 : getByteCodeSize(); }
+    uint32_t getRecursiveCost();
 
-   uint32_t getNumChildren();
-   TR::IDTNode *getChild(uint32_t index);
+    uint32_t getNumChildren();
+    TR::IDTNode* getChild(uint32_t index);
 
-   bool isRoot()  { return _parent == NULL; };
+    bool isRoot() { return _parent == NULL; };
 
-   TR::IDTNode* findChildWithBytecodeIndex(uint32_t bcIndex);
+    TR::IDTNode* findChildWithBytecodeIndex(uint32_t bcIndex);
 
-   TR::ResolvedMethodSymbol* getResolvedMethodSymbol() { return _symbol; }
-   TR_ResolvedMethod* getResolvedMethod() { return _callTarget->_calleeMethod; }
+    TR::ResolvedMethodSymbol* getResolvedMethodSymbol() { return _symbol; }
+    TR_ResolvedMethod* getResolvedMethod() { return _callTarget->_calleeMethod; }
 
-   uint32_t getBudget()  { return _budget; };
+    uint32_t getBudget() { return _budget; };
 
-   TR_CallTarget *getCallTarget() { return _callTarget; }
+    TR_CallTarget* getCallTarget() { return _callTarget; }
 
-   uint32_t getByteCodeIndex() { return _byteCodeIndex; }
-   uint32_t getByteCodeSize() { return _callTarget->_calleeMethod->maxBytecodeIndex(); }
+    uint32_t getByteCodeIndex() { return _byteCodeIndex; }
+    uint32_t getByteCodeSize() { return _callTarget->_calleeMethod->maxBytecodeIndex(); }
 
-   float getCallRatio() { return _callRatio; }
-   double getRootCallRatio() { return _rootCallRatio; }
+    float getCallRatio() { return _callRatio; }
+    double getRootCallRatio() { return _rootCallRatio; }
 
-   private:
-   TR_CallTarget* _callTarget;
-   TR::ResolvedMethodSymbol* _symbol;
+private:
+    TR_CallTarget* _callTarget;
+    TR::ResolvedMethodSymbol* _symbol;
 
-   TR::IDTNode *_parent;
+    TR::IDTNode* _parent;
 
-   int32_t _idx;
-   uint32_t _byteCodeIndex;
+    int32_t _idx;
+    uint32_t _byteCodeIndex;
 
-   TR::vector<TR::IDTNode*, TR::Region&>* _children;
-   uint32_t _staticBenefit;
+    TR::vector<TR::IDTNode*, TR::Region&>* _children;
+    uint32_t _staticBenefit;
 
-   uint32_t _budget;
+    uint32_t _budget;
 
-   float _callRatio;
-   double _rootCallRatio;
+    float _callRatio;
+    double _rootCallRatio;
 
-   TR::InliningMethodSummary *_inliningMethodSummary;
+    TR::InliningMethodSummary* _inliningMethodSummary;
 
-   /**
-    * @brief It is common that a large number of IDTNodes have only one child.
-    * So instead of allocating a deque containing only one element,
-    * we use the _children as the address of that only child to save memory usage.
-    *
-    * @return NULL if there are more than one or no children. The child node if there is only one child.
-    */
-   TR::IDTNode* getOnlyChild();
+    /**
+     * @brief It is common that a large number of IDTNodes have only one child.
+     * So instead of allocating a deque containing only one element,
+     * we use the _children as the address of that only child to save memory usage.
+     *
+     * @return NULL if there are more than one or no children. The child node if there is only one child.
+     */
+    TR::IDTNode* getOnlyChild();
 
-   void setOnlyChild(TR::IDTNode* child);
-   };
-}
+    void setOnlyChild(TR::IDTNode* child);
+};
+} // namespace TR
 
 #endif

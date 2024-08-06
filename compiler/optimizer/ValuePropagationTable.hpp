@@ -22,144 +22,142 @@
 #ifndef VALUEPROPAGATIONTABLE_INCL
 #define VALUEPROPAGATIONTABLE_INCL
 
-TR::Node *constrainAcall(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAdd(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAddressRef(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainANewArray(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainVariableNew(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainVariableNewArray(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAnyIntLoad(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainArrayChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainArraycopy(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainArrayCopyBndChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainArraylength(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainArrayStoreChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAstore(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainB2i(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainB2s(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainB2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBndChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBndChkWithSpineChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBu2i(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBu2s(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBu2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainByteConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCall(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCase(OMR::ValuePropagation *vp, TR::Node *node);
-//TR::Node *constrainCharConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCheckcast(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCheckcastNullChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmp(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmpeq(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmpge(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmpgt(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmple(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmplt(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCmpne(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainCondBranch(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainDivChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainOverflowChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainUnsignedOverflowChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainDload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainFload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainFloatCmp(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainGoto(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainI2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIaload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIand(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIdiv(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmpeq(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmpge(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmpgt(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmple(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmplt(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIfcmpne(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIiload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainImul(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIneg(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIabs(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainInstanceOf(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIntAndFloatConstHelper(OMR::ValuePropagation *vp, TR::Node *node, int32_t value);
-TR::Node *constrainIntConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainFloatConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIntLoad(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIntStore(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIor(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIrem(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIshl(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIshr(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIu2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIushr(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIxor(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLand(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLdiv(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLload(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLmul(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLneg(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLabs(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLoadaddr(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLongConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLongStore(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLor(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLrem(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLshl(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLshr(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLushr(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainLxor(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainMonent(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainMonexit(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainMonexitfence(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainTstart(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainTfinish(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainTabort(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainMultiANewArray(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNarrowToByte(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNarrowToChar(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNarrowToInt(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNarrowToShort(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNew(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNewvalue(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNewArray(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainNullChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainZeroChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainAsm(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainIgoto(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainResolveChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainResolveNullChk(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainReturn(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainS2i(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainS2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainShortConst(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainShortLoad(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainStore(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainSu2i(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainSu2l(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainSubtract(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainSwitch(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainThrow(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainTRT(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainWrtBar(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBCDCHK(OMR::ValuePropagation *vp, TR::Node *node);
+TR::Node* constrainAcall(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAdd(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAddressRef(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainANewArray(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainVariableNew(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainVariableNewArray(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAnyIntLoad(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainArrayChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainArraycopy(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainArrayCopyBndChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainArraylength(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainArrayStoreChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAstore(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainB2i(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainB2s(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainB2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBndChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBndChkWithSpineChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBu2i(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBu2s(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBu2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainByteConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCall(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCase(OMR::ValuePropagation* vp, TR::Node* node);
+// TR::Node *constrainCharConst(OMR::ValuePropagation *vp, TR::Node *node);
+TR::Node* constrainCheckcast(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCheckcastNullChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmp(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmpeq(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmpge(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmpgt(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmple(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmplt(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCmpne(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainCondBranch(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainDivChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainOverflowChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainUnsignedOverflowChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainDload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainFload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainFloatCmp(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainGoto(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainI2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIaload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIand(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIdiv(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmpeq(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmpge(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmpgt(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmple(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmplt(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIfcmpne(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIiload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainImul(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIneg(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIabs(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainInstanceOf(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntAndFloatConstHelper(OMR::ValuePropagation* vp, TR::Node* node, int32_t value);
+TR::Node* constrainIntConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainFloatConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntLoad(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntStore(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIor(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIrem(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIshl(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIshr(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIu2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIushr(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIxor(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLand(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLdiv(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLload(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLmul(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLneg(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLabs(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLoadaddr(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongStore(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLor(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLrem(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLshl(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLshr(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLushr(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLxor(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainMonent(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainMonexit(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainMonexitfence(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainTstart(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainTfinish(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainTabort(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainMultiANewArray(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNarrowToByte(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNarrowToChar(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNarrowToInt(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNarrowToShort(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNew(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNewvalue(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNewArray(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainNullChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainZeroChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainAsm(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIgoto(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainResolveChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainResolveNullChk(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainReturn(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainS2i(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainS2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainShortConst(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainShortLoad(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainStore(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainSu2i(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainSu2l(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainSubtract(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainSwitch(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainThrow(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainTRT(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainWrtBar(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBCDCHK(OMR::ValuePropagation* vp, TR::Node* node);
 
-TR::Node *constrainBCDAggrLoad(OMR::ValuePropagation *vp, TR::Node *node);
+TR::Node* constrainBCDAggrLoad(OMR::ValuePropagation* vp, TR::Node* node);
 
-TR::Node *constrainIntegralToBCD(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node *constrainBCDToIntegral(OMR::ValuePropagation *vp, TR::Node *node);
+TR::Node* constrainIntegralToBCD(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainBCDToIntegral(OMR::ValuePropagation* vp, TR::Node* node);
 
-
-TR::Node * constrainIntegerHighestOneBit(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainIntegerLowestOneBit(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainIntegerNumberOfLeadingZeros(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainIntegerNumberOfTrailingZeros(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainIntegerBitCount(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainLongHighestOneBit(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainLongLowestOneBit(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainLongNumberOfLeadingZeros(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainLongNumberOfTrailingZeros(OMR::ValuePropagation *vp, TR::Node *node);
-TR::Node * constrainLongBitCount(OMR::ValuePropagation *vp, TR::Node *node);
-
+TR::Node* constrainIntegerHighestOneBit(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntegerLowestOneBit(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntegerNumberOfLeadingZeros(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntegerNumberOfTrailingZeros(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainIntegerBitCount(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongHighestOneBit(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongLowestOneBit(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongNumberOfLeadingZeros(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongNumberOfTrailingZeros(OMR::ValuePropagation* vp, TR::Node* node);
+TR::Node* constrainLongBitCount(OMR::ValuePropagation* vp, TR::Node* node);
 
 /*
  * One-to-one mapping between opcodes and their value propagation handlers
@@ -922,50 +920,25 @@ TR::Node * constrainLongBitCount(OMR::ValuePropagation *vp, TR::Node *node);
 
 const ValuePropagationPointerTable constraintHandlers;
 
-const ValuePropagationPtr ValuePropagationPointerTable::table[] =
-   {
-#define OPCODE_MACRO(\
-   opcode, \
-   name, \
-   prop1, \
-   prop2, \
-   prop3, \
-   prop4, \
-   dataType, \
-   typeProps, \
-   childProps, \
-   swapChildrenOpcode, \
-   reverseBranchOpcode, \
-   boolCompareOpcode, \
-   ifCompareOpcode, \
-   ...) opcode ## VPHandler,
+const ValuePropagationPtr ValuePropagationPointerTable::table[] = {
+#define OPCODE_MACRO(opcode, name, prop1, prop2, prop3, prop4, dataType, typeProps, childProps, swapChildrenOpcode, \
+    reverseBranchOpcode, boolCompareOpcode, ifCompareOpcode, ...)                                                   \
+    opcode##VPHandler,
 
-   BadILOpVPHandler,
+    BadILOpVPHandler,
 
 #include "il/Opcodes.enum"
 #undef OPCODE_MACRO
 
-#define VECTOR_OPERATION_MACRO(\
-   operation, \
-   name, \
-   prop1, \
-   prop2, \
-   prop3, \
-   prop4, \
-   dataType, \
-   typeProps, \
-   childProps, \
-   swapChildrenOpcode, \
-   reverseBranchOpcode, \
-   boolCompareOpcode, \
-   ifCompareOpcode, \
-   ...) operation ## VPHandler,
+#define VECTOR_OPERATION_MACRO(operation, name, prop1, prop2, prop3, prop4, dataType, typeProps, childProps, \
+    swapChildrenOpcode, reverseBranchOpcode, boolCompareOpcode, ifCompareOpcode, ...)                        \
+    operation##VPHandler,
 
-   BadILOpVPHandler,
+    BadILOpVPHandler,
 
 #include "il/VectorOperations.enum"
 #undef VECTOR_OPERATION_MACRO
 
-   };
+};
 
 #endif

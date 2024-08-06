@@ -28,9 +28,9 @@
 #ifndef OMR_REAL_REGISTER_CONNECTOR
 #define OMR_REAL_REGISTER_CONNECTOR
 namespace OMR {
- class RealRegister;
- typedef OMR::RealRegister RealRegisterConnector;
-}
+class RealRegister;
+typedef OMR::RealRegister RealRegisterConnector;
+} // namespace OMR
 #endif
 
 #include <stdint.h>
@@ -39,41 +39,29 @@ namespace OMR {
 #include "infra/Flags.hpp"
 
 namespace TR {
- class CodeGenerator;
- class RealRegister;
-}
+class CodeGenerator;
+class RealRegister;
+} // namespace TR
 
-namespace OMR
-{
+namespace OMR {
 
-class OMR_EXTENSIBLE RealRegister : public TR::Register
-   {
+class OMR_EXTENSIBLE RealRegister : public TR::Register {
 
-   public:
+public:
+    TR::RealRegister* self();
 
-   TR::RealRegister* self();
+    typedef enum { Free = 0, Unlatched = 1, Assigned = 2, Blocked = 3, Locked = 4 } RegState;
 
-   typedef enum
-      {
-      Free      = 0,
-      Unlatched = 1,
-      Assigned  = 2,
-      Blocked   = 3,
-      Locked    = 4
-      } RegState;
+    // All hardware backed registers
+    typedef enum {
+#include "codegen/RealRegisterEnum.hpp"
 
-   // All hardware backed registers
-   typedef enum
-      {
-      #include "codegen/RealRegisterEnum.hpp"
+    } RegNum;
 
-      } RegNum;
+    typedef enum {
+#include "codegen/RealRegisterMaskEnum.hpp"
 
-   typedef enum
-      {
-      #include "codegen/RealRegisterMaskEnum.hpp"
-
-      } RegMask;
+    } RegMask;
 
     // PseudoRegisters are the union of all hardware backed registers (ex. GPR0)
     // and constructs such as TR::RealRegister::NoReg or TR::RealRegister::AssignAny.
@@ -86,126 +74,114 @@ class OMR_EXTENSIBLE RealRegister : public TR::Register
     // RegNum to RegDep when using it to set a register dependency. If MSVC 2010 support is
     // no longer required, then this can be cleaned up by using scoped enums instead. An issue
     // to track this is open here: https://github.com/eclipse/omr/issues/2590
-    typedef enum
-       {
-       #include "codegen/PseudoRegisterEnum.hpp"
-       } RegDep;
+    typedef enum {
+#include "codegen/PseudoRegisterEnum.hpp"
+    } RegDep;
 
-   protected:
+protected:
+    RealRegister(TR::CodeGenerator* cg, RegNum n);
+    RealRegister(TR_RegisterKinds, uint16_t, RegState, uint16_t, RegNum, RegMask, TR::CodeGenerator*);
 
-   RealRegister(TR::CodeGenerator *cg, RegNum n);
-   RealRegister(TR_RegisterKinds, uint16_t, RegState, uint16_t, RegNum, RegMask, TR::CodeGenerator *);
+public:
+    /*
+     * Getters/Setters
+     */
+    uint16_t getWeight() { return _weight; }
+    uint16_t setWeight(uint16_t w) { return (_weight = w); }
 
+    RegState getState() { return _state; }
+    RegState setState(RegState s, bool assignedToDummy = false); // can not overwrite locked reg
+    void resetState(RegState s) { _state = s; } // only call this if overwriting a locked register
 
-   public:
-   /*
-    * Getters/Setters
-    */
-   uint16_t getWeight() {return _weight;}
-   uint16_t setWeight(uint16_t w) { return (_weight = w); }
+    TR::Register* setAssignedRegister(TR::Register* r);
 
-   RegState getState() {return _state;}
-   RegState setState(RegState s, bool assignedToDummy=false); //can not overwrite locked reg
-   void resetState(RegState s) {_state = s;} // only call this if overwriting a locked register
+    bool getHasBeenAssignedInMethod() { return _realRegFlags.testAny(isAssigned); }
+    bool setHasBeenAssignedInMethod(bool b);
 
-   TR::Register *setAssignedRegister(TR::Register *r);
+    bool getIsFreeOnExit() { return _realRegFlags.testAny(isFreeOnExit); }
+    void setIsFreeOnExit(bool b = true) { _realRegFlags.set(isFreeOnExit, b); }
 
-   bool getHasBeenAssignedInMethod()  { return _realRegFlags.testAny(isAssigned);  }
-   bool setHasBeenAssignedInMethod(bool b);
+    bool getIsAssignedOnce() { return _realRegFlags.testAny(isAssignedOnce); }
+    void setIsAssignedOnce(bool b = true) { _realRegFlags.set(isAssignedOnce, b); }
 
-   bool getIsFreeOnExit()  { return _realRegFlags.testAny(isFreeOnExit);  }
-   void setIsFreeOnExit(bool b=true) { _realRegFlags.set(isFreeOnExit, b); }
+    bool getIsAssignedMoreThanOnce() { return _realRegFlags.testAny(isAssignedMoreThanOnce); }
+    void setIsAssignedMoreThanOnce(bool b = true) { _realRegFlags.set(isAssignedMoreThanOnce, b); }
 
-   bool getIsAssignedOnce()  { return _realRegFlags.testAny(isAssignedOnce);  }
-   void setIsAssignedOnce(bool b=true) { _realRegFlags.set(isAssignedOnce, b); }
+    bool getIsSpillExtendedOutOfLoop() { return _realRegFlags.testAny(isSpillExtendedOutOfLoop); }
+    void setIsSpillExtendedOutOfLoop(bool b = true) { _realRegFlags.set(isSpillExtendedOutOfLoop, b); }
 
-   bool getIsAssignedMoreThanOnce()  { return _realRegFlags.testAny(isAssignedMoreThanOnce);  }
-   void setIsAssignedMoreThanOnce(bool b=true) { _realRegFlags.set(isAssignedMoreThanOnce, b); }
+    RegMask getRealRegisterMask() { return _registerMask; }
+    RegMask setRealRegisterMask(RegMask m) { return _registerMask = m; }
 
-   bool getIsSpillExtendedOutOfLoop()  { return _realRegFlags.testAny(isSpillExtendedOutOfLoop);  }
-   void setIsSpillExtendedOutOfLoop(bool b=true) { _realRegFlags.set(isSpillExtendedOutOfLoop, b); }
+    RegNum getRegisterNumber() { return _registerNumber; }
+    RegNum setRegisterNumber(RegNum rn) { return _registerNumber = rn; }
 
-   RegMask getRealRegisterMask()       {return _registerMask;}
-   RegMask setRealRegisterMask(RegMask m) { return _registerMask = m;}
+    /*
+     * Other methods specialized in this derived class
+     */
+    virtual void block();
+    virtual void unblock();
 
-   RegNum getRegisterNumber() {return _registerNumber;}
-   RegNum setRegisterNumber(RegNum rn) {return _registerNumber = rn;}
+    virtual TR::Register* getRegister();
+    virtual TR::RealRegister* getRealRegister();
 
+    static TR_RegisterMask getAvailableRegistersMask(TR_RegisterKinds rk) { return 0; }
+    static TR::RealRegister* regMaskToRealRegister(TR_RegisterMask mask, TR_RegisterKinds rk, TR::CodeGenerator* cg)
+    {
+        return NULL;
+    }
 
-   /*
-    * Other methods specialized in this derived class
-    */
-   virtual void block();
-   virtual void unblock();
+    static int32_t getBitPosInMask(TR_RegisterMask mask);
 
-   virtual TR::Register     *getRegister();
-   virtual TR::RealRegister *getRealRegister();
+protected:
+    flags8_t _realRegFlags;
+    RegNum _registerNumber;
 
-   static TR_RegisterMask getAvailableRegistersMask(TR_RegisterKinds rk) { return 0; }
-   static TR::RealRegister *regMaskToRealRegister(TR_RegisterMask mask, TR_RegisterKinds rk, TR::CodeGenerator *cg) { return NULL; }
+private:
+    enum {
+        isAssigned = 0x01, // Implies 32-bit reg on 32-bit platform, 64-bit reg on 64-bit platform
+        isFreeOnExit = 0x04, // Was register free on exit of current inner loop
+        isAssignedOnce = 0x08, // Was the register assigned only once inside the current loop
+        isAssignedMoreThanOnce = 0x10, // Was the register assigned more then once inside the current loop
+        isSpillExtendedOutOfLoop = 0x20, // Was the register load from spill extended to loop pre-entry
+    };
 
-   static int32_t getBitPosInMask(TR_RegisterMask mask);
+    uint16_t _weight;
+    RegState _state;
 
-   protected:
-   flags8_t        _realRegFlags;
-   RegNum _registerNumber;
+    RegMask _registerMask;
+    TR::CodeGenerator* _cg;
+};
 
-   private:
-
-   enum
-      {
-      isAssigned                = 0x01,  // Implies 32-bit reg on 32-bit platform, 64-bit reg on 64-bit platform
-      isFreeOnExit              = 0x04,  // Was register free on exit of current inner loop
-      isAssignedOnce            = 0x08,  // Was the register assigned only once inside the current loop
-      isAssignedMoreThanOnce    = 0x10,  // Was the register assigned more then once inside the current loop
-      isSpillExtendedOutOfLoop  = 0x20,  // Was the register load from spill extended to loop pre-entry
-      };
-
-   uint16_t        _weight;
-   RegState       _state;
-
-   RegMask _registerMask;
-   TR::CodeGenerator *_cg;
-   };
-
-   inline bool operator<(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      // Cannot use std::underlying_type here because of lack of support in xlC
-      auto lhsValue = static_cast<int32_t>(lhs);
-      auto rhsValue = static_cast<int32_t>(rhs);
-      return lhsValue < rhsValue;
-      }
-
-   inline bool operator>(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      // Cannot use std::underlying_type here because of lack of support in xlC
-      auto lhsValue = static_cast<int32_t>(lhs);
-      auto rhsValue = static_cast<int32_t>(rhs);
-      return lhsValue > rhsValue;
-      }
-
-   inline bool operator<=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      return !(lhs > rhs);
-      }
-
-   inline bool operator>=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      return !(lhs < rhs);
-      }
-
-   inline bool operator==(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      // Cannot use std::underlying_type here because of lack of support in xlC
-      auto lhsValue = static_cast<int32_t>(lhs);
-      auto rhsValue = static_cast<int32_t>(rhs);
-      return lhsValue == rhsValue;
-      }
-
-   inline bool operator!=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
-      {
-      return !(lhs == rhs);
-      }
+inline bool operator<(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
+{
+    // Cannot use std::underlying_type here because of lack of support in xlC
+    auto lhsValue = static_cast<int32_t>(lhs);
+    auto rhsValue = static_cast<int32_t>(rhs);
+    return lhsValue < rhsValue;
 }
+
+inline bool operator>(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
+{
+    // Cannot use std::underlying_type here because of lack of support in xlC
+    auto lhsValue = static_cast<int32_t>(lhs);
+    auto rhsValue = static_cast<int32_t>(rhs);
+    return lhsValue > rhsValue;
+}
+
+inline bool operator<=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs) { return !(lhs > rhs); }
+
+inline bool operator>=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs) { return !(lhs < rhs); }
+
+inline bool operator==(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs)
+{
+    // Cannot use std::underlying_type here because of lack of support in xlC
+    auto lhsValue = static_cast<int32_t>(lhs);
+    auto rhsValue = static_cast<int32_t>(rhs);
+    return lhsValue == rhsValue;
+}
+
+inline bool operator!=(const RealRegister::RegNum& lhs, const RealRegister::RegDep& rhs) { return !(lhs == rhs); }
+} // namespace OMR
 
 #endif

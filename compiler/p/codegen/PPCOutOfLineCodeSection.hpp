@@ -28,30 +28,32 @@
 #include "il/ILOpCodes.hpp"
 
 namespace TR {
- class CodeGenerator;
- class LabelSymbol;
- class Node;
- class Register;
-}
+class CodeGenerator;
+class LabelSymbol;
+class Node;
+class Register;
+} // namespace TR
 
-class TR_PPCOutOfLineCodeSection : public TR_OutOfLineCodeSection
-   {
-
-public:
-   TR_PPCOutOfLineCodeSection(TR::LabelSymbol * entryLabel, TR::LabelSymbol * restartLabel,
-                               TR::CodeGenerator *cg) : TR_OutOfLineCodeSection(entryLabel, restartLabel, cg)
-                              {}
-
-   TR_PPCOutOfLineCodeSection(TR::LabelSymbol * entryLabel,
-                               TR::CodeGenerator *cg) : TR_OutOfLineCodeSection(entryLabel, cg)
-                              {}
-   // For calls
-   //
-   TR_PPCOutOfLineCodeSection(TR::Node *callNode, TR::ILOpCodes callOp, TR::Register *targetReg, TR::LabelSymbol *entryLabel, TR::LabelSymbol *restartLabel, TR::CodeGenerator *cg);
-
-   TR_PPCOutOfLineCodeSection(TR::Node *callNode, TR::ILOpCodes callOp, TR::Register *targetReg, TR::LabelSymbol *entryLabel, TR::LabelSymbol *restartLabel, TR::InstOpCode::Mnemonic targetRegMovOpcode, TR::CodeGenerator *cg);
+class TR_PPCOutOfLineCodeSection : public TR_OutOfLineCodeSection {
 
 public:
-   void generatePPCOutOfLineCodeSectionDispatch();
-   };
+    TR_PPCOutOfLineCodeSection(TR::LabelSymbol* entryLabel, TR::LabelSymbol* restartLabel, TR::CodeGenerator* cg)
+        : TR_OutOfLineCodeSection(entryLabel, restartLabel, cg)
+    { }
+
+    TR_PPCOutOfLineCodeSection(TR::LabelSymbol* entryLabel, TR::CodeGenerator* cg)
+        : TR_OutOfLineCodeSection(entryLabel, cg)
+    { }
+    // For calls
+    //
+    TR_PPCOutOfLineCodeSection(TR::Node* callNode, TR::ILOpCodes callOp, TR::Register* targetReg,
+        TR::LabelSymbol* entryLabel, TR::LabelSymbol* restartLabel, TR::CodeGenerator* cg);
+
+    TR_PPCOutOfLineCodeSection(TR::Node* callNode, TR::ILOpCodes callOp, TR::Register* targetReg,
+        TR::LabelSymbol* entryLabel, TR::LabelSymbol* restartLabel, TR::InstOpCode::Mnemonic targetRegMovOpcode,
+        TR::CodeGenerator* cg);
+
+public:
+    void generatePPCOutOfLineCodeSectionDispatch();
+};
 #endif

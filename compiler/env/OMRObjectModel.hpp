@@ -28,9 +28,9 @@
 #ifndef OMR_OBJECT_MODEL_CONNECTOR
 #define OMR_OBJECT_MODEL_CONNECTOR
 namespace OMR {
- class ObjectModel;
- typedef OMR::ObjectModel ObjectModelConnector;
-}
+class ObjectModel;
+typedef OMR::ObjectModel ObjectModelConnector;
+} // namespace OMR
 #endif
 
 #include <stdint.h>
@@ -40,109 +40,105 @@ namespace OMR {
 
 class TR_OpaqueClassBlock;
 namespace OMR {
- class ObjectModel;
+class ObjectModel;
 }
 namespace TR {
- class Compilation;
- class Node;
-}
+class Compilation;
+class Node;
+} // namespace TR
 #ifdef TR_TARGET_ARM64
 namespace TR {
- class DataType;
+class DataType;
 }
 #endif
 
-namespace OMR
-{
+namespace OMR {
 
-class ObjectModel
-   {
+class ObjectModel {
 
-   public:
+public:
+    ObjectModel();
 
-   ObjectModel();
+    void initialize() { }
 
-   void initialize() { }
+    bool mayRequireSpineChecks() { return false; }
 
-   bool mayRequireSpineChecks() { return false; }
+    bool areValueTypesEnabled() { return false; }
+    /**
+     * @brief: Returns true if flattenable value type is enabled
+     */
+    bool areFlattenableValueTypesEnabled() { return false; }
+    /**
+     * @brief: Returns true if value type array element flattening is enabled
+     */
+    bool isValueTypeArrayFlatteningEnabled() { return false; }
 
-   bool areValueTypesEnabled() { return false; }
-   /**
-   * @brief: Returns true if flattenable value type is enabled
-   */
-   bool areFlattenableValueTypesEnabled() { return false; }
-   /**
-   * @brief: Returns true if value type array element flattening is enabled
-   */
-   bool isValueTypeArrayFlatteningEnabled() { return false; }
+    bool generateCompressedObjectHeaders() { return false; }
 
-   bool generateCompressedObjectHeaders() { return false; }
+    // This query answers whether or not this VM is capable of generating arraylet
+    // trees.  This does not imply that it will for this compilation unit: you must ask
+    // Compilation::generateArraylets() to answer that.
+    //
+    bool canGenerateArraylets() { return false; }
 
-   // This query answers whether or not this VM is capable of generating arraylet
-   // trees.  This does not imply that it will for this compilation unit: you must ask
-   // Compilation::generateArraylets() to answer that.
-   //
-   bool canGenerateArraylets() { return false; }
+    bool useHybridArraylets() { return false; }
+    bool usesDiscontiguousArraylets() { return false; }
 
-   bool useHybridArraylets() { return false; }
-   bool usesDiscontiguousArraylets() { return false; }
+    int32_t maxContiguousArraySizeInBytes() { return 0; }
 
-   int32_t maxContiguousArraySizeInBytes() { return 0; }
+    uintptr_t contiguousArrayHeaderSizeInBytes() { return 0; }
 
-   uintptr_t contiguousArrayHeaderSizeInBytes() { return 0; }
+    uintptr_t discontiguousArrayHeaderSizeInBytes() { return 0; }
 
-   uintptr_t discontiguousArrayHeaderSizeInBytes() { return 0; }
+    bool isDiscontiguousArray(int32_t sizeInBytes) { return false; }
+    bool isDiscontiguousArray(int32_t sizeInElements, int32_t elementSize) { return false; }
+    bool isDiscontiguousArray(TR::Compilation* comp, uintptr_t objectPointer);
+    intptr_t getArrayLengthInElements(TR::Compilation* comp, uintptr_t objectPointer);
+    uintptr_t getArrayLengthInBytes(TR::Compilation* comp, uintptr_t objectPointer);
+    uintptr_t getArrayElementWidthInBytes(TR::DataType type);
+    uintptr_t getArrayElementWidthInBytes(TR::Compilation* comp, uintptr_t objectPointer);
+    uintptr_t decompressReference(TR::Compilation* comp, uintptr_t compressedReference);
 
-   bool isDiscontiguousArray(int32_t sizeInBytes) { return false; }
-   bool isDiscontiguousArray(int32_t sizeInElements, int32_t elementSize) { return false; }
-   bool isDiscontiguousArray(TR::Compilation* comp, uintptr_t objectPointer);
-   intptr_t getArrayLengthInElements(TR::Compilation* comp, uintptr_t objectPointer);
-   uintptr_t getArrayLengthInBytes(TR::Compilation* comp, uintptr_t objectPointer);
-   uintptr_t getArrayElementWidthInBytes(TR::DataType type);
-   uintptr_t getArrayElementWidthInBytes(TR::Compilation* comp, uintptr_t objectPointer);
-   uintptr_t decompressReference(TR::Compilation* comp, uintptr_t compressedReference);
+    int32_t compressedReferenceShiftOffset();
 
+    int32_t compressedReferenceShift();
 
-   int32_t compressedReferenceShiftOffset();
+    uintptr_t offsetOfObjectVftField() { return 0; }
 
-   int32_t compressedReferenceShift();
+    // --------------------------------------------------------------------------
+    // Object shape
+    //
+    int32_t sizeofReferenceField();
+    intptr_t sizeofReferenceAddress();
+    uintptr_t elementSizeOfBooleanArray();
+    uint32_t getSizeOfArrayElement(TR::Node* node);
+    int64_t maxArraySizeInElementsForAllocation(TR::Node* newArray, TR::Compilation* comp);
+    int64_t maxArraySizeInElements(int32_t knownMinElementSize, TR::Compilation* comp);
+    bool nativeAddressesCanChangeSize() { return false; }
 
-   uintptr_t offsetOfObjectVftField() { return 0; }
+    int32_t arraySpineShift(int32_t width) { return 0; }
+    int32_t arrayletMask(int32_t width) { return 0; }
+    int32_t arrayletLeafIndex(int32_t index, int32_t elementSize) { return 0; }
+    int32_t objectAlignmentInBytes() { return 0; }
+    uintptr_t offsetOfContiguousArraySizeField() { return 0; }
+    uintptr_t offsetOfDiscontiguousArraySizeField() { return 0; }
+    uintptr_t objectHeaderSizeInBytes() { return 0; }
+    uintptr_t offsetOfIndexableSizeField() { return 0; }
 
-   // --------------------------------------------------------------------------
-   // Object shape
-   //
-   int32_t sizeofReferenceField();
-   intptr_t sizeofReferenceAddress();
-   uintptr_t elementSizeOfBooleanArray();
-   uint32_t getSizeOfArrayElement(TR::Node * node);
-   int64_t maxArraySizeInElementsForAllocation(TR::Node *newArray, TR::Compilation *comp);
-   int64_t maxArraySizeInElements(int32_t knownMinElementSize, TR::Compilation *comp);
-   bool nativeAddressesCanChangeSize() { return false; }
+    /**
+     * @brief: Returns the read barrier type of VM's GC
+     */
+    MM_GCReadBarrierType readBarrierType() { return gc_modron_readbar_none; }
 
-   int32_t arraySpineShift(int32_t width) { return 0; }
-   int32_t arrayletMask(int32_t width) { return 0; }
-   int32_t arrayletLeafIndex(int32_t index, int32_t elementSize) { return 0; }
-   int32_t objectAlignmentInBytes() { return 0; }
-   uintptr_t offsetOfContiguousArraySizeField() { return 0; }
-   uintptr_t offsetOfDiscontiguousArraySizeField() { return 0; }
-   uintptr_t objectHeaderSizeInBytes() { return 0; }
-   uintptr_t offsetOfIndexableSizeField() { return 0; }
+    /**
+     * @brief: Returns the write type kind of VM's GC
+     */
+    MM_GCWriteBarrierType writeBarrierType() { return gc_modron_wrtbar_none; }
 
-   /**
-   * @brief: Returns the read barrier type of VM's GC
-   */
-   MM_GCReadBarrierType  readBarrierType()  { return gc_modron_readbar_none; }
+    bool isOffHeapAllocationEnabled() { return false; }
 
-   /**
-   * @brief: Returns the write type kind of VM's GC
-   */
-   MM_GCWriteBarrierType writeBarrierType() { return gc_modron_wrtbar_none;  }
-
-	bool isOffHeapAllocationEnabled() { return false; }
-
-	uintptr_t offsetOfContiguousDataAddrField() { return 0; }
-   };
-}
+    uintptr_t offsetOfContiguousDataAddrField() { return 0; }
+};
+} // namespace OMR
 
 #endif

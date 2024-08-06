@@ -25,5 +25,5 @@
 // performed.
 //
 namespace TR {
- CompilerEnv *Compiler = 0;
+CompilerEnv* Compiler = 0;
 }

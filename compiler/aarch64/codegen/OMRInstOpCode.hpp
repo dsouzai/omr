@@ -28,71 +28,63 @@
 #ifndef OMR_INSTOPCODE_CONNECTOR
 #define OMR_INSTOPCODE_CONNECTOR
 namespace OMR {
- namespace ARM64 { class InstOpCode; }
- typedef OMR::ARM64::InstOpCode InstOpCodeConnector;
+namespace ARM64 {
+class InstOpCode;
 }
+typedef OMR::ARM64::InstOpCode InstOpCodeConnector;
+} // namespace OMR
 #else
 #error OMR::ARM64::InstOpCode expected to be a primary connector, but a OMR connector is already defined
 #endif
 
 #include "compiler/codegen/OMRInstOpCode.hpp"
 
-namespace OMR
-{
+namespace OMR { namespace ARM64 {
 
-namespace ARM64
-{
+class InstOpCode : public OMR::InstOpCode {
+protected:
+    /**
+     * @brief Constructor
+     */
+    InstOpCode()
+        : OMR::InstOpCode(bad)
+    { }
+    /**
+     * @brief Constructor
+     * @param[in] m : mnemonic
+     */
+    InstOpCode(Mnemonic m)
+        : OMR::InstOpCode(m)
+    { }
 
-class InstOpCode: public OMR::InstOpCode
-   {
-   protected:
+public:
+    typedef uint32_t OpCodeBinaryEntry;
+    static const OpCodeBinaryEntry binaryEncodings[ARM64NumOpCodes];
 
-   /**
-    * @brief Constructor
-    */
-   InstOpCode() : OMR::InstOpCode(bad) {}
-   /**
-    * @brief Constructor
-    * @param[in] m : mnemonic
-    */
-   InstOpCode(Mnemonic m) : OMR::InstOpCode(m) {}
+    /*
+     * @brief Answers binary encoding of Mnemonic
+     * @param[in] m : mnemonic
+     * @return binary encoding
+     */
+    static const OpCodeBinaryEntry getOpCodeBinaryEncoding(Mnemonic m) { return binaryEncodings[m]; }
 
-   public:
+    /*
+     * @brief Answers binary encoding of InstOpCode
+     * @return binary encoding
+     */
+    const OpCodeBinaryEntry getOpCodeBinaryEncoding() { return getOpCodeBinaryEncoding(_mnemonic); }
 
-   typedef uint32_t OpCodeBinaryEntry;
-   static const OpCodeBinaryEntry binaryEncodings[ARM64NumOpCodes];
+    /*
+     * @brief Copies binary encoding of the opcode to buffer
+     * @param[in] cursor : instruction cursor
+     * @return instruction cursor
+     */
+    uint8_t* copyBinaryToBuffer(uint8_t* cursor)
+    {
+        *(uint32_t*)cursor = *(uint32_t*)&binaryEncodings[_mnemonic];
+        return cursor;
+    }
+};
 
-   /*
-    * @brief Answers binary encoding of Mnemonic
-    * @param[in] m : mnemonic
-    * @return binary encoding
-    */
-   static const OpCodeBinaryEntry getOpCodeBinaryEncoding(Mnemonic m)
-      {
-      return binaryEncodings[m];
-      }
-
-   /*
-    * @brief Answers binary encoding of InstOpCode
-    * @return binary encoding
-    */
-   const OpCodeBinaryEntry getOpCodeBinaryEncoding()
-      {
-      return getOpCodeBinaryEncoding(_mnemonic);
-      }
-
-   /*
-    * @brief Copies binary encoding of the opcode to buffer
-    * @param[in] cursor : instruction cursor
-    * @return instruction cursor
-    */
-   uint8_t *copyBinaryToBuffer(uint8_t *cursor)
-      {
-      *(uint32_t *)cursor = *(uint32_t *)&binaryEncodings[_mnemonic];
-      return cursor;
-      }
-   };
-
-} // ARM64
-} // OMR
+}} // namespace OMR::ARM64
 #endif

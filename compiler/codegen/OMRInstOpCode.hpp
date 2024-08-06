@@ -28,66 +28,59 @@
 #ifndef OMR_INSTOPCODE_CONNECTOR
 #define OMR_INSTOPCODE_CONNECTOR
 namespace OMR {
- class InstOpCode;
- typedef OMR::InstOpCode InstOpCodeConnector;
-}
+class InstOpCode;
+typedef OMR::InstOpCode InstOpCodeConnector;
+} // namespace OMR
 #endif
 
 #include <stdint.h>
 #include "env/TRMemory.hpp"
 
-namespace OMR
-{
+namespace OMR {
 
-class InstOpCode
-   {
-   public:
+class InstOpCode {
+public:
+    TR_ALLOC(TR_Memory::Instruction)
 
-   TR_ALLOC(TR_Memory::Instruction)
+    enum Mnemonic {
+#include "codegen/InstOpCode.enum"
+        NumOpCodes
+    };
 
-   enum Mnemonic
-      {
-      #include "codegen/InstOpCode.enum"
-      NumOpCodes
-      };
+protected:
+    InstOpCode(Mnemonic m)
+        : _mnemonic(m)
+    { }
 
-   protected:
+public:
+    Mnemonic getMnemonic() { return _mnemonic; }
+    void setMnemonic(Mnemonic op) { _mnemonic = op; }
 
-   InstOpCode(Mnemonic m) :
-      _mnemonic(m) {}
+    static int32_t getNumOpCodes() { return NumOpCodes; }
 
-   public:
+    static const char* getOpCodeName(Mnemonic m);
+    static const char* getMnemonicName(Mnemonic m);
 
-   Mnemonic getMnemonic() { return _mnemonic; }
-   void setMnemonic(Mnemonic op) { _mnemonic = op; }
+    const char* getOpCodeName() { return getOpCodeName(_mnemonic); }
+    const char* getMnemonicName() { return getMnemonicName(_mnemonic); }
 
-   static int32_t getNumOpCodes() { return NumOpCodes; }
+    /*
+     * 0-terminated, printable description of the given mnemonic
+     */
+    // static char *description(Mnemonic m);
 
-   static const char *getOpCodeName(Mnemonic m);
-   static const char *getMnemonicName(Mnemonic m);
+protected:
+    /*
+     * Pointer to the encoded binary representation of an instruction.
+     */
+    static uint8_t* binaryEncoding(Mnemonic m);
 
-   const char *getOpCodeName()    { return getOpCodeName(_mnemonic);  }
-   const char *getMnemonicName()  { return getMnemonicName(_mnemonic);  }
+    Mnemonic _mnemonic;
 
-   /*
-    * 0-terminated, printable description of the given mnemonic
-    */
-   //static char *description(Mnemonic m);
+private:
+    InstOpCode() { }
+};
 
-   protected:
-
-   /*
-    * Pointer to the encoded binary representation of an instruction.
-    */
-   static uint8_t *binaryEncoding(Mnemonic m);
-
-   Mnemonic _mnemonic;
-
-   private:
-
-   InstOpCode() {}
-   };
-
-}
+} // namespace OMR
 
 #endif

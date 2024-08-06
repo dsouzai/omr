@@ -28,58 +28,50 @@
 #ifndef OMR_SNIPPETGCMAP_CONNECTOR
 #define OMR_SNIPPETGCMAP_CONNECTOR
 namespace OMR {
- class SnippetGCMap;
- typedef OMR::SnippetGCMap SnippetGCMapConnector;
-}
+class SnippetGCMap;
+typedef OMR::SnippetGCMap SnippetGCMapConnector;
+} // namespace OMR
 #endif
 
 #include "infra/Flags.hpp"
 
 namespace TR {
- class Instruction;
- class CodeGenerator;
-}
+class Instruction;
+class CodeGenerator;
+} // namespace TR
 class TR_GCStackMap;
 
-namespace OMR
-{
+namespace OMR {
 
-class SnippetGCMap
-   {
-   public:
+class SnippetGCMap {
+public:
+    SnippetGCMap()
+        : _flags(0)
+        , _GCRegisterMask(0)
+        , _stackMap(0)
+    { }
 
-   SnippetGCMap() :
-      _flags(0),
-      _GCRegisterMask(0),
-      _stackMap(0)
-      {
-      }
+    TR_GCStackMap* getStackMap() { return _stackMap; }
+    void setStackMap(TR_GCStackMap* m) { _stackMap = m; }
 
-   TR_GCStackMap *getStackMap() { return _stackMap; }
-   void setStackMap(TR_GCStackMap *m) { _stackMap = m; }
+    uint32_t getGCRegisterMask() { return _GCRegisterMask; }
+    void setGCRegisterMask(uint32_t regMask) { _GCRegisterMask = regMask; }
 
-   uint32_t getGCRegisterMask() { return _GCRegisterMask; }
-   void setGCRegisterMask(uint32_t regMask) { _GCRegisterMask = regMask; }
+    bool isGCSafePoint() { return _flags.testAll(TO_MASK8(GCSafePoint)); }
+    void setGCSafePoint() { _flags.set(TO_MASK8(GCSafePoint)); }
+    void resetGCSafePoint() { _flags.reset(TO_MASK8(GCSafePoint)); }
 
-   bool isGCSafePoint() { return _flags.testAll(TO_MASK8(GCSafePoint)); }
-   void setGCSafePoint() { _flags.set(TO_MASK8(GCSafePoint)); }
-   void resetGCSafePoint() { _flags.reset(TO_MASK8(GCSafePoint)); }
+    void registerStackMap(TR::Instruction* instruction, TR::CodeGenerator* cg);
+    void registerStackMap(uint8_t* callSiteAddress, TR::CodeGenerator* cg);
 
-   void registerStackMap(TR::Instruction *instruction, TR::CodeGenerator *cg);
-   void registerStackMap(uint8_t *callSiteAddress, TR::CodeGenerator *cg);
+    enum { GCSafePoint = 0 };
 
-   enum
-      {
-      GCSafePoint = 0
-      };
+protected:
+    flags8_t _flags;
+    uint32_t _GCRegisterMask;
+    TR_GCStackMap* _stackMap;
+};
 
-   protected:
-
-   flags8_t _flags;
-   uint32_t _GCRegisterMask;
-   TR_GCStackMap *_stackMap;
-   };
-
-}
+} // namespace OMR
 
 #endif

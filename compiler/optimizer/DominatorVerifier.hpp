@@ -33,7 +33,7 @@
 class TR_BitVector;
 class TR_Dominators;
 namespace TR {
- class Block;
+class Block;
 }
 
 // This class can be used to verify :
@@ -47,35 +47,33 @@ namespace TR {
 //    (Verification 1) and the two algorithms are consistent
 //    (Verification 2), then the efficient algorithm is proven correct.
 //
-class TR_DominatorVerifier
-   {
-   public:
-   TR_ALLOC(TR_Memory::DominatorVerifier)
+class TR_DominatorVerifier {
+public:
+    TR_ALLOC(TR_Memory::DominatorVerifier)
 
-   TR_DominatorVerifier(TR_Dominators&);
+    TR_DominatorVerifier(TR_Dominators&);
 
-   private:
+private:
+    bool bothImplementationsConsistent;
+    bool expensiveAlgorithmCorrect;
 
-   bool    bothImplementationsConsistent;
-   bool    expensiveAlgorithmCorrect;
+    bool areBothImplementationsConsistent(TR_DominatorsChk&, TR_Dominators&);
+    bool isExpensiveAlgorithmCorrect(TR_DominatorsChk&);
+    bool dominates(TR::Block*, TR::Block*);
+    void compareWithPredsOf(TR::Block*, TR::Block*);
 
-   bool    areBothImplementationsConsistent(TR_DominatorsChk&, TR_Dominators&);
-   bool    isExpensiveAlgorithmCorrect(TR_DominatorsChk&);
-   bool    dominates(TR::Block *, TR::Block *);
-   void    compareWithPredsOf(TR::Block *, TR::Block *);
+    TR::Compilation* comp() { return _compilation; }
+    TR_Memory* trMemory() { return comp()->trMemory(); }
+    TR_StackMemory trStackMemory() { return trMemory(); }
 
-   TR::Compilation * comp()          {return _compilation;}
-   TR_Memory *      trMemory()      { return comp()->trMemory(); }
-   TR_StackMemory   trStackMemory() { return trMemory(); }
-
-   TR::Compilation              *_compilation;
-   TR_DominatorsChk::BBInfoChk *_dominatorsChkInfo;
-   TR_BitVector                *_nodesSeenOnEveryPath;
-   TR_BitVector                *_nodesSeenOnCurrentPath;
-   int32_t                      _numBlocks;
-   vcount_t                      _visitCount;
-   TR_Dominators               *_dominators;
-   };
+    TR::Compilation* _compilation;
+    TR_DominatorsChk::BBInfoChk* _dominatorsChkInfo;
+    TR_BitVector* _nodesSeenOnEveryPath;
+    TR_BitVector* _nodesSeenOnCurrentPath;
+    int32_t _numBlocks;
+    vcount_t _visitCount;
+    TR_Dominators* _dominators;
+};
 
 #endif
 

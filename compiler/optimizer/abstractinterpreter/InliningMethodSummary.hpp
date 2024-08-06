@@ -27,7 +27,7 @@
 #include "optimizer/abstractinterpreter/AbsValue.hpp"
 
 namespace TR {
- class PotentialOptimizationPredicate;
+class PotentialOptimizationPredicate;
 }
 
 namespace TR {
@@ -36,95 +36,81 @@ namespace TR {
  * The Inlining Method Summary captures potential optimization opportunities of inlining one particular method
  * and also specifies the constraints that are the maximal safe values to make the optimizations happen.
  */
-class InliningMethodSummary
-   {
-   public:
+class InliningMethodSummary {
+public:
+    InliningMethodSummary(TR::Region& region)
+        : _region(region)
+        , _optsByArg(region)
+    { }
 
-   InliningMethodSummary(TR::Region& region) :
-      _region(region),
-      _optsByArg(region)
-   {}
+    /**
+     * @brief calculate the total static benefits from a particular argument after inlining.
+     *
+     * @param arg the argument
+     * @param argPos the position of the argument
+     *
+     * @return the total static benefit
+     */
+    uint32_t testArgument(TR::AbsValue* arg, uint32_t argPos);
 
-   /**
-    * @brief calculate the total static benefits from a particular argument after inlining.
-    *
-    * @param arg the argument
-    * @param argPos the position of the argument
-    *
-    * @return the total static benefit
-    */
-   uint32_t testArgument(TR::AbsValue* arg, uint32_t argPos);
+    void trace(TR::Compilation* comp);
 
-   void trace(TR::Compilation* comp);
+    void addPotentialOptimizationByArgument(TR::PotentialOptimizationPredicate* predicate, uint32_t argPos);
 
-   void addPotentialOptimizationByArgument(TR::PotentialOptimizationPredicate* predicate, uint32_t argPos);
+private:
+    TR::Region& region() { return _region; }
 
-   private:
+    typedef TR::vector<TR::PotentialOptimizationPredicate*, TR::Region&> PredicateContainer;
+    TR::vector<PredicateContainer*, TR::Region&> _optsByArg;
+    TR::Region& _region;
+};
 
-   TR::Region& region() { return _region; }
+class PotentialOptimizationPredicate {
+public:
+    enum Kind { BranchFolding, NullCheckFolding, InstanceOfFolding, CheckCastFolding };
 
-   typedef TR::vector<TR::PotentialOptimizationPredicate*, TR::Region&> PredicateContainer;
-   TR::vector<PredicateContainer*, TR::Region&> _optsByArg;
-   TR::Region &_region;
-   };
+    PotentialOptimizationPredicate(uint32_t bytecodeIndex, TR::PotentialOptimizationPredicate::Kind kind)
+        : _bytecodeIndex(bytecodeIndex)
+        , _kind(kind)
+    { }
 
-class PotentialOptimizationPredicate
-   {
-   public:
+    virtual void trace(TR::Compilation* comp) = 0;
 
-   enum Kind
-      {
-      BranchFolding,
-      NullCheckFolding,
-      InstanceOfFolding,
-      CheckCastFolding
-      };
+    /**
+     * @brief Test whether the given value is a safe value given the optimization's constraint.
+     *
+     * @param value the value to be tested against the constraint
+     *
+     * @return true if it is a safe value to unlock the optimization. false otherwise.
+     */
+    virtual bool test(TR::AbsValue* value) = 0;
 
-   PotentialOptimizationPredicate(uint32_t bytecodeIndex, TR::PotentialOptimizationPredicate::Kind kind) :
-         _bytecodeIndex(bytecodeIndex),
-         _kind(kind)
-      {}
+    const char* getName();
+    uint32_t getBytecodeIndex() { return _bytecodeIndex; }
 
-   virtual void trace(TR::Compilation* comp)=0;
+protected:
+    uint32_t _bytecodeIndex;
+    TR::PotentialOptimizationPredicate::Kind _kind;
+};
 
-   /**
-    * @brief Test whether the given value is a safe value given the optimization's constraint.
-    *
-    * @param value the value to be tested against the constraint
-    *
-    * @return true if it is a safe value to unlock the optimization. false otherwise.
-    */
-   virtual bool test(TR::AbsValue* value)=0;
+class PotentialOptimizationVPPredicate : public PotentialOptimizationPredicate {
+public:
+    PotentialOptimizationVPPredicate(TR::VPConstraint* constraint, uint32_t bytecodeIndex,
+        TR::PotentialOptimizationPredicate::Kind kind, TR::ValuePropagation* vp)
+        : PotentialOptimizationPredicate(bytecodeIndex, kind)
+        , _constraint(constraint)
+        , _vp(vp)
+    { }
 
-   const char* getName();
-   uint32_t getBytecodeIndex() { return _bytecodeIndex; }
+    virtual bool test(TR::AbsValue* value);
+    virtual void trace(TR::Compilation* comp);
 
-   protected:
+private:
+    bool holdPartialOrderRelation(TR::VPConstraint* valueConstraint, TR::VPConstraint* testConstraint);
 
-   uint32_t _bytecodeIndex;
-   TR::PotentialOptimizationPredicate::Kind _kind;
-   };
-
-class PotentialOptimizationVPPredicate : public PotentialOptimizationPredicate
-   {
-   public:
-   PotentialOptimizationVPPredicate(TR::VPConstraint* constraint, uint32_t bytecodeIndex, TR::PotentialOptimizationPredicate::Kind kind, TR::ValuePropagation* vp) :
-         PotentialOptimizationPredicate(bytecodeIndex, kind),
-         _constraint(constraint),
-         _vp(vp)
-      {}
-
-   virtual bool test(TR::AbsValue *value);
-   virtual void trace(TR::Compilation* comp);
-
-   private:
-
-   bool holdPartialOrderRelation(TR::VPConstraint* valueConstraint, TR::VPConstraint* testConstraint);
-
-   TR::ValuePropagation* _vp;
-   TR::VPConstraint* _constraint;
-
-   };
-}
+    TR::ValuePropagation* _vp;
+    TR::VPConstraint* _constraint;
+};
+} // namespace TR
 
 #endif

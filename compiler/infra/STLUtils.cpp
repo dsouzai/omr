@@ -19,10 +19,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0 OR GPL-2.0-only WITH OpenJDK-assembly-exception-1.0
  *******************************************************************************/
 
-/** 
+/**
  * Defines utility functions to be used with STL containers.
  */
 
 #include <string.h>
 
-bool str_comparator(const char *s1, const char *s2) { return strcmp(s1, s2) < 0; }
+bool str_comparator(const char* s1, const char* s2) { return strcmp(s1, s2) < 0; }

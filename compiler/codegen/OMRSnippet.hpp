@@ -28,9 +28,9 @@
 #ifndef OMR_SNIPPET_CONNECTOR
 #define OMR_SNIPPET_CONNECTOR
 namespace OMR {
- class Snippet;
- typedef OMR::Snippet SnippetConnector;
-}
+class Snippet;
+typedef OMR::Snippet SnippetConnector;
+} // namespace OMR
 #endif
 
 #include <stdint.h>
@@ -42,93 +42,83 @@ namespace OMR {
 
 class TR_Debug;
 namespace TR {
- class Block;
- class CodeGenerator;
- class Node;
- class LabelSymbol;
- class Snippet;
-}
+class Block;
+class CodeGenerator;
+class Node;
+class LabelSymbol;
+class Snippet;
+} // namespace TR
 
-namespace OMR
-{
+namespace OMR {
 
-class OMR_EXTENSIBLE Snippet
-   {
-   public:
+class OMR_EXTENSIBLE Snippet {
+public:
+    TR_ALLOC(TR_Memory::Snippet)
 
-   TR_ALLOC(TR_Memory::Snippet)
+    Snippet(TR::CodeGenerator* cg, TR::Node* node, TR::LabelSymbol* label);
 
-   Snippet(TR::CodeGenerator *cg, TR::Node *node, TR::LabelSymbol *label);
+    Snippet(TR::CodeGenerator* cg, TR::Node* node, TR::LabelSymbol* label, bool isGCSafePoint);
 
-   Snippet(TR::CodeGenerator *cg, TR::Node *node, TR::LabelSymbol *label, bool isGCSafePoint);
+    TR::Snippet* self();
 
-   TR::Snippet *self();
+    TR::CodeGenerator* cg() { return _cg; }
+    void setCodeGenerator(TR::CodeGenerator* cg) { _cg = cg; }
 
-   TR::CodeGenerator *cg() { return _cg; }
-   void setCodeGenerator(TR::CodeGenerator *cg) { _cg = cg; }
+    TR::Node* getNode() { return _node; }
+    void setNode(TR::Node* node) { _node = node; }
 
-   TR::Node *getNode() { return _node; }
-   void setNode(TR::Node *node) { _node = node; }
+    TR::LabelSymbol* getSnippetLabel() { return _snippetLabel; }
+    void setSnippetLabel(TR::LabelSymbol* label);
 
-   TR::LabelSymbol *getSnippetLabel() {return _snippetLabel;}
-   void setSnippetLabel(TR::LabelSymbol *label);
+    virtual uint8_t* emitSnippet();
+    virtual int32_t setEstimatedCodeLocation(int32_t p);
+    virtual uint32_t getLength(int32_t estimatedSnippetStart) = 0;
+    virtual uint8_t* emitSnippetBody() = 0;
 
-   virtual uint8_t *emitSnippet();
-   virtual int32_t setEstimatedCodeLocation(int32_t p);
-   virtual uint32_t getLength(int32_t estimatedSnippetStart) = 0;
-   virtual uint8_t *emitSnippetBody() = 0;
+    virtual void print(TR::FILE*, TR_Debug* debug);
 
-   virtual void print(TR::FILE *, TR_Debug *debug);
+    void prepareSnippetForGCSafePoint();
 
-   void prepareSnippetForGCSafePoint();
+    /////////////////////////////////////////////////////////////////////////////
+    //
+    // Former mixin code -- this still needs to evolve into something better
+    //
+public:
+    TR::Block* getBlock() { return _block; }
+    void setBlock(TR::Block* block) { _block = block; }
 
-   /////////////////////////////////////////////////////////////////////////////
-   //
-   // Former mixin code -- this still needs to evolve into something better
-   //
-   public:
+    bool needsExceptionTableEntry() { return _flags.testAll(TO_MASK32(NeedsExceptionTableEntry)); }
+    void setNeedsExceptionTableEntry() { _flags.set(TO_MASK32(NeedsExceptionTableEntry)); }
+    void resetNeedsExceptionTableEntry() { _flags.reset(TO_MASK32(NeedsExceptionTableEntry)); }
 
-   TR::Block *getBlock() { return _block; }
-   void setBlock(TR::Block *block) { _block = block; }
+    TR::SnippetGCMap& gcMap() { return _gcMap; }
 
-   bool needsExceptionTableEntry() { return _flags.testAll(TO_MASK32(NeedsExceptionTableEntry)); }
-   void setNeedsExceptionTableEntry() { _flags.set(TO_MASK32(NeedsExceptionTableEntry)); }
-   void resetNeedsExceptionTableEntry() { _flags.reset(TO_MASK32(NeedsExceptionTableEntry)); }
+protected:
+    enum {
+        NeedsExceptionTableEntry = 0,
 
-   TR::SnippetGCMap &gcMap() { return _gcMap; }
+        NextSnippetFlag,
+        MaxSnippetFlag = (sizeof(uint32_t) * 8) - 1
+    };
 
-   protected:
+    static_assert(NextSnippetFlag <= MaxSnippetFlag, "OMR::SnippetFlags too many flag bits for flag width");
 
-   enum
-      {
-      NeedsExceptionTableEntry = 0,
+    flags32_t _flags;
 
-      NextSnippetFlag,
-      MaxSnippetFlag = (sizeof(uint32_t)*8)-1
-      };
+private:
+    TR::SnippetGCMap _gcMap;
 
-   static_assert(NextSnippetFlag <= MaxSnippetFlag, "OMR::SnippetFlags too many flag bits for flag width");
+    /////////////////////////////////////////////////////////////////////////////
 
-   flags32_t _flags;
+private:
+    TR::CodeGenerator* _cg;
+    TR::LabelSymbol* _snippetLabel;
+    TR::Node* _node;
 
-   private:
+protected:
+    TR::Block* _block;
+};
 
-   TR::SnippetGCMap _gcMap;
-
-   /////////////////////////////////////////////////////////////////////////////
-
-   private:
-
-   TR::CodeGenerator *_cg;
-   TR::LabelSymbol *_snippetLabel;
-   TR::Node *_node;
-
-   protected:
-
-   TR::Block *_block;
-
-   };
-
-}
+} // namespace OMR
 
 #endif

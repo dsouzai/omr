@@ -33,115 +33,96 @@
 
 class TR_Debug;
 namespace TR {
- class CodeGenerator;
- class Instruction;
- class LabelSymbol;
- class Node;
- class Register;
- class Symbol;
- class SymbolReference;
- class UnresolvedDataSnippet;
-}
+class CodeGenerator;
+class Instruction;
+class LabelSymbol;
+class Node;
+class Register;
+class Symbol;
+class SymbolReference;
+class UnresolvedDataSnippet;
+} // namespace TR
 
 namespace TR {
 
 /**
  * ConstantDataSnippet is used to hold shared data
  */
-class S390ConstantDataSnippet : public TR::Snippet
-   {
-   protected:
+class S390ConstantDataSnippet : public TR::Snippet {
+protected:
+    uint8_t _value[1 << TR_DEFAULT_DATA_SNIPPET_EXPONENT];
 
-   uint8_t _value[1<<TR_DEFAULT_DATA_SNIPPET_EXPONENT];
+    uint32_t _length;
+    TR::UnresolvedDataSnippet* _unresolvedDataSnippet;
+    TR::SymbolReference* _symbolReference;
+    uint32_t _reloType;
 
-   uint32_t                      _length;
-   TR::UnresolvedDataSnippet *_unresolvedDataSnippet;
-   TR::SymbolReference*           _symbolReference;
-   uint32_t                      _reloType;
+public:
+    S390ConstantDataSnippet(TR::CodeGenerator* cg, TR::Node*, void* c, uint16_t size);
 
-   public:
+    virtual Kind getKind() { return IsConstantData; }
 
-   S390ConstantDataSnippet(TR::CodeGenerator *cg, TR::Node *, void *c, uint16_t size);
+    virtual uint32_t getConstantSize() { return _length; }
+    virtual int32_t getDataAs1Byte() { return *((int8_t*)&_value); }
+    virtual int32_t getDataAs2Bytes() { return *((int16_t*)&_value); }
+    virtual int32_t getDataAs4Bytes() { return *((int32_t*)&_value); }
+    virtual int64_t getDataAs8Bytes() { return *((int64_t*)&_value); }
 
-   virtual Kind getKind() { return IsConstantData; }
+    virtual uint8_t* getRawData() { return _value; }
 
-   virtual uint32_t getConstantSize() { return _length; }
-   virtual int32_t getDataAs1Byte()  { return *((int8_t *) &_value); }
-   virtual int32_t getDataAs2Bytes() { return *((int16_t *) &_value); }
-   virtual int32_t getDataAs4Bytes() { return *((int32_t *) &_value); }
-   virtual int64_t getDataAs8Bytes() { return *((int64_t *) &_value); }
+    void addMetaDataForCodeAddress(uint8_t* cursor);
+    virtual uint8_t* emitSnippetBody();
+    virtual uint32_t getLength(int32_t estimatedSnippetStart);
+    virtual uint32_t setLength(uint32_t length) { return _length = length; }
 
-   virtual uint8_t * getRawData()
-      {
-      return _value;
-      }
+    TR::UnresolvedDataSnippet* getUnresolvedDataSnippet() { return _unresolvedDataSnippet; }
+    TR::UnresolvedDataSnippet* setUnresolvedDataSnippet(TR::UnresolvedDataSnippet* uds)
+    {
+        return _unresolvedDataSnippet = uds;
+    }
+    TR::SymbolReference* getSymbolReference() { return _symbolReference; }
+    TR::SymbolReference* setSymbolReference(TR::SymbolReference* sr) { return _symbolReference = sr; }
 
-   void addMetaDataForCodeAddress(uint8_t *cursor);
-   virtual uint8_t *emitSnippetBody();
-   virtual uint32_t getLength(int32_t estimatedSnippetStart);
-   virtual uint32_t setLength(uint32_t length) { return _length=length; }
+    uint32_t getReloType() { return _reloType; }
+    uint32_t setReloType(uint32_t rt) { return _reloType = rt; }
+    TR::Compilation* comp() { return cg()->comp(); }
+};
 
-   TR::UnresolvedDataSnippet* getUnresolvedDataSnippet() { return _unresolvedDataSnippet;}
-   TR::UnresolvedDataSnippet* setUnresolvedDataSnippet(TR::UnresolvedDataSnippet* uds)
-      {
-      return _unresolvedDataSnippet = uds;
-      }
-   TR::SymbolReference* getSymbolReference() { return _symbolReference;}
-   TR::SymbolReference* setSymbolReference(TR::SymbolReference* sr)
-      {
-      return _symbolReference = sr;
-      }
+class S390ConstantInstructionSnippet : public TR::S390ConstantDataSnippet {
+    TR::Instruction* _instruction;
 
-   uint32_t            getReloType() { return _reloType;}
-   uint32_t            setReloType(uint32_t rt)
-      {
-      return _reloType = rt;
-      }
-   TR::Compilation* comp() { return cg()->comp(); }
-
-   };
-
-class S390ConstantInstructionSnippet : public TR::S390ConstantDataSnippet
-   {
-   TR::Instruction * _instruction;
-
-   public:
-
-   S390ConstantInstructionSnippet(TR::CodeGenerator *cg, TR::Node *, TR::Instruction *);
-   TR::Instruction * getInstruction() { return _instruction; }
-   Kind getKind() { return IsConstantInstruction; }
-   virtual uint32_t getLength(int32_t estimatedSnippetStart) { return 8; }
-   uint32_t getConstantSize() { return 8; }
-   virtual int64_t getDataAs8Bytes();
-   uint8_t * emitSnippetBody();
-   };
+public:
+    S390ConstantInstructionSnippet(TR::CodeGenerator* cg, TR::Node*, TR::Instruction*);
+    TR::Instruction* getInstruction() { return _instruction; }
+    Kind getKind() { return IsConstantInstruction; }
+    virtual uint32_t getLength(int32_t estimatedSnippetStart) { return 8; }
+    uint32_t getConstantSize() { return 8; }
+    virtual int64_t getDataAs8Bytes();
+    uint8_t* emitSnippetBody();
+};
 
 /**
  * Create constant data snippet with method ep and complete method signature
  */
-class S390EyeCatcherDataSnippet : public TR::S390ConstantDataSnippet
-   {
-   uint8_t *  _value;
+class S390EyeCatcherDataSnippet : public TR::S390ConstantDataSnippet {
+    uint8_t* _value;
 
-   public:
+public:
+    S390EyeCatcherDataSnippet(TR::CodeGenerator* cg, TR::Node*);
 
-   S390EyeCatcherDataSnippet(TR::CodeGenerator *cg, TR::Node *);
-
-   uint8_t *emitSnippetBody();
-   Kind getKind() { return IsEyeCatcherData; }
-   };
+    uint8_t* emitSnippetBody();
+    Kind getKind() { return IsEyeCatcherData; }
+};
 
 /**
  * WritableDataSnippet is used to hold patchable data
  */
-class S390WritableDataSnippet : public TR::S390ConstantDataSnippet
-   {
-   public:
+class S390WritableDataSnippet : public TR::S390ConstantDataSnippet {
+public:
+    S390WritableDataSnippet(TR::CodeGenerator* cg, TR::Node*, void* c, uint16_t size);
 
-   S390WritableDataSnippet(TR::CodeGenerator *cg, TR::Node *, void *c, uint16_t size);
-
-   virtual Kind getKind() { return IsWritableData; }
-   };
-}
+    virtual Kind getKind() { return IsWritableData; }
+};
+} // namespace TR
 
 #endif

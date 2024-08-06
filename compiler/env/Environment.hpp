@@ -25,22 +25,20 @@
 #include "env/OMREnvironment.hpp"
 
 namespace TR {
- class CPU;
+class CPU;
 }
 
-namespace TR
-{
-class Environment : public OMR::EnvironmentConnector
-   {
+namespace TR {
+class Environment : public OMR::EnvironmentConnector {
 public:
+    Environment()
+        : OMR::EnvironmentConnector()
+    { }
 
-   Environment() :
-      OMR::EnvironmentConnector() {}
-
-   Environment(TR::MajorOperatingSystem o, TR::Bitness b) :
-      OMR::EnvironmentConnector(o, b) {}
-
-   };
-}
+    Environment(TR::MajorOperatingSystem o, TR::Bitness b)
+        : OMR::EnvironmentConnector(o, b)
+    { }
+};
+} // namespace TR
 
 #endif

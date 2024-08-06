@@ -36,24 +36,18 @@ class TR_BitVector;
 class TR_OSRMethodData;
 class TR_OSRSlotSharingInfo;
 namespace TR {
- class Block;
- class Compilation;
- class Instruction;
- class Node;
- class ResolvedMethodSymbol;
- class SymbolReference;
- class TreeTop;
-}
-template <class T> class List;
+class Block;
+class Compilation;
+class Instruction;
+class Node;
+class ResolvedMethodSymbol;
+class SymbolReference;
+class TreeTop;
+} // namespace TR
+template<class T> class List;
 
-namespace TR
-   {
-   enum HCRMode
-      {
-      none,
-      osr,
-      traditional
-      };
+namespace TR {
+enum HCRMode { none, osr, traditional };
 
 /*
  * An OSR transition can occur before or after the OSR point's
@@ -69,13 +63,7 @@ namespace TR
  *
  * It is possible for both of these modes to be enabled at once.
  */
-   enum OSRTransitionTarget
-      {
-      disableOSR = 0,
-      preExecutionOSR = 1,
-      postExecutionOSR = 2,
-      preAndPostExecutionOSR = 3
-      };
+enum OSRTransitionTarget { disableOSR = 0, preExecutionOSR = 1, postExecutionOSR = 2, preAndPostExecutionOSR = 3 };
 
 /*
  * OSR can operate in two modes, voluntary and involuntary.
@@ -86,42 +74,40 @@ namespace TR
  * In voluntary OSR, the JITed code does control when an OSR transition occurs, allowing it to
  * limit the OSR points with transitions.
  */
-   enum OSRMode
-      {
-      voluntaryOSR,
-      involuntaryOSR
-      };
-   }
+enum OSRMode { voluntaryOSR, involuntaryOSR };
+} // namespace TR
 
 typedef TR::typed_allocator<std::pair<const int32_t, TR_BitVector*>, TR::Region&> DefiningMapAllocator;
 typedef std::less<int32_t> DefiningMapComparator;
 typedef std::map<int32_t, TR_BitVector*, DefiningMapComparator, DefiningMapAllocator> DefiningMap;
 
-typedef TR::vector<DefiningMap *, TR::Region&> DefiningMaps;
-class TR_OSRSlotSharingInfo
-   {
+typedef TR::vector<DefiningMap*, TR::Region&> DefiningMaps;
+class TR_OSRSlotSharingInfo {
 public:
-   TR_ALLOC(TR_Memory::OSR);
-   TR_OSRSlotSharingInfo(TR::Compilation* _comp);
-   void addSlotInfo(int32_t slot, int32_t symRefNum, int32_t symRefOrder, int32_t symSize, bool takesTwoSlots);
-   class TR_SlotInfo
-      {
-      public:
-      TR_SlotInfo(int32_t _slot, int32_t _symRefNum, int32_t _symRefOrder, int32_t _symSize, bool _takesTwoSlots) :
-         slot(_slot), symRefNum(_symRefNum), symRefOrder(_symRefOrder), symSize(_symSize),
-         takesTwoSlots(_takesTwoSlots) {};
-      int32_t slot;
-      int32_t symRefNum;
-      int32_t symRefOrder;
-      int32_t symSize;
-      bool takesTwoSlots;
-      };
-   TR_Array<TR_SlotInfo>& getSlotInfos() {return slotInfos;}
-   friend TR::Compilation& operator<< (TR::Compilation& out, const TR_OSRSlotSharingInfo*);
+    TR_ALLOC(TR_Memory::OSR);
+    TR_OSRSlotSharingInfo(TR::Compilation* _comp);
+    void addSlotInfo(int32_t slot, int32_t symRefNum, int32_t symRefOrder, int32_t symSize, bool takesTwoSlots);
+    class TR_SlotInfo {
+    public:
+        TR_SlotInfo(int32_t _slot, int32_t _symRefNum, int32_t _symRefOrder, int32_t _symSize, bool _takesTwoSlots)
+            : slot(_slot)
+            , symRefNum(_symRefNum)
+            , symRefOrder(_symRefOrder)
+            , symSize(_symSize)
+            , takesTwoSlots(_takesTwoSlots) {};
+        int32_t slot;
+        int32_t symRefNum;
+        int32_t symRefOrder;
+        int32_t symSize;
+        bool takesTwoSlots;
+    };
+    TR_Array<TR_SlotInfo>& getSlotInfos() { return slotInfos; }
+    friend TR::Compilation& operator<<(TR::Compilation& out, const TR_OSRSlotSharingInfo*);
+
 private:
-   TR_Array<TR_SlotInfo> slotInfos;
-   TR::Compilation* comp;
-   };
+    TR_Array<TR_SlotInfo> slotInfos;
+    TR::Compilation* comp;
+};
 
 /**
  * \page OSR On Stack Replacement (OSR)
@@ -182,284 +168,279 @@ private:
  *
  */
 
-class TR_OSRCompilationData
-   {
-   public:
-   TR_ALLOC(TR_Memory::OSR);
+class TR_OSRCompilationData {
+public:
+    TR_ALLOC(TR_Memory::OSR);
 
-   TR_OSRCompilationData(TR::Compilation* comp);
-   const TR_Array<TR_OSRMethodData *> &getOSRMethodDataArray() const { return osrMethodDataArray; }
-   TR_OSRMethodData *findOSRMethodData(int32_t inlinedSiteIndex, TR::ResolvedMethodSymbol *methodSymbol);
-   TR_OSRMethodData *findOrCreateOSRMethodData(int32_t inlinedSiteIndex, TR::ResolvedMethodSymbol *methodSymbol);
-   TR_OSRMethodData *findCallerOSRMethodData(TR_OSRMethodData *callee);
-   void addSlotSharingInfo(const TR_ByteCodeInfo& T, int32_t slot, int32_t symRefNum,
-                           int32_t symRefOrder, int32_t symSize, bool takesTwoSlots);
-   void ensureSlotSharingInfoAt(const TR_ByteCodeInfo& T);
-   void addInstruction(TR::Instruction* instr);
-   void addInstruction(int32_t instructionPC, TR_ByteCodeInfo bcInfo);
+    TR_OSRCompilationData(TR::Compilation* comp);
+    const TR_Array<TR_OSRMethodData*>& getOSRMethodDataArray() const { return osrMethodDataArray; }
+    TR_OSRMethodData* findOSRMethodData(int32_t inlinedSiteIndex, TR::ResolvedMethodSymbol* methodSymbol);
+    TR_OSRMethodData* findOrCreateOSRMethodData(int32_t inlinedSiteIndex, TR::ResolvedMethodSymbol* methodSymbol);
+    TR_OSRMethodData* findCallerOSRMethodData(TR_OSRMethodData* callee);
+    void addSlotSharingInfo(const TR_ByteCodeInfo& T, int32_t slot, int32_t symRefNum, int32_t symRefOrder,
+        int32_t symSize, bool takesTwoSlots);
+    void ensureSlotSharingInfoAt(const TR_ByteCodeInfo& T);
+    void addInstruction(TR::Instruction* instr);
+    void addInstruction(int32_t instructionPC, TR_ByteCodeInfo bcInfo);
 
-   void checkOSRLimits();
+    void checkOSRLimits();
 
-   uint32_t getMaxScratchBufferSize() const {return maxScratchBufferSize;}
-   void setMaxScratchBufferSize(uint32_t _maxScratchBufferSize);
+    uint32_t getMaxScratchBufferSize() const { return maxScratchBufferSize; }
+    void setMaxScratchBufferSize(uint32_t _maxScratchBufferSize);
 
-   uint32_t getSizeOfMetaData() const;
-   uint32_t getSizeOfInstruction2SharedSlotMap() const;
-   uint32_t getSizeOfCallerIndex2OSRCatchBlockMap() const;
+    uint32_t getSizeOfMetaData() const;
+    uint32_t getSizeOfInstruction2SharedSlotMap() const;
+    uint32_t getSizeOfCallerIndex2OSRCatchBlockMap() const;
 
-   uint32_t writeMetaData(uint8_t* buffer) const;
-   uint32_t writeInstruction2SharedSlotMap(uint8_t* buffer) const;
-   uint32_t writeCallerIndex2OSRCatchBlockMap(uint8_t* buffer) const;
+    uint32_t writeMetaData(uint8_t* buffer) const;
+    uint32_t writeInstruction2SharedSlotMap(uint8_t* buffer) const;
+    uint32_t writeCallerIndex2OSRCatchBlockMap(uint8_t* buffer) const;
 
-   void finishComputingOSRData();
-   void setOSRMethodDataArraySize(int newSize);
+    void finishComputingOSRData();
+    void setOSRMethodDataArraySize(int newSize);
 
-   void setSeenClassPreventingInducedOSR() { _classPreventingInducedOSRSeen = true; }
-   bool seenClassPreventingInducedOSR() { return _classPreventingInducedOSRSeen; }
+    void setSeenClassPreventingInducedOSR() { _classPreventingInducedOSRSeen = true; }
+    bool seenClassPreventingInducedOSR() { return _classPreventingInducedOSRSeen; }
 
-   int32_t getNumOfSymsThatShareSlot() {return numOfSymsThatShareSlot;}
-   void updateNumOfSymsThatShareSlot(int32_t value) {numOfSymsThatShareSlot += value;}
-   void buildSymRefOrderMap();
+    int32_t getNumOfSymsThatShareSlot() { return numOfSymsThatShareSlot; }
+    void updateNumOfSymsThatShareSlot(int32_t value) { numOfSymsThatShareSlot += value; }
+    void buildSymRefOrderMap();
 
-   int32_t getSymRefOrder(int32_t symRefNumber);
-   TR_OSRSlotSharingInfo* getSlotsInfo(const TR_ByteCodeInfo &bcInfo);
+    int32_t getSymRefOrder(int32_t symRefNumber);
+    TR_OSRSlotSharingInfo* getSlotsInfo(const TR_ByteCodeInfo& bcInfo);
 
-   /**
-    * \brief This is the top level function to start building \ref DefiningMaps
-    * for the symbol references under \c prepareForOSR call for each method
-    *
-    * \c DefiningMap maps each symRef to the set of symRefs that define it in
-    * one block or several contiguous blocks.
-    *
-    * After the \c DefiningMaps are no longer needed, the client must call
-    * \ref clearDefiningMap in order to drop all references to the
-    * \ref TR::Region that was supplied.
-    *
-    * \param region A \ref TR::Region memory region in which the final
-    *               \c DefiningMaps will be allocated.  The caller is
-    *               responsible for releasing the memory in which the
-    *               \c DefiningMaps are allocated
-    * \see clearDefiningMap
-    */
-   void buildDefiningMap(TR::Region &region);
-   void buildFinalMap(int32_t callerIndex,
-                      DefiningMap *finalMap,
-                      DefiningMap *workingCatchBlockMap,
-                      DefiningMaps &definingSymRefsMapAtOSRCodeBlocks,
-                      DefiningMaps &symRefNumberMapForPrepareForOSRCalls
-                      );
-   /**
-    * \brief Clears the \ref DefiningMap associated with each
-    * \c prepareForOSR call.
-    * \see buildDefiningMap
-    */
-   void clearDefiningMap();
+    /**
+     * \brief This is the top level function to start building \ref DefiningMaps
+     * for the symbol references under \c prepareForOSR call for each method
+     *
+     * \c DefiningMap maps each symRef to the set of symRefs that define it in
+     * one block or several contiguous blocks.
+     *
+     * After the \c DefiningMaps are no longer needed, the client must call
+     * \ref clearDefiningMap in order to drop all references to the
+     * \ref TR::Region that was supplied.
+     *
+     * \param region A \ref TR::Region memory region in which the final
+     *               \c DefiningMaps will be allocated.  The caller is
+     *               responsible for releasing the memory in which the
+     *               \c DefiningMaps are allocated
+     * \see clearDefiningMap
+     */
+    void buildDefiningMap(TR::Region& region);
+    void buildFinalMap(int32_t callerIndex, DefiningMap* finalMap, DefiningMap* workingCatchBlockMap,
+        DefiningMaps& definingSymRefsMapAtOSRCodeBlocks, DefiningMaps& symRefNumberMapForPrepareForOSRCalls);
+    /**
+     * \brief Clears the \ref DefiningMap associated with each
+     * \c prepareForOSR call.
+     * \see buildDefiningMap
+     */
+    void clearDefiningMap();
 
-   /**
-    * \brief Debug dump of \ref DefiningMap
-    * \param map The \c DefiningMap to print out
-    */
-   void printMap(DefiningMap *map);
+    /**
+     * \brief Debug dump of \ref DefiningMap
+     * \param map The \c DefiningMap to print out
+     */
+    void printMap(DefiningMap* map);
 
-   class TR_ScratchBufferInfo
-      {
-      public:
-      TR_ScratchBufferInfo(int32_t _inlinedSiteIndex, int32_t _osrBufferOffset,
-                           int32_t _scratchBufferOffset, int32_t _symSize) :
-         inlinedSiteIndex(_inlinedSiteIndex), osrBufferOffset(_osrBufferOffset),
-         scratchBufferOffset(_scratchBufferOffset), symSize(_symSize) {};
-      bool operator==(const TR_ScratchBufferInfo& info) const;
-      int32_t writeToBuffer(uint8_t* buffer) const;
-      int32_t inlinedSiteIndex;
-      int32_t osrBufferOffset;
-      int32_t scratchBufferOffset;
-      int32_t symSize;
-      };
+    class TR_ScratchBufferInfo {
+    public:
+        TR_ScratchBufferInfo(
+            int32_t _inlinedSiteIndex, int32_t _osrBufferOffset, int32_t _scratchBufferOffset, int32_t _symSize)
+            : inlinedSiteIndex(_inlinedSiteIndex)
+            , osrBufferOffset(_osrBufferOffset)
+            , scratchBufferOffset(_scratchBufferOffset)
+            , symSize(_symSize) {};
+        bool operator==(const TR_ScratchBufferInfo& info) const;
+        int32_t writeToBuffer(uint8_t* buffer) const;
+        int32_t inlinedSiteIndex;
+        int32_t osrBufferOffset;
+        int32_t scratchBufferOffset;
+        int32_t symSize;
+    };
 
-   typedef TR_Array<TR_ScratchBufferInfo> TR_ScratchBufferInfos;
+    typedef TR_Array<TR_ScratchBufferInfo> TR_ScratchBufferInfos;
 
+    /**
+     * This class is basically a mapping from a given instruction PC offset to information that
+     * that enables to copy values of symbols that share slot(s) from OSR scratch buffer to OSR buffer.
+     * This information is deduced from live symbols at that instruction pc.
+     * More formally, it represents a pair (i, s) where i is an instruction PC and s is an array
+     * of `TR_ScratchBufferInfo`.
+     */
+    class TR_Instruction2SharedSlotMapEntry {
+    public:
+        TR_Instruction2SharedSlotMapEntry(int32_t _instructionPC, const TR_ScratchBufferInfos& _scratchBufferInfos)
+            : instructionPC(_instructionPC)
+            , scratchBufferInfos(_scratchBufferInfos)
+        { }
+        TR_Instruction2SharedSlotMapEntry(const TR_Instruction2SharedSlotMapEntry& entry)
+            : instructionPC(entry.instructionPC)
+            , scratchBufferInfos(entry.scratchBufferInfos)
+        { }
+        TR_Instruction2SharedSlotMapEntry& operator=(const TR_Instruction2SharedSlotMapEntry& entry)
+        {
+            instructionPC = entry.instructionPC;
+            scratchBufferInfos = entry.scratchBufferInfos;
+            return *this;
+        }
+        int32_t instructionPC;
+        TR_ScratchBufferInfos scratchBufferInfos;
+    };
 
-   /**
-    * This class is basically a mapping from a given instruction PC offset to information that
-    * that enables to copy values of symbols that share slot(s) from OSR scratch buffer to OSR buffer.
-    * This information is deduced from live symbols at that instruction pc.
-    * More formally, it represents a pair (i, s) where i is an instruction PC and s is an array
-    * of `TR_ScratchBufferInfo`.
-    */
-   class TR_Instruction2SharedSlotMapEntry
-      {
-      public:
-      TR_Instruction2SharedSlotMapEntry(int32_t _instructionPC, const TR_ScratchBufferInfos& _scratchBufferInfos) :
-         instructionPC(_instructionPC), scratchBufferInfos(_scratchBufferInfos) {}
-      TR_Instruction2SharedSlotMapEntry(const TR_Instruction2SharedSlotMapEntry& entry):
-         instructionPC(entry.instructionPC), scratchBufferInfos(entry.scratchBufferInfos) {}
-      TR_Instruction2SharedSlotMapEntry& operator=(const TR_Instruction2SharedSlotMapEntry& entry)
-         {
-         instructionPC = entry.instructionPC;
-         scratchBufferInfos = entry.scratchBufferInfos;
-         return *this;
-         }
-      int32_t instructionPC;
-      TR_ScratchBufferInfos scratchBufferInfos;
-      };
+    void addInstruction2SharedSlotMapEntry(int32_t instructionPC, const TR_ScratchBufferInfos& infos);
+    void compressInstruction2SharedSlotMap();
 
-   void addInstruction2SharedSlotMapEntry(int32_t instructionPC, const TR_ScratchBufferInfos& infos);
-   void compressInstruction2SharedSlotMap();
+    friend TR::Compilation& operator<<(TR::Compilation&, const TR_OSRCompilationData&);
 
-   friend TR::Compilation& operator<< (TR::Compilation&, const TR_OSRCompilationData&);
+private:
+    typedef TR::deque<TR_Instruction2SharedSlotMapEntry, TR::Region&> TR_Instruction2SharedSlotMap;
 
-   private:
-   typedef TR::deque<TR_Instruction2SharedSlotMapEntry, TR::Region&> TR_Instruction2SharedSlotMap;
+    /// a mapping from the symref's reference number to symRefOrder
+    /// (see above for the definition of symRefOrder)
+    typedef CS2::HashTable<int32_t, int32_t, TR::Allocator> TR_SymRefOrderMap;
+    uint32_t getOSRStackFrameSize(uint32_t methodIndex);
 
-   /// a mapping from the symref's reference number to symRefOrder
-   /// (see above for the definition of symRefOrder)
-   typedef CS2::HashTable<int32_t, int32_t, TR::Allocator> TR_SymRefOrderMap;
-   uint32_t getOSRStackFrameSize(uint32_t methodIndex);
+    // auxiliary method called only by buildSymRefOrderMap
+    void buildSymRefOrderMapAux(TR_Array<List<TR::SymbolReference> >* symListArray);
+    TR_SymRefOrderMap symRefOrderMap;
+    TR_Instruction2SharedSlotMap instruction2SharedSlotMap;
+    // an array of TR_OSRMethodData, one element for each inlined method and one for the root method
+    TR_Array<TR_OSRMethodData*> osrMethodDataArray;
+    TR::Compilation* comp;
+    uint32_t maxScratchBufferSize;
 
-   //auxiliary method called only by buildSymRefOrderMap
-   void buildSymRefOrderMapAux(TR_Array<List<TR::SymbolReference> >* symListArray);
-   TR_SymRefOrderMap                 symRefOrderMap;
-   TR_Instruction2SharedSlotMap      instruction2SharedSlotMap;
-   //an array of TR_OSRMethodData, one element for each inlined method and one for the root method
-   TR_Array<TR_OSRMethodData *>      osrMethodDataArray;
-   TR::Compilation*                   comp;
-   uint32_t                          maxScratchBufferSize;
+    /// Number of sets of symbols that share slots in all inlined
+    /// methods, e.g., if symbols 'a' and 'b' share a slot and symbols
+    /// 'c' and 'd' share a slot, the following field is set to 2.
+    int32_t numOfSymsThatShareSlot;
 
-   /// Number of sets of symbols that share slots in all inlined
-   /// methods, e.g., if symbols 'a' and 'b' share a slot and symbols
-   /// 'c' and 'd' share a slot, the following field is set to 2.
-   int32_t                           numOfSymsThatShareSlot;
-
-   bool                              _classPreventingInducedOSRSeen;
+    bool _classPreventingInducedOSRSeen;
 };
 
-class TR_OSRMethodData
-   {
-   public:
-   TR_ALLOC(TR_Memory::OSR);
+class TR_OSRMethodData {
+public:
+    TR_ALLOC(TR_Memory::OSR);
 
-   TR_OSRMethodData(int32_t _inlinedSiteIndex, TR::ResolvedMethodSymbol *_methodSymbol,
-      TR_OSRCompilationData* _osrCompilationData);
-   int32_t getInlinedSiteIndex() const { return inlinedSiteIndex; }
-   TR::ResolvedMethodSymbol *getMethodSymbol() const { return methodSymbol; }
-   TR::Block * findOrCreateOSRCodeBlock(TR::Node* n);
-   TR::Block * findOrCreateOSRCatchBlock(TR::Node* n);
-   TR::Block *getOSRCodeBlock() const { return osrCodeBlock; }
-   TR::Block *getOSRCatchBlock() const {return osrCatchBlock;}
-   bool inlinesAnyMethod() const;
-   void setNumOfSymsThatShareSlot(int32_t newValue);
-   int32_t getNumOfSymsThatShareSlot() {return numOfSymsThatShareSlot;}
-   void addSlotSharingInfo(int32_t byteCodeIndex,
-                           int32_t slot, int32_t symRefNum, int32_t symRefOrder, int32_t symSize, bool takesTwoSlots);
-   void ensureSlotSharingInfoAt(int32_t byteCodeIndex);
-   bool hasSlotSharingOrDeadSlotsInfo();
-   void addInstruction(int32_t instructionPC, int32_t byteCodeIndex);
+    TR_OSRMethodData(
+        int32_t _inlinedSiteIndex, TR::ResolvedMethodSymbol* _methodSymbol, TR_OSRCompilationData* _osrCompilationData);
+    int32_t getInlinedSiteIndex() const { return inlinedSiteIndex; }
+    TR::ResolvedMethodSymbol* getMethodSymbol() const { return methodSymbol; }
+    TR::Block* findOrCreateOSRCodeBlock(TR::Node* n);
+    TR::Block* findOrCreateOSRCatchBlock(TR::Node* n);
+    TR::Block* getOSRCodeBlock() const { return osrCodeBlock; }
+    TR::Block* getOSRCatchBlock() const { return osrCatchBlock; }
+    bool inlinesAnyMethod() const;
+    void setNumOfSymsThatShareSlot(int32_t newValue);
+    int32_t getNumOfSymsThatShareSlot() { return numOfSymsThatShareSlot; }
+    void addSlotSharingInfo(int32_t byteCodeIndex, int32_t slot, int32_t symRefNum, int32_t symRefOrder,
+        int32_t symSize, bool takesTwoSlots);
+    void ensureSlotSharingInfoAt(int32_t byteCodeIndex);
+    bool hasSlotSharingOrDeadSlotsInfo();
+    void addInstruction(int32_t instructionPC, int32_t byteCodeIndex);
 
-   int32_t getHeaderSize() const;
-   int32_t getTotalNumOfSlots() const;
-   int32_t getTotalDataSize() const;
-   int32_t slotIndex2OSRBufferIndex(int32_t slotIndex, int symSize, bool takesTwoSlots) const;
-   void addScratchBufferOffset(int32_t slotIndex, int32_t symRefOrder, int32_t scratchBufferOffset);
-   bool isEmpty() const {return bcInfoHashTab.IsEmpty();}
-   TR::Compilation* comp() const;
+    int32_t getHeaderSize() const;
+    int32_t getTotalNumOfSlots() const;
+    int32_t getTotalDataSize() const;
+    int32_t slotIndex2OSRBufferIndex(int32_t slotIndex, int symSize, bool takesTwoSlots) const;
+    void addScratchBufferOffset(int32_t slotIndex, int32_t symRefOrder, int32_t scratchBufferOffset);
+    bool isEmpty() const { return bcInfoHashTab.IsEmpty(); }
+    TR::Compilation* comp() const;
 
-   void setNumSymRefs(int32_t numBits) {_numSymRefs = numBits; }
-   int32_t getNumSymRefs() { return _numSymRefs; }
+    void setNumSymRefs(int32_t numBits) { _numSymRefs = numBits; }
+    int32_t getNumSymRefs() { return _numSymRefs; }
 
-   void addLiveRangeInfo(int32_t byteCodeIndex, TR_BitVector *liveRangeInfo);
-   TR_BitVector *getLiveRangeInfo(int32_t byteCodeIndex);
+    void addLiveRangeInfo(int32_t byteCodeIndex, TR_BitVector* liveRangeInfo);
+    TR_BitVector* getLiveRangeInfo(int32_t byteCodeIndex);
 
-   void addPendingPushLivenessInfo(int32_t byteCodeIndex, TR_BitVector *livenessInfo);
-   TR_BitVector *getPendingPushLivenessInfo(int32_t byteCodeIndex);
+    void addPendingPushLivenessInfo(int32_t byteCodeIndex, TR_BitVector* livenessInfo);
+    TR_BitVector* getPendingPushLivenessInfo(int32_t byteCodeIndex);
 
-   void ensureArgInfoAt(int32_t byteCodeIndex, int32_t argNum);
-   void addArgInfo(int32_t byteCodeIndex, int32_t argIndex, int32_t argSymRef);
-   TR_Array<int32_t>* getArgInfo(int32_t byteCodeIndex);
+    void ensureArgInfoAt(int32_t byteCodeIndex, int32_t argNum);
+    void addArgInfo(int32_t byteCodeIndex, int32_t argIndex, int32_t argSymRef);
+    TR_Array<int32_t>* getArgInfo(int32_t byteCodeIndex);
 
-   bool linkedToCaller() { return _linkedToCaller; }
-   void setLinkedToCaller(bool b) { _linkedToCaller = b; }
+    bool linkedToCaller() { return _linkedToCaller; }
+    void setLinkedToCaller(bool b) { _linkedToCaller = b; }
 
-   void buildDefiningMap(TR::Block *block, DefiningMap *blockDefiningMap, DefiningMap *prepareForOSRCallMap = NULL);
-   void buildDefiningMapForBlock(TR::Block *block, DefiningMap *blockMap);
-   void buildDefiningMapForOSRCodeBlockAndPrepareForOSRCall(TR::Block *block, DefiningMap *osrCodeBlockMap, DefiningMap *prepareForOSRCallMap);
-   DefiningMap* getDefiningMap();
-   void collectSubTreeSymRefs(TR::Node *node, TR_BitVector *subTreeSymRefs, TR::NodeChecklist &checklist);
-   void setSymRefs(TR_BitVector *symRefs) { _symRefs = symRefs; }
-   TR_BitVector *getSymRefs() { return _symRefs; }
-   TR_OSRSlotSharingInfo* getSlotsInfo(int32_t byteCodeIndex);
+    void buildDefiningMap(TR::Block* block, DefiningMap* blockDefiningMap, DefiningMap* prepareForOSRCallMap = NULL);
+    void buildDefiningMapForBlock(TR::Block* block, DefiningMap* blockMap);
+    void buildDefiningMapForOSRCodeBlockAndPrepareForOSRCall(
+        TR::Block* block, DefiningMap* osrCodeBlockMap, DefiningMap* prepareForOSRCallMap);
+    DefiningMap* getDefiningMap();
+    void collectSubTreeSymRefs(TR::Node* node, TR_BitVector* subTreeSymRefs, TR::NodeChecklist& checklist);
+    void setSymRefs(TR_BitVector* symRefs) { _symRefs = symRefs; }
+    TR_BitVector* getSymRefs() { return _symRefs; }
+    TR_OSRSlotSharingInfo* getSlotsInfo(int32_t byteCodeIndex);
 
-   friend TR::Compilation& operator<< (TR::Compilation& out, const TR_OSRMethodData& osrMethodData);
-   friend void TR_OSRCompilationData::buildDefiningMap(TR::Region& region);
-   friend void TR_OSRCompilationData::clearDefiningMap();
+    friend TR::Compilation& operator<<(TR::Compilation& out, const TR_OSRMethodData& osrMethodData);
+    friend void TR_OSRCompilationData::buildDefiningMap(TR::Region& region);
+    friend void TR_OSRCompilationData::clearDefiningMap();
 
-   private:
-   void createOSRBlocks(TR::Node* n);
-   void setDefiningMap(DefiningMap *definingMap);
+private:
+    void createOSRBlocks(TR::Node* n);
+    void setDefiningMap(DefiningMap* definingMap);
 
-   typedef CS2::HashTable<int32_t, TR_BitVector *, TR::Allocator> TR_BCLiveRangeInfoHashTable;
-   typedef CS2::HashTable<int32_t, TR_OSRSlotSharingInfo*, TR::Allocator> TR_BCInfoHashTable;
-   typedef CS2::HashTable<int32_t, TR_Array<int32_t>*, TR::Allocator> TR_ArgInfoHashTable;
-   typedef CS2::HashTable<int32_t, TR_Array<int32_t>, TR::Allocator> TR_Slot2ScratchBufferOffset;
+    typedef CS2::HashTable<int32_t, TR_BitVector*, TR::Allocator> TR_BCLiveRangeInfoHashTable;
+    typedef CS2::HashTable<int32_t, TR_OSRSlotSharingInfo*, TR::Allocator> TR_BCInfoHashTable;
+    typedef CS2::HashTable<int32_t, TR_Array<int32_t>*, TR::Allocator> TR_ArgInfoHashTable;
+    typedef CS2::HashTable<int32_t, TR_Array<int32_t>, TR::Allocator> TR_Slot2ScratchBufferOffset;
 
-   /// method symbol corresponding to this method
-   TR::ResolvedMethodSymbol       *methodSymbol; // NOTE: This field must appear first, because its comp() is used to initialize other fields
+    /// method symbol corresponding to this method
+    TR::ResolvedMethodSymbol*
+        methodSymbol; // NOTE: This field must appear first, because its comp() is used to initialize other fields
 
-   /// a mapping from shared slot indices to an array of offsets in the scratch buffer.
-   /// For each shared slot, there is a set of two or more syms that share that slot. The elements
-   /// of the array above is the same as this set. The elements of the array are indexed by their symRefOrder.
-   TR_Slot2ScratchBufferOffset  slot2ScratchBufferOffset;
+    /// a mapping from shared slot indices to an array of offsets in the scratch buffer.
+    /// For each shared slot, there is a set of two or more syms that share that slot. The elements
+    /// of the array above is the same as this set. The elements of the array are indexed by their symRefOrder.
+    TR_Slot2ScratchBufferOffset slot2ScratchBufferOffset;
 
-   /// a hash table from bytecode
-   TR_BCInfoHashTable           bcInfoHashTab;
+    /// a hash table from bytecode
+    TR_BCInfoHashTable bcInfoHashTab;
 
-   TR_BCLiveRangeInfoHashTable  bcLiveRangeInfoHashTab;
-   TR_BCLiveRangeInfoHashTable  bcPendingPushLivenessInfoHashTab;
-   DefiningMap                  *_symRefDefiningMap;
-   TR_BitVector                 *_symRefs;
+    TR_BCLiveRangeInfoHashTable bcLiveRangeInfoHashTab;
+    TR_BCLiveRangeInfoHashTable bcPendingPushLivenessInfoHashTab;
+    DefiningMap* _symRefDefiningMap;
+    TR_BitVector* _symRefs;
 
-   TR_ArgInfoHashTable argInfoHashTab;
+    TR_ArgInfoHashTable argInfoHashTab;
 
-   int32_t _numSymRefs;
+    int32_t _numSymRefs;
 
-   /// the index of the root method inlining table in which this method appears
-   int32_t                      inlinedSiteIndex;
-   TR::Block                     *osrCodeBlock;
+    /// the index of the root method inlining table in which this method appears
+    int32_t inlinedSiteIndex;
+    TR::Block* osrCodeBlock;
 
-   /// This is an empty catch block right before the osr code block, i.e., it falls through to the osr code block.
-   /// All incoming exception edges (from normal blocks) should go to the osr catch block and
-   /// all incoming normal edges (from callees code blocks) should go to the osr code block.
-   TR::Block                     *osrCatchBlock;
+    /// This is an empty catch block right before the osr code block, i.e., it falls through to the osr code block.
+    /// All incoming exception edges (from normal blocks) should go to the osr catch block and
+    /// all incoming normal edges (from callees code blocks) should go to the osr code block.
+    TR::Block* osrCatchBlock;
 
-   /// Number of sets of symbols that share slots in this method
-   int32_t                      numOfSymsThatShareSlot;
+    /// Number of sets of symbols that share slots in this method
+    int32_t numOfSymsThatShareSlot;
 
-   /// points to the owning object
-   TR_OSRCompilationData*       osrCompilationData;
+    /// points to the owning object
+    TR_OSRCompilationData* osrCompilationData;
 
-   bool _linkedToCaller;
-   };
+    bool _linkedToCaller;
+};
 
+class TR_OSRPoint {
+public:
+    TR_ALLOC(TR_Memory::OSR);
 
-class TR_OSRPoint
-   {
-   public:
-   TR_ALLOC(TR_Memory::OSR);
+    TR_OSRPoint(TR_ByteCodeInfo& bcInfo, TR_OSRMethodData* methodData, TR_Memory* m);
+    TR_OSRMethodData* getOSRMethodData() { return _methodData; }
 
-   TR_OSRPoint(TR_ByteCodeInfo &bcInfo, TR_OSRMethodData *methodData, TR_Memory *m);
-   TR_OSRMethodData *getOSRMethodData() { return _methodData; }
+    void setOSRIndex(uint32_t index) { _index = index; }
+    uint32_t getOSRIndex() { return _index; }
+    TR_ByteCodeInfo& getByteCodeInfo() { return _bcInfo; }
 
-   void setOSRIndex(uint32_t index) { _index = index; }
-   uint32_t getOSRIndex() { return _index; }
-   TR_ByteCodeInfo& getByteCodeInfo() {return _bcInfo;}
+private:
+    TR_OSRMethodData* _methodData;
+    uint32_t _index;
+    TR_ByteCodeInfo _bcInfo;
+};
 
-   private:
-   TR_OSRMethodData                   *_methodData;
-   uint32_t                            _index;
-   TR_ByteCodeInfo                     _bcInfo;
-   };
-
-
-TR::Compilation& operator<< (TR::Compilation& out, const TR_OSRCompilationData& osrData);
-
+TR::Compilation& operator<<(TR::Compilation& out, const TR_OSRCompilationData& osrData);
 
 #endif

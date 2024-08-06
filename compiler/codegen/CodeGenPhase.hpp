@@ -26,19 +26,18 @@
 #include "codegen/OMRCodeGenPhase.hpp"
 
 namespace TR {
- class CodeGenerator;
+class CodeGenerator;
 }
 
-namespace TR
-{
+namespace TR {
 
-class OMR_EXTENSIBLE CodeGenPhase: public OMR::CodeGenPhaseConnector
-   {
-   public:
+class OMR_EXTENSIBLE CodeGenPhase : public OMR::CodeGenPhaseConnector {
+public:
+    CodeGenPhase(TR::CodeGenerator* cg)
+        : OMR::CodeGenPhaseConnector(cg)
+    { }
+};
 
-   CodeGenPhase(TR::CodeGenerator * cg): OMR::CodeGenPhaseConnector(cg) {}
-   };
-
-}
+} // namespace TR
 
 #endif

@@ -31,115 +31,95 @@
 #include "codegen/X86Instruction.hpp"
 
 namespace TR {
- class CodeGenerator;
- class LabelSymbol;
- class Node;
-}
+class CodeGenerator;
+class LabelSymbol;
+class Node;
+} // namespace TR
 
 namespace TR {
 
-class X86FPConversionSnippet : public TR::X86RestartSnippet
-   {
-   TR::SymbolReference *_helperSymRef;
+class X86FPConversionSnippet : public TR::X86RestartSnippet {
+    TR::SymbolReference* _helperSymRef;
 
-   public:
+public:
+    X86FPConversionSnippet(TR::CodeGenerator* cg, TR::Node* node, TR::LabelSymbol* restartlab,
+        TR::LabelSymbol* snippetlab, TR::SymbolReference* helperSymRef)
+        : TR::X86RestartSnippet(cg, node, restartlab, snippetlab, helperSymRef->canCauseGC())
+        , _helperSymRef(helperSymRef)
+    {
+        // The code generation for this snippet does not allow a proper GC map
+        // to be built, so assert that GC will not happen.
+        //
+        TR_ASSERT(!helperSymRef->canCauseGC(), "assertion failure");
+    }
 
-   X86FPConversionSnippet(TR::CodeGenerator   *cg,
-                          TR::Node            *node,
-                          TR::LabelSymbol      *restartlab,
-                          TR::LabelSymbol      *snippetlab,
-                          TR::SymbolReference *helperSymRef)
-      : TR::X86RestartSnippet(cg, node, restartlab, snippetlab, helperSymRef->canCauseGC()),
-           _helperSymRef(helperSymRef)
-      {
-      // The code generation for this snippet does not allow a proper GC map
-      // to be built, so assert that GC will not happen.
-      //
-      TR_ASSERT(!helperSymRef->canCauseGC(), "assertion failure");
-      }
+    TR::SymbolReference* getHelperSymRef() { return _helperSymRef; }
+    TR::SymbolReference* setHelperSymRef(TR::SymbolReference* s) { return (_helperSymRef = s); }
 
-   TR::SymbolReference *getHelperSymRef()                      {return _helperSymRef;}
-   TR::SymbolReference *setHelperSymRef(TR::SymbolReference *s) {return (_helperSymRef = s);}
+    uint8_t* emitCallToConversionHelper(uint8_t* buffer);
+    virtual uint8_t* emitSnippetBody();
+    virtual uint8_t* genFPConversion(uint8_t* buffer) = 0;
+    virtual Kind getKind() { return IsFPConversion; }
+};
 
-   uint8_t *emitCallToConversionHelper(uint8_t *buffer);
-   virtual uint8_t *emitSnippetBody();
-   virtual uint8_t *genFPConversion(uint8_t *buffer) = 0;
-   virtual Kind getKind() {return IsFPConversion;}
-   };
+class X86FPConvertToIntSnippet : public TR::X86FPConversionSnippet {
+    TR::X86RegInstruction* _convertInstruction;
 
+public:
+    X86FPConvertToIntSnippet(TR::LabelSymbol* restartlab, TR::LabelSymbol* snippetlab,
+        TR::SymbolReference* helperSymRef, TR::X86RegInstruction* convertInstr, TR::CodeGenerator* cg)
+        : TR::X86FPConversionSnippet(cg, convertInstr->getNode(), restartlab, snippetlab, helperSymRef)
+        , _convertInstruction(convertInstr)
+    { }
 
-class X86FPConvertToIntSnippet  : public TR::X86FPConversionSnippet
-   {
-   TR::X86RegInstruction  *_convertInstruction;
+    TR::X86RegInstruction* getConvertInstruction() { return _convertInstruction; }
+    uint8_t* genFPConversion(uint8_t* buffer);
+    virtual uint32_t getLength(int32_t estimatedSnippetStart);
+    virtual Kind getKind() { return IsFPConvertToInt; }
+};
 
-   public:
+class X86FPConvertToLongSnippet : public TR::X86FPConversionSnippet {
+    TR::X86RegMemInstruction *_loadHighInstruction, *_loadLowInstruction;
+    TR::RealRegister *_lowRegister, *_highRegister, *_doubleRegister;
+    uint8_t _action;
 
-   X86FPConvertToIntSnippet(TR::LabelSymbol            *restartlab,
-                            TR::LabelSymbol            *snippetlab,
-                            TR::SymbolReference       *helperSymRef,
-                            TR::X86RegInstruction     *convertInstr,
-                            TR::CodeGenerator *cg)
-      : TR::X86FPConversionSnippet(cg, convertInstr->getNode(), restartlab, snippetlab, helperSymRef),
-           _convertInstruction(convertInstr) {}
+    void analyseLongConversion();
 
-   TR::X86RegInstruction  * getConvertInstruction() {return _convertInstruction;}
-   uint8_t *genFPConversion(uint8_t *buffer);
-   virtual uint32_t getLength(int32_t estimatedSnippetStart);
-   virtual Kind getKind() {return IsFPConvertToInt;}
-   };
+public:
+    static const uint8_t _registerActions[16];
 
+    enum actionFlags {
+        kXCHG = 0x01,
+        kMOVHigh = 0x02,
+        kMOVLow = 0x04,
+        kPreserveEDX = 0x08,
+        kPreserveEAX = 0x10,
+        kNeedFXCH = 0x80
+    };
 
-class X86FPConvertToLongSnippet  : public TR::X86FPConversionSnippet
-   {
-   TR::X86RegMemInstruction          *_loadHighInstruction,
-                                    *_loadLowInstruction;
-   TR::RealRegister               *_lowRegister,
-                                    *_highRegister,
-                                    *_doubleRegister;
-   uint8_t                           _action;
+    X86FPConvertToLongSnippet(TR::LabelSymbol* restartlab, TR::LabelSymbol* snippetlab,
+        TR::SymbolReference* helperSymRef, TR::Node* node, TR::X86RegMemInstruction* loadHighInstr,
+        TR::X86RegMemInstruction* loadLowInstr, TR::CodeGenerator* cg)
+        : TR::X86FPConversionSnippet(cg, node, restartlab, snippetlab, helperSymRef)
+        , _loadHighInstruction(loadHighInstr)
+        , _loadLowInstruction(loadLowInstr)
+        , _lowRegister(0)
+        , _highRegister(0)
+        , _doubleRegister(0)
+        , _action(0)
+    { }
 
-   void analyseLongConversion();
+    uint8_t getAction() { return _action; }
 
-   public:
+    TR::RealRegister* getLowRegister() { return _lowRegister; }
+    TR::RealRegister* getHighRegister() { return _highRegister; }
+    TR::RealRegister* getDoubleRegister() { return _doubleRegister; }
 
-   static const uint8_t              _registerActions[16];
+    uint8_t* genFPConversion(uint8_t* buffer);
+    virtual uint32_t getLength(int32_t estimatedSnippetStart);
+    virtual Kind getKind() { return IsFPConvertToLong; }
+};
 
-   enum actionFlags
-      {
-      kXCHG        = 0x01,
-      kMOVHigh     = 0x02,
-      kMOVLow      = 0x04,
-      kPreserveEDX = 0x08,
-      kPreserveEAX = 0x10,
-      kNeedFXCH    = 0x80
-      };
-
-   X86FPConvertToLongSnippet(TR::LabelSymbol                    *restartlab,
-                             TR::LabelSymbol                    *snippetlab,
-                             TR::SymbolReference                *helperSymRef,
-                             TR::Node                           *node,
-                             TR::X86RegMemInstruction           *loadHighInstr,
-                             TR::X86RegMemInstruction           *loadLowInstr,
-                             TR::CodeGenerator *cg)
-      : TR::X86FPConversionSnippet(cg, node, restartlab, snippetlab, helperSymRef),
-           _loadHighInstruction(loadHighInstr),
-           _loadLowInstruction(loadLowInstr),
-           _lowRegister(0),
-           _highRegister(0),
-           _doubleRegister(0),
-           _action(0) {}
-
-   uint8_t getAction() { return _action; }
-
-   TR::RealRegister * getLowRegister()   { return _lowRegister; }
-   TR::RealRegister * getHighRegister()   { return _highRegister; }
-   TR::RealRegister * getDoubleRegister() { return _doubleRegister; }
-
-   uint8_t *genFPConversion(uint8_t *buffer);
-   virtual uint32_t getLength(int32_t estimatedSnippetStart);
-   virtual Kind getKind() {return IsFPConvertToLong;}
-   };
-
-}
+} // namespace TR
 
 #endif

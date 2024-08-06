@@ -26,22 +26,22 @@
 #include "codegen/OMRRegisterPair.hpp"
 
 namespace TR {
- class Register;
+class Register;
 }
 
-namespace TR
-{
+namespace TR {
 
-class OMR_EXTENSIBLE RegisterPair: public OMR::RegisterPairConnector
-   {
-   public:
+class OMR_EXTENSIBLE RegisterPair : public OMR::RegisterPairConnector {
+public:
+    RegisterPair() { }
+    RegisterPair(TR_RegisterKinds rk)
+        : OMR::RegisterPairConnector(rk)
+    { }
+    RegisterPair(TR::Register* lo, TR::Register* ho)
+        : OMR::RegisterPairConnector(lo, ho)
+    { }
+};
 
-   RegisterPair() {}
-   RegisterPair(TR_RegisterKinds rk) : OMR::RegisterPairConnector(rk) {}
-   RegisterPair(TR::Register *lo, TR::Register *ho) : OMR::RegisterPairConnector(lo, ho) {}
-
-   };
-
-}
+} // namespace TR
 
 #endif

@@ -28,23 +28,21 @@
 #include <stdint.h>
 
 namespace TR {
- class Compilation;
- class ResolvedMethodSymbol;
-}
+class Compilation;
+class ResolvedMethodSymbol;
+} // namespace TR
 struct OptimizationStrategy;
 
-namespace TR
-{
+namespace TR {
 
-class Optimizer : public OMR::OptimizerConnector
-   {
-   public:
+class Optimizer : public OMR::OptimizerConnector {
+public:
+    Optimizer(TR::Compilation* comp, TR::ResolvedMethodSymbol* methodSymbol, bool isIlGen,
+        const OptimizationStrategy* strategy = NULL, uint16_t VNType = 0)
+        : OMR::OptimizerConnector(comp, methodSymbol, isIlGen, strategy, VNType)
+    { }
+};
 
-   Optimizer(TR::Compilation *comp, TR::ResolvedMethodSymbol *methodSymbol, bool isIlGen,
-         const OptimizationStrategy *strategy = NULL, uint16_t VNType = 0) :
-      OMR::OptimizerConnector(comp, methodSymbol, isIlGen, strategy, VNType) {}
-   };
-
-}
+} // namespace TR
 
 #endif

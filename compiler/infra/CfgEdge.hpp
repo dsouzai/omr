@@ -31,87 +31,85 @@
 #include "infra/Link.hpp"
 
 namespace TR {
- class CFGNode;
+class CFGNode;
 }
 
-namespace TR
-{
+namespace TR {
 
-class CFGEdge : public TR_Link<CFGEdge>
-   {
-   public:
-   TR_ALLOC(TR_Memory::CFGEdge)
+class CFGEdge : public TR_Link<CFGEdge> {
+public:
+    TR_ALLOC(TR_Memory::CFGEdge)
 
+    CFGEdge()
+        : _pFrom(NULL)
+        , _pTo(NULL)
+        , _visitCount(0)
+        , _frequency(0)
+        , _id(-1)
+    { }
 
-   CFGEdge() : _pFrom(NULL), _pTo(NULL), _visitCount(0), _frequency(0), _id(-1)
-   {}
+    // Construct a normal edge between two nodes
+    //
 
-   // Construct a normal edge between two nodes
-   //
+    static CFGEdge* createEdge(CFGNode* pF, CFGNode* pT, TR_Memory* trMemory, TR_AllocationKind allocKind = heapAlloc);
+    static CFGEdge* createExceptionEdge(
+        CFGNode* pF, CFGNode* pT, TR_Memory* trMemory, TR_AllocationKind allocKind = heapAlloc);
+    static CFGEdge* createEdge(CFGNode* pF, CFGNode* pT, TR::Region& region);
+    static CFGEdge* createExceptionEdge(CFGNode* pF, CFGNode* pT, TR::Region& reigon);
 
-   static CFGEdge * createEdge (CFGNode *pF, CFGNode *pT, TR_Memory* trMemory, TR_AllocationKind allocKind = heapAlloc);
-   static CFGEdge * createExceptionEdge (CFGNode *pF, CFGNode *pT, TR_Memory* trMemory, TR_AllocationKind allocKind = heapAlloc);
-   static CFGEdge * createEdge (CFGNode *pF, CFGNode *pT, TR::Region &region);
-   static CFGEdge * createExceptionEdge (CFGNode *pF, CFGNode *pT, TR::Region &reigon);
+    CFGNode* getFrom() { return _pFrom; }
+    CFGNode* getTo() { return _pTo; }
 
-   CFGNode *getFrom() {return _pFrom;}
-   CFGNode *getTo()   {return _pTo;}
+    bool getCreatedByTailRecursionElimination() { return _flags.testAny(_createdByTailRecursionElimination); }
+    void setCreatedByTailRecursionElimination(bool b) { _flags.set(_createdByTailRecursionElimination, b); }
 
-   bool getCreatedByTailRecursionElimination() { return _flags.testAny(_createdByTailRecursionElimination); }
-   void setCreatedByTailRecursionElimination(bool b) { _flags.set(_createdByTailRecursionElimination, b); }
+    // Set the from and to nodes for this edge. Also adds this edge to the
+    // appropriate successor or predecessor lists in the nodes.
+    //
+    void setFrom(CFGNode* pF);
+    void setTo(CFGNode* pT);
+    void setExceptionFrom(CFGNode* pF);
+    void setExceptionTo(CFGNode* pF);
+    void setFromTo(CFGNode* pF, CFGNode* pT);
+    void setExceptionFromTo(CFGNode* pF, CFGNode* pT);
+    vcount_t getVisitCount() { return _visitCount; }
+    vcount_t setVisitCount(vcount_t vc) { return (_visitCount = vc); }
+    vcount_t incVisitCount() { return ++_visitCount; }
+    int32_t getId() { return _id; }
+    int32_t setId(int32_t id) { return (_id = id); }
 
-   // Set the from and to nodes for this edge. Also adds this edge to the
-   // appropriate successor or predecessor lists in the nodes.
-   //
-   void setFrom(CFGNode *pF);
-   void setTo(CFGNode *pT);
-   void setExceptionFrom(CFGNode *pF);
-   void setExceptionTo(CFGNode *pF);
-   void setFromTo(CFGNode *pF, CFGNode *pT);
-   void setExceptionFromTo(CFGNode *pF, CFGNode *pT);
-   vcount_t    getVisitCount()            {return _visitCount;}
-   vcount_t    setVisitCount(vcount_t vc) {return (_visitCount = vc);}
-   vcount_t    incVisitCount()
-      {
-      return ++_visitCount;
-      }
-   int32_t    getId()            {return _id;}
-   int32_t    setId(int32_t id)  {return (_id = id);}
+    int16_t getFrequency() { return _frequency; }
 
-   int16_t    getFrequency()          { return _frequency; }
+    void setFrequency(int32_t f)
+    {
+        if (f >= SHRT_MAX)
+            f = SHRT_MAX - 1;
 
-   void       setFrequency(int32_t f)
-      {
-      if (f >= SHRT_MAX)
-         f = SHRT_MAX-1;
+        _frequency = f;
+    }
 
-      _frequency = f;
-      }
+    void normalizeFrequency(int32_t maxFrequency);
 
-   void       normalizeFrequency(int32_t maxFrequency);
+private:
+    // keeping this c-tor private since there is no real need to make it public right now
+    CFGEdge(CFGNode* pF, CFGNode* pT);
 
-   private:
+    enum // flags
+    {
+        _createdByTailRecursionElimination = 0x8000
+    };
 
-   //keeping this c-tor private since there is no real need to make it public right now
-   CFGEdge(CFGNode *pF, CFGNode *pT);
+    CFGNode* _pFrom;
+    CFGNode* _pTo;
 
-   enum  // flags
-      {
-      _createdByTailRecursionElimination = 0x8000
-      };
+    vcount_t _visitCount;
+    flags16_t _flags;
 
+    int16_t _frequency;
 
-   CFGNode *_pFrom;
-   CFGNode *_pTo;
+    int32_t _id;
+};
 
-   vcount_t   _visitCount;
-   flags16_t  _flags;
-
-   int16_t _frequency;
-
-   int32_t _id;
-   };
-
-}
+} // namespace TR
 
 #endif

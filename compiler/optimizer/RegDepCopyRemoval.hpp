@@ -28,15 +28,14 @@
 #include <vector>
 
 namespace TR {
- class Compilation;
- class Node;
- class TreeTop;
- class NodeChecklist;
-}
-template <typename T> class TR_Array;
+class Compilation;
+class Node;
+class TreeTop;
+class NodeChecklist;
+} // namespace TR
+template<typename T> class TR_Array;
 
-namespace TR
-{
+namespace TR {
 
 // Tries to remove redundant copies that are implicit in the commoning
 // relationships within individual sets of outgoing register dependencies.
@@ -57,81 +56,75 @@ namespace TR
 // a fresh virtual register, and then reuses the same copy node where possible
 // in later dependencies to avoid repeating the same copies.
 
-class RegDepCopyRemoval : public TR::Optimization
-   {
-   public:
+class RegDepCopyRemoval : public TR::Optimization {
+public:
+    RegDepCopyRemoval(TR::OptimizationManager* manager);
+    static TR::Optimization* create(TR::OptimizationManager* manager)
+    {
+        return new (manager->allocator()) RegDepCopyRemoval(manager);
+    }
 
-   RegDepCopyRemoval(TR::OptimizationManager *manager);
-   static TR::Optimization *create(TR::OptimizationManager *manager)
-      {
-      return new (manager->allocator()) RegDepCopyRemoval(manager);
-      }
+    virtual int32_t perform();
+    virtual const char* optDetailString() const throw();
 
-   virtual int32_t perform();
-   virtual const char * optDetailString() const throw();
+private:
+    enum RegDepState {
+        REGDEP_ABSENT, // Not specified in the current regdeps
+        REGDEP_IGNORED, // Specified, but ignore (e.g. register pairs)
+        REGDEP_UNDECIDED, // Preferred handling not yet determined
+        REGDEP_NODE_ORIGINAL, // Leave the reg dep unchanged
+        REGDEP_NODE_FRESH_COPY, // Make a fresh copy for this reg dep
+        REGDEP_NODE_REUSE_COPY, // Reuse a previous copy for this reg dep
+    };
 
-   private:
+    // Data for a particular register, extracted from a GlRegDeps currently
+    // under consideration.
+    struct RegDepInfo {
+        TR::Node* node; // Toplevel [ai]RegLoad/PassThrough node for this register
+        TR::Node* value; // The node that supplies the value of the register
+        RegDepState state;
+        int childIndex; // Position of this dependency within _regDeps
+    };
 
-   enum RegDepState
-      {
-      REGDEP_ABSENT,          // Not specified in the current regdeps
-      REGDEP_IGNORED,         // Specified, but ignore (e.g. register pairs)
-      REGDEP_UNDECIDED,       // Preferred handling not yet determined
-      REGDEP_NODE_ORIGINAL,   // Leave the reg dep unchanged
-      REGDEP_NODE_FRESH_COPY, // Make a fresh copy for this reg dep
-      REGDEP_NODE_REUSE_COPY, // Reuse a previous copy for this reg dep
-      };
+    // The last node whose value was to be put into a register, along with the
+    // actual node selected in order to provide that value (either the original,
+    // or a copy).
+    struct NodeChoice {
+        TR::Node* original;
+        TR::Node* selected;
+        TR::Node* regStoreNode;
+    };
 
-   // Data for a particular register, extracted from a GlRegDeps currently
-   // under consideration.
-   struct RegDepInfo
-      {
-      TR::Node *node;   // Toplevel [ai]RegLoad/PassThrough node for this register
-      TR::Node *value;  // The node that supplies the value of the register
-      RegDepState state;
-      int childIndex;   // Position of this dependency within _regDeps
-      };
+    const char* registerName(TR_GlobalRegisterNumber reg);
+    void rangeCheckRegister(TR_GlobalRegisterNumber reg);
+    RegDepInfo& getRegDepInfo(TR_GlobalRegisterNumber reg);
+    NodeChoice& getNodeChoice(TR_GlobalRegisterNumber reg);
 
-   // The last node whose value was to be put into a register, along with the
-   // actual node selected in order to provide that value (either the original,
-   // or a copy).
-   struct NodeChoice
-      {
-      TR::Node *original;
-      TR::Node *selected;
-      TR::Node *regStoreNode;
-      };
+    void discardAllNodeChoices();
+    void discardNodeChoice(TR_GlobalRegisterNumber reg);
+    void clearNodeChoice(TR_GlobalRegisterNumber reg);
+    void rememberNodeChoice(TR_GlobalRegisterNumber reg, TR::Node* selected);
 
-   const char *registerName(TR_GlobalRegisterNumber reg);
-   void rangeCheckRegister(TR_GlobalRegisterNumber reg);
-   RegDepInfo &getRegDepInfo(TR_GlobalRegisterNumber reg);
-   NodeChoice &getNodeChoice(TR_GlobalRegisterNumber reg);
+    void processRegDeps(TR::Node* deps, TR::TreeTop* depTT);
+    void clearRegDepInfo();
+    void readRegDeps();
+    void ignoreRegister(TR_GlobalRegisterNumber reg);
+    void selectNodesToReuse(TR::NodeChecklist& usedNodes);
+    void selectNodesToCopy(TR::NodeChecklist& usedNodes);
+    void updateRegDeps(TR::NodeChecklist& usedNodes);
+    void reuseCopy(TR_GlobalRegisterNumber reg);
+    void makeFreshCopy(TR_GlobalRegisterNumber reg);
+    void updateSingleRegDep(TR_GlobalRegisterNumber reg, TR::Node* selected);
+    void generateRegcopyDebugCounter(const char* category);
 
-   void discardAllNodeChoices();
-   void discardNodeChoice(TR_GlobalRegisterNumber reg);
-   void clearNodeChoice(TR_GlobalRegisterNumber reg);
-   void rememberNodeChoice(TR_GlobalRegisterNumber reg, TR::Node *selected);
+    const TR_GlobalRegisterNumber _regBegin;
+    const TR_GlobalRegisterNumber _regEnd;
+    std::vector<RegDepInfo, TR::typed_allocator<RegDepInfo, TR::Allocator> > _regDepInfoTable;
+    std::vector<NodeChoice, TR::typed_allocator<NodeChoice, TR::Allocator> > _nodeChoiceTable;
+    TR::TreeTop* _treetop;
+    TR::Node* _regDeps;
+};
 
-   void processRegDeps(TR::Node *deps, TR::TreeTop *depTT);
-   void clearRegDepInfo();
-   void readRegDeps();
-   void ignoreRegister(TR_GlobalRegisterNumber reg);
-   void selectNodesToReuse(TR::NodeChecklist &usedNodes);
-   void selectNodesToCopy(TR::NodeChecklist &usedNodes);
-   void updateRegDeps(TR::NodeChecklist &usedNodes);
-   void reuseCopy(TR_GlobalRegisterNumber reg);
-   void makeFreshCopy(TR_GlobalRegisterNumber reg);
-   void updateSingleRegDep(TR_GlobalRegisterNumber reg, TR::Node *selected);
-   void generateRegcopyDebugCounter(const char *category);
-
-   const TR_GlobalRegisterNumber _regBegin;
-   const TR_GlobalRegisterNumber _regEnd;
-   std::vector<RegDepInfo, TR::typed_allocator<RegDepInfo, TR::Allocator> > _regDepInfoTable;
-   std::vector<NodeChoice, TR::typed_allocator<NodeChoice, TR::Allocator> > _nodeChoiceTable;
-   TR::TreeTop *_treetop;
-   TR::Node *_regDeps;
-   };
-
-}
+} // namespace TR
 
 #endif // REGDEPCOPYREMOVAL_INCL

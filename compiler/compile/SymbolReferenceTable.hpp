@@ -25,20 +25,16 @@
 #include "compile/OMRSymbolReferenceTable.hpp"
 
 namespace TR {
- class Compilation;
+class Compilation;
 }
 
-namespace TR
-   {
-   class SymbolReferenceTable : public OMR::SymbolReferenceTableConnector
-      {
-      public:
-
-      SymbolReferenceTable(size_t s, TR::Compilation *c) :
-         OMR::SymbolReferenceTableConnector(s, c)
-         {
-         }
-      };
-   }
+namespace TR {
+class SymbolReferenceTable : public OMR::SymbolReferenceTableConnector {
+public:
+    SymbolReferenceTable(size_t s, TR::Compilation* c)
+        : OMR::SymbolReferenceTableConnector(s, c)
+    { }
+};
+} // namespace TR
 
 #endif

@@ -19,7 +19,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0 OR GPL-2.0-only WITH OpenJDK-assembly-exception-1.0
  *******************************************************************************/
 
-/** 
+/**
  * Declares utility functions to be used with STL containers.
  */
 
@@ -34,6 +34,6 @@
  * @param s2 pointer to the second operand string
  * @returns true if the string pointed to by s1 is 'less than' the one pointed to by s2
  */
-bool str_comparator(const char *s1, const char *s2);
+bool str_comparator(const char* s1, const char* s2);
 
 #endif

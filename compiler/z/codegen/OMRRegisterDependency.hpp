@@ -28,9 +28,11 @@
 #ifndef OMR_REGISTER_DEPENDENCY_CONNECTOR
 #define OMR_REGISTER_DEPENDENCY_CONNECTOR
 namespace OMR {
- namespace Z { class RegisterDependencyConditions; }
- typedef OMR::Z::RegisterDependencyConditions RegisterDependencyConditionsConnector;
+namespace Z {
+class RegisterDependencyConditions;
 }
+typedef OMR::Z::RegisterDependencyConditions RegisterDependencyConditionsConnector;
+} // namespace OMR
 #else
 #error OMR::Z::RegisterDependencyConditions expected to be a primary connector, but a OMR connector is already defined
 #endif
@@ -38,9 +40,11 @@ namespace OMR {
 #ifndef OMR_REGISTER_DEPENDENCY_GROUP_CONNECTOR
 #define OMR_REGISTER_DEPENDENCY_GROUP_CONNECTOR
 namespace OMR {
- namespace Z { class RegisterDependencyGroup; }
- typedef OMR::Z::RegisterDependencyGroup RegisterDependencyGroupConnector;
+namespace Z {
+class RegisterDependencyGroup;
 }
+typedef OMR::Z::RegisterDependencyGroup RegisterDependencyGroupConnector;
+} // namespace OMR
 #endif
 
 #include "compiler/codegen/OMRRegisterDependency.hpp"
@@ -58,286 +62,254 @@ namespace OMR {
 #include "env/TRMemory.hpp"
 #include "infra/Assert.hpp"
 
-#define RefsAndDefsDependentRegister  (ReferencesDependentRegister | DefinesDependentRegister)
+#define RefsAndDefsDependentRegister (ReferencesDependentRegister | DefinesDependentRegister)
 
 namespace TR {
- class Instruction;
- class Node;
- class RegisterDependencyConditions;
- class RegisterPair;
-}
-template <typename ListKind> class List;
+class Instruction;
+class Node;
+class RegisterDependencyConditions;
+class RegisterPair;
+} // namespace TR
+template<typename ListKind> class List;
 
-#define RefsAndDefsDependentRegister  (ReferencesDependentRegister | DefinesDependentRegister)
+#define RefsAndDefsDependentRegister (ReferencesDependentRegister | DefinesDependentRegister)
 
 #define NUM_VM_THREAD_REG_DEPS 1
-namespace OMR
-{
-namespace Z
-{
-class OMR_EXTENSIBLE RegisterDependencyGroup : public OMR::RegisterDependencyGroup
-   {
-   public:
+namespace OMR { namespace Z {
+class OMR_EXTENSIBLE RegisterDependencyGroup : public OMR::RegisterDependencyGroup {
+public:
+    RegisterDependencyGroup()
+        : OMR::RegisterDependencyGroup()
+    { }
 
-   RegisterDependencyGroup() : OMR::RegisterDependencyGroup() {}
+    uint32_t genBitMapOfAssignableGPRs(TR::CodeGenerator* cg, uint32_t numberOfRegisters);
 
-   uint32_t genBitMapOfAssignableGPRs(TR::CodeGenerator *cg, uint32_t numberOfRegisters);
+    void assignRegisters(TR::Instruction* currentInstruction, TR_RegisterKinds kindToBeAssigned,
+        uint32_t numberOfRegisters, TR::CodeGenerator* cg);
 
-   void assignRegisters(TR::Instruction  *currentInstruction, TR_RegisterKinds kindToBeAssigned, uint32_t numberOfRegisters, TR::CodeGenerator *cg);
+    int8_t getNumUses() { return _numUses; }
 
-   int8_t getNumUses()
-      {
-      return _numUses;
-      }
+    void incNumUses(int8_t n = 1) { _numUses += n; }
 
-   void incNumUses(int8_t n = 1)
-      {
-      _numUses += n;
-      }
+protected:
+};
 
-   protected:
+class RegisterDependencyConditions : public OMR::RegisterDependencyConditions {
+    TR::RegisterDependencyGroup* _preConditions;
+    TR::RegisterDependencyGroup* _postConditions;
+    uint16_t _numPreConditions;
+    uint16_t _addCursorForPre;
+    uint16_t _numPostConditions;
+    uint16_t _addCursorForPost;
+    bool _isUsed;
+    TR::CodeGenerator* _cg;
 
-   };
+public:
+    TR_ALLOC(TR_Memory::RegisterDependencyConditions)
 
-class RegisterDependencyConditions: public OMR::RegisterDependencyConditions
-   {
-   TR::RegisterDependencyGroup *_preConditions;
-   TR::RegisterDependencyGroup *_postConditions;
-   uint16_t                         _numPreConditions;
-   uint16_t                         _addCursorForPre;
-   uint16_t                         _numPostConditions;
-   uint16_t                         _addCursorForPost;
-   bool                            _isUsed;
-   TR::CodeGenerator               *_cg;
+    RegisterDependencyConditions(TR::CodeGenerator* cg, TR::Node* node, uint32_t extranum, TR::Instruction** cursorPtr);
 
-   public:
+    // Make a copy of and exiting dep list and make room for new deps.
 
-   TR_ALLOC(TR_Memory::RegisterDependencyConditions)
+    RegisterDependencyConditions(TR::RegisterDependencyConditions* iConds, uint16_t numNewPreConds,
+        uint16_t numNewPostConds, TR::CodeGenerator* cg);
 
-   RegisterDependencyConditions(TR::CodeGenerator *cg,
-                                       TR::Node          *node,
-                                       uint32_t          extranum,
-                                       TR::Instruction  **cursorPtr);
+    RegisterDependencyConditions(
+        TR::RegisterDependencyConditions* conds_1, TR::RegisterDependencyConditions* conds_2, TR::CodeGenerator* cg);
 
-   // Make a copy of and exiting dep list and make room for new deps.
+    RegisterDependencyConditions(TR::RegisterDependencyGroup* _preConditions,
+        TR::RegisterDependencyGroup* _postConditions, uint16_t numPreConds, uint16_t numPostConds,
+        TR::CodeGenerator* cg)
+        : _preConditions(_preConditions)
+        , _postConditions(_postConditions)
+        , _numPreConditions(numPreConds)
+        , _addCursorForPre(numPreConds)
+        , _numPostConditions(numPostConds)
+        , _addCursorForPost(numPostConds)
+        , _isUsed(false)
+        , _cg(cg)
+    { }
 
-   RegisterDependencyConditions(TR::RegisterDependencyConditions* iConds, uint16_t numNewPreConds, uint16_t numNewPostConds, TR::CodeGenerator *cg);
+    RegisterDependencyConditions()
+        : _preConditions(NULL)
+        , _postConditions(NULL)
+        , _numPreConditions(0)
+        , _addCursorForPre(0)
+        , _numPostConditions(0)
+        , _addCursorForPost(0)
+        , _isUsed(false)
+        , _cg(NULL)
+    { }
 
+    // VMThread work: implicitly add an extra post condition for a possible vm thread
+    // register post dependency.  Do not need for pre because they are so
+    // infrequent.
+    RegisterDependencyConditions(uint16_t numPreConds, uint16_t numPostConds, TR::CodeGenerator* cg);
 
-   RegisterDependencyConditions( TR::RegisterDependencyConditions * conds_1,
-                                        TR::RegisterDependencyConditions * conds_2,
-                                        TR::CodeGenerator *cg);
+    void resolveSplitDependencies(TR::CodeGenerator* cg, TR::Node* Noce, TR::Node* child, TR::RegisterPair* regPair,
+        List<TR::Register>& regList, TR::Register*& reg, TR::Register*& highReg, TR::Register*& copyReg,
+        TR::Register*& highCopyReg, TR::Instruction*& iCursor, TR::RealRegister::RegNum& regNum);
 
-   RegisterDependencyConditions(TR::RegisterDependencyGroup *_preConditions,
-                                TR::RegisterDependencyGroup *_postConditions,
-                                uint16_t numPreConds, uint16_t numPostConds, TR::CodeGenerator *cg)
-      : _preConditions(_preConditions),
-        _postConditions(_postConditions),
-        _numPreConditions(numPreConds),
-        _addCursorForPre(numPreConds),
-        _numPostConditions(numPostConds),
-        _addCursorForPost(numPostConds),
-        _isUsed(false),
-        _cg(cg)
-      {}
+    bool getIsUsed() { return _isUsed; }
+    void setIsUsed() { _isUsed = true; }
+    void resetIsUsed() { _isUsed = false; }
 
-   RegisterDependencyConditions()
-      : _preConditions(NULL),
-        _postConditions(NULL),
-        _numPreConditions(0),
-        _addCursorForPre(0),
-        _numPostConditions(0),
-        _addCursorForPost(0),
-        _isUsed(false),
-        _cg(NULL)
-      {}
+    TR::RegisterDependencyGroup* getPreConditions() { return _preConditions; }
 
-   //VMThread work: implicitly add an extra post condition for a possible vm thread
-   //register post dependency.  Do not need for pre because they are so
-   //infrequent.
-   RegisterDependencyConditions(uint16_t numPreConds, uint16_t numPostConds, TR::CodeGenerator *cg);
+    void unionNoRegPostCondition(TR::Register* reg, TR::CodeGenerator* cg)
+    {
+        addPostCondition(reg, TR::RealRegister::AssignAny);
+    }
 
-   void resolveSplitDependencies(
-      TR::CodeGenerator* cg,
-      TR::Node* Noce, TR::Node* child,
-      TR::RegisterPair * regPair, List<TR::Register>& regList,
-      TR::Register*& reg, TR::Register*& highReg,
-      TR::Register*& copyReg, TR::Register*& highCopyReg,
-      TR::Instruction*& iCursor,
-      TR::RealRegister::RegNum& regNum);
+    uint32_t getNumPreConditions() { return _numPreConditions; }
 
-   bool getIsUsed() {return _isUsed;}
-   void setIsUsed() {_isUsed=true;}
-   void resetIsUsed() {_isUsed=false;}
+    uint32_t setNumPreConditions(uint16_t n, TR_Memory* m);
 
-   TR::RegisterDependencyGroup *getPreConditions()  {return _preConditions;}
+    uint32_t getNumPostConditions() { return _numPostConditions; }
 
-   void unionNoRegPostCondition(TR::Register *reg, TR::CodeGenerator *cg)
-      {
-      addPostCondition(reg, TR::RealRegister::AssignAny);
-      }
+    uint32_t setNumPostConditions(uint16_t n, TR_Memory* m);
 
-   uint32_t getNumPreConditions() {return _numPreConditions;}
+    uint32_t getAddCursorForPre() { return _addCursorForPre; }
+    uint32_t setAddCursorForPre(uint16_t a) { return _addCursorForPre = a; }
 
-   uint32_t setNumPreConditions(uint16_t n, TR_Memory * m);
+    uint32_t getAddCursorForPost() { return _addCursorForPost; }
+    uint32_t setAddCursorForPost(uint16_t a) { return _addCursorForPost = a; }
 
-   uint32_t getNumPostConditions() {return _numPostConditions;}
+    void addAssignAnyPreCondOnMemRef(TR::MemoryReference* memRef)
+    {
+        TR::Register* base = memRef->getBaseRegister();
+        TR::Register* indx = memRef->getIndexRegister();
 
-   uint32_t setNumPostConditions(uint16_t n, TR_Memory * m);
+        if (base != NULL) {
+            addPreConditionIfNotAlreadyInserted(base, TR::RealRegister::AssignAny);
+        }
+        if (indx != NULL) {
+            addPreConditionIfNotAlreadyInserted(indx, TR::RealRegister::AssignAny);
+        }
+    }
 
-   uint32_t getAddCursorForPre() {return _addCursorForPre;}
-   uint32_t setAddCursorForPre(uint16_t a) {return _addCursorForPre = a;}
+    void addPreCondition(TR::Register* vr, TR::RealRegister::RegNum rr, uint8_t flag = ReferencesDependentRegister)
+    {
+        addPreCondition(vr, static_cast<TR::RealRegister::RegDep>(rr), flag);
+    }
 
-   uint32_t getAddCursorForPost() {return _addCursorForPost;}
-   uint32_t setAddCursorForPost(uint16_t a) {return _addCursorForPost = a;}
+    void addPreCondition(TR::Register* vr, TR::RealRegister::RegDep rr, uint8_t flag = ReferencesDependentRegister);
 
-   void addAssignAnyPreCondOnMemRef(TR::MemoryReference* memRef)
-      {
-      TR::Register* base = memRef->getBaseRegister();
-      TR::Register* indx = memRef->getIndexRegister();
+    TR::RegisterDependencyGroup* getPostConditions() { return _postConditions; }
 
-      if (base != NULL)
-         {
-         addPreConditionIfNotAlreadyInserted(base, TR::RealRegister::AssignAny);
-         }
-      if (indx != NULL)
-         {
-         addPreConditionIfNotAlreadyInserted(indx, TR::RealRegister::AssignAny);
-         }
-      }
+    void addAssignAnyPostCondOnMemRef(TR::MemoryReference* memRef)
+    {
+        TR::Register* base = memRef->getBaseRegister();
+        TR::Register* indx = memRef->getIndexRegister();
 
-   void addPreCondition(TR::Register                              *vr,
-                        TR::RealRegister::RegNum rr,
-                        uint8_t                                   flag = ReferencesDependentRegister)
-       {
-       addPreCondition(vr, static_cast<TR::RealRegister::RegDep>(rr), flag);
-       }
+        if (base != NULL) {
+            addPostConditionIfNotAlreadyInserted(base, TR::RealRegister::AssignAny, ReferencesDependentRegister);
+        }
+        if (indx != NULL) {
+            addPostConditionIfNotAlreadyInserted(indx, TR::RealRegister::AssignAny, ReferencesDependentRegister);
+        }
+    }
 
-   void addPreCondition(TR::Register                              *vr,
-                        TR::RealRegister::RegDep rr,
-                        uint8_t                                   flag = ReferencesDependentRegister);
+    void addPostCondition(TR::Register* vr, TR::RealRegister::RegNum rr, uint8_t flag = ReferencesDependentRegister)
+    {
+        addPostCondition(vr, static_cast<TR::RealRegister::RegDep>(rr), flag);
+    }
 
-   TR::RegisterDependencyGroup *getPostConditions() {return _postConditions;}
+    void addPostCondition(TR::Register* vr, TR::RealRegister::RegDep rr, uint8_t flag = ReferencesDependentRegister);
 
-   void addAssignAnyPostCondOnMemRef(TR::MemoryReference* memRef)
-      {
-      TR::Register* base = memRef->getBaseRegister();
-      TR::Register* indx = memRef->getIndexRegister();
+    void assignPreConditionRegisters(
+        TR::Instruction* currentInstruction, TR_RegisterKinds kindToBeAssigned, TR::CodeGenerator* cg);
 
-      if (base != NULL)
-         {
-         addPostConditionIfNotAlreadyInserted(base, TR::RealRegister::AssignAny, ReferencesDependentRegister);
-         }
-      if (indx != NULL)
-         {
-         addPostConditionIfNotAlreadyInserted(indx, TR::RealRegister::AssignAny, ReferencesDependentRegister);
-         }
-      }
+    void assignPostConditionRegisters(
+        TR::Instruction* currentInstruction, TR_RegisterKinds kindToBeAssigned, TR::CodeGenerator* cg);
 
-   void addPostCondition(TR::Register                              *vr,
-                         TR::RealRegister::RegNum rr,
-                         uint8_t                                   flag = ReferencesDependentRegister)
-      {
-      addPostCondition(vr, static_cast<TR::RealRegister::RegDep>(rr), flag);
-      }
+    TR::Register* searchPreConditionRegister(TR::RealRegister::RegNum rr, uint8_t flag = RefsAndDefsDependentRegister);
 
-   void addPostCondition(TR::Register *vr, TR::RealRegister::RegDep rr, uint8_t flag = ReferencesDependentRegister);
+    TR::Register* searchPostConditionRegister(TR::RealRegister::RegNum rr, uint8_t flag = RefsAndDefsDependentRegister);
 
-   void assignPreConditionRegisters(TR::Instruction *currentInstruction, TR_RegisterKinds kindToBeAssigned, TR::CodeGenerator *cg);
+    TR::Register* searchPreConditionRegister(TR::Register* vr, uint8_t flag = RefsAndDefsDependentRegister);
 
-   void assignPostConditionRegisters(TR::Instruction *currentInstruction, TR_RegisterKinds kindToBeAssigned, TR::CodeGenerator *cg);
+    TR::Register* searchPostConditionRegister(TR::Register* vr, uint8_t flag = RefsAndDefsDependentRegister);
 
-   TR::Register *searchPreConditionRegister(TR::RealRegister::RegNum rr, uint8_t flag = RefsAndDefsDependentRegister);
+    int32_t searchPostConditionRegisterPos(TR::Register* vr, uint8_t flag = RefsAndDefsDependentRegister);
 
-   TR::Register *searchPostConditionRegister(TR::RealRegister::RegNum rr, uint8_t flag = RefsAndDefsDependentRegister);
+    void stopUsingDepRegs(TR::CodeGenerator* cg, TR::Register* ret1 = NULL, TR::Register* ret2 = NULL);
 
-   TR::Register *searchPreConditionRegister(TR::Register * vr, uint8_t flag = RefsAndDefsDependentRegister);
+    // These methods are temporary until dependencies are re-engineered down the road
+    // We only add in the post condition if the desired virt reg is not already spoken for
 
-   TR::Register *searchPostConditionRegister(TR::Register * vr, uint8_t flag = RefsAndDefsDependentRegister);
+    /**
+     * @brief Adds the provided \c TR::RegisterDependency to the set of preconditions if it
+     *        has not been added already
+     *
+     * @param[in] \a regDep : the \c TR::RegisterDependency to add
+     *
+     * @return \c true if successfully added; \c false otherwise
+     */
+    bool addPreConditionIfNotAlreadyInserted(TR::RegisterDependency* regDep);
+    bool addPreConditionIfNotAlreadyInserted(
+        TR::Register* vr, TR::RealRegister::RegNum rr, uint8_t flag = ReferencesDependentRegister);
+    bool addPreConditionIfNotAlreadyInserted(
+        TR::Register* vr, TR::RealRegister::RegDep rr, uint8_t flag = ReferencesDependentRegister);
 
-   int32_t searchPostConditionRegisterPos(TR::Register * vr, uint8_t flag = RefsAndDefsDependentRegister);
+    /**
+     * @brief Adds the provided \c TR::RegisterDependency to the set of postconditions if it
+     *        has not been added already
+     *
+     * @param[in] \a regDep : the \c TR::RegisterDependency to add
+     *
+     * @return \c true if successfully added; \c false otherwise
+     */
+    bool addPostConditionIfNotAlreadyInserted(TR::RegisterDependency* regDep);
 
-   void stopUsingDepRegs(TR::CodeGenerator *cg, TR::Register *ret1=NULL, TR::Register *ret2=NULL);
+    bool addPostConditionIfNotAlreadyInserted(
+        TR::Register* vr, TR::RealRegister::RegNum rr, uint8_t flag = ReferencesDependentRegister);
+    bool addPostConditionIfNotAlreadyInserted(
+        TR::Register* vr, TR::RealRegister::RegDep rr, uint8_t flag = ReferencesDependentRegister);
 
+    TR::RegisterDependencyConditions* clone(TR::CodeGenerator* cg, int32_t additionalRegDeps);
 
-   // These methods are temporary until dependencies are re-engineered down the road
-   // We only add in the post condition if the desired virt reg is not already spoken for
+    bool refsRegister(TR::Register* r);
+    bool defsRegister(TR::Register* r);
+    bool usesRegister(TR::Register* r);
 
-   /**
-    * @brief Adds the provided \c TR::RegisterDependency to the set of preconditions if it
-    *        has not been added already
-    *
-    * @param[in] \a regDep : the \c TR::RegisterDependency to add
-    *
-    * @return \c true if successfully added; \c false otherwise
-    */
-   bool addPreConditionIfNotAlreadyInserted(TR::RegisterDependency *regDep);
-   bool addPreConditionIfNotAlreadyInserted(TR::Register *vr,
-                                            TR::RealRegister::RegNum rr,
-                                            uint8_t flag = ReferencesDependentRegister);
-   bool addPreConditionIfNotAlreadyInserted(TR::Register *vr,
-                                            TR::RealRegister::RegDep rr,
-                                            uint8_t flag = ReferencesDependentRegister);
+    void bookKeepingRegisterUses(
+        TR::Instruction* instr, TR::CodeGenerator* cg, int32_t oldPreCursor = 0, int32_t oldPostCursor = 0);
+    void createRegisterAssociationDirective(TR::Instruction* instruction, TR::CodeGenerator* cg);
 
-   /**
-    * @brief Adds the provided \c TR::RegisterDependency to the set of postconditions if it
-    *        has not been added already
-    *
-    * @param[in] \a regDep : the \c TR::RegisterDependency to add
-    *
-    * @return \c true if successfully added; \c false otherwise
-    */
-   bool addPostConditionIfNotAlreadyInserted(TR::RegisterDependency *regDep);
+    /**
+     * @brief Inquires whether a register dependency exists within a given \c TR::RegisterDependencyGroup
+     *
+     * @param[in] \a regDepArr : the \c TR::RegisterDependencyGroup to check
+     * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
+     * @param[in] \a numberOfRegisters : the number of registers in the dependency group to check
+     *
+     * @return \c true if the register dependency is found; \c false otherwise
+     */
+    bool doesConditionExist(
+        TR::RegisterDependencyGroup* regDepArr, TR::RegisterDependency* regDep, uint32_t numberOfRegisters);
 
-   bool addPostConditionIfNotAlreadyInserted(TR::Register *vr,
-                                             TR::RealRegister::RegNum rr,
-                                             uint8_t flag = ReferencesDependentRegister);
-   bool addPostConditionIfNotAlreadyInserted(TR::Register *vr,
-                                             TR::RealRegister::RegDep rr,
-                                             uint8_t flag = ReferencesDependentRegister);
+    /**
+     * @brief Inquires whether a given register dependency exists within the preconditions
+     *
+     * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
+     *
+     * @return \c true if the register dependency is found; \c false otherwise
+     */
+    bool doesPreConditionExist(TR::RegisterDependency* regDep);
 
-   TR::RegisterDependencyConditions *clone(TR::CodeGenerator *cg, int32_t additionalRegDeps);
+    /**
+     * @brief Inquires whether a given register dependency exists within the postconditions
+     *
+     * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
+     *
+     * @return \c true if the register dependency is found; \c false otherwise
+     */
+    bool doesPostConditionExist(TR::RegisterDependency* regDep);
 
-   bool refsRegister(TR::Register *r);
-   bool defsRegister(TR::Register *r);
-   bool usesRegister(TR::Register *r);
+    TR::CodeGenerator* cg() { return _cg; }
+};
 
-   void bookKeepingRegisterUses(TR::Instruction *instr, TR::CodeGenerator *cg, int32_t oldPreCursor=0, int32_t oldPostCursor=0);
-   void createRegisterAssociationDirective(TR::Instruction *instruction, TR::CodeGenerator *cg);
-
-   /**
-    * @brief Inquires whether a register dependency exists within a given \c TR::RegisterDependencyGroup
-    *
-    * @param[in] \a regDepArr : the \c TR::RegisterDependencyGroup to check
-    * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
-    * @param[in] \a numberOfRegisters : the number of registers in the dependency group to check
-    *
-    * @return \c true if the register dependency is found; \c false otherwise
-    */
-   bool doesConditionExist( TR::RegisterDependencyGroup * regDepArr, TR::RegisterDependency *regDep, uint32_t numberOfRegisters );
-
-   /**
-    * @brief Inquires whether a given register dependency exists within the preconditions
-    *
-    * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
-    *
-    * @return \c true if the register dependency is found; \c false otherwise
-    */
-   bool doesPreConditionExist( TR::RegisterDependency *regDep );
-
-   /**
-    * @brief Inquires whether a given register dependency exists within the postconditions
-    *
-    * @param[in] \a regDep : the \c TR::RegisterDependency to check for inclusion
-    *
-    * @return \c true if the register dependency is found; \c false otherwise
-    */
-   bool doesPostConditionExist( TR::RegisterDependency *regDep );
-
-   TR::CodeGenerator *cg()   { return _cg; }
-   };
-
-}
-}
+}} // namespace OMR::Z
 
 #endif /* OMR_Z_REGISTER_DEPENDENCY_INCL */

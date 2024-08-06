@@ -26,6 +26,6 @@
 /**
  * @brief Make sure the code gets from the data cache to the instruction cache.
  */
-void riscvCodeSync(void *codeStart, size_t codeSize);
+void riscvCodeSync(void* codeStart, size_t codeSize);
 
-#endif//CODESYNC_HPP_
+#endif // CODESYNC_HPP_

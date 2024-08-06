@@ -26,9 +26,9 @@
 
 #ifndef TR_SYSTEM_SEGMENT_PROVIDER
 #define TR_SYSTEM_SEGMENT_PROVIDER
- class SystemSegmentProvider;
+class SystemSegmentProvider;
 namespace TR {
- using OMR::SystemSegmentProvider;
+using OMR::SystemSegmentProvider;
 }
 #endif
 
@@ -41,36 +41,27 @@ namespace TR {
 
 namespace OMR {
 
-class SystemSegmentProvider : public TR::SegmentAllocator
-   {
+class SystemSegmentProvider : public TR::SegmentAllocator {
 public:
-   SystemSegmentProvider(size_t segmentSize, TR::RawAllocator rawAllocator);
-   ~SystemSegmentProvider() throw();
-   virtual TR::MemorySegment &request(size_t requiredSize);
-   virtual void release(TR::MemorySegment &segment) throw();
-   size_t bytesAllocated() const throw();
-   size_t regionBytesAllocated() const throw();
-   size_t systemBytesAllocated() const throw();
-   size_t allocationLimit() const throw();
-   void setAllocationLimit(size_t);
+    SystemSegmentProvider(size_t segmentSize, TR::RawAllocator rawAllocator);
+    ~SystemSegmentProvider() throw();
+    virtual TR::MemorySegment& request(size_t requiredSize);
+    virtual void release(TR::MemorySegment& segment) throw();
+    size_t bytesAllocated() const throw();
+    size_t regionBytesAllocated() const throw();
+    size_t systemBytesAllocated() const throw();
+    size_t allocationLimit() const throw();
+    void setAllocationLimit(size_t);
 
 private:
-   TR::RawAllocator _rawAllocator;
-   size_t _currentBytesAllocated;
-   size_t _highWaterMark;
-   typedef TR::typed_allocator<
-      TR::MemorySegment,
-      TR::RawAllocator
-      > SegmentSetAllocator;
+    TR::RawAllocator _rawAllocator;
+    size_t _currentBytesAllocated;
+    size_t _highWaterMark;
+    typedef TR::typed_allocator<TR::MemorySegment, TR::RawAllocator> SegmentSetAllocator;
 
-   std::set<
-      TR::MemorySegment,
-      std::less< TR::MemorySegment >,
-      SegmentSetAllocator
-      > _segments;
+    std::set<TR::MemorySegment, std::less<TR::MemorySegment>, SegmentSetAllocator> _segments;
+};
 
-   };
-
-} // namespace TR
+} // namespace OMR
 
 #endif // OMR_SYSTEM_SEGMENT_PROVIDER

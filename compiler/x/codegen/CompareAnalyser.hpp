@@ -27,76 +27,59 @@
 #include "codegen/CodeGenerator.hpp"
 #include "codegen/InstOpCode.hpp"
 
-#define EvalChild1   0x01
-#define EvalChild2   0x02
-#define CmpReg1Reg2  0x04
-#define CmpReg1Mem2  0x08
-#define CmpMem1Reg2  0x10
+#define EvalChild1 0x01
+#define EvalChild2 0x02
+#define CmpReg1Reg2 0x04
+#define CmpReg1Mem2 0x08
+#define CmpMem1Reg2 0x10
 
 namespace TR {
- class LabelSymbol;
- class Machine;
- class Node;
- class Register;
-}
+class LabelSymbol;
+class Machine;
+class Node;
+class Register;
+} // namespace TR
 
-class TR_X86CompareAnalyser  : public TR_Analyser
-   {
+class TR_X86CompareAnalyser : public TR_Analyser {
 
-   static const uint8_t _actionMap[NUM_ACTIONS];
-   TR::CodeGenerator    *_cg;
-   TR::Machine *_machine;
+    static const uint8_t _actionMap[NUM_ACTIONS];
+    TR::CodeGenerator* _cg;
+    TR::Machine* _machine;
 
-   public:
+public:
+    TR_X86CompareAnalyser(TR::CodeGenerator* cg)
+        : _cg(cg)
+        , _machine(cg->machine())
+    { }
 
-   TR_X86CompareAnalyser(TR::CodeGenerator *cg)
-      : _cg(cg), _machine(cg->machine())
-      {}
+    void integerCompareAnalyser(TR::Node* root, TR::InstOpCode::Mnemonic regRegOpCode,
+        TR::InstOpCode::Mnemonic regMemOpCode, TR::InstOpCode::Mnemonic memRegOpCode);
 
-   void integerCompareAnalyser(
-      TR::Node       *root,
-      TR::InstOpCode::Mnemonic regRegOpCode,
-      TR::InstOpCode::Mnemonic regMemOpCode,
-      TR::InstOpCode::Mnemonic memRegOpCode);
+    void integerCompareAnalyser(TR::Node* root, TR::Node* firstChild, TR::Node* secondChild,
+        bool determineEvaluationOrder, TR::InstOpCode::Mnemonic regRegOpCode, TR::InstOpCode::Mnemonic regMemOpCode,
+        TR::InstOpCode::Mnemonic memRegOpCode);
 
-   void integerCompareAnalyser(
-      TR::Node       *root,
-      TR::Node       *firstChild,
-      TR::Node       *secondChild,
-      bool           determineEvaluationOrder,
-      TR::InstOpCode::Mnemonic  regRegOpCode,
-      TR::InstOpCode::Mnemonic  regMemOpCode,
-      TR::InstOpCode::Mnemonic  memRegOpCode);
+    void longOrderedCompareAndBranchAnalyser(TR::Node* root, TR::InstOpCode::Mnemonic lowBranchOpCode,
+        TR::InstOpCode::Mnemonic highBranchOpCode, TR::InstOpCode::Mnemonic highReversedBranchOpCode);
 
-   void longOrderedCompareAndBranchAnalyser(TR::Node       *root,
-                                            TR::InstOpCode::Mnemonic lowBranchOpCode,
-                                            TR::InstOpCode::Mnemonic highBranchOpCode,
-                                            TR::InstOpCode::Mnemonic highReversedBranchOpCode);
+    void longEqualityCompareAndBranchAnalyser(TR::Node* root, TR::LabelSymbol* firstBranchLabel,
+        TR::LabelSymbol* secondBranchLabel, TR::InstOpCode::Mnemonic secondBranchOp);
 
+    TR::Register* longEqualityBooleanAnalyser(
+        TR::Node* root, TR::InstOpCode::Mnemonic setOpCode, TR::InstOpCode::Mnemonic combineOpCode);
 
-   void longEqualityCompareAndBranchAnalyser(TR::Node        *root,
-                                             TR::LabelSymbol *firstBranchLabel,
-                                             TR::LabelSymbol *secondBranchLabel,
-                                             TR::InstOpCode::Mnemonic  secondBranchOp);
+    TR::Register* longOrderedBooleanAnalyser(
+        TR::Node* root, TR::InstOpCode::Mnemonic highSetOpCode, TR::InstOpCode::Mnemonic lowSetOpCode);
 
-   TR::Register *longEqualityBooleanAnalyser(TR::Node       *root,
-                                            TR::InstOpCode::Mnemonic setOpCode,
-                                            TR::InstOpCode::Mnemonic combineOpCode);
+    TR::Register* longCMPAnalyser(TR::Node* root);
 
-   TR::Register *longOrderedBooleanAnalyser(TR::Node       *root,
-                                           TR::InstOpCode::Mnemonic highSetOpCode,
-                                           TR::InstOpCode::Mnemonic lowSetOpCode);
+    bool getEvalChild1() { return (_actionMap[getInputs()] & EvalChild1) ? true : false; }
+    bool getEvalChild2() { return (_actionMap[getInputs()] & EvalChild2) ? true : false; }
+    bool getCmpReg1Reg2() { return (_actionMap[getInputs()] & CmpReg1Reg2) ? true : false; }
+    bool getCmpReg1Mem2() { return (_actionMap[getInputs()] & CmpReg1Mem2) ? true : false; }
+    bool getCmpMem1Reg2() { return (_actionMap[getInputs()] & CmpMem1Reg2) ? true : false; }
 
-   TR::Register *longCMPAnalyser(TR::Node *root);
-
-
-   bool getEvalChild1()  {return (_actionMap[getInputs()] & EvalChild1)  ? true : false;}
-   bool getEvalChild2()  {return (_actionMap[getInputs()] & EvalChild2)  ? true : false;}
-   bool getCmpReg1Reg2() {return (_actionMap[getInputs()] & CmpReg1Reg2) ? true : false;}
-   bool getCmpReg1Mem2() {return (_actionMap[getInputs()] & CmpReg1Mem2) ? true : false;}
-   bool getCmpMem1Reg2() {return (_actionMap[getInputs()] & CmpMem1Reg2) ? true : false;}
-
-   TR::CodeGenerator *cg() { return _cg; }
-   };
+    TR::CodeGenerator* cg() { return _cg; }
+};
 
 #endif

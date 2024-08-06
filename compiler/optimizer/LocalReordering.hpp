@@ -29,9 +29,9 @@
 
 class TR_BitVector;
 namespace TR {
- class Block;
- class TreeTop;
-}
+class Block;
+class TreeTop;
+} // namespace TR
 
 /*
  * Class TR_LocalReordering
@@ -58,44 +58,43 @@ namespace TR {
  * was not disabled even after local live range reduction was enabled.
  */
 
-class TR_LocalReordering  : public TR::Optimization
-   {
-   public:
-   // Performs local reordering within
-   // a basic block.
-   //
-   TR_LocalReordering(TR::OptimizationManager *manager);
-   static TR::Optimization *create(TR::OptimizationManager *manager)
-      {
-      return new (manager->allocator()) TR_LocalReordering(manager);
-      }
+class TR_LocalReordering : public TR::Optimization {
+public:
+    // Performs local reordering within
+    // a basic block.
+    //
+    TR_LocalReordering(TR::OptimizationManager* manager);
+    static TR::Optimization* create(TR::OptimizationManager* manager)
+    {
+        return new (manager->allocator()) TR_LocalReordering(manager);
+    }
 
-   virtual int32_t perform();
-   virtual int32_t performOnBlock(TR::Block *);
-   virtual void prePerformOnBlocks();
-   virtual void postPerformOnBlocks();
-   virtual const char * optDetailString() const throw();
+    virtual int32_t perform();
+    virtual int32_t performOnBlock(TR::Block*);
+    virtual void prePerformOnBlocks();
+    virtual void postPerformOnBlocks();
+    virtual const char* optDetailString() const throw();
 
-   private :
-   bool transformBlock(TR::Block *);
-   void delayDefinitions(TR::Block *);
-   void collectUses(TR::Block *);
-   void setUseTreeForSymbolReferencesIn(TR::TreeTop *, TR::Node *, vcount_t);
-   bool containsBarriers(TR::Block *);
-   void insertDefinitionBetween(TR::TreeTop *, TR::TreeTop *);
-   bool isAnySymInDefinedOrUsedBy(TR::Node *, vcount_t);
-   bool isAnySymInDefinedBy(TR::Node *, vcount_t);
-   void moveStoresEarlierIfRhsAnchored(TR::Block *, TR::TreeTop *, TR::Node *, TR::Node *, vcount_t);
-   void collectSymbolsUsedAndDefinedInNode(TR::Node *, vcount_t);
-   bool insertEarlierIfPossible(TR::TreeTop *, TR::TreeTop *, bool);
-   bool isSubtreeCommoned(TR::Node *);
+private:
+    bool transformBlock(TR::Block*);
+    void delayDefinitions(TR::Block*);
+    void collectUses(TR::Block*);
+    void setUseTreeForSymbolReferencesIn(TR::TreeTop*, TR::Node*, vcount_t);
+    bool containsBarriers(TR::Block*);
+    void insertDefinitionBetween(TR::TreeTop*, TR::TreeTop*);
+    bool isAnySymInDefinedOrUsedBy(TR::Node*, vcount_t);
+    bool isAnySymInDefinedBy(TR::Node*, vcount_t);
+    void moveStoresEarlierIfRhsAnchored(TR::Block*, TR::TreeTop*, TR::Node*, TR::Node*, vcount_t);
+    void collectSymbolsUsedAndDefinedInNode(TR::Node*, vcount_t);
+    bool insertEarlierIfPossible(TR::TreeTop*, TR::TreeTop*, bool);
+    bool isSubtreeCommoned(TR::Node*);
 
-   TR_BitVector *_seenSymbols, *_stopNodes, *_temp;
-   TR::TreeTop **_treeTopsAsArray;
-   TR::TreeTop **_storeTreesAsArray;
-   int32_t _numStoreTreeTops;
-   bool _seenUnpinnedInternalPointer;
-   int32_t _counter;
-   };
+    TR_BitVector *_seenSymbols, *_stopNodes, *_temp;
+    TR::TreeTop** _treeTopsAsArray;
+    TR::TreeTop** _storeTreesAsArray;
+    int32_t _numStoreTreeTops;
+    bool _seenUnpinnedInternalPointer;
+    int32_t _counter;
+};
 
 #endif

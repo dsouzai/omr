@@ -28,9 +28,9 @@
 #ifndef OMR_JITCODERX_OBJECTFORMAT_CONNECTOR
 #define OMR_JITCODERX_OBJECTFORMAT_CONNECTOR
 namespace OMR {
- class JitCodeRXObjectFormat;
- typedef OMR::JitCodeRXObjectFormat JitCodeRXObjectFormatConnector;
-}
+class JitCodeRXObjectFormat;
+typedef OMR::JitCodeRXObjectFormat JitCodeRXObjectFormatConnector;
+} // namespace OMR
 #endif
 
 #include <stddef.h>
@@ -38,14 +38,10 @@ namespace OMR {
 #include "infra/Annotations.hpp"
 #include "objectfmt/ObjectFormat.hpp"
 
-namespace OMR
-{
+namespace OMR {
 
-class OMR_EXTENSIBLE JitCodeRXObjectFormat : public TR::ObjectFormat
-   {
+class OMR_EXTENSIBLE JitCodeRXObjectFormat : public TR::ObjectFormat { };
 
-   };
-
-}
+} // namespace OMR
 
 #endif

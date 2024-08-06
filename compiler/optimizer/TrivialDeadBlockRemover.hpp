@@ -23,32 +23,30 @@
 #define TRIVIALDEADBLOCKREMOVER_INCL
 
 namespace TR {
- class TreeTop;
- class Block;
-}
+class TreeTop;
+class Block;
+} // namespace TR
 
 #include "optimizer/Optimization.hpp"
 
 class TR_TrivialDeadBlockRemover : public TR::Optimization {
 
-   public:
-      virtual int32_t perform();
-      virtual const char * optDetailString() const throw();
+public:
+    virtual int32_t perform();
+    virtual const char* optDetailString() const throw();
 
+    TR_TrivialDeadBlockRemover(TR::OptimizationManager* manager)
+        : TR::Optimization(manager) {};
 
-      TR_TrivialDeadBlockRemover(TR::OptimizationManager *manager):
-         TR::Optimization(manager) {};
+    static TR::Optimization* create(TR::OptimizationManager* manager)
+    {
+        return new (manager->allocator()) TR_TrivialDeadBlockRemover(manager);
+    }
 
-      static TR::Optimization *create(TR::OptimizationManager *manager)
-         {
-         return new (manager->allocator()) TR_TrivialDeadBlockRemover(manager);
-         }
-
-   protected:
-      bool isFoldable(TR::TreeTop* tt);
-      bool foldIf(TR::Block* b);
-      TR_YesNoMaybe  evaluateTakeBranch(TR::Node* n);
-
+protected:
+    bool isFoldable(TR::TreeTop* tt);
+    bool foldIf(TR::Block* b);
+    TR_YesNoMaybe evaluateTakeBranch(TR::Node* n);
 };
 
 #endif
