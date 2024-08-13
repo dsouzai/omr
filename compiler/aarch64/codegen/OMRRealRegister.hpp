@@ -27,8 +27,12 @@
  */
 #ifndef OMR_REAL_REGISTER_CONNECTOR
 #define OMR_REAL_REGISTER_CONNECTOR
-   namespace OMR { namespace ARM64 { class RealRegister; } }
-   namespace OMR { typedef OMR::ARM64::RealRegister RealRegisterConnector; }
+   namespace OMR {
+namespace ARM64 { class RealRegister; }
+}
+   namespace OMR {
+typedef OMR::ARM64::RealRegister RealRegisterConnector;
+}
 #else
    #error OMR::ARM64::RealRegister expected to be a primary connector, but an OMR connector is already defined
 #endif
@@ -36,7 +40,9 @@
 #include "compiler/codegen/OMRRealRegister.hpp"
 #include "infra/Annotations.hpp"
 
-namespace TR { class CodeGenerator; }
+namespace TR {
+class CodeGenerator;
+}
 
 
 namespace OMR

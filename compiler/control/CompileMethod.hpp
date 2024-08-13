@@ -25,8 +25,10 @@
 
 struct OMR_VMThread;
 class TR_ResolvedMethod;
-namespace TR { class IlGeneratorMethodDetails; }
-namespace TR { class JitConfig; }
+namespace TR {
+class IlGeneratorMethodDetails;
+class JitConfig;
+}
 
 int32_t init_options(TR::JitConfig *jitConfig, char * cmdLineOptions);
 int32_t commonJitInit(OMR::FrontEnd &fe, char * cmdLineOptions);
