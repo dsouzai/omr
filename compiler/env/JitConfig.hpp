@@ -26,42 +26,40 @@
 #include <stdint.h>
 #include "env/IO.hpp"
 
-namespace TR
-{
+namespace TR {
 
-class JitConfig
-   {
-   protected:
-   JitConfig();
+class JitConfig {
+protected:
+    JitConfig();
 
-   public:
+public:
+    static JitConfig *instance();
 
-   static JitConfig *instance();
+    // possibly temporary place for options to be stored?
+    struct {
+        int32_t codeCacheKB;
+        char *vLogFileName;
+        TR::FILE *vLogFile;
+        uint64_t verboseFlags;
+    } options;
 
-   // possibly temporary place for options to be stored?
-   struct
-      {
-      int32_t       codeCacheKB;
-      char        * vLogFileName;
-      TR::FILE    * vLogFile;
-      uint64_t      verboseFlags;
-      } options;
+    void setInterpreterTOC(size_t interpreterTOC) { _interpreterTOC = interpreterTOC; }
 
-   void setInterpreterTOC(size_t interpreterTOC) { _interpreterTOC = interpreterTOC; }
-   size_t getInterpreterTOC()                    { return _interpreterTOC; }
+    size_t getInterpreterTOC() { return _interpreterTOC; }
 
-   void *getPseudoTOC()               { return _pseudoTOC; }
-   void setPseudoTOC(void *pseudoTOC) { _pseudoTOC = pseudoTOC; }
+    void *getPseudoTOC() { return _pseudoTOC; }
 
-   private:
-   char                        _eyecatcher[8];
+    void setPseudoTOC(void *pseudoTOC) { _pseudoTOC = pseudoTOC; }
 
-   void                      * _processorInfo;
+private:
+    char _eyecatcher[8];
 
-   size_t                      _interpreterTOC;
+    void *_processorInfo;
 
-   void                      * _pseudoTOC; // only used on POWER, otherwise should be NULL
-   };
+    size_t _interpreterTOC;
+
+    void *_pseudoTOC; // only used on POWER, otherwise should be NULL
+};
 
 } /* namespace TR */
 

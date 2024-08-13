@@ -33,71 +33,81 @@
 
 class TR_ResolvedMethod;
 
-namespace TR
-{
+namespace TR {
 
 // ::TR_FrontEnd: defines the API that can be used across the codebase for both TR and OMR
 // FECommon: is a repository of code and data that is common to all OMR frontends but not all TR frontends
-// FEBase<D>: is a repository of code and data that is specific to a single frontend, but described as an abstract templat
+// FEBase<D>: is a repository of code and data that is specific to a single frontend, but described as an abstract
+// templat
 //            based on the type D
 // D: concrete frontend. Stuff that is not common with other frontends.
 
-class FECommon : public ::TR_FrontEnd
-   {
-   protected:
-   FECommon();
+class FECommon : public ::TR_FrontEnd {
+protected:
+    FECommon();
 
+public:
+    virtual TR_PersistentMemory *persistentMemory() = 0;
 
-   public:
-   virtual TR_PersistentMemory       * persistentMemory() = 0;
+    virtual TR_Debug *createDebug(TR::Compilation *comp = NULL);
 
-   virtual TR_Debug *createDebug(TR::Compilation *comp = NULL);
+    virtual TR_OpaqueClassBlock *getClassFromSignature(const char *sig, int32_t length, TR_ResolvedMethod *method,
+        bool isVettedForAOT = false)
+    {
+        return NULL;
+    }
 
-   virtual TR_OpaqueClassBlock * getClassFromSignature(const char * sig, int32_t length, TR_ResolvedMethod *method, bool isVettedForAOT=false) { return NULL; }
-   virtual TR_OpaqueClassBlock * getClassFromSignature(const char * sig, int32_t length, TR_OpaqueMethodBlock *method, bool isVettedForAOT=false) { return NULL; }
-   virtual const char *       sampleSignature(TR_OpaqueMethodBlock * aMethod, char *buf, int32_t bufLen, TR_Memory *memory) { return NULL; }
+    virtual TR_OpaqueClassBlock *getClassFromSignature(const char *sig, int32_t length, TR_OpaqueMethodBlock *method,
+        bool isVettedForAOT = false)
+    {
+        return NULL;
+    }
 
-   // need this so z codegen can create a sym ref to compare to another sym ref it cannot possibly be equal to
-   virtual uintptr_t getOffsetOfIndexableSizeField() { return -1; }
-   };
+    virtual const char *sampleSignature(TR_OpaqueMethodBlock *aMethod, char *buf, int32_t bufLen, TR_Memory *memory)
+    {
+        return NULL;
+    }
 
-template <class T> struct FETraits {};
+    // need this so z codegen can create a sym ref to compare to another sym ref it cannot possibly be equal to
+    virtual uintptr_t getOffsetOfIndexableSizeField() { return -1; }
+};
 
-template <class Derived>
-class FEBase : public FECommon
-   {
-   public:
-   // Define our types in terms of the Traits
-   typedef typename TR::FETraits<Derived>::JitConfig        JitConfig;
+template<class T> struct FETraits {};
 
-   private:
-   JitConfig            _config;
-   TR::CodeCacheManager _codeCacheManager;
+template<class Derived> class FEBase : public FECommon {
+public:
+    // Define our types in terms of the Traits
+    typedef typename TR::FETraits<Derived>::JitConfig JitConfig;
 
-   // this is deprecated in favour of TR::Allocator
-   TR_PersistentMemory       _persistentMemory; // global memory
+private:
+    JitConfig _config;
+    TR::CodeCacheManager _codeCacheManager;
 
-   public:
-   FEBase()
-      : FECommon(),
-      _config(),
-      _codeCacheManager(TR::Compiler->rawAllocator),
-      _persistentMemory(jitConfig(), TR::Compiler->persistentAllocator())
-      {
-      ::trPersistentMemory = &_persistentMemory;
-      }
+    // this is deprecated in favour of TR::Allocator
+    TR_PersistentMemory _persistentMemory; // global memory
 
-   static Derived &singleton() { return *(Derived::instance()); }
+public:
+    FEBase()
+        : FECommon()
+        , _config()
+        , _codeCacheManager(TR::Compiler->rawAllocator)
+        , _persistentMemory(jitConfig(), TR::Compiler->persistentAllocator())
+    {
+        ::trPersistentMemory = &_persistentMemory;
+    }
 
-   JitConfig *jitConfig() { return &_config; }
-   TR::CodeCacheManager &codeCacheManager() { return _codeCacheManager; }
+    static Derived &singleton() { return *(Derived::instance()); }
 
-   virtual uint8_t * allocateRelocationData(TR::Compilation* comp, uint32_t size);
+    JitConfig *jitConfig() { return &_config; }
 
-   virtual TR_PersistentMemory       * persistentMemory() { return &_persistentMemory; }
-   virtual TR::PersistentInfo * getPersistentInfo() { return _persistentMemory.getPersistentInfo(); }
+    TR::CodeCacheManager &codeCacheManager() { return _codeCacheManager; }
 
-   };
+    virtual uint8_t *allocateRelocationData(TR::Compilation *comp, uint32_t size);
+
+    virtual TR_PersistentMemory *persistentMemory() { return &_persistentMemory; }
+
+    virtual TR::PersistentInfo *getPersistentInfo() { return _persistentMemory.getPersistentInfo(); }
+};
 
 } /* namespace TR */
 
