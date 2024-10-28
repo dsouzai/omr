@@ -1156,6 +1156,9 @@ enum TR_ReductionAlgorithms
 #define TR_INITIAL_SCOUNT                  20
 #define TR_UNRESOLVED_IMPLIES_COLD_COUNT  200  // If a method has run this many times, we can assume unresolved symbols indicate cold paths
 
+#define TR_INITIAL_LF_COUNT                 5
+#define TR_INITIAL_LF_SCOUNT                5
+
 #define TR_DEFAULT_COLD_UPGRADE_SAMPLE_THRESHOLD  3
 #define TR_DEFAULT_GCR_RESET_COUNT      10000
 #define TR_DEFAULT_GCR_DEC_COUNT            1
@@ -1467,6 +1470,8 @@ public:
       _inlinerCGVeryColdBorderFrequency = 0;
       _alwaysWorthInliningThreshold = 0;
       _initialSCount = 0;
+      _initialLambdaFormCount = 0;
+      _initialLambdaFormSCount = 0;
       _enableSCHintFlags = 0;
       _insertGCRTrees = false;
       _maxLimitedGRACandidates = 0;
@@ -1794,6 +1799,9 @@ public:
    int32_t get390LitPoolBufferSize() { return _test390LitPoolBuffer; }
    int32_t getInitialSCount()        { return _initialSCount; }
    int32_t getEnableSCHintFlags()    { return _enableSCHintFlags; }
+
+   int32_t getInitialLambdaFormCount() { return _initialLambdaFormCount; }
+   int32_t getInitialLambdaFormSCount() { return _initialLambdaFormSCount; }
 
    int32_t getInlineCntrCalleeTooBigBucketSize() { return _inlineCntrCalleeTooBigBucketSize; }
    int32_t getInlineCntrColdAndNotTinyBucketSize() { return _inlineCntrColdAndNotTinyBucketSize; }
@@ -2494,6 +2502,9 @@ protected:
    int32_t                     _initialSCount;
    int32_t                     _enableSCHintFlags;
    bool                        _insertGCRTrees; // more like a flag than an option; cannot be set by user
+
+   int32_t                     _initialLambdaFormCount;
+   int32_t                     _initialLambdaFormSCount;
 
    int32_t                     _maxLimitedGRACandidates;
    int32_t                     _maxLimitedGRARegs;

@@ -935,6 +935,8 @@ TR::OptionTable OMR::Options::_jitOptions[] = {
    {"jProfilingMethodRecompThreshold=",      "C<nnn>\tMethod invocations for jProfiling body",
         TR::Options::set32BitSignedNumeric, offsetof(OMR::Options,_jProfilingMethodRecompThreshold), 0, "F%d"},
    {"keepBCDWidening",       "O\tstress testing option -- do not remove widening BCD operations", SET_OPTION_BIT(TR_KeepBCDWidening), "F" },
+   {"lambdaFormCount=", "M<nnn>\t", TR::Options::set32BitNumeric, offsetof(OMR::Options, _initialLambdaFormCount), 0, "F%d"},
+   {"lambdaFormSCount=", "M<nnn>\t", TR::Options::set32BitNumeric, offsetof(OMR::Options, _initialLambdaFormSCount), 0, "F%d"},
    {"largeCompiledMethodExemptionFreqCutoff=", "O<nnn>\tInliner threshold",
       TR::Options::set32BitNumeric, offsetof(OMR::Options, _largeCompiledMethodExemptionFreqCutoff), 0, "F%d" },
    {"largeNumberOfLoops=", "O<nnn>\tnumber of loops to consider 'a large number'", TR::Options::set32BitNumeric, offsetof(OMR::Options,_largeNumberOfLoops), 0, "F%d"},
@@ -2662,6 +2664,8 @@ OMR::Options::jitPreProcess()
    _initialColdRunCount = -1;
    _initialColdRunBCount = -1;
    _initialSCount = TR_INITIAL_SCOUNT;
+   _initialLambdaFormCount = TR_INITIAL_LF_COUNT;
+   _initialLambdaFormSCount = TR_INITIAL_LF_SCOUNT;
    _lastOptIndex = INT_MAX;
    _lastOptSubIndex = INT_MAX;
    _lastSearchCount = INT_MAX;
