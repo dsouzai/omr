@@ -26,9 +26,11 @@
 #include "il/ILOpCodes.hpp"
 #include "codegen/InstOpCode.hpp"
 
-namespace TR { class CodeGenerator; }
-namespace TR { class Node; }
-namespace TR { class Register; }
+namespace TR {
+class CodeGenerator;
+class Node;
+class Register;
+}
 
 // Total possible action sets based on the characteristics of the node children.
 //
