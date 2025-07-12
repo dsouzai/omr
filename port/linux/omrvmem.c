@@ -1452,10 +1452,10 @@ omrvmem_create_double_mapped_region(struct OMRPortLibrary *portLibrary, void* re
 			flags |= MAP_HUGETLB;
 		}
       if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
-         fd = open_temp_file();
-         newIdentifier->fd = fd;
+			fd = open_temp_file();
+			newIdentifier->fd = fd;
       } else {
-   		fd = oldIdentifier->fd;
+			fd = oldIdentifier->fd;
       }
 #if defined(OMRVMEM_DEBUG)
 		printf("Found %zu regions.\n", regionsCount);
