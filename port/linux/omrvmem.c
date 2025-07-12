@@ -1118,7 +1118,7 @@ set_flags_for_mmap(int *flags)
 }
 
 static int
-open_temp_file()
+open_temp_file(uintptr_t byteAmount)
 {
 	int fd = OMRPORT_INVALID_FD;
 
@@ -1133,6 +1133,15 @@ open_temp_file()
 			close(fd);
 			fd = OMRPORT_INVALID_FD;
 		}
+	} else {
+		Trc_PRT_vmem_reserve_tempfile_not_created(filename, byteAmount);
+		/* The main reason for allocating memory with mmap and backed by
+		 * a file is to be able to "disclaim" infrequently accessed memory
+		 * blocks to the backing file, thus reducing physical memory usage.
+		 * If the backing file cannot be opened, we should not terminate
+		 * the process; rather, we should allocate memory using an
+		 * ANONYMOUS PRIVATE map and continue to run.
+		 */
 	}
 
 	return fd;
@@ -1179,17 +1188,7 @@ reserve_memory_with_mmap(struct OMRPortLibrary *portLibrary, void *address, uint
 
 	if (useBackingSharedFile) {
 		if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
-			fd = open_temp_file();
-			if (OMRPORT_INVALID_FD == fd) {
-				Trc_PRT_vmem_reserve_tempfile_not_created(filename, byteAmount);
-				/* The main reason for allocating memory with mmap and backed by
-				 * a file is to be able to "disclaim" infrequently accessed memory
-				 * blocks to the backing file, thus reducing physical memory usage.
-				 * If the backing file cannot be opened, we should not terminate
-				 * the process; rather, we should allocate memory using an
-				 * ANONYMOUS PRIVATE map and continue to run.
-				 */
-			}
+			fd = open_temp_file(byteAmount);
 		} else {
 			memfd_function_t memfd_createDL = PPG_memfd_function;
 			if (NULL != memfd_createDL) {
@@ -1452,7 +1451,7 @@ omrvmem_create_double_mapped_region(struct OMRPortLibrary *portLibrary, void* re
 			flags |= MAP_HUGETLB;
 		}
       if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
-			fd = open_temp_file();
+			fd = open_temp_file(byteAmount);
 			newIdentifier->fd = fd;
       } else {
 			fd = oldIdentifier->fd;
