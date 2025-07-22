@@ -1117,6 +1117,37 @@ set_flags_for_mmap(int *flags)
 	return useBackingFile;
 }
 
+
+static int
+open_temp_file(uintptr_t byteAmount)
+{
+	int fd = OMRPORT_INVALID_FD;
+
+	/* Generate a unique temporary filename from template and open the file. */
+	char filename[FILE_NAME_SIZE + 1];
+	snprintf(filename, sizeof(filename), "omrvmem_%09d_XXXXXX", getpid());
+	fd = mkostemp(filename, 0);
+	if (OMRPORT_INVALID_FD != fd) {
+		unlink(filename);
+		/* Set the file size with fallocate . */
+		if (OMRPORT_INVALID_FD == fallocate(fd, 0, 0, byteAmount)) {
+			close(fd);
+			fd = OMRPORT_INVALID_FD;
+		}
+	} else {
+		Trc_PRT_vmem_reserve_tempfile_not_created(filename, byteAmount);
+		/* The main reason for allocating memory with mmap and backed by
+		 * a file is to be able to "disclaim" infrequently accessed memory
+		 * blocks to the backing file, thus reducing physical memory usage.
+		 * If the backing file cannot be opened, we should not terminate
+		 * the process; rather, we should allocate memory using an
+		 * ANONYMOUS PRIVATE map and continue to run.
+		 */
+	}
+
+	return fd;
+}
+
 static void *
 reserve_memory_with_mmap(struct OMRPortLibrary *portLibrary, void *address, uintptr_t byteAmount, struct J9PortVmemIdentifier *identifier, uintptr_t mode, uintptr_t pageSize, OMRMemCategory *category)
 {
@@ -1158,28 +1189,7 @@ reserve_memory_with_mmap(struct OMRPortLibrary *portLibrary, void *address, uint
 
 	if (useBackingSharedFile) {
 		if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
-			/* Generate a unique temporary filename from template and open the file. */
-			char filename[FILE_NAME_SIZE + 1];
-			snprintf(filename, sizeof(filename), "/tmp/omrvmem_%09d_XXXXXX", getpid());
-			fd = mkostemp(filename, 0);
-			if (OMRPORT_INVALID_FD != fd) {
-				unlink(filename);
-				/* Set the file size with fallocate . */
-				if (OMRPORT_INVALID_FD == fallocate(fd, 0, 0, byteAmount)) {
-					close(fd);
-					fd = OMRPORT_INVALID_FD;
-				}
-			}
-			if (OMRPORT_INVALID_FD == fd) {
-				Trc_PRT_vmem_reserve_tempfile_not_created(filename, byteAmount);
-				/* The main reason for allocating memory with mmap and backed by
-				 * a file is to be able to "disclaim" infrequently accessed memory
-				 * blocks to the backing file, thus reducing physical memory usage.
-				 * If the backing file cannot be opened, we should not terminate
-				 * the process; rather, we should allocate memory using an
-				 * ANONYMOUS PRIVATE map and continue to run.
-				 */
-			}
+			fd = open_temp_file(byteAmount);
 		} else {
 			memfd_function_t memfd_createDL = PPG_memfd_function;
 			if (NULL != memfd_createDL) {
@@ -1378,10 +1388,14 @@ omrvmem_create_double_mapped_region(struct OMRPortLibrary *portLibrary, void* re
 	/* All regions are fully double mapped. Partial double mapping is not supported yet. */
 	Assert_PRT_true((regionsCount * regionSize) == byteAmount);
 
-	if (0 != (OMRPORT_VMEM_MEMORY_MODE_COMMIT & mode)) {
+	if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_COMMIT)) {
+		protectionFlags = get_protectionBits(mode);
+	} else if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
+		Assert_PRT_true(NULL != preferredAddress);
 		protectionFlags = get_protectionBits(mode);
 	}
-	if (0 != (OMRPORT_VMEM_MEMORY_MODE_MMAP_HUGE_PAGES & oldIdentifier->mode)) {
+
+	if (OMR_ARE_ANY_BITS_SET(oldIdentifier->mode, OMRPORT_VMEM_MEMORY_MODE_MMAP_HUGE_PAGES)) {
 		flags |= MAP_HUGETLB;
 	}
 
@@ -1418,7 +1432,7 @@ omrvmem_create_double_mapped_region(struct OMRPortLibrary *portLibrary, void* re
 
 		/* Update identifier and commit memory if required */
 		update_vmemIdentifier(newIdentifier, contiguousMap, contiguousMap, byteAmount, mode, pageSize, OMRPORT_VMEM_PAGE_FLAG_NOT_USED, allocator, category, -1);
-		if (0 != (OMRPORT_VMEM_MEMORY_MODE_COMMIT & mode)) {
+		if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_COMMIT)) {
 			if (NULL == omrvmem_commit_memory(portLibrary, contiguousMap, byteAmount, newIdentifier)) {
 				/* If the commit fails free the memory  */
 #if defined(OMRVMEM_DEBUG)
@@ -1434,10 +1448,15 @@ omrvmem_create_double_mapped_region(struct OMRPortLibrary *portLibrary, void* re
 	if (successfulContiguousMap) {
 		Assert_PRT_true(NULL != contiguousMap);
 		flags = MAP_SHARED | MAP_FIXED; // Must be shared, SIGSEGV otherwise
-		if (0 != (OMRPORT_VMEM_MEMORY_MODE_MMAP_HUGE_PAGES & oldIdentifier->mode)) {
+		if (OMR_ARE_ANY_BITS_SET(oldIdentifier->mode, OMRPORT_VMEM_MEMORY_MODE_MMAP_HUGE_PAGES)) {
 			flags |= MAP_HUGETLB;
 		}
-		fd = oldIdentifier->fd;
+		if (OMR_ARE_ANY_BITS_SET(mode, OMRPORT_VMEM_MEMORY_MODE_SHARE_TMP_FILE_OPEN)) {
+			fd = open_temp_file(byteAmount);
+			newIdentifier->fd = fd;
+		} else {
+			fd = oldIdentifier->fd;
+		}
 #if defined(OMRVMEM_DEBUG)
 		printf("Found %zu regions.\n", regionsCount);
 		uintptr_t j = 0;
