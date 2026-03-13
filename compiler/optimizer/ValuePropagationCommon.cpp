@@ -3331,17 +3331,12 @@ void OMR::ValuePropagation::transformRTMultiLeafArrayCopy(TR_RealTimeArrayCopy *
     if (!helperClass)
         return;
 
-    TR_ScratchList<TR_ResolvedMethod> helperMethods(trMemory());
-    comp()->fej9()->getResolvedMethods(trMemory(), helperClass, &helperMethods);
-    ListIterator<TR_ResolvedMethod> it(&helperMethods);
     TR::SymbolReference *helperSymRef = NULL;
-    for (TR_ResolvedMethod *m = it.getCurrent(); m && !helperSymRef; m = it.getNext()) {
-        char *sig = m->nameChars();
-        logprintf(trace(), log, " sig = %s\n", sig);
+    TR_ResolvedMethod *m = comp()->fej9()->getResolvedMethodForNameOnly(trMemory(), helperClass, "multiLeafArrayCopy");
 
-        if (!strncmp(sig, "multiLeafArrayCopy", 18))
-            helperSymRef
-                = getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, m, TR::MethodSymbol::Static);
+    if (m) {
+        logprintf(trace(), log, " sig = %s\n", m->nameChars());
+        helperSymRef = getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, m, TR::MethodSymbol::Static);
     }
 
     logprintf(trace(), log, " helper sym = %p\n", helperSymRef);

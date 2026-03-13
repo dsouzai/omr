@@ -4835,20 +4835,20 @@ TR::Node *constrainCall(OMR::ValuePropagation *vp, TR::Node *node)
             if (jitHelpersClass && TR::Compiler->cls.isClassInitialized(vp->comp(), jitHelpersClass)) {
                 TR::SymbolReference *hashCodeMethodSymRef = NULL;
                 TR::SymbolReference *getHelpersSymRef = NULL;
-                TR_ScratchList<TR_ResolvedMethod> helperMethods(vp->trMemory());
-                vp->comp()->fej9()->getResolvedMethods(vp->trMemory(), jitHelpersClass, &helperMethods);
-                ListIterator<TR_ResolvedMethod> it(&helperMethods);
-                for (TR_ResolvedMethod *m = it.getCurrent(); m; m = it.getNext()) {
-                    char *sig = m->nameChars();
-                    if (!strncmp(sig, "hashCodeImpl", 11)) {
-                        hashCodeMethodSymRef = vp->comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX,
-                            -1, m, TR::MethodSymbol::Virtual);
-                        hashCodeMethodSymRef->setOffset(
-                            TR::Compiler->cls.vTableSlot(vp->comp(), m->getPersistentIdentifier(), jitHelpersClass));
-                    } else if (!strncmp(sig, "getHelpers", 10)) {
-                        getHelpersSymRef = vp->comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1,
-                            m, TR::MethodSymbol::Static);
-                    }
+
+                TR_ResolvedMethod *m
+                    = vp->comp()->fej9()->getResolvedMethodForNameOnly(vp->trMemory(), jitHelpersClass, "hashCodeImpl");
+                if (m) {
+                    hashCodeMethodSymRef = vp->comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1,
+                        m, TR::MethodSymbol::Virtual);
+                    hashCodeMethodSymRef->setOffset(
+                        TR::Compiler->cls.vTableSlot(vp->comp(), m->getPersistentIdentifier(), jitHelpersClass));
+                }
+
+                m = vp->comp()->fej9()->getResolvedMethodForNameOnly(vp->trMemory(), jitHelpersClass, "getHelpers");
+                if (m) {
+                    getHelpersSymRef = vp->comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, m,
+                        TR::MethodSymbol::Static);
                 }
 
                 if (vp->comp()->getOption(TR_EnableJITHelpershashCodeImpl) && hashCodeMethodSymRef && getHelpersSymRef
