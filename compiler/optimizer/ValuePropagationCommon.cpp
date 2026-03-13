@@ -686,24 +686,16 @@ int32_t OMR::ValuePropagation::getPrimitiveArrayType(char primitiveArrayChar)
 static TR_ResolvedMethod *findResolvedClassMethod(TR::Compilation *comp, char *className, char *methodName,
     char *methodSig)
 {
+    TR_ResolvedMethod *method = NULL;
+
     TR_OpaqueClassBlock *classHandle
         = comp->fe()->getClassFromSignature(className, strlen(className), comp->getCurrentMethod());
 
     if (classHandle) {
-        TR_ScratchList<TR_ResolvedMethod> classMethods(comp->trMemory());
-        comp->fej9()->getResolvedMethods(comp->trMemory(), classHandle, &classMethods);
-
-        ListIterator<TR_ResolvedMethod> it(&classMethods);
-        TR_ResolvedMethod *method;
-        int methodNameLen = strlen(methodName);
-        int methodSigLen = strlen(methodSig);
-        for (method = it.getCurrent(); method; method = it.getNext()) {
-            if (!strncmp(method->nameChars(), methodName, methodNameLen)
-                && !strncmp(method->signatureChars(), methodSig, methodSigLen))
-                return method;
-        }
+        method
+            = comp->fej9()->getResolvedMethodForNameAndSignature(comp->trMemory(), classHandle, methodName, methodSig);
     }
-    return NULL;
+    return method;
 }
 #endif
 

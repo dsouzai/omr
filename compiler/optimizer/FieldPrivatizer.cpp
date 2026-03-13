@@ -1213,23 +1213,17 @@ void TR_FieldPrivatizer::placeStringEpiloguesBackInExit(TR::Block *block, bool p
 {
 #if J9_PROJECT_SPECIFIC
     if (!_toStringSymRef) {
-        TR_ScratchList<TR_ResolvedMethod> stringBufferMethods(trMemory());
-        comp()->fej9()->getResolvedMethods(trMemory(), _stringBufferClass, &stringBufferMethods);
-        ListIterator<TR_ResolvedMethod> it(&stringBufferMethods);
-        for (TR_ResolvedMethod *method = it.getCurrent(); method; method = it.getNext()) {
-            if (!strncmp(method->nameChars(), "toString", 8)) {
-                char *sig = method->signatureChars();
-                if (!strncmp(sig, "()Ljava/lang/String;", 20)) {
-                    _toStringSymRef = comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, method,
-                        TR::MethodSymbol::Virtual);
-                    break;
-                }
-            }
+        TR_ResolvedMethod *method = comp()->fej9()->getResolvedMethodForNameAndSignature(trMemory(), _stringBufferClass,
+            "toString", "()Ljava/lang/String;");
+
+        if (method) {
+            _toStringSymRef = comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, method,
+                TR::MethodSymbol::Virtual);
         }
     }
 
     if (!_toStringSymRef) {
-        TR_ASSERT(0, "Expected StringBuffer library method not found\n");
+        TR_ASSERT(comp()->compileRelocatableCode(), "Expected StringBuffer library method not found\n");
         return;
     }
 
@@ -1276,18 +1270,11 @@ void TR_FieldPrivatizer::cleanupStringPeephole()
     }
 
     if (!_appendSymRef) {
-        TR_ScratchList<TR_ResolvedMethod> stringBufferMethods(trMemory());
-        comp()->fej9()->getResolvedMethods(trMemory(), _stringBufferClass, &stringBufferMethods);
-        ListIterator<TR_ResolvedMethod> it(&stringBufferMethods);
-        for (TR_ResolvedMethod *method = it.getCurrent(); method; method = it.getNext()) {
-            if ((method->nameLength() == 15) && !strncmp(method->nameChars(), "jitAppendUnsafe", 15)) {
-                char *sig = method->signatureChars();
-                if (!strncmp(sig, "(C)Ljava/lang/StringBuffer;", 27)) {
-                    _appendSymRef = comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, method,
-                        TR::MethodSymbol::Special);
-                    break;
-                }
-            }
+        TR_ResolvedMethod *method = comp()->fej9()->getResolvedMethodForNameAndSignature(trMemory(), _stringBufferClass,
+            "jitAppendUnsafe", "(C)Ljava/lang/StringBuffer;");
+        if (method) {
+            _appendSymRef = comp()->getSymRefTab()->findOrCreateMethodSymbol(JITTED_METHOD_INDEX, -1, method,
+                TR::MethodSymbol::Special);
         }
 
         TR::TreeTop *currTree = _stringPeepholeTree;
